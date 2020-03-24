@@ -9,4 +9,10 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->view('carshare_home', $data);
 	}
+	
+	public function search()
+	{  
+		$data = array();
+		$this->load->view('carshare_search', $data);
+	}
 }
