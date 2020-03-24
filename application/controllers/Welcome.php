@@ -5,7 +5,8 @@ class Welcome extends CI_Controller {
 
 
 	public function index()
-	{
-		$this->load->view('carshare_home');
+	{  
+		$data = array();
+		$this->load->view('carshare_home', $data);
 	}
 }
