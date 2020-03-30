@@ -1,117 +1,259 @@
-/**
-* Template Name: Bocor - v2.0.0
-* Template URL: https://bootstrapmade.com/bocor-bootstrap-template-nice-animation/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-!(function($) {
-  "use strict";
+/*global jQuery */
+(function ($) {
+    "use strict";
 
-  // Smooth scroll for the navigation menu and links with .scrollto classes
-  $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      e.preventDefault();
-      var target = $(this.hash);
-      if (target.length) {
+    jQuery(document).ready(function ($) {
+        /*---------------------------------
+         All Window Scroll Function Start
+        --------------------------------- */
+        $(window).scroll(function () {
+            // Header Fix Js Here
+            if ($(window).scrollTop() >= 200) {
+                $('#header-area').addClass('fixTotop');
+            } else {
+                $('#header-area').removeClass('fixTotop');
+            }
 
-        var scrollto = target.offset().top;
+            // Scroll top Js Here
+            if ($(window).scrollTop() >= 400) {
+                $('.scroll-top').slideDown(400);
+            } else {
+                $('.scroll-top').slideUp(400);
+            }
+        });
+        /*--------------------------------
+         All Window Scroll Function End
+        --------------------------------- */
 
-        $('html, body').animate({
-          scrollTop: scrollto
-        }, 1500, 'easeInOutExpo');
+        // Home Page 0ne Date Picker JS
+        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+        $('#startDate').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: today,
+            maxDate: function () {
+                return $('#endDate').val();
+            }
+        });
 
-        if ($(this).parents('.nav-menu, .mobile-nav').length) {
-          $('.nav-menu .active, .mobile-nav .active').removeClass('active');
-          $(this).closest('li').addClass('active');
-        }
+        $('#endDate').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: function () {
+                return $('#startDate').val();
+            }
+        });
 
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
-          $('.mobile-nav-overly').fadeOut();
-        }
-        return false;
-      }
-    }
-  });
+        // Partner Carousel
+        $(".partner-content-wrap").owlCarousel({
+            loop: true,
+            margin: 15,
+            autoplay: true,
+            autoplayTimeout: 1500,
+            nav: false,
+            dots: false,
+            rtl: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        }); // Partner Carousel End
 
-  // Mobile Navigation
-  if ($('.nav-menu').length) {
-    var $mobile_nav = $('.nav-menu').clone().prop({
-      class: 'mobile-nav d-lg-none'
-    });
-    $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
-    $('body').append('<div class="mobile-nav-overly"></div>');
 
-    $(document).on('click', '.mobile-nav-toggle', function(e) {
-      $('body').toggleClass('mobile-nav-active');
-      $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
-      $('.mobile-nav-overly').toggle();
-    });
+        // Funfact Count JS
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
 
-    $(document).on('click', '.mobile-nav .drop-down > a', function(e) {
-      e.preventDefault();
-      $(this).next().slideToggle(300);
-      $(this).parent().toggleClass('active');
-    });
 
-    $(document).click(function(e) {
-      var container = $(".mobile-nav, .mobile-nav-toggle");
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
-          $('.mobile-nav-overly').fadeOut();
-        }
-      }
-    });
-  } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
-    $(".mobile-nav, .mobile-nav-toggle").hide();
-  }
+        // Choose Popular Car Isotope
+        $(".popucar-menu a, .home2-car-filter a").click(function () {
 
-  // Back to top button
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 100) {
-      $('.back-to-top').fadeIn('slow');
-    } else {
-      $('.back-to-top').fadeOut('slow');
-    }
-  });
+            $(".popucar-menu a, .home2-car-filter a").removeClass('active');
+            $(this).addClass('active');
 
-  $('.back-to-top').click(function() {
-    $('html, body').animate({
-      scrollTop: 0
-    }, 1500, 'easeInOutExpo');
-    return false;
-  });
+            var filterValue = $(this).attr('data-filter');
+            $(".popular-car-gird").isotope({
+                filter: filterValue
+            });
 
-  // Porfolio isotope and filter
-  $(window).on('load', function() {
-    var portfolioIsotope = $('.portfolio-container').isotope({
-      itemSelector: '.portfolio-item',
-      layoutMode: 'fitRows'
-    });
+            return false;
+        }); // Choose Popular Car Isotope End
 
-    $('#portfolio-flters li').on('click', function() {
-      $("#portfolio-flters li").removeClass('filter-active');
-      $(this).addClass('filter-active');
 
-      portfolioIsotope.isotope({
-        filter: $(this).data('filter')
-      });
-    });
+        // Choose Newest Car Isotope
+        $(".newcar-menu a").click(function () {
 
-    // Initiate venobox (lightbox feature used in portofilo)
-    $(document).ready(function() {
-      $('.venobox').venobox();
-    });
-  });
+            $(".newcar-menu a").removeClass('active');
+            $(this).addClass('active');
 
-  // Initi AOS
-  AOS.init({
-    duration: 800,
-    easing: "ease-in-out"
-  });
+            var filterValue = $(this).attr('data-filter');
+            $(".newest-car-gird").isotope({
+                filter: filterValue
+            });
 
-})(jQuery);
+            return false;
+        }); // Choose Newest Car Isotope End
+
+
+        // Choose Car Maginific Popup
+        $('.car-hover').magnificPopup({
+            type: 'image',
+            removalDelay: 300,
+            mainClass: 'mfp-fade'
+        }); // Maginific Popup End
+
+
+        // Testimonial Carousel
+        $(".testimonial-content").owlCarousel({
+            loop: true,
+            items: 1,
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 3000,
+            nav: false,
+            dots: true
+        });
+        // Testimonial Carousel End
+
+
+        // Video Bg JS 
+        $('#mobileapp-video-bg').YTPlayer({
+            fitToBackground: true,
+            videoURL: 'm5_AKjDdqaU',
+            containment: '#mobile-app-area',
+            quality: 'highres',
+            loop: true,
+            showControls: false,
+            opacity: 1,
+            mute: true
+        }); // Video Bg End
+
+        // Click to Scroll TOP
+        $(".scroll-top").click(function () {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 1500);
+        }); //Scroll TOP End
+
+        // SlickNav or Mobile Menu
+        $(".mainmenu").slicknav({
+            'label': '',
+            'prependTo': '#header-bottom .container .row'
+        }); // SlickNav End
+
+
+        // Home Page Two Slideshow
+        $("#slideslow-bg").vegas({
+            overlay: true,
+            transition: 'fade',
+            transitionDuration: 2000,
+            delay: 4000,
+            color: '#000',
+            animation: 'random',
+            animationDuration: 20000,
+            slides: [
+                {
+                    src: 'assets/img/slider-img/slider-img-1.jpg'
+                },
+                {
+                    src: 'assets/img/slider-img/slider-img-2.jpg'
+                },
+                {
+                    src: 'assets/img/slider-img/slider-img-3.jpg'
+                },
+                {
+                    src: 'assets/img/slider-img/slider-img-4.jpg'
+                }
+            ]
+        }); //Home Page Two Slideshow
+
+        // Home Page Two Date Picker JS
+
+        $('#startDate2').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: today,
+            maxDate: function () {
+                return $('#endDate2').val();
+            }
+        });
+
+        $('#endDate2').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: function () {
+                return $('#startDate2').val();
+            }
+        });
+
+        // Home Page 3 Slider Start
+        $("#home-slider-area").owlCarousel({
+            loop: true,
+            items: 1,
+            autoplay: true,
+            autoplayHoverPause: false,
+            autoplayTimeout: 3000,
+            nav: false,
+            dots: true,
+            animateOut: 'slideOutDown',
+            animateIn: 'slideInDown'
+        });
+        // Home Page 3 Slider End
+
+        // Car Details Slider Start
+        $(".car-preview-crousel").owlCarousel({
+            loop: true,
+            items: 1,
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 2000,
+            nav: false,
+            dots: true,
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn'
+        });
+
+        // Home 2 Service Carousel
+        $(".service-container-wrap").owlCarousel({
+            loop: true,
+            items: 3,
+            margin: 20,
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 2000,
+            nav: false,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+
+
+    }); //Ready Function End
+
+    jQuery(window).load(function () {
+        jQuery('.preloader').fadeOut();
+        jQuery('.preloader-spinner').delay(350).fadeOut('slow');
+        jQuery('body').removeClass('loader-active');
+        jQuery(".popular-car-gird").isotope();
+    }); //window load End
+
+
+}(jQuery));
