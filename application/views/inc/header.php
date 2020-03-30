@@ -114,6 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <li><a href="index3.html">Home 3</a></li>
                                     </ul>
                                 </li>
+								<li><a href="<?php echo base_url("/search"); ?>">Search</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="services.html">services</a></li>
                                 <li><a href="#">Cars</a>
