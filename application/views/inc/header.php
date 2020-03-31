@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <body class="loader-active">
 
-    <!--== Preloader Area Start ==
+    <!--== Preloader Area Start ==	-->
     <div class="preloader">
         <div class="preloader-spinner">
             <div class="loader-content">
@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
-	-->
+
     <!--== Preloader Area End ==-->
 
     <!--== Header Area Start ==-->
