@@ -14,5 +14,10 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->view('carshare_search', $data);
 	}
+	public function contact()
+	{  
+		$data = array();
+		$this->load->view('carshare_contact', $data);
+	}
 
 }
