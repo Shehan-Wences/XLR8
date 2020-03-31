@@ -19,5 +19,9 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->view('carshare_contact', $data);
 	}
-
+	public function signup()
+	{  
+		$data = array();
+		$this->load->view('carshare_signup', $data);
+	}
 }
