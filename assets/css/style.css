@@ -1919,7 +1919,7 @@ body,
 	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	overflow: hidden;
-	padding: 100px 40px;
+	padding: 20px 40px;
 	position: relative;
 	z-index: 1;
 }
@@ -1949,8 +1949,9 @@ body,
 }
 
 .booka-car-content .bookcar-btn button {
-	background-color: #fff;
-	border: 1px solid #4da4bd;
+	background-color: #000000;
+	color:white;
+	border: 1px solid #000000;
 	border-radius: 2px;
 	padding: 8px 0;
 	width: 100%;
@@ -1958,6 +1959,7 @@ body,
 
 .booka-car-content .bookcar-btn button:hover {
 	background-color: #4da4bd;
+	border: 1px solid #4da4bd;
 }
 
 .booka-car-content .bookcar-btn {
