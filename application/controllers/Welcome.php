@@ -8,7 +8,7 @@ class Welcome extends CI_Controller {
 	{  
 	 $this->load->database();
 
-    $feeds = $this->db->get('vts_feeds');
+    $feeds = $this->db->get('Registration');
     echo $feeds;die();
 	
 		$data = array();
