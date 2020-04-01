@@ -6,6 +6,11 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{  
+	 $this->load->database();
+
+    $feeds = $this->db->get('vts_feeds');
+    echo $feeds;die();
+	
 		$data = array();
 		$this->load->view('carshare_home', $data);
 	}
