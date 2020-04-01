@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li class="<?php if ($title == "Home") {echo "active";} ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
 								<li class="<?php if ($title == "Search") {echo "active";} ?>"><a href="<?php echo base_url("/search"); ?>">Search</a></li>
                                 <li class="<?php if ($title == "Contact us") {echo "active";} ?>"><a href="<?php echo base_url("/contact"); ?>">Contact Us</a></li>
-								<li class="<?php if ($title == "Sign up") {echo "active";} ?>"><a href="<?php echo base_url("/signup"); ?>">Sign Up</a></li>
+								<li class="<?php if ($title == "Sign in") {echo "active";} ?>"><a href="<?php echo base_url("/signin"); ?>"><i class="fa fa-user" aria-hidden="true"></i> Sign in</a></li>
                             </ul>
                         </nav>
                     </div>

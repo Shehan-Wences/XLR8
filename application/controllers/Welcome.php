@@ -6,7 +6,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{  
-	 
+	 //$this->load->database();
 	/*	$this->db->select('Email');
         $this->db->from('Registration');
 
@@ -28,6 +28,11 @@ class Welcome extends CI_Controller {
 	{  
 		$data = array();
 		$this->load->view('carshare_contact', $data);
+	}
+	public function signin()
+	{  
+		$data = array();
+		$this->load->view('carshare_signin', $data);
 	}
 	public function signup()
 	{  

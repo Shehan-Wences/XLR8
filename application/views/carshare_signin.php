@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$data['title'] = ucfirst('Sign up');
+$data['title'] = ucfirst('Sign in');
 $this->load->view('inc/header', $data);
 
 ?>
@@ -27,43 +27,30 @@ $this->load->view('inc/header', $data);
     <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-8 m-auto">
+                <div class="col-lg-4 col-md-8 m-auto">
                 	<div class="login-page-content">
                 		<div class="login-form">
-                			<h3>Sign Up</h3>
+                			<h3>Welcome Back!</h3>
 							<form action="#">
-								<div class="name">
-									<div class="row">
-										<div class="col-md-6">
-											<input type="text" placeholder="First Name">
-										</div>
-										<div class="col-md-6">
-											<input type="text" placeholder="Last Name">
-										</div>
-									</div>
-								</div>
 								<div class="username">
-									<input type="email" placeholder="Email">
-								</div>
-								<div class="username">
-									<input type="text" placeholder="Username">
+									<input type="text" placeholder="Email or Username">
 								</div>
 								<div class="password">
 									<input type="password" placeholder="Password">
 								</div>
 								<div class="log-btn">
-									<button type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
+									<button type="submit"><i class="fa fa-sign-in"></i> Sign In</button>
 								</div>
 							</form>
                 		</div>
                 		
                 		<div class="login-other">
                 			<span class="or">or</span>
-                			<a href="#" class="login-with-btn facebook"><i class="fa fa-facebook"></i> Signup With Facebook</a>
-                			<a href="#" class="login-with-btn google"><i class="fa fa-google"></i> Signup With Google</a>
+                			<a href="#" class="login-with-btn facebook"><i class="fa fa-facebook"></i> Sign With Facebook</a>
+                			<a href="#" class="login-with-btn google"><i class="fa fa-google"></i> Sign With Google</a>
                 		</div>
                 		<div class="create-ac">
-                			<p>Have an account? <a href="<?php echo base_url("/signin"); ?>">Sign In</a></p>
+                			<p>Don't have an account? <a href="<?php echo base_url("/signup"); ?>">Sign Up</a></p>
                 		</div>
                 		<div class="login-menu">
                 			<a href="<?php echo base_url("/contact"); ?>">Contact</a>
