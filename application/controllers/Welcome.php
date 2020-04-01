@@ -7,13 +7,14 @@ class Welcome extends CI_Controller {
 	public function index()
 	{  
 	 //$this->load->database();
-		$query = $this->db->query("SELECT * FROM Registration");
+		$this->db->select('Email');
+        $this->db->from('Registration');
 
-		foreach ($query->result_array() as $row)
-		{
-				echo $row['Email'];
-				
-		}
+        $open_list = $this->db->get();
+        foreach ($open_list->result() as $open_info) {
+            echo $open_info['Email'];
+        }
+		
 		$data = array();
 		$this->load->view('carshare_home', $data);
 	}
