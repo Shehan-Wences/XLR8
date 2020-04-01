@@ -12,7 +12,7 @@ class Welcome extends CI_Controller {
 
         $open_list = $this->db->get();
         foreach ($open_list->result() as $open_info) {
-            echo $open_info['Email'];
+           print_r($open_info) ;
         }
 		
 		$data = array();
