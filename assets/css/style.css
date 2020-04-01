@@ -2558,7 +2558,7 @@ body,
 }
 
 .tech-info-list li::before {
-	color: #fab702;
+	color: #4da4bd;
 	content: "\f058";
 	font-family: FontAwesome;
 	margin-right: 15px;
@@ -3047,7 +3047,7 @@ body,
 
 .create-ac a:hover,
 .login-menu a:hover {
-	color: #fab702;
+	color: #4da4bd;
 	text-decoration: underline;
 }
 
