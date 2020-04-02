@@ -31,12 +31,12 @@ $this->load->view('inc/header', $data);
                 	<div class="login-page-content">
                 		<div class="login-form">
                 			<h3>Welcome Back!</h3>
-							<form action="#">
+							<form action="<?php echo base_url('/validate_login'); ?>">
 								<div class="username">
-									<input type="text" placeholder="Email or Username">
+									<input type="text" name="email" placeholder="Email or Username">
 								</div>
 								<div class="password">
-									<input type="password" placeholder="Password">
+									<input type="password" name="password" placeholder="Password">
 								</div>
 								<div class="log-btn">
 									<button type="submit"><i class="fa fa-sign-in"></i> Sign In</button>
