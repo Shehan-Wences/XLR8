@@ -6,10 +6,16 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{ 
+		
 		$data = array();
 		
-        $session_array_used = $this->session->userdata('logged_in');
-        $data['username'] = $session_array_used['username'];
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['username'];
+		}else{
+ 
+		}
+        
  		$this->load->view('carshare_home', $data);
 	}
 	
