@@ -54,8 +54,7 @@ class Welcome extends CI_Controller {
 
             $this->session->set_userdata('logged_in', $session_data);
 			$session_array_used = $this->session->userdata('logged_in');
-			$this->index();	
-           //   echo "Welcome back " . $session_array_used['username'];
+			redirect('', 'refresh');
         } else {
             echo "Email or Password Incorrect!";
         }
@@ -67,5 +66,12 @@ class Welcome extends CI_Controller {
 	{  
 		$data = array();
 		$this->load->view('carshare_signup', $data);
+		
+	}
+	public function signout()
+	{  
+		
+        $this->session->unset_userdata('logged_in');
+		redirect('', 'refresh');
 	}
 }

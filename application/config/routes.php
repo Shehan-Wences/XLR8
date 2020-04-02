@@ -54,7 +54,7 @@ $route['search'] = 'welcome/search';
 $route['contact'] = 'welcome/contact';
 $route['signin'] = 'welcome/signin';
 $route['signup'] = 'welcome/signup';
-
+$route['signout'] = 'welcome/signout';
 
 $route['404_override'] = '';
 

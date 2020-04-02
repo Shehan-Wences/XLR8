@@ -80,7 +80,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<?php   
 								if(isset($username)){
 								?>
-								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $username; ?></a></li>		
+								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $username; ?></a>
+                                    <ul>
+										<li><a href="<?php echo base_url("/profile"); ?>">Profile</a></li>
+										<li><a href="<?php echo base_url("/profile"); ?>">Bookings</a></li>
+                                        <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
+                                        
+                                    </ul>
+                                </li>
 								<?php 
 								}else{
 								?>
