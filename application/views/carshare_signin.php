@@ -31,7 +31,7 @@ $this->load->view('inc/header', $data);
                 	<div class="login-page-content">
                 		<div class="login-form">
                 			<h3>Welcome Back!</h3>
-							<form action="<?php echo base_url('/validate_login'); ?>" method="post" >
+							<form action="<?php echo base_url('/signin'); ?>" method="post" >
 								<div class="username">
 									<input type="text" name="email" placeholder="Email or Username">
 								</div>

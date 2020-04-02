@@ -12,34 +12,12 @@ class Welcome extends CI_Controller {
 	{ 
 		
 		$data = array();
-		
-		$this->load->model('carshare_model');
-        $login = $this->carshare_model->member_login_details('shehanwences@gmail.com','123456');
-
-        if (count($login) > 0) {
-            
-            $session_data = array(
-                'email' => $login[0]->Email,
-                'username' => $login[0]->Name,
-            );
-
-            $this->session->set_userdata('logged_in', $session_data);
-			$session_array_used = $this->session->userdata('logged_in');
 			
-              echo "Welcome back " . $session_array_used['username'];
-        } else {
-            echo "Email or Password Incorrect!";
-        }
-		
-		
-		
-		
-		
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['username'];
 		}else{
- 
+			echo "ssssss";
 		}
         
  		$this->load->view('carshare_home', $data);
@@ -61,13 +39,13 @@ class Welcome extends CI_Controller {
 
             $this->session->set_userdata('logged_in', $session_data);
 			$session_array_used = $this->session->userdata('logged_in');
-			
-              echo "Welcome back " . $session_array_used['username'];
+			$this->index();	
+           //   echo "Welcome back " . $session_array_used['username'];
         } else {
             echo "Email or Password Incorrect!";
         }
 		
-		$this->load->view('carshare_signin', $data);
+		
             
 
         
@@ -86,6 +64,29 @@ class Welcome extends CI_Controller {
 	public function signin()
 	{  
 		$data = array();
+		if(isset($_POST)){
+		
+		$email=$this->input->post('email');
+		$password=$this->input->post('password');
+        $this->load->model('carshare_model');
+        $login = $this->carshare_model->member_login_details('shehanwences@gmail.com','123456');
+
+        if (count($login) > 0) {
+            
+            $session_data = array(
+                'email' => $login[0]->Email,
+                'username' => $login[0]->Name,
+            );
+
+            $this->session->set_userdata('logged_in', $session_data);
+			$session_array_used = $this->session->userdata('logged_in');
+			$this->index();	
+           //   echo "Welcome back " . $session_array_used['username'];
+        } else {
+            echo "Email or Password Incorrect!";
+        }
+		
+		}
 		$this->load->view('carshare_signin', $data);
 	}
 	public function signup()

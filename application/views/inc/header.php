@@ -77,14 +77,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li class="<?php if ($title == "Home") {echo "active";} ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
 								<li class="<?php if ($title == "Search") {echo "active";} ?>"><a href="<?php echo base_url("/search"); ?>">Search</a></li>
                                 <li class="<?php if ($title == "Contact us") {echo "active";} ?>"><a href="<?php echo base_url("/contact"); ?>">Contact Us</a></li>
-								<li class="<?php if ($title == "Sign in") {echo "active";} ?>"><a href="<?php echo base_url("/signin"); ?>"><i class="fa fa-user" aria-hidden="true"></i> Sign in</a></li>
 								<?php   
-								if(isset($data['username'])){
+								if(isset($username)){
 								?>
-								<li class="active"><?php echo $data['username']; ?></li>		
+								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $username; ?></a></li>		
 								<?php 
-								}
+								}else{
 								?>
+								<li class="<?php if ($title == "Sign in") {echo "active";} ?>"><a href="<?php echo base_url("/signin"); ?>"><i class="fa fa-user" aria-hidden="true"></i> Sign in</a></li>
+								<?php } ?>
                             </ul>
                         </nav>
                     </div>
