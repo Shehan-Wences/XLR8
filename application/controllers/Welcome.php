@@ -27,15 +27,35 @@ class Welcome extends CI_Controller {
 	public function search()
 	{  
 		$data = array();
+		
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['username'];
+		}else{
+			
+		}
+		
 		$this->load->view('carshare_search', $data);
 	}
 	public function contact()
 	{  
 		$data = array();
+		
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['username'];
+		}else{
+			
+		}
+		
 		$this->load->view('carshare_contact', $data);
 	}
 	public function signin()
 	{  
+		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+		}
+		
 		$data = array();
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
@@ -64,6 +84,9 @@ class Welcome extends CI_Controller {
 	}
 	public function signup()
 	{  
+		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+		}
 		$data = array();
 		$this->load->view('carshare_signup', $data);
 		
