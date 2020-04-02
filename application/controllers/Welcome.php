@@ -41,7 +41,7 @@ class Welcome extends CI_Controller {
             echo "Email or Password Incorrect!";
         }
 		
-
+		$this->load->view('carshare_signin', $data);
             
 
         
