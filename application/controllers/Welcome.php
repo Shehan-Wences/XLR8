@@ -91,10 +91,24 @@ class Welcome extends CI_Controller {
 	}
 	public function signup()
 	{  
-			if($this->session->userdata('logged_in')){
+		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
 		}
 		$data = array();
+		$this->load->model('carshare_model');
+        if ($this->input->server('REQUEST_METHOD')) == 'POST') {
+           
+
+            $add_data = array('Fname' => $_POST['Fname'],
+								'Lname' => $_POST['Lname'],
+								'Email' => $_POST['Email'],
+								'Status' => 'PENDING',
+								'Password' => $_POST['Password']);
+
+            $this->carshare_model->add_data('customer', $add_data);
+          
+        } 
+			
 		$this->load->view('carshare_signup', $data);
 		
 	}

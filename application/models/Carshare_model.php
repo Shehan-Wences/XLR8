@@ -4,8 +4,8 @@ class carshare_model extends CI_Model {
 
     public function add_data($table, $data) {
         $this->db->insert($table, $data);
-        $last_id = $this->db->insert_id();
-        return $last_id;
+      //  $last_id = $this->db->insert_id();
+       // return $last_id;
     }
 
     public function edit_data($table, $id, $where, $data) {

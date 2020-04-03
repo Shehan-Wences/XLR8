@@ -35,24 +35,21 @@ $this->load->view('inc/header', $data);
 								<div class="name">
 									<div class="row">
 										<div class="col-md-6">
-											<input type="text" placeholder="First Name">
+											<input name="Fname" type="text" placeholder="First Name">
 										</div>
 										<div class="col-md-6">
-											<input type="text" placeholder="Last Name">
+											<input name="Lname" type="text" placeholder="Last Name">
 										</div>
 									</div>
 								</div>
-								<div class="username">
-									<input type="email" placeholder="Email">
-								</div>
-								<div class="username">
-									<input type="text" placeholder="Username">
+								<div class="Email">
+									<input name="Email" type="email" placeholder="Email">
 								</div>
 								<div class="password">
-									<input type="password" placeholder="Password">
+									<input name="Password" type="password" placeholder="Password">
 								</div>
 								<div class="log-btn">
-									<button type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
+									<button name="signup" type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
 								</div>
 							</form>
                 		</div>
