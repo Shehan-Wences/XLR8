@@ -102,13 +102,13 @@ class Welcome extends CI_Controller {
             $add_data = array('Fname' => $_POST['Fname'],
 								'Lname' => $_POST['Lname'],
 								'Email' => $_POST['Email'],
-								'Status' => 'PENDING',
+								'Status' => 'ACTIVE',
 								'Password' => $_POST['Password']);
 
             $this->carshare_model->add_data('customer', $add_data);
           
         } 
-			
+		echo "Account Created";	
 		$this->load->view('carshare_signup', $data);
 		
 	}
