@@ -96,7 +96,7 @@ class Welcome extends CI_Controller {
 		}
 		$data = array();
 		$this->load->model('carshare_model');
-        if ($this->input->server('REQUEST_METHOD')) == 'POST') {
+        if (($this->input->server('REQUEST_METHOD')) == 'POST') {
            
 
             $add_data = array('Fname' => $_POST['Fname'],
