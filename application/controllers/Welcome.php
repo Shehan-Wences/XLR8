@@ -78,11 +78,11 @@ class Welcome extends CI_Controller {
 				$session_array_used = $this->session->userdata('logged_in');
 				redirect('', 'refresh');
 			}else{
-				 echo "Account Status Pending! Check Back Later";
+				 echo "Account Status Pending! Check Back Later".$login[0]->Status;
 			}
 			
         } else {
-            echo "Email or Password Incorrect!" .$login[0]->Status;
+            echo "Email or Password Incorrect!" ;
 			
         }
 		
