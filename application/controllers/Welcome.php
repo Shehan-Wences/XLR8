@@ -67,7 +67,7 @@ class Welcome extends CI_Controller {
 
         if (count($login) > 0) {
             
-			if(($login[0]->Status)== "ACTIVE"){
+			if(($login[0]->Status) == 'ACTIVE'){
 				$session_data = array(
 					'email' => $login[0]->Email,
 					'Fname' => $login[0]->Fname,
@@ -82,7 +82,8 @@ class Welcome extends CI_Controller {
 			}
 			
         } else {
-            echo "Email or Password Incorrect!";
+            echo "Email or Password Incorrect!" .$login[0]->Status;
+			
         }
 		
 		}
