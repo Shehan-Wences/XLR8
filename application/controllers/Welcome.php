@@ -66,7 +66,7 @@ class Welcome extends CI_Controller {
         $login = $this->carshare_model->member_login_details($email,$password);
 
         if (count($login) > 0) {
-            $status=$login[0]->Status;
+            $status=trim($login[0]->Status);
 			if($status == "ACTIVE"){
 				$session_data = array(
 					'email' => $login[0]->Email,
