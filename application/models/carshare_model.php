@@ -25,6 +25,7 @@ class carshare_model extends CI_Model {
         $this->db->select('Fname');
 		$this->db->select('Lname');
         $this->db->select('Password');
+		$this->db->select('Status');
         $this->db->from('customer');
 		$this->db->where("customer.Email", $email);
         $this->db->where("customer.Password", $pass);

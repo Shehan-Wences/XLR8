@@ -67,15 +67,20 @@ class Welcome extends CI_Controller {
 
         if (count($login) > 0) {
             
-            $session_data = array(
-                'email' => $login[0]->Email,
-                'fname' => $login[0]->Fname,
-				'lname' => $login[0]->Lname,
-            );
+			if(($login[0]->Status)== "ACTIVE"){
+				$session_data = array(
+					'email' => $login[0]->Email,
+					'Fname' => $login[0]->Fname,
+					'Lname' => $login[0]->Lname,
+				);
 
-            $this->session->set_userdata('logged_in', $session_data);
-			$session_array_used = $this->session->userdata('logged_in');
-			redirect('', 'refresh');
+				$this->session->set_userdata('logged_in', $session_data);
+				$session_array_used = $this->session->userdata('logged_in');
+				redirect('', 'refresh');
+			}else{
+				 echo "Account Status Pending! Check Back Later";
+			}
+			
         } else {
             echo "Email or Password Incorrect!";
         }
