@@ -15,7 +15,7 @@ class Welcome extends CI_Controller {
 			
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
-			$data['username'] = $session_array_used['username'];
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
 			
 		}
@@ -30,7 +30,7 @@ class Welcome extends CI_Controller {
 		
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
-			$data['username'] = $session_array_used['username'];
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
 			
 		}
@@ -43,7 +43,7 @@ class Welcome extends CI_Controller {
 		
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
-			$data['username'] = $session_array_used['username'];
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
 			
 		}
@@ -69,7 +69,8 @@ class Welcome extends CI_Controller {
             
             $session_data = array(
                 'email' => $login[0]->Email,
-                'username' => $login[0]->Name,
+                'fname' => $login[0]->Fname,
+				'lname' => $login[0]->Lname,
             );
 
             $this->session->set_userdata('logged_in', $session_data);
@@ -84,7 +85,7 @@ class Welcome extends CI_Controller {
 	}
 	public function signup()
 	{  
-		if($this->session->userdata('logged_in')){
+			if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
 		}
 		$data = array();

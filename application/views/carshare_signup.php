@@ -31,7 +31,7 @@ $this->load->view('inc/header', $data);
                 	<div class="login-page-content">
                 		<div class="login-form">
                 			<h3>Sign Up</h3>
-							<form action="#">
+							<form action="<?php echo base_url('/signup'); ?>" method="post" >
 								<div class="name">
 									<div class="row">
 										<div class="col-md-6">
@@ -76,3 +76,5 @@ $this->load->view('inc/header', $data);
     <!--== Login Page Content End ==-->
 
 <?php $this->load->view('inc/footer'); ?>
+
+
