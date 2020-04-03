@@ -67,7 +67,7 @@ class Welcome extends CI_Controller {
 
         if (count($login) > 0) {
             
-			if(strval($login[0]->Status) == 'ACTIVE'){
+			if(strval($login[0]->Status) == "ACTIVE"){
 				$session_data = array(
 					'email' => $login[0]->Email,
 					'Fname' => $login[0]->Fname,
