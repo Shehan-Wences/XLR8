@@ -66,8 +66,8 @@ class Welcome extends CI_Controller {
         $login = $this->carshare_model->member_login_details($email,$password);
 
         if (count($login) > 0) {
-            
-			if(strval($login[0]->Status) == "ACTIVE"){
+            $status=$login[0]->Status;
+			if($status == "ACTIVE"){
 				$session_data = array(
 					'email' => $login[0]->Email,
 					'Fname' => $login[0]->Fname,
@@ -78,7 +78,7 @@ class Welcome extends CI_Controller {
 				$session_array_used = $this->session->userdata('logged_in');
 				redirect('', 'refresh');
 			}else{
-				 echo "Account Status Pending! Check Back Later".$login[0]->Status;
+				 echo "Account Status Pending! Check Back Later";
 			}
 			
         } else {
