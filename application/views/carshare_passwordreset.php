@@ -32,8 +32,8 @@ $this->load->view('inc/header', $data);
                 		<div class="login-form">
                 			<h3>Forgot your Password ?</h3>
 							<form action="<?php echo base_url('/passwordreset'); ?>" method="post" >
-								<div class="username">
-									<input type="text" name="email" placeholder="Email">
+								<div class="Email">
+									<input name="Email" type="email" placeholder="Email">
 								</div>
 								
 								<div class="log-btn">
