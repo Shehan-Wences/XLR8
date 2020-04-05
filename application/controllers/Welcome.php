@@ -129,7 +129,7 @@ class Welcome extends CI_Controller {
 									'Lname' => $_POST['Lname'],
 									'Email' => $_POST['Email'],
 									'Status' => 'ACTIVE',
-									'Password' => sha1($randomPassword);
+									'Password' => sha1($randomPassword));
 
 				$this->carshare_model->add_data('customer', $add_data);
 				
