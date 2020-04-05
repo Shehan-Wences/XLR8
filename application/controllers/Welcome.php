@@ -19,7 +19,8 @@ class Welcome extends CI_Controller {
 		}else{
 			
 		}
-        
+   	
+
  		$this->load->view('carshare_home', $data);
 	}
 	
@@ -47,7 +48,10 @@ class Welcome extends CI_Controller {
 		}else{
 			
 		}
-		
+
+ 
+
+			
 		$this->load->view('carshare_contact', $data);
 	}
 	public function signin()
@@ -98,14 +102,54 @@ class Welcome extends CI_Controller {
 		$this->load->model('carshare_model');
         if (($this->input->server('REQUEST_METHOD')) == 'POST') {
            
+			$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+			$pass = array(); //remember to declare $pass as an array
+			$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+			for ($i = 0; $i < 8; $i++) {
+				$n = rand(0, $alphaLength);
+				$pass[] = $alphabet[$n];
+			}
+			$randomPassword=implode($pass); //turn the array into a string
 
             $add_data = array('Fname' => $_POST['Fname'],
 								'Lname' => $_POST['Lname'],
 								'Email' => $_POST['Email'],
 								'Status' => 'ACTIVE',
-								'Password' => $_POST['Password']);
+								'Password' => $randomPassword);
 
             $this->carshare_model->add_data('customer', $add_data);
+			
+			
+			$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>Thank You for Registering with XLR8 CarShare.</p>
+			<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
+			<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
+			<p>Many Thanks</p>
+			<p>XLR8 Team</p></body></html>';
+	
+			$config['protocol']    = 'smtp';
+			$config['smtp_host']    = 'ssl://smtp.gmail.com';
+			$config['smtp_port']    = '465';
+			$config['smtp_timeout'] = '60';
+
+			$config['smtp_user']    = 'xlr8.carshare@gmail.com';    
+			$config['smtp_pass']    = 's3757847'; 
+
+			$config['charset']    = 'utf-8';
+			$config['newline']    = "\r\n";
+			$config['mailtype'] = 'html'; 
+			$config['validation'] = TRUE; 
+
+			 
+
+			$this->email->initialize($config);
+			$this->email->set_mailtype("html");
+			$this->email->from('xlr8.carshare@gmail.com');
+			$this->email->to($_POST['Email']);
+			$this->email->subject('Welcome To XLR8');
+			$this->email->message($emailContent);
+			$this->email->send();
+			
+			
           
         } 
 		echo "Account Created";	

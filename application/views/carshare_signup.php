@@ -45,9 +45,10 @@ $this->load->view('inc/header', $data);
 								<div class="Email">
 									<input name="Email" type="email" placeholder="Email">
 								</div>
-								<div class="password">
+								<!--<div class="password">
 									<input name="Password" type="password" placeholder="Password">
 								</div>
+								-->
 								<div class="log-btn">
 									<button name="signup" type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
 								</div>
