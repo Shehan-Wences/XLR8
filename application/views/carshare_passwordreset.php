@@ -31,11 +31,20 @@ $this->load->view('inc/header', $data);
                 	<div class="login-page-content">
                 		<div class="login-form">
                 			<h3>Forgot your Password ?</h3>
+							<?php if(isset($accounterror)){   ?>
+							<div class="alert alert-danger">
+								<strong>Oops!</strong><?php echo $accounterror;   ?> 
+							</div>
+							<?php }  ?>
 							<form action="<?php echo base_url('/passwordreset'); ?>" method="post" >
 								<div class="Email">
 									<input name="Email" type="email" placeholder="Email">
 								</div>
-								
+								<?php if(isset($erroremail)){   ?>
+								<div class="alert alert-danger">
+									<strong>Oops!</strong><?php echo $erroremail;   ?> 
+								</div>
+								<?php }  ?>
 								<div class="log-btn">
 									<button type="submit"><i class="fa fa-sign-in"></i>Reset Password</button>
 								</div>

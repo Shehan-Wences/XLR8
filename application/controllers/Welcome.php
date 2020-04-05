@@ -61,6 +61,7 @@ class Welcome extends CI_Controller {
 		}
 		
 		$data = array();
+		unset($data);
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
 		
@@ -82,11 +83,11 @@ class Welcome extends CI_Controller {
 				$session_array_used = $this->session->userdata('logged_in');
 				redirect('', 'refresh');
 			}else{
-				 echo "Account Status Pending! Check Back Later";
+				$data['accounterror'] = "Account Status is ".$status.". Please Contact XLR8 Team for more details.";
 			}
 			
         } else {
-            echo "Email or Password Incorrect!" ;
+            $data['accounterror'] = "Username or Password is invalid.";
 			
         }
 		
@@ -100,6 +101,7 @@ class Welcome extends CI_Controller {
 		}
 		$status=true;
 		$data = array();
+		unset($data);
 		$this->load->model('carshare_model');
         if (($this->input->server('REQUEST_METHOD')) == 'POST') {
            
@@ -113,15 +115,15 @@ class Welcome extends CI_Controller {
 			$randomPassword=implode($pass); //turn the array into a string
 
 			if(!preg_match("/^[a-z ,.'-]{2,10}$/i", $_POST['Fname'])){
-				echo "First Name should contain 2-10 characters";
+				$data['errorfname'] = "First Name should contain 2-10 characters";
 				$status=false;
 			}
 			if(!preg_match("/^[a-z ,.'-]{2,20}$/i", $_POST['Lname'])){
-				echo "Last Name should contain 2-20 characters";
+				$data['errorlname'] = "Last Name should contain 2-20 characters";
 				$status=false;
 			}
 			if(!preg_match("/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i", $_POST['Email'])){
-				echo "Invalid Email";
+				$data['erroremail'] = "Invalid Email";
 				$status=false;
 			}
 			if($status==true){
@@ -162,11 +164,11 @@ class Welcome extends CI_Controller {
 				$this->email->subject('Welcome To XLR8');
 				$this->email->message($emailContent);
 				$this->email->send();
-			
+				$data['successmessage'] = "Account Create succefully. Please check your email.";
 			}
           
         } 
-		echo "Account Created";	
+		
 		$this->load->view('carshare_signup', $data);
 		
 	}
@@ -180,6 +182,7 @@ class Welcome extends CI_Controller {
 	{  
 		$status=true;
 		$data = array();
+		unset($data);
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
 
@@ -189,7 +192,7 @@ class Welcome extends CI_Controller {
 			$this->load->model('carshare_model');
            
 			if(!preg_match("/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i", $_POST['Email'])){
-				echo "Invalid Email";
+				$data['erroremail'] = "Invalid Email";
 				$status=false;
 			}
 			$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
@@ -205,7 +208,8 @@ class Welcome extends CI_Controller {
 			$login = $this->carshare_model->email_check($_POST['Email']);
 
 				if(count($login) < 1){
-					echo "Account matching that email does not exist";
+					
+					$data['accounterror'] = "Account matching that email does not exist";
 					$status=false;
 				}
 			}
@@ -248,7 +252,7 @@ class Welcome extends CI_Controller {
 			}
           
         } 
-		//echo "Account Created";	
+		
 		$this->load->view('carshare_passwordreset', $data);
 	}
 }

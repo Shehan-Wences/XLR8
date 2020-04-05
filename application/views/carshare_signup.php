@@ -31,20 +31,42 @@ $this->load->view('inc/header', $data);
                 	<div class="login-page-content">
                 		<div class="login-form">
                 			<h3>Sign Up</h3>
+							<?php if(isset($successmessage)){   ?>
+								<div class="alert alert-success">
+									<strong>Yay!!</strong><?php echo $erroremail;   ?> 
+								</div>
+							<?php }  ?>
 							<form action="<?php echo base_url('/signup'); ?>" method="post" >
 								<div class="name">
 									<div class="row">
 										<div class="col-md-6">
 											<input name="Fname" type="text" placeholder="First Name">
 										</div>
+										
 										<div class="col-md-6">
 											<input name="Lname" type="text" placeholder="Last Name">
 										</div>
+									
 									</div>
+									<?php if(isset($errorfname)){   ?>
+										<div class="alert alert-danger">
+											<strong>Oops!</strong><?php echo $errorfname;   ?> 
+										</div>
+									<?php }  ?>
+									<?php if(isset($errorlname)){   ?>
+										<div class="alert alert-danger">
+											<strong>Oops!</strong><?php echo $errorlname;   ?> 
+										</div>
+									<?php }  ?>
 								</div>
 								<div class="Email">
 									<input name="Email" type="email" placeholder="Email">
 								</div>
+								<?php if(isset($erroremail)){   ?>
+								<div class="alert alert-danger">
+									<strong>Oops!</strong><?php echo $erroremail;   ?> 
+								</div>
+								<?php }  ?>
 								<!--<div class="password">
 									<input name="Password" type="password" placeholder="Password">
 								</div>
