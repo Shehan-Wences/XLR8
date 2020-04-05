@@ -61,7 +61,7 @@ class Welcome extends CI_Controller {
 		}
 		
 		$data = array();
-		unset($data);
+		
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
 		
@@ -101,7 +101,7 @@ class Welcome extends CI_Controller {
 		}
 		$status=true;
 		$data = array();
-		unset($data);
+		
 		$this->load->model('carshare_model');
         if (($this->input->server('REQUEST_METHOD')) == 'POST') {
            
@@ -126,6 +126,16 @@ class Welcome extends CI_Controller {
 				$data['erroremail'] = "Invalid Email";
 				$status=false;
 			}
+			if($status==true){
+			$login = $this->carshare_model->email_check($_POST['Email']);
+
+				if(count($login) > 0){
+					
+					$data['erroremail'] = "Account matching that email already exists.";
+					$status=false;
+				}
+			}
+			
 			if($status==true){
 				$add_data = array('Fname' => $_POST['Fname'],
 									'Lname' => $_POST['Lname'],
@@ -182,7 +192,7 @@ class Welcome extends CI_Controller {
 	{  
 		$status=true;
 		$data = array();
-		unset($data);
+		
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
 
