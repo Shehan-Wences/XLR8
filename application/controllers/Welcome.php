@@ -205,6 +205,7 @@ class Welcome extends CI_Controller {
 			$login = $this->carshare_model->email_check($_POST['Email']);
 
 				if(count($login) < 1){
+					echo "Account matching that email does not exist";
 					$status=false;
 				}
 			}
@@ -213,7 +214,7 @@ class Welcome extends CI_Controller {
 				$edit_data = array('Password' => sha1($randomPassword));
 
 				
-				$this->carshare_model->edit_data('customers', $_POST['Email'], 'Email', $edit_data);
+				$this->carshare_model->edit_data('customer', $_POST['Email'], 'Email', $edit_data);
 				
 				$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>You have requested to RESET your password.</p>
 				<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
