@@ -178,6 +178,8 @@ class Welcome extends CI_Controller {
 	}
 	public function passwordreset()
 	{  
+		$status=true;
+		$data = array();
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
 
@@ -196,7 +198,12 @@ class Welcome extends CI_Controller {
 				$pass[] = $alphabet[$n];
 			}
 			$randomPassword=implode($pass); //turn the array into a string
-			 
+			$login = $this->carshare_model->email_check($_POST['Email']);
+
+			if(count($login) < 1){
+				$status=false;
+			}
+       
 			
 			if($status==true){
 				$edit_data = array('Password' => sha1($randomPassword));
@@ -236,7 +243,7 @@ class Welcome extends CI_Controller {
 			}
           
         } 
-		echo "Account Created";	
+		//echo "Account Created";	
 		$this->load->view('carshare_passwordreset', $data);
 	}
 }

@@ -18,6 +18,20 @@ class carshare_model extends CI_Model {
         $this->db->delete($table, $data);
         return true;
     }
+	
+	public function email_check($email) {
+        $data = array();
+        $this->db->select('Email');
+        $this->db->from('customer');
+		$this->db->where("customer.Email", $email);
+       
+        $open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+    }
 
     public function member_login_details($email, $pass) {
         $data = array();
