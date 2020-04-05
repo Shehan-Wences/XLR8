@@ -176,4 +176,67 @@ class Welcome extends CI_Controller {
         $this->session->unset_userdata('logged_in');
 		redirect('', 'refresh');
 	}
+	public function passwordreset()
+	{  
+		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+
+		}
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+           
+			if(!preg_match("/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i", $_POST['Email'])){
+				echo "Invalid Email";
+				$status=false;
+			}
+			$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+			$pass = array(); //remember to declare $pass as an array
+			$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+			for ($i = 0; $i < 8; $i++) {
+				$n = rand(0, $alphaLength);
+				$pass[] = $alphabet[$n];
+			}
+			$randomPassword=implode($pass); //turn the array into a string
+			 
+			
+			if($status==true){
+				$edit_data = array('Password' => sha1($randomPassword));
+
+				
+				$this->carshare_model->edit_data('customers', $_POST['Email'], 'Email', $edit_data);
+				
+				$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>You have requested to RESET your password.</p>
+				<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
+				<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
+				<p>Many Thanks</p>
+				<p>XLR8 Team</p></body></html>';
+		
+				$config['protocol']    = 'smtp';
+				$config['smtp_host']    = 'ssl://smtp.gmail.com';
+				$config['smtp_port']    = '465';
+				$config['smtp_timeout'] = '60';
+
+				$config['smtp_user']    = 'xlr8.carshare@gmail.com';    
+				$config['smtp_pass']    = 's3757847'; 
+
+				$config['charset']    = 'utf-8';
+				$config['newline']    = "\r\n";
+				$config['mailtype'] = 'html'; 
+				$config['validation'] = TRUE; 
+
+				 
+
+				$this->email->initialize($config);
+				$this->email->set_mailtype("html");
+				$this->email->from('xlr8.carshare@gmail.com');
+				$this->email->to($_POST['Email']);
+				$this->email->subject('XLR8 >> Password Reset');
+				$this->email->message($emailContent);
+				$this->email->send();
+			
+			}
+          
+        } 
+		echo "Account Created";	
+		$this->load->view('carshare_passwordreset', $data);
+	}
 }

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$data['title'] = ucfirst('Sign in');
+$data['title'] = ucfirst('Password Reset');
 $this->load->view('inc/header', $data);
 
 ?>
@@ -12,7 +12,7 @@ $this->load->view('inc/header', $data);
                 <!-- Page Title Start -->
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
-                        <h2>SIGN IN</h2>
+                        <h2>Password Reset</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
@@ -30,29 +30,21 @@ $this->load->view('inc/header', $data);
                 <div class="col-lg-4 col-md-8 m-auto">
                 	<div class="login-page-content">
                 		<div class="login-form">
-                			<h3>Welcome Back!</h3>
-							<form action="<?php echo base_url('/signin'); ?>" method="post" >
+                			<h3>Forgot your Password ?</h3>
+							<form action="<?php echo base_url('/passwordreset'); ?>" method="post" >
 								<div class="username">
 									<input type="text" name="email" placeholder="Email">
 								</div>
-								<div class="password">
-									<input type="password" name="password" placeholder="Password">
-								</div>
+								
 								<div class="log-btn">
-									<button type="submit"><i class="fa fa-sign-in"></i> Sign In</button>
+									<button type="submit"><i class="fa fa-sign-in"></i>Reset Password</button>
 								</div>
 							</form>
                 		</div>
+                		
+                		
                 		<div class="create-ac">
-                			<p>Forgot your password? <a href="<?php echo base_url("/passwordreset"); ?>">Sign Up</a></p>
-                		</div>
-                		<div class="login-other">
-                			<span class="or">or</span>
-                			<a href="#" class="login-with-btn facebook"><i class="fa fa-facebook"></i> Sign With Facebook</a>
-                			<a href="#" class="login-with-btn google"><i class="fa fa-google"></i> Sign With Google</a>
-                		</div>
-                		<div class="create-ac">
-                			<p>Don't have an account? <a href="<?php echo base_url("/signup"); ?>">Sign Up</a></p>
+                			<p>Have an account? <a href="<?php echo base_url("/signin"); ?>">Sign In</a></p>
                 		</div>
                 		<div class="login-menu">
                 			<a href="<?php echo base_url("/contact"); ?>">Contact</a>
