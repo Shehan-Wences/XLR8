@@ -44,7 +44,7 @@ $this->load->view('inc/header', $data);
 							</form>
                 		</div>
                 		<div class="create-ac">
-                			<p>Forgot your password? <a href="<?php echo base_url("/passwordreset"); ?>">Sign Up</a></p>
+                			<p>Forgot your password? <a href="<?php echo base_url("/passwordreset"); ?>">Reset</a></p>
                 		</div>
                 		<div class="login-other">
                 			<span class="or">or</span>

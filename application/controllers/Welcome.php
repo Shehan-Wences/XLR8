@@ -198,12 +198,14 @@ class Welcome extends CI_Controller {
 				$pass[] = $alphabet[$n];
 			}
 			$randomPassword=implode($pass); //turn the array into a string
+			
+			if($status==true){
 			$login = $this->carshare_model->email_check($_POST['Email']);
 
-			if(count($login) < 1){
-				$status=false;
+				if(count($login) < 1){
+					$status=false;
+				}
 			}
-       
 			
 			if($status==true){
 				$edit_data = array('Password' => sha1($randomPassword));
