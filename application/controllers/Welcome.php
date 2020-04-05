@@ -258,7 +258,7 @@ class Welcome extends CI_Controller {
 				$this->email->subject('XLR8 >> Password Reset');
 				$this->email->message($emailContent);
 				$this->email->send();
-			
+				$data['successmessage'] = "Password succefully reseted.Please check your email.";
 			}
           
         } 

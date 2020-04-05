@@ -36,6 +36,11 @@ $this->load->view('inc/header', $data);
 								<strong>Oops!</strong><?php echo $accounterror;   ?> 
 							</div>
 							<?php }  ?>
+							<?php if(isset($successmessage)){   ?>
+							<div class="alert alert-success">
+								<strong>Yay!</strong><?php echo $successmessage;   ?> 
+							</div>
+							<?php }  ?>
 							<form action="<?php echo base_url('/passwordreset'); ?>" method="post" >
 								<div class="Email">
 									<input name="Email" type="email" placeholder="Email">
