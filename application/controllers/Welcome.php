@@ -169,7 +169,7 @@ class Welcome extends CI_Controller {
 
 				$this->email->initialize($config);
 				$this->email->set_mailtype("html");
-				$this->email->from('xlr8.carshare@gmail.com');
+				$this->email->from('xlr8.carshare@gmail.com','XLR8');
 				$this->email->to($_POST['Email']);
 				$this->email->subject('Welcome To XLR8');
 				$this->email->message($emailContent);
@@ -253,7 +253,7 @@ class Welcome extends CI_Controller {
 
 				$this->email->initialize($config);
 				$this->email->set_mailtype("html");
-				$this->email->from('xlr8.carshare@gmail.com');
+				$this->email->from('xlr8.carshare@gmail.com','XLR8');
 				$this->email->to($_POST['Email']);
 				$this->email->subject('XLR8 >> Password Reset');
 				$this->email->message($emailContent);
