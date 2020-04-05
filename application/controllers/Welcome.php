@@ -98,6 +98,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
 		}
+		$status=true;
 		$data = array();
 		$this->load->model('carshare_model');
         if (($this->input->server('REQUEST_METHOD')) == 'POST') {
@@ -111,45 +112,58 @@ class Welcome extends CI_Controller {
 			}
 			$randomPassword=implode($pass); //turn the array into a string
 
-            $add_data = array('Fname' => $_POST['Fname'],
-								'Lname' => $_POST['Lname'],
-								'Email' => $_POST['Email'],
-								'Status' => 'ACTIVE',
-								'Password' => $randomPassword);
+			if(!preg_match("/^[a-z ,.'-]{2,10}$/i", $_POST['Fname'])){
+				echo "First Name should contain 2-10 characters";
+				$status=false;
+			}
+			if(!preg_match("/^[a-z ,.'-]{2,20}$/i", $_POST['Lname'])){
+				echo "Last Name should contain 2-20 characters";
+				$status=false;
+			}
+			if(!preg_match("/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i", $_POST['Email'])){
+				echo "Invalid Email";
+				$status=false;
+			}
+			if($status==true){
+				$add_data = array('Fname' => $_POST['Fname'],
+									'Lname' => $_POST['Lname'],
+									'Email' => $_POST['Email'],
+									'Status' => 'ACTIVE',
+									'Password' => sha1($randomPassword);
 
-            $this->carshare_model->add_data('customer', $add_data);
+				$this->carshare_model->add_data('customer', $add_data);
+				
+				
+				$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>Thank You for Registering with XLR8 CarShare.</p>
+				<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
+				<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
+				<p>Many Thanks</p>
+				<p>XLR8 Team</p></body></html>';
+		
+				$config['protocol']    = 'smtp';
+				$config['smtp_host']    = 'ssl://smtp.gmail.com';
+				$config['smtp_port']    = '465';
+				$config['smtp_timeout'] = '60';
+
+				$config['smtp_user']    = 'xlr8.carshare@gmail.com';    
+				$config['smtp_pass']    = 's3757847'; 
+
+				$config['charset']    = 'utf-8';
+				$config['newline']    = "\r\n";
+				$config['mailtype'] = 'html'; 
+				$config['validation'] = TRUE; 
+
+				 
+
+				$this->email->initialize($config);
+				$this->email->set_mailtype("html");
+				$this->email->from('xlr8.carshare@gmail.com');
+				$this->email->to($_POST['Email']);
+				$this->email->subject('Welcome To XLR8');
+				$this->email->message($emailContent);
+				$this->email->send();
 			
-			
-			$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>Thank You for Registering with XLR8 CarShare.</p>
-			<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
-			<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
-			<p>Many Thanks</p>
-			<p>XLR8 Team</p></body></html>';
-	
-			$config['protocol']    = 'smtp';
-			$config['smtp_host']    = 'ssl://smtp.gmail.com';
-			$config['smtp_port']    = '465';
-			$config['smtp_timeout'] = '60';
-
-			$config['smtp_user']    = 'xlr8.carshare@gmail.com';    
-			$config['smtp_pass']    = 's3757847'; 
-
-			$config['charset']    = 'utf-8';
-			$config['newline']    = "\r\n";
-			$config['mailtype'] = 'html'; 
-			$config['validation'] = TRUE; 
-
-			 
-
-			$this->email->initialize($config);
-			$this->email->set_mailtype("html");
-			$this->email->from('xlr8.carshare@gmail.com');
-			$this->email->to($_POST['Email']);
-			$this->email->subject('Welcome To XLR8');
-			$this->email->message($emailContent);
-			$this->email->send();
-			
-			
+			}
           
         } 
 		echo "Account Created";	

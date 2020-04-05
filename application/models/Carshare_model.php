@@ -28,7 +28,7 @@ class carshare_model extends CI_Model {
 		$this->db->select('Status');
         $this->db->from('customer');
 		$this->db->where("customer.Email", $email);
-        $this->db->where("customer.Password", $pass);
+        $this->db->where("customer.Password", sha1($pass));
 
         $open_list = $this->db->get();
 		
