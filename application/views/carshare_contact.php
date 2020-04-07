@@ -13,7 +13,7 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>Contact Us</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>Got a question? Our team is happy to answer your questions.Fill out the form and we'll be in touch as soon as possible.</p>
                     </div>
                 </div>
                 <!-- Page Title End -->
