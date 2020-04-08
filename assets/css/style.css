@@ -3240,3 +3240,8 @@ body,
 	opacity: 1;
 	visibility: visible;
 }
+@media (min-width: 1024px){
+.d-xl-block {
+    display: block!important;
+}
+}
