@@ -52,7 +52,7 @@ $this->load->view('inc/header', $data);
                         <form action="<?php echo base_url('/passwordchange'); ?>" method="post" >
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <div class="name-input">
+                                    <div class="website-input">
                                         <input name="newpass" type="password" placeholder="New Password">
                                     </div>
                                 </div>

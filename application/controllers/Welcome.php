@@ -229,7 +229,7 @@ class Welcome extends CI_Controller {
 	{  
 		
 		$data = array();
-		
+		$this->load->model('carshare_model');
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
@@ -237,6 +237,32 @@ class Welcome extends CI_Controller {
 			redirect('', 'refresh');
 		}
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+			
+			if(!preg_match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", $_POST['newpass'])){
+				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$status=false;
+			}
+			if(!preg_match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", $_POST['confirmpass'])){
+				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$status=false;
+			}
+			if($_POST['confirmpass']==$_POST['newpass']){
+				if(){
+					$data['passerror'] =$data['passerror']."\r\n Passwords does not match!";
+				}else{
+					$data['passerror'] = "Passwords does not match!";
+				}
+				
+				$status=false;
+			}
+			
+			if($status==true){
+				$edit_data = array('Password' => sha1($_POST['confirmpass']));
+				$this->carshare_model->edit_data('customer',$session_array_used['email'], 'Email', $edit_data);
+				$data['passsuccess'] = "Password successfully changed";
+			}
+			
+			
 			
 			$data['passerror'] = "Invalid pass";
 			$data['passsuccess'] = "yay pass";
