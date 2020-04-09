@@ -36,33 +36,31 @@ $this->load->view('inc/header', $data);
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 m-auto">
-				<h1 class="font-weight-normal text-center">Deactivate my account</h1>
-				
-            <div class="deactivate-form">
-				
-         <div class="row">
-	        <div class="col-md-8 mx-auto my-4">
-        <div class="card">
-            <div class="card-body">
-                
-                    <div class="form-group">
-                        <p> Are you sure you want to deactivate your account? If you change your mind, you can always contact our team to reactivate your account. We're here to help!</p>
-                    </div>
-					<div class="input-submit" style="text-align: center">
-                                <button class="button">Deactivate</button>
-                         </div>
-                
-            
-        </div>
+					<h1 class="font-weight-normal text-center">Deactivate my account</h1>
+					<div class="deactivate-form">
+						<div class="row">
+							<div class="col-md-8 mx-auto my-4">
+								<div class="card">
+									<div class="card-body">               
+										<div class="form-group">
+											<p> Are you sure you want to deactivate your account? If you change your mind, you can always contact our team to reactivate your account. We're here to help!</p>
+										</div>
+										<form action="<?php echo base_url('/deactivate'); ?>" method="post" >
+									
+										<div class="input-submit">
+											<button name="deactivate" type="submit">Deactivate</button>
+										</div>
+										</form>
+									</div>
   
-                </div>
-                </div>
-				</div>
-				</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 	
-	</div>
-	</div>
+			</div>
+		</div>
 	</div>
     <!--== Deactivation Page Area End ==-->
 

@@ -198,9 +198,16 @@ class Welcome extends CI_Controller {
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
-			
+			redirect('', 'refresh');
 		}
-		
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+			
+			$edit_data = array('Status' => 'Deactivated');
+			$this->carshare_model->edit_data('customer',$session_array_used['email'], 'Email', $edit_data);
+
+			redirect('/signout', 'refresh');	
+		}	
+			
 		$this->load->view('carshare_deactivate', $data);
 	}
 	
@@ -213,7 +220,7 @@ class Welcome extends CI_Controller {
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
-			
+			redirect('', 'refresh');
 		}
 		
 		$this->load->view('carshare_profile', $data);
@@ -227,7 +234,7 @@ class Welcome extends CI_Controller {
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
-			
+			redirect('', 'refresh');
 		}
 		
 		$this->load->view('carshare_changepassword', $data);
