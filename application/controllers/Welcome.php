@@ -246,7 +246,7 @@ class Welcome extends CI_Controller {
 				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
 				$status=false;
 			}
-			if($_POST['confirmpass']==$_POST['newpass']){
+			if($_POST['confirmpass']!=$_POST['newpass']){
 				if(isset($data['passerror'])){
 					$data['passerror'] =$data['passerror']."\r\n Passwords does not match!";
 				}else{
