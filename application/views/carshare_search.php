@@ -58,10 +58,10 @@ $this->load->view('inc/header', $data);
                             <div class="pick-location bookinput-item">
                                 <select class="custom-select">
                                   <option selected>Pick Location</option>
-                                  <option value="1">Dhaka</option>
-                                  <option value="2">Comilla</option>
-                                  <option value="3">Barishal</option>
-                                  <option value="3">Rangpur</option>
+                                  <option value="1">Melbourne CBD</option>
+                                  <option value="2">East Melbourne</option>
+                                  <option value="3">North Melbourne</option>
+                                  <option value="3">South Melbourne</option>
                                 </select>
                             </div>
 
@@ -75,10 +75,11 @@ $this->load->view('inc/header', $data);
 
                             <div class="car-choose bookinput-item">
                                 <select class="custom-select">
-                                  <option selected>Choose Car</option>
-                                  <option value="1">BMW</option>
-                                  <option value="2">Audi</option>
-                                  <option value="3">Lexus</option>
+                                  <option selected>Select car type</option>
+                                  <option value="1">Sedan</option>
+                                  <option value="2">Hatchback</option>
+                                  <option value="3">Van</option>
+								  <option value="4">SUV</option>
                                 </select>
                             </div>
 
@@ -103,11 +104,11 @@ $this->load->view('inc/header', $data);
                     <div class="sidebar-content-wrap">
                         <!-- Single Sidebar Start -->
                         <div class="single-sidebar">
-                            <h3>For More Informations</h3>
+                            <h3>For More Information</h3>
 
                             <div class="sidebar-body">
-                                <p><i class="fa fa-mobile"></i> +8801816 277 243</p>
-                                <p><i class="fa fa-clock-o"></i> Mon - Sat 8.00 - 18.00</p>
+                                <p><i class="fa fa-mobile"></i> 1300 CAR XLR8</p>
+                                <p><i class="fa fa-clock-o"></i> Mon - Sat 8.00 AM - 6.00 PM</p>
                             </div>
                         </div>
                         <!-- Single Sidebar End -->
@@ -123,7 +124,7 @@ $this->load->view('inc/header', $data);
                                             <a href="#"><img src="assets/img/we-do/service1-img.png" alt="JSOFT"></a>
                                         </div>
                                         <div class="recent-tip-body">
-                                            <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
+                                            <h4><a href="#">How to get started with your first rental car</a></h4>
                                             <span class="date">February 5, 2018</span>
                                         </div>
                                     </li>
@@ -153,7 +154,7 @@ $this->load->view('inc/header', $data);
                                             <a href="#"><img src="assets/img/we-do/service3-img.png" alt="JSOFT"></a>
                                         </div>
                                         <div class="recent-tip-body">
-                                            <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
+                                            <h4><a href="#">How XLR8 can help you get from A to B</a></h4>
                                             <span class="date">February 5, 2018</span>
                                         </div>
                                     </li>

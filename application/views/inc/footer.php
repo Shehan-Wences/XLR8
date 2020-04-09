@@ -10,11 +10,11 @@
                             <h2>About Us</h2>
                             <div class="widget-body">
                                 <img src="assets/img/logo.png" alt="JSOFT">
-                                <p>Lorem ipsum dolored is a sit ameted consectetur adipisicing elit. Nobis magni assumenda distinctio debitis, eum fuga fugiat error reiciendis.</p>
-
+                                <p>XLR8 is a newly established car sharing service that operates in the heart of Victoria, providing customers the red carpet experience like no other. </p>
+								<p>If you would like to be the first to find out about our latest deals and offers, subscribe to our newsletter below: </p>	
                                 <div class="newsletter-area">
                                     <form action="index.html">
-                                        <input type="email" placeholder="Subscribe Our Newsletter">
+                                        <input type="email" placeholder="Enter an email address">
                                         <button type="submit" class="newsletter-btn"><i class="fa fa-send"></i></button>
                                     </form>
                                 </div>
@@ -31,19 +31,19 @@
                             <div class="widget-body">
                                 <ul class="recent-post">
                                     <li>
-                                        <a href="#">Number 01<i class="fa fa-long-arrow-right"></i>
+                                        <a href="#">About Us<i class="fa fa-long-arrow-right"></i>
                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#">Number 02<i class="fa fa-long-arrow-right"></i>
+                                        <a href="#">FAQ<i class="fa fa-long-arrow-right"></i>
                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#">Number 03<i class="fa fa-long-arrow-right"></i>
+                                        <a href="#">Privacy Policy<i class="fa fa-long-arrow-right"></i>
                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#">Number 04<i class="fa fa-long-arrow-right"></i>
+                                        <a href="#">Terms & Conditions<i class="fa fa-long-arrow-right"></i>
                                        </a>
                                     </li>
                                 </ul>
@@ -55,16 +55,16 @@
                     <!-- Single Footer Widget Start -->
                     <div class="col-lg-4 col-md-6">
                         <div class="single-footer-widget">
-                            <h2>get touch</h2>
+                            <h2>GET IN TOUCH</h2>
                             <div class="widget-body">
-                                <p>Lorem ipsum doloer sited amet, consectetur adipisicing elit. nibh auguea, scelerisque sed</p>
+                                <p>Can't find the answers you're looking for?</p>
 
                                 <ul class="get-touch">
-                                    <li><i class="fa fa-map-marker"></i>Australia</li>
-                                    <li><i class="fa fa-mobile"></i> +61 01 86 25 72 43</li>
+                                    <li><i class="fa fa-map-marker"></i>45 Collins St, Melbourne, VIC 3000</li>
+                                    <li><i class="fa fa-mobile"></i> 1300 CAR XLR8</li>
                                     <li><i class="fa fa-envelope"></i>XLR8@gmail.com</li>
                                 </ul>
-                                <a href="https://goo.gl/maps/b5mt45MCaPB2" class="map-show" target="_blank">Show Location</a>
+                                <a href="https://goo.gl/maps/oXqnvH2rucWbrEUq5" class="map-show" target="_blank">Show Location</a>
                             </div>
                         </div>
                     </div>
