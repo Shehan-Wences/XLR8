@@ -32,12 +32,12 @@ $this->load->view('inc/header', $data);
   </ol>
 </nav>
 	
-    <div class="changepass-page-wrao section-padding">
+
+	<div class="contact-page-wrao section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 m-auto">
 				<h1 class="font-weight-normal text-center">Change Password</h1>
-				<div class="changepass-form">
 				<?php if(isset($passerror)){   ?>
 							<div class="alert alert-danger">
 								<strong>Oops!</strong><?php echo $passerror;   ?> 
@@ -48,38 +48,37 @@ $this->load->view('inc/header', $data);
 								<strong>Yay!</strong><?php echo $passsuccess;   ?> 
 							</div>
 				<?php }  ?>
-					<div class="row">
-						<div class="col-md-8 mx-auto my-4">
-							<div class="card">
-								<div class="card-body">
-									<form action="<?php echo base_url('/passwordchange'); ?>" method="post" >
-										<div class="form-group">
-											<input name="newpass" type="password" placeholder="New Password">
-										</div>
-										<div class="form-group">
-											<input name="confirmpass" type="password" placeholder="New Password again">
-										</div>
-										
-										<div class="input-submit">
+                    <div class="contact-form">
+                        <form action="<?php echo base_url('/passwordchange'); ?>" method="post" >
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="name-input">
+                                        <input name="newpass" type="password" placeholder="New Password">
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="name-input">
+                                        <input name="confirmpass" type="password" placeholder="New Password again">
+                                    </div>
+                                </div>
+
+                             
+                            </div>
+
+                           
+                            <div class="input-submit">
 											<button name="changepass" type="submit">Update</button>
-										</div>
-									</form>
-							
-									                
-				
-				
-				
-								</div>
 							</div>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-	
-	</div>
-	</div>
-	
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--== Change Password Page Area End ==-->
 
  
