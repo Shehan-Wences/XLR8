@@ -56,6 +56,9 @@ $route['signin'] = 'welcome/signin';
 $route['signup'] = 'welcome/signup';
 $route['signout'] = 'welcome/signout';
 $route['passwordreset'] = 'welcome/passwordreset';
+$route['deactivate'] = 'welcome/deactivate';
+$route['profile'] = 'welcome/profile';
+$route['passwordchange'] = 'welcome/passwordchange';
 
 $route['404_override'] = '';
 

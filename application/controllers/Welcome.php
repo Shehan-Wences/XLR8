@@ -188,6 +188,51 @@ class Welcome extends CI_Controller {
         $this->session->unset_userdata('logged_in');
 		redirect('', 'refresh');
 	}
+	
+	public function deactivate()
+	{  
+		
+		$data = array();
+		
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else{
+			
+		}
+		
+		$this->load->view('carshare_deactivate', $data);
+	}
+	
+	public function profile()
+	{  
+		
+		$data = array();
+		
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else{
+			
+		}
+		
+		$this->load->view('carshare_profile', $data);
+	}
+	public function passwordchange()
+	{  
+		
+		$data = array();
+		
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else{
+			
+		}
+		
+		$this->load->view('carshare_changepassword', $data);
+	}
+	
 	public function passwordreset()
 	{  
 		$status=true;

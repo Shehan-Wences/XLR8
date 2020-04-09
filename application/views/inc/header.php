@@ -83,7 +83,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $username; ?></a>
                                     <ul>
 										<li><a href="<?php echo base_url("/profile"); ?>">Profile</a></li>
-										<li><a href="<?php echo base_url("/profile"); ?>">Bookings</a></li>
+										<li><a href="<?php echo base_url("/bookings"); ?>">Bookings</a></li>
+										<li><a href="<?php echo base_url("/passwordchange"); ?>">Change Password</a></li>
+										<li><a href="<?php echo base_url("/deactivate"); ?>">Deactivate</a></li>
                                         <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
                                         
                                     </ul>
