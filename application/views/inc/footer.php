@@ -55,16 +55,16 @@
                     <!-- Single Footer Widget Start -->
                     <div class="col-lg-4 col-md-6">
                         <div class="single-footer-widget">
-                            <h2>get touch</h2>
+                            <h2>GET IN TOUCH</h2>
                             <div class="widget-body">
                                 <p>Can't find the answers you're looking for?</p>
 
                                 <ul class="get-touch">
-                                    <li><i class="fa fa-map-marker"></i>Melbourne, Victoria, Australia</li>
+                                    <li><i class="fa fa-map-marker"></i>45 Collins St, Melbourne, VIC 3000</li>
                                     <li><i class="fa fa-mobile"></i> 1300 CAR XLR8</li>
                                     <li><i class="fa fa-envelope"></i>XLR8@gmail.com</li>
                                 </ul>
-                                <a href="https://goo.gl/maps/b5mt45MCaPB2" class="map-show" target="_blank">Show Location</a>
+                                <a href="https://goo.gl/maps/oXqnvH2rucWbrEUq5" class="map-show" target="_blank">Show Location</a>
                             </div>
                         </div>
                     </div>
