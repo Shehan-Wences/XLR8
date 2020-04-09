@@ -193,7 +193,7 @@ class Welcome extends CI_Controller {
 	{  
 		
 		$data = array();
-		
+		$this->load->model('carshare_model');
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
