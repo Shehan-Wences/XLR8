@@ -227,7 +227,7 @@ class Welcome extends CI_Controller {
 	}
 	public function passwordchange()
 	{  
-		
+		$status=true;
 		$data = array();
 		$this->load->model('carshare_model');
 		if($this->session->userdata('logged_in')){

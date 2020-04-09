@@ -62,7 +62,7 @@ $this->load->view('inc/header', $data);
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="website-input">
-                                        <input name="confirmpass" type="password" placeholder="New Password again">
+                                        <input name="confirmpass" type="password" placeholder="Retype Password">
                                     </div>
                                 </div>
 
