@@ -13,7 +13,7 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>Contact Us</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Got a question? Our team is happy to answer your questions.Fill out the form and we'll be in touch as soon as possible.</p>
+                        <p>Got a question? Our team is happy to answer your questions. Fill out the form and we'll be in touch as soon as possible.</p>
                     </div>
                 </div>
                 <!-- Page Title End -->
@@ -74,8 +74,8 @@ $this->load->view('inc/header', $data);
 
     <!--== Map Area Start ==-->
     <div class="maparea">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29213.038296132225!2d90.39150904197642!3d23.760577791538438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c783c3404f0d%3A0x76ae0d2edabc81df!2sHatir+Jheel!5e0!3m2!1sen!2sbd!4v1517941663187"></iframe>
-    </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12607.936572390969!2d144.9723171040658!3d-37.81384039993984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642c80a4d2e13%3A0x284597fcbe480e4!2s45%20Collins%20St%2C%20Melbourne%20VIC%203000!5e0!3m2!1sen!2sau!4v1586417781447!5m2!1sen!2sau" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+	</div>
     <!--== Map Area End ==-->
 
 
