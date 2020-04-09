@@ -11,7 +11,7 @@ $this->load->view('inc/header', $data);
                 <!-- Page Title Start -->
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
-                        <h2>WELCOME <?php echo $username; ?></h2>
+                        <h2>About time you changed your password</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
                          
                     </div>
@@ -37,33 +37,45 @@ $this->load->view('inc/header', $data);
             <div class="row">
                 <div class="col-lg-10 m-auto">
 				<h1 class="font-weight-normal text-center">Change Password</h1>
-            
-			<div class="changepass-form">
-			<div class="row">
-	        <div class="col-md-8 mx-auto my-4">
-        <div class="card">
-            <div class="card-body">
-                
-                    <div class="form-group">
-                        <label for="pass">New Password</label>
-                        <input type="password" name="pass" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="repass">Confirm new password</label>
-                        <input type="password" name="repass" class="form-control">
-                    </div>
-                    <div class="input-submit">
-                                <button type="submit">Confirm</button>
-                            </div>
-                
-            </div>
-        </div>
-  
-                </div>
-                </div>
+				<div class="changepass-form">
+				<?php if(isset($passerror)){   ?>
+							<div class="alert alert-danger">
+								<strong>Oops!</strong><?php echo $passerror;   ?> 
+							</div>
+				<?php }  ?>
+				<?php if(isset($passsuccess)){   ?>
+							<div class="alert alert-success">
+								<strong>Yay!</strong><?php echo $passsuccess;   ?> 
+							</div>
+				<?php }  ?>
+					<div class="row">
+						<div class="col-md-8 mx-auto my-4">
+							<div class="card">
+								<div class="card-body">
+									<form action="<?php echo base_url('/passwordchange'); ?>" method="post" >
+										<div class="form-group">
+											<input name="newpass" type="password" placeholder="New Password">
+										</div>
+										<div class="form-group">
+											<input name="confirmpass" type="password" placeholder="New Password again">
+										</div>
+										
+										<div class="input-submit">
+											<button name="changepass" type="submit">Update</button>
+										</div>
+									</form>
+							
+									                
+				
+				
+				
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
 				</div>
-				</div>
-				</div>
+			</div>
 	
 	</div>
 	</div>

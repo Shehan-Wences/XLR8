@@ -236,7 +236,13 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect('', 'refresh');
 		}
-		
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+			
+			$data['passerror'] = "Invalid pass";
+			$data['passsuccess'] = "yay pass";
+			
+			
+		}
 		$this->load->view('carshare_changepassword', $data);
 	}
 	

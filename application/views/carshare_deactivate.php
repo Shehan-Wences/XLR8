@@ -11,7 +11,7 @@ $this->load->view('inc/header', $data);
                 <!-- Page Title Start -->
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
-                        <h2>WELCOME KIM</h2>
+                        <h2>Thinking of Deactivating?</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
                          
                     </div>
