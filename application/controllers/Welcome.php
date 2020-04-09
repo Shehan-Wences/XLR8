@@ -238,11 +238,11 @@ class Welcome extends CI_Controller {
 		}
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
 			
-			if(!preg_match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", $_POST['newpass'])){
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['newpass'])){
 				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
 				$status=false;
 			}
-			if(!preg_match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", $_POST['confirmpass'])){
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['confirmpass'])){
 				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
 				$status=false;
 			}
