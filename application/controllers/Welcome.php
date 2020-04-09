@@ -247,7 +247,7 @@ class Welcome extends CI_Controller {
 				$status=false;
 			}
 			if($_POST['confirmpass']==$_POST['newpass']){
-				if(){
+				if(isset($data['passerror'])){
 					$data['passerror'] =$data['passerror']."\r\n Passwords does not match!";
 				}else{
 					$data['passerror'] = "Passwords does not match!";
