@@ -261,12 +261,7 @@ class Welcome extends CI_Controller {
 				$this->carshare_model->edit_data('customer',$session_array_used['email'], 'Email', $edit_data);
 				$data['passsuccess'] = "Password successfully changed";
 			}
-			
-			
-			
-			$data['passerror'] = "Invalid pass";
-			$data['passsuccess'] = "yay pass";
-			
+					
 			
 		}
 		$this->load->view('carshare_changepassword', $data);
