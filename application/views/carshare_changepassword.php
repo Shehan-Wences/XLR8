@@ -25,10 +25,8 @@ $this->load->view('inc/header', $data);
     <!--== Change password Page Area Start ==-->
 	<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="/">My profile</a></li>
-    <li class="breadcrumb-item"><a href="/">My bookings</a></li>
+  <li class="breadcrumb-item"><a href="/"><?php echo $username; ?></a></li>
    <li class="breadcrumb-item active" aria-current="page">Change Password</li>
-    <li class="breadcrumb-item"><a href="/">Deactivate account</a></li>
   </ol>
 </nav>
 	
@@ -50,6 +48,18 @@ $this->load->view('inc/header', $data);
 				<?php }  ?>
                     <div class="contact-form">
                         <form action="<?php echo base_url('/passwordchange'); ?>" method="post" >
+						
+						<div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="website-input">
+                                        <input name="currentpass" type="password" placeholder="Current Password">
+                                    </div>
+                                </div>
+                               
+                            </div>
+						
+						
+						
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="website-input">
