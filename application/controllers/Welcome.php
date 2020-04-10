@@ -223,7 +223,7 @@ class Welcome extends CI_Controller {
 			redirect('', 'refresh');
 		}
 		
-		$details = $this->carshare_model->member_login_details($email,$password);
+		$details = $this->carshare_model->profile($this->session->userdata('logged_in','email'));
 			if (count($details) > 0) {
 				$data['Fname'] = $details[0]->Fname;
 				$data['Lname'] = $details[0]->Lname;
