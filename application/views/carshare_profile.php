@@ -40,14 +40,14 @@ $this->load->view('inc/header', $data);
                 <div class="col-lg-10 m-auto card">
 				
                     <div class="contact-form">
-					<?phpif(isset($accounterror)){  ?>
-					<div class="alert alert-danger" style="margin:1rem;">
-								<strong><?php echo $accounterror; ?></strong> 
-								<?php if(isset($Fnameerror)){ ?><p>* <?php echo $Fnameerror; ?> </p> <?php } ?>
-								<?php if(isset($Lnameerror)){ ?><p>* <?php echo $Lnameerror; ?> </p> <?php } ?>
-								<?php if(isset($Phoneerror)){ ?><p>* <?php echo $Phoneerror; ?> </p> <?php } ?>
-								<?php if(isset($Lerror)){ ?><p>* <?php echo $Lerror; ?> </p> <?php } ?>
-					</div>
+					<?php if(isset($accounterror)){  ?>
+						<div class="alert alert-danger" style="margin:1rem;">
+									<strong><?php echo $accounterror; ?></strong> 
+									<?php if(isset($Fnameerror)){ ?><p>* <?php echo $Fnameerror; ?> </p> <?php } ?>
+									<?php if(isset($Lnameerror)){ ?><p>* <?php echo $Lnameerror; ?> </p> <?php } ?>
+									<?php if(isset($Phoneerror)){ ?><p>* <?php echo $Phoneerror; ?> </p> <?php } ?>
+									<?php if(isset($Lerror)){ ?><p>* <?php echo $Lerror; ?> </p> <?php } ?>
+						</div>
 					<?php } ?>
                         <form action="<?php echo base_url('/profile'); ?>" method="post" >
 						
