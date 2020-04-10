@@ -2,10 +2,64 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $data['title'] = ucfirst('search');
 $this->load->view('inc/header', $data);
-
 ?>
 
-   <!--== Slider Area Start ==-->
+<!--== CSS Code to merge to range slider ==-->
+<style>
+    .selector {
+    position: relative;
+    width: 300px;
+    margin: 0 auto 20px;
+    height: 35px;
+    text-align: center;
+    }
+
+    .selector input {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 100%;
+    outline: none;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    border-radius: 8px;
+    }
+
+    .selector input::-webkit-slider-thumb {
+    pointer-events: all;
+    position: relative;
+    z-index: 1;
+    outline: 0;
+    height: 24px;
+    widows: 24px;
+    border-radius: 12px;
+    background-color: white;
+    border: 2px solid black;
+    -webkit-appearance: none;
+    }
+
+    .selector input::-moz-range-thumb {
+    pointer-events: all;
+    position: relative;
+    z-index: 1;
+    outline: 0;
+    height: 24px;
+    widows: 24px;
+    border-radius: 12px;
+    background-color: white;
+    border: 2px solid black;
+    -moz-appearance: none;
+    }
+
+    input::-moz-range-track {
+    background: #ccc;
+    }
+</style>
+<!--== End of CSS Code to merge to range slider ==-->
+ 
+<!--== Slider Area Start ==-->
     <section id="home-slider-area">
         <div class="home-slider-item slider-bg-1 overlay">
             <div class="container">
@@ -238,36 +292,55 @@ $this->load->view('inc/header', $data);
 						<div class="single-sidebar">
                             <h3>PRICE</h3>
 							<div class="text-center">
-                            <div class="sidebar-body">
-							  <p>Select a price that is within your budget:</p>
-							  
-							  <input type="range" min="1" max="100" value="50" id="slider">
-							  
-								<div id="selector" >
-								<div class="SelectBtn"></div>
-								<div> Price per day $ <span id="SelectValue"></span></div>
-								</div>
-								</div> 
-								<script>
-									var slider = document.getElementById("slider");
-									var selector = document.getElementById("selector");
-									var SelectValue = document.getElementById("SelectValue");
-									
-									SelectValue.innerHTML = slider.value;
-									
-									slider.oninput = function(){
-										SelectValue.innerHTML = this.value;
-										selector.style.left = this.value + "fasfsafas%";
-										
-									}
-									</script>
-								
-							 
-							 
-							 
-							 
-							 </div>
-                        </div>
+                                <div class="sidebar-body">
+							        <p>Select a price that is within your budget:</p>                            						
+								    <div class="selector" >
+								        <div class="SelectBtn"></div>
+                                            <input value="0" min="0" max="100" step="1" type="range" >
+                                            <input value="100" min="0" max="100" step="1" type="range" >
+                                            </br>
+								                <div> Price per day </br><span class="SelectValue"></span> </div>
+                                        </div>
+                                    </br>
+								    </div> 
+
+								    <script>
+                                        function getVals(){
+                                            
+                                            var parent = this.parentNode;
+                                            var slides = parent.getElementsByTagName("input");
+                                                var slide1 = parseFloat( slides[0].value );
+                                                var slide2 = parseFloat( slides[1].value );
+                                            
+                                            if( slide1 > slide2 )
+                                            { 
+                                                var tmp = slide2; 
+                                                slide2 = slide1; 
+                                                slide1 = tmp; 
+                                            }
+                                            
+                                            var displayElement = parent.getElementsByClassName("SelectValue")[0];
+                                                displayElement.innerHTML = "$ " + slide1 + " To $" + slide2 ;
+                                            }
+
+                                            window.onload = function(){
+                                           
+                                            var sliderSections = document.getElementsByClassName("selector");
+                                                for( var x = 0; x < sliderSections.length; x++ ){
+                                                    var sliders = sliderSections[x].getElementsByTagName("input");
+                                                    for( var y = 0; y < sliders.length; y++ ){
+                                                    if( sliders[y].type ==="range" ){
+                                                        sliders[y].oninput = getVals;
+                                                        sliders[y].oninput();
+                                                    }
+                                                    }
+                                                }
+                                            }                        
+                                    </script>
+
+							    </div>
+                            </div>
+
 						
 						 <div class="text-center">
 						 <div class="input-submit">
