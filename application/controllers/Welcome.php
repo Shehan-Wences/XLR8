@@ -395,4 +395,30 @@ class Welcome extends CI_Controller {
 		
 		$this->load->view('carshare_passwordreset', $data);
 	}
+
+	public function addCar()
+	{
+		$data = array();
+
+		$this->load->model('carshare_model');
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') 
+		{
+           
+			
+			$addCar_data = array('carid' => $_POST['CarID'],
+									'description' => $_POST['Description'],
+									'make' => $_POST['Make'],
+									'model' => $_POST['Model'],
+									'rent' => $_POST['rent'],
+									'type' => $_POST['type'],
+									'fuel' => $_POST['fuel'],
+									'transmission' => $_POST['trans']
+							    );
+
+				$this->carshare_model->add_data('car', $addCar_data);
+			
+		}
+		$this->load->view('carshare_addCar', $data);
+
+	}
 }

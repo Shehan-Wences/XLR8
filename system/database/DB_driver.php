@@ -92,7 +92,7 @@ abstract class CI_DB_driver {
 	 *
 	 * @var	string
 	 */
-	public $dbdriver		= 'mysqli';
+	public $dbdriver		= 'postgre';
 
 	/**
 	 * Sub-driver
@@ -156,7 +156,7 @@ abstract class CI_DB_driver {
 	 *
 	 * @var	object|resource
 	 */
-	public $conn_id			= FALSE;
+	public $conn_id			= TRUE;
 
 	/**
 	 * Result ID
