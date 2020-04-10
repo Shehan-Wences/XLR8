@@ -415,7 +415,7 @@ class Welcome extends CI_Controller {
 									'transmission' => $_POST['trans']
 							    );
 
-			$this->carshare_model->add_data('car', $addCar_data);
+				$this->carshare_model->add_data('car', $addCar_data);
 			
 		}
 		$this->load->view('carshare_addcar', $data);
