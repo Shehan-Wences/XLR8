@@ -25,7 +25,7 @@ $this->load->view('inc/header', $data);
     <!--== Deactivation Page Area Start ==-->
 	<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-	<li class="breadcrumb-item"><a href="/"><?php echo $username; ?></a></li>
+	<li class="breadcrumb-item"><a href="<?php echo base_url('/profile'); ?>"><?php echo $username; ?></a></li>
 	<li class="breadcrumb-item active" aria-current="page">Deactivate account</li>
   </ol>
 </nav>

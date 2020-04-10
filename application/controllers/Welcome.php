@@ -239,7 +239,7 @@ class Welcome extends CI_Controller {
 				$status=false;
 			}
 			if(!preg_match("/^[0-9]{9}$/", $_POST['DriverL'])){
-				$data['Lerror']	="Invalid Liecense Number";		
+				$data['Lerror']	="Invalid License Number";		
 				$status=false;
 			}
 			
