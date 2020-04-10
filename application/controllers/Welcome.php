@@ -412,12 +412,10 @@ class Welcome extends CI_Controller {
 									'rent' => $_POST['rent'],
 									'type' => $_POST['type'],
 									'fuel' => $_POST['fuel'],
-									'transmission' => $_POST['trans']);
-				
-									
-			$escaped = pg_escape_literal($addCar_data);
+									'transmission' => $_POST['trans']
+							    );
 
-			$this->carshare_model->add_data('car', $escaped);
+			$this->carshare_model->add_data('car', $addCar_data);
 			
 		}
 		$this->load->view('carshare_addcar', $data);
