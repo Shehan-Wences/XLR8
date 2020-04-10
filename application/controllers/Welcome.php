@@ -215,6 +215,7 @@ class Welcome extends CI_Controller {
 	{  
 		
 		$data = array();
+		$status=true;
 		$this->load->model('carshare_model');
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
@@ -224,23 +225,37 @@ class Welcome extends CI_Controller {
 		
 		
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
-			/*
+			
 			if(!preg_match("/^[a-z ,.'-]{2,10}$/i", $_POST['Fname'])){
-				$data['errorfname'] = "First Name should contain 2-10 characters";
+				$data['Fnameerror']	="First Name should contain 2-10 characters";
 				$status=false;
 			}
 			if(!preg_match("/^[a-z ,.'-]{2,20}$/i", $_POST['Lname'])){
-				$data['errorlname'] = "Last Name should contain 2-20 characters";
+				$data['Lnameerror']	="Last Name should contain 2-20 characters";
 				$status=false;
 			}
-			*/
-			$data['accounterror'] =	"Details Could Not Be Updated!";	
-			$data['Fnameerror']	="First Name should contain 2-10 characters";
-			$data['Lnameerror']	="Last Name should contain 2-20 characters";			
-			$data['Phoneerror']	="Invalid Phone number";			
-			$data['Lerror']	="Invalid Liecense Number";		
-								
-								
+			if(!preg_match("/^[0]{1}[0-9]{9}$/", $_POST['Phone'])){
+				$data['Phoneerror']	="Invalid Phone number";
+				$status=false;
+			}
+			if(!preg_match("/^[0-9]{9}$/", $_POST['DriverL'])){
+				$data['Lerror']	="Invalid Liecense Number";		
+				$status=false;
+			}
+			
+			if($status==false){
+				$data['accounterror'] =	"Details Could Not Be Updated!";	
+			}else{
+				$edit_data = array('Fname' => $_POST['Fname'],'Lname' => $_POST['Lname'],'Phone' => $_POST['Phone'],'DriverL' => $_POST['DriverL']);
+				$this->carshare_model->edit_data('customer',$session_array_used['email'], 'Email', $edit_data);
+				$data['accountsuccess'] = "Details Successfully Updated";
+			}
+			    
+				
+			$data['Fname'] = $_POST['Fname'];
+			$data['Lname'] = $_POST['Lname'];
+			$data['Phone'] = $_POST['Phone'];
+			$data['DriverL'] = $_POST['DriverL'];					
 				
 			
 		}else{
