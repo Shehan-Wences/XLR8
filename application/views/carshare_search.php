@@ -49,6 +49,8 @@ $this->load->view('inc/header', $data);
     <!--== Slider Area End ==-->
 
     <!--== Book A Car Area Start ==-->
+	
+	
     <div id="book-a-car">
         <div class="container">
             <div class="row">
@@ -57,7 +59,7 @@ $this->load->view('inc/header', $data);
                         <form action="index3.html">
                             <div class="pick-location bookinput-item">
                                 <select class="custom-select">
-                                  <option selected>Pick Location</option>
+                                  <option selected>Pick up Location</option>
                                   <option value="1">Melbourne CBD</option>
                                   <option value="2">East Melbourne</option>
                                   <option value="3">North Melbourne</option>
@@ -66,7 +68,7 @@ $this->load->view('inc/header', $data);
                             </div>
 
                             <div class="pick-date bookinput-item">
-                                <input id="startDate2" placeholder="Pick Date" />
+                                <input id="startDate2" placeholder="Pick up Date" />
                             </div>
 
                             <div class="retern-date bookinput-item">
@@ -75,11 +77,11 @@ $this->load->view('inc/header', $data);
 
                             <div class="car-choose bookinput-item">
                                 <select class="custom-select">
-                                  <option selected>Select car type</option>
-                                  <option value="1">Sedan</option>
-                                  <option value="2">Hatchback</option>
-                                  <option value="3">Van</option>
-								  <option value="4">SUV</option>
+                                  <option selected>Return Location</option>
+                                  <option value="1">Melbourne CBD</option>
+                                  <option value="2">East Melbourne</option>
+                                  <option value="3">North Melbourne</option>
+                                  <option value="3">South Melbourne</option>
                                 </select>
                             </div>
 
@@ -103,80 +105,175 @@ $this->load->view('inc/header', $data);
                 <div class="col-lg-4">
                     <div class="sidebar-content-wrap">
                         <!-- Single Sidebar Start -->
-                        <div class="single-sidebar">
-                            <h3>For More Information</h3>
-
+						
+						<div class="single-sidebar">
+                            <h3>CAR TYPE</h3>
+							<div class="text-left">
                             <div class="sidebar-body">
-                                <p><i class="fa fa-mobile"></i> 1300 CAR XLR8</p>
-                                <p><i class="fa fa-clock-o"></i> Mon - Sat 8.00 AM - 6.00 PM</p>
-                            </div>
-                        </div>
-                        <!-- Single Sidebar End -->
+                                <form action="/" method="post">
+								<div class="row">
+								<div class="col-lg-6 col-md-6">
+									 <input type="checkbox" value="">
+									 <label for="type"> Sedan</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+									 <input type="checkbox" value="">
+									 <label for="type"> Van</label><br>
+									 </div>
+								</div>
+								
+								<div class="row">
+								<div class="col-lg-6 col-md-6">
+									 <input type="checkbox" value="">
+									 <label for="type"> Hatchback</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+									 <input type="checkbox" value="">
+									 <label for="type"> SUV</label><br>
+									 </div>
+								</div>
+								
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Wagon</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Convertible</label><br>
+									 </div>
+								</div>
 
-                        <!-- Single Sidebar Start -->
+                                </form>
+                            </div>
+							</div>
+                        </div>
+						
+									
+						
                         <div class="single-sidebar">
-                            <h3>Rental Tips</h3>
-
+                            <h3>MAKE</h3>
+							<div class="text-left">
                             <div class="sidebar-body">
-                                <ul class="recent-tips">
-                                    <li class="single-recent-tips">
-                                        <div class="recent-tip-thum">
-                                            <a href="#"><img src="assets/img/we-do/service1-img.png" alt="JSOFT"></a>
-                                        </div>
-                                        <div class="recent-tip-body">
-                                            <h4><a href="#">How to get started with your first rental car</a></h4>
-                                            <span class="date">February 5, 2018</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="single-recent-tips">
-                                        <div class="recent-tip-thum">
-                                            <a href="#"><img src="assets/img/we-do/service3-img.png" alt="JSOFT"></a>
-                                        </div>
-                                        <div class="recent-tip-body">
-                                            <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
-                                            <span class="date">February 5, 2018</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="single-recent-tips">
-                                        <div class="recent-tip-thum">
-                                            <a href="#"><img src="assets/img/we-do/service2-img.png" alt="JSOFT"></a>
-                                        </div>
-                                        <div class="recent-tip-body">
-                                            <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
-                                            <span class="date">February 5, 2018</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="single-recent-tips">
-                                        <div class="recent-tip-thum">
-                                            <a href="#"><img src="assets/img/we-do/service3-img.png" alt="JSOFT"></a>
-                                        </div>
-                                        <div class="recent-tip-body">
-                                            <h4><a href="#">How XLR8 can help you get from A to B</a></h4>
-                                            <span class="date">February 5, 2018</span>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <form action="/" method="post">
+									<div class="row">
+									<div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Honda</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Toyota</label><br>
+									 </div>
+								</div>
+								
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Hyundai</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Kia</label><br>
+									 </div>
+								</div>
+								
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Holden</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Ford</label><br>
+									 </div>
+								</div>
+								
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> BMW</label><br>
+									 </div>
+									 <div class="col-lg-6 col-md-6">
+										 <input type="checkbox" value="">
+										 <label for="type"> Lexus</label><br>
+									 </div>
+								</div>
+								</form>
                             </div>
+							</div>
                         </div>
-                        <!-- Single Sidebar End -->
-
-                        <!-- Single Sidebar Start -->
-                        <div class="single-sidebar">
-                            <h3>Connect with Us</h3>
-
+						
+												
+						
+						
+						<div class="single-sidebar">
+                            <h3>TRANSMISSION</h3>
+							<div class="text-center">
                             <div class="sidebar-body">
-                                <div class="social-icons text-center">
-                                    <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" target="_blank"><i class="fa fa-behance"></i></a>
-                                    <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
-                                    <a href="#" target="_blank"><i class="fa fa-dribbble"></i></a>
-                                </div>
+                                <form action="/" method="post">
+								  <input type="checkbox" value="">
+								  <label for="make"> Automatic</label><br>
+								  <input type="checkbox" value="">
+								  <label for="make"> Manual</label><br>
+								</form>
                             </div>
+							</div>
                         </div>
+						
+						<div class="single-sidebar">
+                            <h3>FUEL</h3>
+							<div class="text-center">
+                            <div class="sidebar-body">
+                                <form action="/" method="post">
+								  <input type="checkbox" value="">
+								  <label for="make"> Petrol</label><br>
+								  <input type="checkbox" value="">
+								  <label for="make"> Diesel</label><br>
+								</form>
+                            </div>
+							</div>
+                        </div>
+						
+						<div class="single-sidebar">
+                            <h3>PRICE</h3>
+							<div class="text-center">
+                            <div class="sidebar-body">
+							  <p>Select a price that is within your budget:</p>
+							  
+							  <input type="range" min="1" max="100" value="50" id="slider">
+							  
+								<div id="selector" >
+								<div class="SelectBtn"></div>
+								<div> Price per day $ <span id="SelectValue"></span></div>
+								</div>
+								</div> 
+								<script>
+									var slider = document.getElementById("slider");
+									var selector = document.getElementById("selector");
+									var SelectValue = document.getElementById("SelectValue");
+									
+									SelectValue.innerHTML = slider.value;
+									
+									slider.oninput = function(){
+										SelectValue.innerHTML = this.value;
+										selector.style.left = this.value + "fasfsafas%";
+										
+									}
+									</script>
+								
+							 
+							 
+							 
+							 
+							 </div>
+                        </div>
+						
+						 <div class="text-center">
+						 <div class="input-submit">
+                                <button type="submit">SEARCH</button>
+                         </div>
+							</div>
                         <!-- Single Sidebar End -->
                     </div>
                 </div>
@@ -199,19 +296,19 @@ $this->load->view('inc/header', $data);
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="#">Aston Martin One-77</a></h2>
-                                                <h5>39$ Rent /per a day</h5>
-                                                <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean inorci luctus et ultrices posuere cubilia.</p>
+                                                <h2><a href="#">2000 BMW 3 Series 318i</a></h2>
+                                                <h5>$10 AUD / PER Day</h5>
+                                                <p>Love vintage cars? This car may be the right one for you! Modern cars are sometimes overrated.</p>
                                                 <ul class="car-info-list">
                                                     <li>Air Condition</li>
                                                     <li>Diesel</li>
-                                                    <li>Auto</li>
+                                                    <li>Manual</li>
                                                 </ul>
                                                 <p class="rating">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star unmark"></i>
                                                     <i class="fa fa-star unmark"></i>
                                                 </p>
                                                 <a href="#" class="rent-btn">Book It</a>
@@ -238,12 +335,12 @@ $this->load->view('inc/header', $data);
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="#">Aston Martin One-77</a></h2>
-                                                <h5>39$ Rent /per a day</h5>
-                                                <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean inorci luctus et ultrices posuere cubilia.</p>
+                                                <h2><a href="#">BMW 8 SERIES COUPÉ</a></h2>
+                                                <h5>$99 AUD / PER DAY</h5>
+                                                <p>Power. Control. Comfort. Combined with exclusive racing features, the luxury sports car is the perfect fusion of top quality and maximum performance. The 8 is never just a moment in time.</p>
                                                 <ul class="car-info-list">
                                                     <li>Air Condition</li>
-                                                    <li>Diesel</li>
+                                                    <li>Petrol</li>
                                                     <li>Auto</li>
                                                 </ul>
                                                 <p class="rating">
@@ -251,7 +348,7 @@ $this->load->view('inc/header', $data);
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star unmark"></i>
+                                                    <i class="fa fa-star"></i>
                                                 </p>
                                                 <a href="#" class="rent-btn">Book It</a>
                                             </div>
@@ -277,9 +374,9 @@ $this->load->view('inc/header', $data);
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="#">Aston Martin One-77</a></h2>
-                                                <h5>39$ Rent /per a day</h5>
-                                                <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean inorci luctus et ultrices posuere cubilia.</p>
+                                                <h2><a href="#">2002 BMW 3 Series 318i</a></h2>
+                                                <h5>$15 AUD / PER DAY</h5>
+                                                <p>Stylish but affordable car to start your journey.</p>
                                                 <ul class="car-info-list">
                                                     <li>Air Condition</li>
                                                     <li>Diesel</li>
@@ -289,7 +386,7 @@ $this->load->view('inc/header', $data);
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star unmark"></i>
                                                     <i class="fa fa-star unmark"></i>
                                                 </p>
                                                 <a href="#" class="rent-btn">Book It</a>
