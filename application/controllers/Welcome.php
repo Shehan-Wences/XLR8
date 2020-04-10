@@ -219,15 +219,12 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			redirect('', 'refresh');
-		}
+			$data['Email'] = $session_array_used['email'];
 		
-		$details = $this->carshare_model->profile($this->session->userdata('logged_in','email'));
+		$details = $this->carshare_model->profile($data['Email']);
 			if (count($details) > 0) {
 				$data['Fname'] = $details[0]->Fname;
 				$data['Lname'] = $details[0]->Lname;
-				$data['Email'] = $details[0]->Email;
 				$data['Phone'] = $details[0]->Phone;
 				$data['DriverL'] = $details[0]->DriverL;
 			  
@@ -241,6 +238,10 @@ class Welcome extends CI_Controller {
 		
 		
 		$this->load->view('carshare_profile', $data);
+		
+		}else{
+			redirect('', 'refresh');
+		}
 	}
 	public function passwordchange()
 	{  
