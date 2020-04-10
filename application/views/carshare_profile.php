@@ -33,14 +33,22 @@ $this->load->view('inc/header', $data);
 
     <div class="contact-page-wrao sectionp-padding">
 	<h1 class="text-center" style="margin:50px 0">MY PROFILE</h1>
+	
         <div class="container">
 		
             <div class="row">
                 <div class="col-lg-10 m-auto card">
 				
                     <div class="contact-form">
-					
-					
+					<?php isset($accounterror){  ?>
+					<div class="alert alert-danger" style="margin:1rem;">
+								<strong><?php echo $accounterror; ?></strong> 
+								<?php isset($Fnameerror){ ?><p>* <?php echo $Fnameerror; ?> </p> <?php } ?>
+								<?php isset($Lnameerror){ ?><p>* <?php echo $Lnameerror; ?> </p> <?php } ?>
+								<?php isset($Phoneerror){ ?><p>* <?php echo $Phoneerror; ?> </p> <?php } ?>
+								<?php isset($Lerror){ ?><p>* <?php echo $Lerror; ?> </p> <?php } ?>
+					</div>
+					<?php } ?>
                         <form action="<?php echo base_url('/profile'); ?>" method="post" >
 						
 						

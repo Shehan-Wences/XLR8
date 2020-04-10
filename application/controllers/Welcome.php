@@ -221,7 +221,30 @@ class Welcome extends CI_Controller {
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 			$data['Email'] = $session_array_used['email'];
 		
-		$details = $this->carshare_model->profile($data['Email']);
+		
+		
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+			/*
+			if(!preg_match("/^[a-z ,.'-]{2,10}$/i", $_POST['Fname'])){
+				$data['errorfname'] = "First Name should contain 2-10 characters";
+				$status=false;
+			}
+			if(!preg_match("/^[a-z ,.'-]{2,20}$/i", $_POST['Lname'])){
+				$data['errorlname'] = "Last Name should contain 2-20 characters";
+				$status=false;
+			}
+			*/
+			$data['accounterror'] =	"Details Could Not Be Updated!";	
+			$data['Fnameerror']	="First Name should contain 2-10 characters";
+			$data['Lnameerror']	="Last Name should contain 2-20 characters";			
+			$data['Phoneerror']	="Invalid Phone number";			
+			$data['Lerror']	="Invalid Liecense Number";		
+								
+								
+				
+			
+		}else{
+			$details = $this->carshare_model->profile($data['Email']);
 			if (count($details) > 0) {
 				$data['Fname'] = $details[0]->Fname;
 				$data['Lname'] = $details[0]->Lname;
@@ -229,11 +252,6 @@ class Welcome extends CI_Controller {
 				$data['DriverL'] = $details[0]->DriverL;
 			  
 			}
-		
-		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
-			
-			
-			
 		}
 		
 		
