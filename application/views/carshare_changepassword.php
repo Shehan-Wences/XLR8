@@ -48,18 +48,7 @@ $this->load->view('inc/header', $data);
 				<?php }  ?>
                     <div class="contact-form">
                         <form action="<?php echo base_url('/passwordchange'); ?>" method="post" >
-						
-						<div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="website-input">
-                                        <input name="currentpass" type="password" placeholder="Current Password">
-                                    </div>
-                                </div>
-                               
-                            </div>
-						
-						
-						
+
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="website-input">
