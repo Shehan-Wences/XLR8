@@ -31,17 +31,17 @@ $this->load->view('inc/header', $data);
 
 
 
-    <div class="contact-page-wrao section-padding">
+    <div class="contact-page-wrao sectionp-padding">
 	<h1 class="text-center" style="margin:50px 0">MY PROFILE</h1>
         <div class="container">
 		
             <div class="row">
-                <div class="col-lg-10 m-auto">
+                <div class="col-lg-10 m-auto card">
 				
                     <div class="contact-form">
 					
 					
-                        <form action="index.html">
+                        <form action="<?php echo base_url('/profile'); ?>" method="post" >
 						
 						
 						
