@@ -25,9 +25,7 @@ $this->load->view('inc/header', $data);
     <!--== Deactivation Page Area Start ==-->
 	<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="/">My profile</a></li>
-    <li class="breadcrumb-item"><a href="/">My bookings</a></li>
-    <li class="breadcrumb-item"><a href="/">Change Password</a></li>
+	<li class="breadcrumb-item"><a href="/"><?php echo $username; ?></a></li>
 	<li class="breadcrumb-item active" aria-current="page">Deactivate account</li>
   </ol>
 </nav>
@@ -46,9 +44,10 @@ $this->load->view('inc/header', $data);
 											<p> Are you sure you want to deactivate your account? If you change your mind, you can always contact our team to reactivate your account. We're here to help!</p>
 										</div>
 										<form action="<?php echo base_url('/deactivate'); ?>" method="post" >
-									
+										<div class="text-center">
 										<div class="input-submit">
 											<button name="deactivate" type="submit">Deactivate</button>
+										</div>
 										</div>
 										</form>
 									</div>
