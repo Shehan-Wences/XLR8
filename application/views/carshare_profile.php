@@ -75,7 +75,7 @@ $this->load->view('inc/header', $data);
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="email-input">
-                                        <input type="email" placeholder="<?php echo $email; ?>">
+                                        <input type="email" placeholder="<?php echo $Email; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="phone-input">
-                                        <input type="phone" placeholder="<?php echo $phone; ?>">
+                                        <input type="phone" placeholder="<?php echo $Phone; ?>">
                                     </div>
 								</div>
 							</div>

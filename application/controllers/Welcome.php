@@ -215,13 +215,30 @@ class Welcome extends CI_Controller {
 	{  
 		
 		$data = array();
-		
+		$this->load->model('carshare_model');
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
 			redirect('', 'refresh');
 		}
+		
+		$details = $this->carshare_model->member_login_details($email,$password);
+			if (count($details) > 0) {
+				$data['Fname'] = $details[0]->Fname;
+				$data['Lname'] = $details[0]->Lname;
+				$data['Email'] = $details[0]->Email;
+				$data['Phone'] = $details[0]->Phone;
+				$data['DriverL'] = $details[0]->DriverL;
+			  
+			}
+		
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+			
+			
+			
+		}
+		
 		
 		$this->load->view('carshare_profile', $data);
 	}
