@@ -49,6 +49,11 @@ $this->load->view('inc/header', $data);
 									<?php if(isset($Lerror)){ ?><p>* <?php echo $Lerror; ?> </p> <?php } ?>
 						</div>
 					<?php } ?>
+					<?php if(isset($accountsuccess)){  ?>
+						<div class="alert alert-success" style="margin:1rem;">
+									<strong><?php echo $accountsuccess; ?></strong> 
+						</div>
+					<?php } ?>
                         <form action="<?php echo base_url('/profile'); ?>" method="post" >
 						
 						
@@ -60,7 +65,7 @@ $this->load->view('inc/header', $data);
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="text" placeholder="First Name" value="<?php echo $Fname; ?>">
+                                        <input name="Fname" type="text" placeholder="First Name" value="<?php echo $Fname; ?>">
                                     </div>
                                 </div>
                              </div>
@@ -72,7 +77,7 @@ $this->load->view('inc/header', $data);
 								
 								<div class="col-lg-6 col-md-6">
 								    <div class="website-input">
-                                        <input type="text" placeholder="Last Name" value="<?php echo $Lname; ?>">
+                                        <input name="Lname" type="text" placeholder="Last Name" value="<?php echo $Lname; ?>">
                                     </div>
 								</div>
 							</div>
@@ -83,7 +88,7 @@ $this->load->view('inc/header', $data);
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="email" placeholder="Email cannot be changed" value="<?php echo $Email; ?>" disabled>
+                                        <input name="Email" type="email" placeholder="Email cannot be changed" value="<?php echo $Email; ?>" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +99,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="phone" placeholder="Phone Number" value="<?php echo $Phone; ?>">
+                                        <input name="Phone" type="phone" placeholder="Phone Number" value="<?php echo $Phone; ?>">
                                     </div>
 								</div>
 							</div>
@@ -105,7 +110,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="license" placeholder="Driver's License Number" value="<?php echo $DriverL; ?>">
+                                        <input name="DriverL" type="license" placeholder="Driver's License Number" value="<?php echo $DriverL; ?>">
                                     </div>
 								</div>
 							</div>
