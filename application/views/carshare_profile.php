@@ -47,8 +47,8 @@ $this->load->view('inc/header', $data);
 						
                             <div class="row justify-content-center">
 							
-							<div class= "col-lg-2 col-md-2">  
-								<p>First Name:</p>
+							<div class= "col-lg-4 col-md-4">  
+								<p class="profile-input">First Name:</p>
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input">
@@ -58,8 +58,8 @@ $this->load->view('inc/header', $data);
                              </div>
 							
 							<div class="row justify-content-center">
-                                <div class="col-lg-2 col-md-2">  
-								<p>Last Name:</p>
+                                <div class="col-lg-4 col-md-4">  
+								<p class="profile-input">Last Name:</p>
 								</div>
 								
 								<div class="col-lg-6 col-md-6">
@@ -70,8 +70,8 @@ $this->load->view('inc/header', $data);
 							</div>
 
                             <div class="row justify-content-center">
-							<div class="col-lg-2 col-md-2">  
-								<p>Email Address:</p>
+							<div class="col-lg-4 col-md-4">  
+								<p class="profile-input">Email Address:</p>
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input">
@@ -81,8 +81,8 @@ $this->load->view('inc/header', $data);
                             </div>
 							
 							<div class="row justify-content-center">
-							<div class="col-lg-2 col-md-2">  
-								<p>Phone number:</p>
+							<div class="col-lg-4 col-md-4">  
+								<p class="profile-input">Phone number:</p>
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">
@@ -92,8 +92,8 @@ $this->load->view('inc/header', $data);
 							</div>
 							
 							<div class="row justify-content-center">
-							<div class="col-lg-2 col-md-2">  
-								<p>License number:</p>
+							<div class="col-lg-4 col-md-4">  
+								<p class="profile-input">License number:</p>
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">

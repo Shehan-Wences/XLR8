@@ -2628,7 +2628,10 @@ body,
 .subject-input {
 	margin-top: 30px;
 }
-
+.profile-input {
+	margin-top: 38px;
+	text-align: right;
+}
 .message-input textarea {
 	padding: 15px;
 }
