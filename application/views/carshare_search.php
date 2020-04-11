@@ -8,7 +8,7 @@ $this->load->view('inc/header', $data);
 <style>
     .selector {
     position: relative;
-    width: 300px;
+    width: 100%;
     margin: 0 auto 20px;
     height: 35px;
     text-align: center;
@@ -57,6 +57,7 @@ $this->load->view('inc/header', $data);
     background: #ccc;
     }
 </style>
+
 <!--== End of CSS Code to merge to range slider ==-->
  
 <!--== Slider Area Start ==-->
@@ -110,37 +111,32 @@ $this->load->view('inc/header', $data);
             <div class="row">
                 <div class="col-lg-12">
                     <div class="booka-car-content">
-                        <form action="index3.html">
+                        <form action="<?php echo base_url('/search'); ?>" method="get">
                             <div class="pick-location bookinput-item">
-                                <select class="custom-select">
+                                <select name="location" class="custom-select">
+								
                                   <option selected>Pick up Location</option>
-                                  <option value="1">Melbourne CBD</option>
-                                  <option value="2">East Melbourne</option>
-                                  <option value="3">North Melbourne</option>
-                                  <option value="3">South Melbourne</option>
+								 
+									<?php foreach($locations as $key=>$loc){?>
+                                  <option <?php if(isset($location)){ if($location==trim($loc->locationid)){ echo "selected"; }  }?> value="<?php echo trim($loc->locationid); ?>"> <?php echo trim($loc->name); ?></option>
+								<?php } ?>
+								  
+								  
                                 </select>
                             </div>
 
                             <div class="pick-date bookinput-item">
-                                <input id="startDate2" placeholder="Pick up Date" />
+                                <input name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
                             </div>
 
                             <div class="retern-date bookinput-item">
-                                <input id="endDate2" placeholder="Return Date" />
+                                <input name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                             </div>
 
-                            <div class="car-choose bookinput-item">
-                                <select class="custom-select">
-                                  <option selected>Return Location</option>
-                                  <option value="1">Melbourne CBD</option>
-                                  <option value="2">East Melbourne</option>
-                                  <option value="3">North Melbourne</option>
-                                  <option value="3">South Melbourne</option>
-                                </select>
-                            </div>
+                           
 
                             <div class="bookcar-btn bookinput-item">
-                                <button type="submit">Book Car</button>
+                                <button type="submit" id="searchbutton">Search</button>
                             </div>
                         </form>
                     </div>
@@ -342,11 +338,7 @@ $this->load->view('inc/header', $data);
                             </div>
 
 						
-						 <div class="text-center">
-						 <div class="input-submit">
-                                <button type="submit">SEARCH</button>
-                         </div>
-							</div>
+						
                         <!-- Single Sidebar End -->
                     </div>
                 </div>
@@ -355,12 +347,18 @@ $this->load->view('inc/header', $data);
                 <!-- Car List Content Start -->
                 <div class="col-lg-8">
                     <div class="car-list-content m-t-50">
+
+                      
+						<?php if(isset($cars)){ foreach($cars as $key=>$car){?>
+                                                                    
+
+
                         <!-- Single Car Start -->
                         <div class="single-car-wrap">
                             <div class="row">
                                 <!-- Single Car Thumbnail -->
                                 <div class="col-lg-5">
-                                    <div class="car-list-thumb car-thumb-1"></div>
+                                    <div class="car-list-thumb" style="background-image: url(<?php echo $car->imageurl; ?>);"></div>
                                 </div>
                                 <!-- Single Car Thumbnail -->
 
@@ -369,22 +367,16 @@ $this->load->view('inc/header', $data);
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="#">2000 BMW 3 Series 318i</a></h2>
-                                                <h5>$10 AUD / PER Day</h5>
-                                                <p>Love vintage cars? This car may be the right one for you! Modern cars are sometimes overrated.</p>
+                                                <h2><a href="<?php echo base_url('/car?id='.$car->carid); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
+                                                <h5>$<?php echo $car->rent; ?> AUD / PER DAY</h5>
+                                                <p><?php echo $car->description; ?></p>
                                                 <ul class="car-info-list">
-                                                    <li>Air Condition</li>
-                                                    <li>Diesel</li>
-                                                    <li>Manual</li>
+                                                    <li><?php echo $car->type; ?></li>
+                                                    <li><?php echo $car->fuel; ?></li>
+                                                    <li><?php echo $car->transmission; ?></li>
                                                 </ul>
-                                                <p class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star unmark"></i>
-                                                    <i class="fa fa-star unmark"></i>
-                                                </p>
-                                                <a href="#" class="rent-btn">Book It</a>
+                                             
+                                                <a href="<?php echo base_url('/car?id='.$car->carid); ?>" class="rent-btn">View Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -393,89 +385,17 @@ $this->load->view('inc/header', $data);
                             </div>
                         </div>
                         <!-- Single Car End -->
-
-                        <!-- Single Car Start -->
-                        <div class="single-car-wrap">
-                            <div class="row">
-                                <!-- Single Car Thumbnail -->
-                                <div class="col-lg-5">
-                                    <div class="car-list-thumb car-thumb-2"></div>
-                                </div>
-                                <!-- Single Car Thumbnail -->
-
-                                <!-- Single Car Info -->
-                                <div class="col-lg-7">
-                                    <div class="display-table">
-                                        <div class="display-table-cell">
-                                            <div class="car-list-info">
-                                                <h2><a href="#">BMW 8 SERIES COUPÉ</a></h2>
-                                                <h5>$99 AUD / PER DAY</h5>
-                                                <p>Power. Control. Comfort. Combined with exclusive racing features, the luxury sports car is the perfect fusion of top quality and maximum performance. The 8 is never just a moment in time.</p>
-                                                <ul class="car-info-list">
-                                                    <li>Air Condition</li>
-                                                    <li>Petrol</li>
-                                                    <li>Auto</li>
-                                                </ul>
-                                                <p class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </p>
-                                                <a href="#" class="rent-btn">Book It</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Car info -->
-                            </div>
-                        </div>
-                        <!-- Single Car End -->
-
-                        <!-- Single Car Start -->
-                        <div class="single-car-wrap">
-                            <div class="row">
-                                <!-- Single Car Thumbnail -->
-                                <div class="col-lg-5">
-                                    <div class="car-list-thumb car-thumb-3"></div>
-                                </div>
-                                <!-- Single Car Thumbnail -->
-
-                                <!-- Single Car Info -->
-                                <div class="col-lg-7">
-                                    <div class="display-table">
-                                        <div class="display-table-cell">
-                                            <div class="car-list-info">
-                                                <h2><a href="#">2002 BMW 3 Series 318i</a></h2>
-                                                <h5>$15 AUD / PER DAY</h5>
-                                                <p>Stylish but affordable car to start your journey.</p>
-                                                <ul class="car-info-list">
-                                                    <li>Air Condition</li>
-                                                    <li>Diesel</li>
-                                                    <li>Auto</li>
-                                                </ul>
-                                                <p class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star unmark"></i>
-                                                    <i class="fa fa-star unmark"></i>
-                                                </p>
-                                                <a href="#" class="rent-btn">Book It</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Car info -->
-                            </div>
-                        </div>
-                        <!-- Single Car End -->
+						
+						<?php } }?>
+						
+						
                     </div>
 
                     <!-- Page Pagination Start -->
                     <div class="page-pagi">
                         <nav aria-label="Page navigation example">
+						
+						  <!-- Page Pagination Start 
                             <ul class="pagination">
                                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -485,6 +405,7 @@ $this->load->view('inc/header', $data);
                                 <li class="page-item"><a class="page-link" href="#">5</a></li>
                                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
                             </ul>
+							  Page Pagination Start -->
                         </nav>
                     </div>
                     <!-- Page Pagination End -->

@@ -20,6 +20,11 @@ class Welcome extends CI_Controller {
 			
 		}
    	
+			
+		$this->load->model('carshare_model');
+        $data['location']='1';	
+		
+		$data['locations'] = $this->carshare_model->locations();
 
  		$this->load->view('carshare_home', $data);
 	}
@@ -29,11 +34,31 @@ class Welcome extends CI_Controller {
 	{  
 		$data = array();
 		
+		$this->load->model('carshare_model');
+        
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
 			
+		}
+		
+		$data['locations'] = $this->carshare_model->locations();
+		
+		if(($this->input->server('REQUEST_METHOD')) == 'GET'){
+		 if(!isset($_GET['location']) || !isset($_GET['pdate']) || !isset($_GET['ddate'])){
+			 $data['location']='1';
+			 $data['pickup']=date('m/d/Y');
+			 $data['dropoff']=date('m/d/Y',strtotime($data['pickup']. ' + 3 days'));
+			
+		 }else{
+			 $data['location']=$_GET['location'];
+			 $data['pickup']=$_GET['pdate'];
+			 $data['dropoff']=$_GET['ddate'];
+		 }
+		 
+		  $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff']);
+		
 		}
 		
 		$this->load->view('carshare_search', $data);

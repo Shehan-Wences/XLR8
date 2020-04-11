@@ -67,6 +67,57 @@ class carshare_model extends CI_Model {
         }
         return $data;
     }
-
+	
+	 public function locations() {
+        $data = array();
+        $this->db->select('locationid');
+        $this->db->select('name');
+		
+        $this->db->from('location');
+		
+        $open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+    }
+	
+	function fetch_cars($plocation,$pdate,$ddate)
+	{
+		$data = array();	
+		
+		$this->db->select('car.carid');
+        $this->db->select('description');
+        $this->db->select('make');
+        $this->db->select('model');
+        $this->db->select('rent');
+        $this->db->select('type');
+        $this->db->select('fuel');
+        $this->db->select('transmission');
+		$this->db->select('year');
+		$this->db->select('imageurl'); 
+        $this->db->from('car');
+        $this->db->join('parking', 'car.carid = parking.carid', 'left'); 	
+		$this->db->where('parking.availabledate <=', $pdate);
+		$this->db->where('parking.enddate  >=', $ddate);
+		$this->db->where('parking.availablelocationid ', $plocation);
+		$this->db->order_by("rent ASC");
+		 
+		 		
+		
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+ }
+ 
+ 
+ 
+ 
+ 
 }
 ?>

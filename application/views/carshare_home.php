@@ -13,16 +13,15 @@ $this->load->view('inc/header', $data);
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="book-a-car">
-                            <form action="index.html">
+                            <form action="<?php echo base_url('/search'); ?>" method="get">
                                 <!--== Pick Up Location ==-->
                                 <div class="pickup-location book-item">
                                     <h4>PICK-UP LOCATION:</h4>
-                                    <select class="custom-select">
-                                      <option selected>Select</option>
-                                      <option value="1">Dhaka</option>
-                                      <option value="2">Comilla</option>
-                                      <option value="3">Barishal</option>
-                                      <option value="3">Rangpur</option>
+                                    <select name="location" class="custom-select">
+                                      <option selected>Pick up Location</option>
+                                      <?php foreach($locations as $key=>$loc){?>
+                                  <option <?php if(isset($location)){ if($location==trim($loc->locationid)){ echo "selected"; }  }?> value="<?php echo trim($loc->locationid); ?>"> <?php echo trim($loc->name); ?></option>
+								<?php } ?>
                                     </select>
                                 </div>
                                 <!--== Pick Up Location ==-->
@@ -30,25 +29,17 @@ $this->load->view('inc/header', $data);
                                 <!--== Pick Up Date ==-->
                                 <div class="pick-up-date book-item">
                                     <h4>PICK-UP DATE:</h4>
-                                    <input id="startDate" placeholder="Pick Up Date" />
+                                    <input name="pdate" id="startDate" value="<?php echo date('m/d/Y'); ?>" placeholder="Pick Up Date" />
 
                                     <div class="return-car">
                                         <h4>Return DATE:</h4>
-                                        <input id="endDate" placeholder="Return Date" />
+                                        <input name="ddate" id="endDate" value="<?php echo date('m/d/Y',strtotime(date('m/d/Y'). ' + 3 days')); ?>" placeholder="Return Date" />
                                     </div>
                                 </div>
                                 <!--== Pick Up Location ==-->
 
                                 <!--== Car Choose ==-->
-                                <div class="choose-car-type book-item">
-                                    <h4>CHOOSE CAR TYPE:</h4>
-                                    <select class="custom-select">
-                                      <option selected>Select</option>
-                                      <option value="1">BMW</option>
-                                      <option value="2">Audi</option>
-                                      <option value="3">Lexus</option>
-                                    </select>
-                                </div>
+                             
                                 <!--== Car Choose ==-->
 
                                 <div class="book-button text-center">
