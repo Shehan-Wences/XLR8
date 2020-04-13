@@ -56,8 +56,127 @@ $this->load->view('inc/header', $data);
     input::-moz-range-track {
     background: #ccc;
     }
+	
+	
+	
+	
 </style>
+<script>
+$(document).ready(function(){
+	
+	
+	function load_search_data()
+	{
+	var location=$('#searchlocation').val();
+	var start=$('#startDate2').val();
+	var startdate = new Date(start);
+	
+	var end=$('#endDate2').val();
+	var enddate = new Date(end);
+	
+	var status=true;
+	
+	var loc = new RegExp('^([0-1]?[0-9]|20|21)$');
+		
+	if (!loc.test(location)) {
+        $('#searchlocation').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		
+    }
+	
+	if(!isNaN(startdate.valueOf())==false){
+		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		
+	}
+	if(!isNaN(enddate.valueOf())==false){
+		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		
+	}
+	if(status==true){
+			
+			
+			
+		
+			$("#searchform").append($("input[name=typesstring]"));
+			$("#searchform").submit();
+			
+		
+		
+	}
+	}
 
+	
+	$("#searchlocation").change(function () {
+		$('#searchlocation').css({"border": "1px solid #4da4bd"});
+    });
+	$("#startDate2").change(function () {
+		$('#startDate2').css({"border": "1px solid #4da4bd"});
+    });
+	$("#endDate2").change(function () {
+		$('#endDate2').css({"border": "1px solid #4da4bd"});
+    });
+	$( "input[name=type]" ).click(function() {
+		var atLeastOneIsChecked = $("input[name=type]:checked").length == 0;
+		if(atLeastOneIsChecked){
+			alert("Atleast One Type Should Be Selected!");
+			
+				$(this).prop('checked', true);
+		
+		}else{
+		var typevalues = new Array();
+		$.each($("input[name=type]:checked"), function() {
+		typevalues.push($(this).val());
+		
+		});
+		
+		types = JSON.stringify(typevalues);
+		types = encodeURIComponent(types);
+		$("input[name=typesstring]").val(types);
+		load_search_data();
+		}
+		
+
+	});
+	
+	
+});
+
+function Validation(){
+    
+	var location=$('#searchlocation').val();
+	var start=$('#startDate2').val();
+	var startdate = new Date(start);
+	
+	var end=$('#endDate2').val();
+	var enddate = new Date(end);
+	
+	var status=true;
+	
+	var loc = new RegExp('^([0-1]?[0-9]|20|21)$');
+	
+	if (!loc.test(location)) {
+        $('#searchlocation').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		
+    }
+	
+	if(!isNaN(startdate.valueOf())==false){
+		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		
+	}
+	if(!isNaN(enddate.valueOf())==false){
+		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		
+	}	
+	if(status==false){
+		return false;
+	}
+}
+</script>
 <!--== End of CSS Code to merge to range slider ==-->
  
 <!--== Slider Area Start ==-->
@@ -111,9 +230,9 @@ $this->load->view('inc/header', $data);
             <div class="row">
                 <div class="col-lg-12">
                     <div class="booka-car-content">
-                        <form action="<?php echo base_url('/search'); ?>" method="get">
+                        <form id="searchform" action="<?php echo base_url("/search"); ?>" method="get" onsubmit="return Validation()" >
                             <div class="pick-location bookinput-item">
-                                <select name="location" class="custom-select">
+                                <select id="searchlocation" name="location" class="custom-select">
 								
                                   <option selected>Pick up Location</option>
 								 
@@ -159,43 +278,35 @@ $this->load->view('inc/header', $data);
 						<div class="single-sidebar">
                             <h3>CAR TYPE</h3>
 							<div class="text-left">
-                            <div class="sidebar-body">
-                                <form action="/" method="post">
-								<div class="row">
-								<div class="col-lg-6 col-md-6">
-									 <input type="checkbox" value="">
-									 <label for="type"> Sedan</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-									 <input type="checkbox" value="">
-									 <label for="type"> Van</label><br>
-									 </div>
+							
+                            <div class="sidebar-body type">
+ 								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="Sedan" <?php if (in_array("Sedan", $cartype)){ echo "checked"; }  ?> > Sedan</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="Van" <?php if (in_array("Van", $cartype)){ echo "checked"; }  ?> > Van</label>
+									</div>
 								</div>
-								
-								<div class="row">
-								<div class="col-lg-6 col-md-6">
-									 <input type="checkbox" value="">
-									 <label for="type"> Hatchback</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-									 <input type="checkbox" value="">
-									 <label for="type"> SUV</label><br>
-									 </div>
-								</div>
-								
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Wagon</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Convertible</label><br>
-									 </div>
+										<label><input name="type" type="checkbox" value="Hatchback" <?php if (in_array("Hatchback", $cartype)){ echo "checked"; }  ?> > Hatchback</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="SUV" <?php if (in_array("SUV", $cartype)){ echo "checked"; }  ?>> SUV</label>
+									</div>
 								</div>
-
-                                </form>
-                            </div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="Wagon" <?php if (in_array("Wagon", $cartype)){ echo "checked"; }  ?>> Wagon</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="Convertible" <?php if (in_array("Convertible", $cartype)){ echo "checked"; }  ?> > Convertible</label>
+									</div>
+								</div>
+								<input type="hidden" name="typesstring"  />
+	                        </div>
+							
 							</div>
                         </div>
 						
@@ -208,11 +319,11 @@ $this->load->view('inc/header', $data);
                                 <form action="/" method="post">
 									<div class="row">
 									<div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
+										 <input type="checkbox" value="Honda">
 										 <label for="type"> Honda</label><br>
 									 </div>
 									 <div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
+										 <input type="checkbox" value="Toyota">
 										 <label for="type"> Toyota</label><br>
 									 </div>
 								</div>

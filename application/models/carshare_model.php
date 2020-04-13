@@ -83,8 +83,22 @@ class carshare_model extends CI_Model {
         return $data;
     }
 	
-	function fetch_cars($plocation,$pdate,$ddate)
+	function fetch_cars($plocation,$pdate,$ddate,$type)
 	{
+
+		if($type != null){
+			
+			$a=0;
+			foreach($type as $t){
+				$a++;
+				if($a==1){
+				 $typeq= "car.type='".$t."' ";		
+				}else{
+				 $typeq= " ".$typeq."OR car.type='".$t."' ";
+				}
+			}
+		}
+		
 		$data = array();	
 		
 		$this->db->select('car.carid');
@@ -99,6 +113,15 @@ class carshare_model extends CI_Model {
 		$this->db->select('imageurl'); 
         $this->db->from('car');
         $this->db->join('parking', 'car.carid = parking.carid', 'left'); 	
+		
+		//$this->db->where("(car.type='SUV')", NULL, FALSE);
+		if(isset($typeq)){
+		 $this->db->where("(".$typeq.")", NULL, FALSE);
+		}
+		
+		
+		
+		
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);
 		$this->db->where('parking.availablelocationid ', $plocation);

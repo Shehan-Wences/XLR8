@@ -33,6 +33,7 @@ class Welcome extends CI_Controller {
 	public function search()
 	{  
 		$data = array();
+		$type='';
 		
 		$this->load->model('carshare_model');
         
@@ -46,6 +47,9 @@ class Welcome extends CI_Controller {
 		$data['locations'] = $this->carshare_model->locations();
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'GET'){
+			
+		
+			
 		 if(!isset($_GET['location']) || !isset($_GET['pdate']) || !isset($_GET['ddate'])){
 			 $data['location']='1';
 			 $data['pickup']=date('m/d/Y');
@@ -56,8 +60,14 @@ class Welcome extends CI_Controller {
 			 $data['pickup']=$_GET['pdate'];
 			 $data['dropoff']=$_GET['ddate'];
 		 }
+		 if(isset($_GET['typesstring'])){
+			$type=json_decode(urldecode($_GET['typesstring']));
+		 }else{
+			$type = array("Sedan", "Van", "Hatchback", "SUV", "Wagon", "Convertible");
+		 }
+		 $data['cartype']=$type;
 		 
-		  $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff']);
+		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type);
 		
 		}
 		
