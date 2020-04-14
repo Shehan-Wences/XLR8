@@ -256,7 +256,7 @@ function Validation(){
 		
 	}
 	if(!isNaN(enddate.valueOf())==false){
-		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		 $('#endDate2').css({"border": "1.5px solid #ff0000"});
 		status=false;
 		
 	}	
