@@ -318,7 +318,7 @@ function Validation(){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="booka-car-content">
-                        <form id="searchform" action="http://localhost/ProgrammingProject/search" method="get" onsubmit="return Validation()" >
+                        <form id="searchform" action="<?php echo base_url("/search"); ?>" method="get" onsubmit="return Validation()" >
                             <div class="pick-location bookinput-item">
                                 <select id="searchlocation" name="location" class="custom-select">
 								
