@@ -29,6 +29,20 @@ class Welcome extends CI_Controller {
  		$this->load->view('carshare_home', $data);
 	}
 	
+	public function error404()
+	{ 
+		
+		$data = array();
+			
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else{
+			
+		}
+ 
+ 		$this->load->view('error_404', $data);
+	}
 	
 	public function search()
 	{  

@@ -61,5 +61,5 @@ $route['profile'] = 'welcome/profile';
 $route['passwordchange'] = 'welcome/passwordchange';
 $route['addcar'] = 'welcome/addCar';
 
-$route['404_override'] = '';
+$route['404_override'] = 'welcome/error404'';
 
