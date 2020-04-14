@@ -370,26 +370,26 @@ function Validation(){
                             <div class="sidebar-body type">
  								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Sedan" <?php if (in_array("Sedan", $cartype)){ echo "checked"; }  ?> > Sedan</label>
+										<label><input name="type" type="checkbox" value="Sedan" <?php if(is_array($cartype)){ if (in_array("Sedan", $cartype)){ echo "checked"; } } ?> > Sedan</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Van" <?php if (in_array("Van", $cartype)){ echo "checked"; }  ?> > Van</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Hatchback" <?php if (in_array("Hatchback", $cartype)){ echo "checked"; }  ?> > Hatchback</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="SUV" <?php if (in_array("SUV", $cartype)){ echo "checked"; }  ?>> SUV</label>
+										<label><input name="type" type="checkbox" value="Van" <?php if(is_array($cartype)){ if (in_array("Van", $cartype)){ echo "checked"; } } ?> > Van</label>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Wagon" <?php if (in_array("Wagon", $cartype)){ echo "checked"; }  ?>> Wagon</label>
+										<label><input name="type" type="checkbox" value="Hatchback" <?php if(is_array($cartype)){ if (in_array("Hatchback", $cartype)){ echo "checked"; }  }?> > Hatchback</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Convertible" <?php if (in_array("Convertible", $cartype)){ echo "checked"; }  ?> > Convertible</label>
+										<label><input name="type" type="checkbox" value="SUV" <?php if(is_array($cartype)){ if (in_array("SUV", $cartype)){ echo "checked"; }  }?>> SUV</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="Wagon" <?php if(is_array($cartype)){ if (in_array("Wagon", $cartype)){ echo "checked"; } } ?>> Wagon</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="type" type="checkbox" value="Convertible" <?php if(is_array($cartype)){ if (in_array("Convertible", $cartype)){ echo "checked"; }  }?> > Convertible</label>
 									</div>
 								</div>
 								<input type="hidden" name="typesstring"  />
@@ -406,34 +406,34 @@ function Validation(){
                             <div class="sidebar-body make">
  								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Honda" <?php if (in_array("Honda", $carmake)){ echo "checked"; }  ?> > Honda</label>
+										<label><input name="make" type="checkbox" value="Honda" <?php if(is_array($carmake)){  if (in_array("Honda", $carmake)){ echo "checked"; } } ?> > Honda</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Toyota" <?php if (in_array("Toyota", $carmake)){ echo "checked"; }  ?> > Toyota</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Hyundai" <?php if (in_array("Hyundai", $carmake)){ echo "checked"; }  ?> > Hyundai</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Kia" <?php if (in_array("Kia", $carmake)){ echo "checked"; }  ?>> Kia</label>
+										<label><input name="make" type="checkbox" value="Toyota" <?php if(is_array($carmake)){  if (in_array("Toyota", $carmake)){ echo "checked"; } } ?> > Toyota</label>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Holden" <?php if (in_array("Holden", $carmake)){ echo "checked"; }  ?>> Holden</label>
+										<label><input name="make" type="checkbox" value="Hyundai" <?php if(is_array($carmake)){  if (in_array("Hyundai", $carmake)){ echo "checked"; } } ?> > Hyundai</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Ford" <?php if (in_array("Ford", $carmake)){ echo "checked"; }  ?> > Ford</label>
+										<label><input name="make" type="checkbox" value="Kia" <?php if(is_array($carmake)){  if (in_array("Kia", $carmake)){ echo "checked"; }  }?>> Kia</label>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="BMW" <?php if (in_array("BMW", $carmake)){ echo "checked"; }  ?>> BMW</label>
+										<label><input name="make" type="checkbox" value="Holden" <?php if(is_array($carmake)){  if (in_array("Holden", $carmake)){ echo "checked"; }  }?> > Holden</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Lexus" <?php if (in_array("Lexus", $carmake)){ echo "checked"; }  ?> > Lexus</label>
+										<label><input name="make" type="checkbox" value="Ford" <?php if(is_array($carmake)){  if (in_array("Ford", $carmake)){ echo "checked"; } } ?> > Ford</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="make" type="checkbox" value="BMW" <?php if(is_array($carmake)){  if (in_array("BMW", $carmake)){ echo "checked"; } } ?> > BMW</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="make" type="checkbox" value="Lexus" <?php if(is_array($carmake)){  if (in_array("Lexus", $carmake)){ echo "checked"; } } ?> > Lexus</label>
 									</div>
 								</div>
 								<input type="hidden" name="makestring"  />
@@ -451,10 +451,10 @@ function Validation(){
                             <div class="sidebar-body transmission">
  								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="transmission" type="checkbox" value="Auto" <?php if (in_array("Auto", $cartransmission)){ echo "checked"; }  ?> > Auto</label>
+										<label><input name="transmission" type="checkbox" value="Auto" <?php if(is_array($cartransmission)){ if (in_array("Auto", $cartransmission)){ echo "checked"; } } ?> > Auto</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="transmission" type="checkbox" value="Manual" <?php if (in_array("Manual", $cartransmission)){ echo "checked"; }  ?> > Manual</label>
+										<label><input name="transmission" type="checkbox" value="Manual" <?php if(is_array($cartransmission)){ if (in_array("Manual", $cartransmission)){ echo "checked"; } } ?> > Manual</label>
 									</div>
 								</div>
 								<input type="hidden" name="transmissionstring"  />
@@ -470,18 +470,18 @@ function Validation(){
                             <div class="sidebar-body fuel">
  								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Petrol" <?php if (in_array("Petrol", $carfuel)){ echo "checked"; }  ?> > Petrol</label>
+										<label><input name="fuel" type="checkbox" value="Petrol" <?php if(is_array($carfuel)){ if (in_array("Petrol", $carfuel)){ echo "checked"; } } ?> > Petrol</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Diesel" <?php if (in_array("Diesel", $carfuel)){ echo "checked"; }  ?> > Diesel</label>
+										<label><input name="fuel" type="checkbox" value="Diesel" <?php if(is_array($carfuel)){if (in_array("Diesel", $carfuel)){ echo "checked"; } } ?> > Diesel</label>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Hybrid" <?php if (in_array("Hybrid", $carfuel)){ echo "checked"; }  ?> > Hybrid</label>
+										<label><input name="fuel" type="checkbox" value="Hybrid" <?php if(is_array($carfuel)){if (in_array("Hybrid", $carfuel)){ echo "checked"; } } ?> > Hybrid</label>
 									</div>
 									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Electric" <?php if (in_array("Electric", $carfuel)){ echo "checked"; }  ?> > Electric</label>
+										<label><input name="fuel" type="checkbox" value="Electric" <?php if(is_array($carfuel)){if (in_array("Electric", $carfuel)){ echo "checked"; } } ?> > Electric</label>
 									</div>
 								</div>
 								<input type="hidden" name="fuelstring"  />
