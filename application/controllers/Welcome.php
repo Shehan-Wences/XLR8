@@ -477,6 +477,9 @@ class Welcome extends CI_Controller {
 									'type' => $_POST['type'],
 									'fuel' => $_POST['fuel'],
 									'transmission' => $_POST['trans']
+									'year' => $_POST['year'],
+									'imageurl' => $_POST['imgUrl'],
+
 							    );
 
 			$this->carshare_model->add_data('car', $addCar_data);

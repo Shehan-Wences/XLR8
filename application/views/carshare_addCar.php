@@ -4,6 +4,23 @@ $data['title'] = ucfirst('Add Car');
 $this->load->view('inc/header', $data);
 
 ?>
+
+<style>
+.login-form select {
+	background-color: transparent;
+	border: 1px solid #555;
+	color: #000;
+	margin: 10px 0;
+	padding: 10px 20px;
+	-webkit-transition: all 0.4s ease 0s;
+	transition: all 0.4s ease 0s;
+	width: 100%;
+}
+
+.login-form select:focus {
+	border-color: #fff;
+}
+</style>
  
       <!--== Page Title Area Start ==-->
     <section id="page-title-area" class="section-padding overlay">
@@ -31,43 +48,60 @@ $this->load->view('inc/header', $data);
                 		<div class="login-form">
                 			<h3>Add Car</h3>
 							<form action="<?php echo base_url('/addcar'); ?>" method="post" >
-                                <div class="Email">
-								    	<input name="CarID" type="text" placeholder="Enter CarID">
-								</div>
-                            
-                                <div class="Email">
-									<input name="Description" type="text" placeholder="Enter Car Descripition">
-								</div>
-                                
-                                <div class="name">
-									<div class="row">
-										<div class="col-md-6">
-											<input name="Make" type="text" placeholder="Enter Car Make">
-										</div>
-										
-										<div class="col-md-6">
-											<input name="Model" type="text" placeholder="Enter Car Model">
-										</div>
+                               
+							   	<input name="CarID" type="text" placeholder="Enter CarID">
+						                    
+    							<input name="Description" type="text" placeholder="Enter Car Descripition">
+							
+								<div class="row">
+									<div class="col-md-6">
+										<select name="Make">
+											<option value="">Enter Car Make</option>
+											<option value="Honda">Honda</option>
+											<option value="Toyota">Toyota</option>
+											<option value="Hyundai">Hyundai</option>
+											<option value="Kia">Kia</option>
+											<option value="Holden">Holden</option>
+											<option value="Ford">Ford</option>
+											<option value="BMW">BMW</option>
+											<option value="Lexus">Lexus</option>
+										</select>
+									</div>	
+									<div class="col-md-6">
+										<input name="Model" type="text" placeholder="Enter Car Model">
 									</div>
 								</div>
 
-								<div class="Email">
-									<input name="rent" type="number" placeholder="Enter rent per day">
-								</div>
-
-                                <div class="Email">
-									<input name="type" type="text" placeholder="Enter type">
-								</div>
-
-                                <div class="Email">
-									<input name="fuel" type="text" placeholder="Enter Fuel type">
-								</div>
-
-                                <div class="Email">
-									<input name="trans" type="text" placeholder="Enter transmission type">
-								</div>
-
-
+	
+								<input name="rent" type="number" placeholder="Enter rent per day">
+							
+								<select name="type">
+									<option value="">Enter type</option>
+									<option value="Sedan">Sedan</option>
+									<option value="Van">Van</option>
+									<option value="Hatchback">Hatchback</option>
+									<option value="SUV">SUV</option>
+									<option value="Wagon">Wagon</option>
+									<option value="Convertible">Convertible</option>
+								</select>
+								
+								<select name="fuel">
+									<option value="">Enter Fuel type</option>
+									<option value="Petrol">Petrol</option>
+									<option value="Diesel">Diesel</option>
+									<option value="Hybrid">Hybrid</option>
+									<option value="Electric">Electric</option>
+								</select>
+								
+								<select name="trans">
+									<option value="">Enter transmission type</option>
+									<option value="Auto">Auto</option>
+									<option value="Manual">Manual</option>
+								</select>
+								
+								<input name="year" type="number" placeholder="Enter car make year">
+								
+								<input name="imgUrl" type="text" placeholder="Enter Car image Url">
 								
 								<div class="log-btn">
 									<button name="add" type="submit"><i class="fa fa-check-square"></i> Add Car</button>
