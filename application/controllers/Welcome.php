@@ -34,7 +34,7 @@ class Welcome extends CI_Controller {
 	{  
 		$data = array();
 		$type='';
-		
+		$make='';
 		$this->load->model('carshare_model');
         
 		if($this->session->userdata('logged_in')){
@@ -64,10 +64,27 @@ class Welcome extends CI_Controller {
 			$type=json_decode(urldecode($_GET['typesstring']));
 		 }else{
 			$type = array("Sedan", "Van", "Hatchback", "SUV", "Wagon", "Convertible");
+					 }
+		 if(isset($_GET['makestring'])){
+			$make=json_decode(urldecode($_GET['makestring']));
+		 }else{
+			$make = array("Honda", "Toyota", "Hyundai", "Kia", "Holden", "Ford", "BMW", "Lexus");
+		 }
+		 if(isset($_GET['transmissionstring'])){
+			$transmission=json_decode(urldecode($_GET['transmissionstring']));
+		 }else{
+			$transmission = array("Auto", "Manual");
+		 }
+		 if(isset($_GET['fuelstring'])){
+			$fuel=json_decode(urldecode($_GET['fuelstring']));
+		 }else{
+			$fuel = array("Petrol", "Diesel","Hybrid","Electric");
 		 }
 		 $data['cartype']=$type;
-		 
-		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type);
+		 $data['carmake']=$make;
+		 $data['cartransmission']=$transmission;
+		 $data['carfuel']=$fuel;
+		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel);
 		
 		}
 		
@@ -166,7 +183,7 @@ class Welcome extends CI_Controller {
 
 				if(count($login) > 0){
 					
-					$data['erroremail'] = "Account matching that email already exists.";
+					$data['erroracc'] = "Account matching that email already exists.";
 					$status=false;
 				}
 			}

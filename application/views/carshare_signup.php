@@ -33,7 +33,12 @@ $this->load->view('inc/header', $data);
                 			<h3>Sign Up</h3>
 							<?php if(isset($successmessage)){   ?>
 								<div class="alert alert-success">
-									<strong>Yay!!</strong><?php echo $erroremail;   ?> 
+									<strong>Yay!!</strong><?php echo $successmessage;   ?> 
+								</div>
+							<?php }  ?>
+							<?php if(isset($erroracc)){   ?>
+								<div class="alert alert-danger">
+									<strong>Oops!!</strong><?php echo $erroracc;   ?> 
 								</div>
 							<?php }  ?>
 							<form action="<?php echo base_url('/signup'); ?>" method="post" >

@@ -83,7 +83,7 @@ class carshare_model extends CI_Model {
         return $data;
     }
 	
-	function fetch_cars($plocation,$pdate,$ddate,$type)
+	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel)
 	{
 
 		if($type != null){
@@ -99,6 +99,42 @@ class carshare_model extends CI_Model {
 			}
 		}
 		
+		if($make != null){
+			
+			$a=0;
+			foreach($make as $m){
+				$a++;
+				if($a==1){
+				 $makeq= "car.make='".$m."' ";		
+				}else{
+				 $makeq= " ".$makeq."OR car.make='".$m."' ";
+				}
+			}
+		}
+		if($transmission != null){
+			
+			$a=0;
+			foreach($transmission as $m){
+				$a++;
+				if($a==1){
+				 $transmissionq= "car.transmission='".$m."' ";		
+				}else{
+				 $transmissionq= " ".$transmissionq."OR car.transmission='".$m."' ";
+				}
+			}
+		}
+		if($fuel != null){
+			
+			$a=0;
+			foreach($fuel as $m){
+				$a++;
+				if($a==1){
+				 $fuelq= "car.fuel='".$m."' ";		
+				}else{
+				 $fuelq= " ".$fuelq."OR car.fuel='".$m."' ";
+				}
+			}
+		}
 		$data = array();	
 		
 		$this->db->select('car.carid');
@@ -118,9 +154,17 @@ class carshare_model extends CI_Model {
 		if(isset($typeq)){
 		 $this->db->where("(".$typeq.")", NULL, FALSE);
 		}
+		if(isset($makeq)){
+		 $this->db->where("(".$makeq.")", NULL, FALSE);
+		}
 		
+		if(isset($transmissionq)){
+		 $this->db->where("(".$transmissionq.")", NULL, FALSE);
+		}
 		
-		
+		if(isset($fuelq)){
+		 $this->db->where("(".$fuelq.")", NULL, FALSE);
+		}
 		
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);

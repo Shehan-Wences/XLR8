@@ -64,6 +64,10 @@ $this->load->view('inc/header', $data);
 <script>
 $(document).ready(function(){
 	
+	var types='';
+	var make='';
+	var transmission='';
+	var fuel='';
 	
 	function load_search_data()
 	{
@@ -94,12 +98,60 @@ $(document).ready(function(){
 		status=false;
 		
 	}
+	/*Car Type*/
+	var typevalues = new Array();
+	$.each($("input[name=type]:checked"), function() {
+		typevalues.push($(this).val());
+		
+	});
+		
+	types = JSON.stringify(typevalues);
+	types = encodeURIComponent(types);
+	$("input[name=typesstring]").val(types);
+	
+	/*Car Make*/	
+	var makevalues = new Array();
+	$.each($("input[name=make]:checked"), function() {
+		makevalues.push($(this).val());
+		
+	});
+		
+	make = JSON.stringify(makevalues);
+	make = encodeURIComponent(make);
+	$("input[name=makestring]").val(make);
+	
+	/*Car Transmission*/
+	var transmissionvalues = new Array();
+	$.each($("input[name=transmission]:checked"), function() {
+		transmissionvalues.push($(this).val());
+		
+	});
+		
+	transmission = JSON.stringify(transmissionvalues);
+	transmission = encodeURIComponent(transmission);
+	$("input[name=transmissionstring]").val(transmission);
+	
+	/*Car Fuel*/
+	var fuelvalues = new Array();
+	$.each($("input[name=fuel]:checked"), function() {
+		fuelvalues.push($(this).val());
+		
+	});
+		
+	fuel = JSON.stringify(fuelvalues);
+	fuel = encodeURIComponent(fuel);
+	$("input[name=fuelstring]").val(fuel);
+		
 	if(status==true){
 			
 			
 			
 		
-			$("#searchform").append($("input[name=typesstring]"));
+			$("#searchform").prepend($("input[name=typesstring]"));
+			$("#searchform").prepend($("input[name=makestring]"));
+			$("#searchform").prepend($("input[name=transmissionstring]"));
+			$("#searchform").prepend($("input[name=fuelstring]"));
+			
 			$("#searchform").submit();
 			
 		
@@ -117,6 +169,7 @@ $(document).ready(function(){
 	$("#endDate2").change(function () {
 		$('#endDate2').css({"border": "1px solid #4da4bd"});
     });
+	
 	$( "input[name=type]" ).click(function() {
 		var atLeastOneIsChecked = $("input[name=type]:checked").length == 0;
 		if(atLeastOneIsChecked){
@@ -125,15 +178,50 @@ $(document).ready(function(){
 				$(this).prop('checked', true);
 		
 		}else{
-		var typevalues = new Array();
-		$.each($("input[name=type]:checked"), function() {
-		typevalues.push($(this).val());
 		
-		});
+		load_search_data();
+		}
 		
-		types = JSON.stringify(typevalues);
-		types = encodeURIComponent(types);
-		$("input[name=typesstring]").val(types);
+
+	});
+	$( "input[name=make]" ).click(function() {
+		var atLeastOneIsChecked = $("input[name=make]:checked").length == 0;
+		if(atLeastOneIsChecked){
+			alert("Atleast One Make Should Be Selected!");
+			
+				$(this).prop('checked', true);
+		
+		}else{
+		
+		load_search_data();
+		}
+		
+
+	});
+	
+	$( "input[name=transmission]" ).click(function() {
+		var atLeastOneIsChecked = $("input[name=transmission]:checked").length == 0;
+		if(atLeastOneIsChecked){
+			alert("Atleast One Type of Transmission Should Be Selected!");
+			
+				$(this).prop('checked', true);
+		
+		}else{
+		
+		load_search_data();
+		}
+		
+
+	});
+	$( "input[name=fuel]" ).click(function() {
+		var atLeastOneIsChecked = $("input[name=fuel]:checked").length == 0;
+		if(atLeastOneIsChecked){
+			alert("Atleast One Fuel Type Should Be Selected!");
+			
+				$(this).prop('checked', true);
+		
+		}else{
+		
 		load_search_data();
 		}
 		
@@ -230,7 +318,7 @@ function Validation(){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="booka-car-content">
-                        <form id="searchform" action="<?php echo base_url("/search"); ?>" method="get" onsubmit="return Validation()" >
+                        <form id="searchform" action="http://localhost/ProgrammingProject/search" method="get" onsubmit="return Validation()" >
                             <div class="pick-location bookinput-item">
                                 <select id="searchlocation" name="location" class="custom-select">
 								
@@ -310,144 +398,97 @@ function Validation(){
 							</div>
                         </div>
 						
-									
 						
-                        <div class="single-sidebar">
+						<div class="single-sidebar">
                             <h3>MAKE</h3>
 							<div class="text-left">
-                            <div class="sidebar-body">
-                                <form action="/" method="post">
-									<div class="row">
+							
+                            <div class="sidebar-body make">
+ 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="Honda">
-										 <label for="type"> Honda</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="Toyota">
-										 <label for="type"> Toyota</label><br>
-									 </div>
+										<label><input name="make" type="checkbox" value="Honda" <?php if (in_array("Honda", $carmake)){ echo "checked"; }  ?> > Honda</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="make" type="checkbox" value="Toyota" <?php if (in_array("Toyota", $carmake)){ echo "checked"; }  ?> > Toyota</label>
+									</div>
 								</div>
-								
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Hyundai</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Kia</label><br>
-									 </div>
+										<label><input name="make" type="checkbox" value="Hyundai" <?php if (in_array("Hyundai", $carmake)){ echo "checked"; }  ?> > Hyundai</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="make" type="checkbox" value="Kia" <?php if (in_array("Kia", $carmake)){ echo "checked"; }  ?>> Kia</label>
+									</div>
 								</div>
-								
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Holden</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Ford</label><br>
-									 </div>
+										<label><input name="make" type="checkbox" value="Holden" <?php if (in_array("Holden", $carmake)){ echo "checked"; }  ?>> Holden</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="make" type="checkbox" value="Ford" <?php if (in_array("Ford", $carmake)){ echo "checked"; }  ?> > Ford</label>
+									</div>
 								</div>
-								
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> BMW</label><br>
-									 </div>
-									 <div class="col-lg-6 col-md-6">
-										 <input type="checkbox" value="">
-										 <label for="type"> Lexus</label><br>
-									 </div>
+										<label><input name="make" type="checkbox" value="BMW" <?php if (in_array("BMW", $carmake)){ echo "checked"; }  ?>> BMW</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="make" type="checkbox" value="Lexus" <?php if (in_array("Lexus", $carmake)){ echo "checked"; }  ?> > Lexus</label>
+									</div>
 								</div>
-								</form>
-                            </div>
+								<input type="hidden" name="makestring"  />
+	                        </div>
+							
 							</div>
                         </div>
-						
-												
-						
+
+					
 						
 						<div class="single-sidebar">
-                            <h3>TRANSMISSION</h3>
-							<div class="text-center">
-                            <div class="sidebar-body">
-                                <form action="/" method="post">
-								  <input type="checkbox" value="">
-								  <label for="make"> Automatic</label><br>
-								  <input type="checkbox" value="">
-								  <label for="make"> Manual</label><br>
-								</form>
-                            </div>
+                            <h3>Transmission</h3>
+							<div class="text-left">
+							
+                            <div class="sidebar-body transmission">
+ 								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="transmission" type="checkbox" value="Auto" <?php if (in_array("Auto", $cartransmission)){ echo "checked"; }  ?> > Auto</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="transmission" type="checkbox" value="Manual" <?php if (in_array("Manual", $cartransmission)){ echo "checked"; }  ?> > Manual</label>
+									</div>
+								</div>
+								<input type="hidden" name="transmissionstring"  />
+	                        </div>
+							
 							</div>
                         </div>
 						
 						<div class="single-sidebar">
-                            <h3>FUEL</h3>
-							<div class="text-center">
-                            <div class="sidebar-body">
-                                <form action="/" method="post">
-								  <input type="checkbox" value="">
-								  <label for="make"> Petrol</label><br>
-								  <input type="checkbox" value="">
-								  <label for="make"> Diesel</label><br>
-								</form>
-                            </div>
+                            <h3>Fuel</h3>
+							<div class="text-left">
+													
+                            <div class="sidebar-body fuel">
+ 								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="fuel" type="checkbox" value="Petrol" <?php if (in_array("Petrol", $carfuel)){ echo "checked"; }  ?> > Petrol</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="fuel" type="checkbox" value="Diesel" <?php if (in_array("Diesel", $carfuel)){ echo "checked"; }  ?> > Diesel</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<label><input name="fuel" type="checkbox" value="Hybrid" <?php if (in_array("Hybrid", $carfuel)){ echo "checked"; }  ?> > Hybrid</label>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<label><input name="fuel" type="checkbox" value="Electric" <?php if (in_array("Electric", $carfuel)){ echo "checked"; }  ?> > Electric</label>
+									</div>
+								</div>
+								<input type="hidden" name="fuelstring"  />
+	                        </div>
+							
 							</div>
                         </div>
-						
-						<div class="single-sidebar">
-                            <h3>PRICE</h3>
-							<div class="text-center">
-                                <div class="sidebar-body">
-							        <p>Select a price that is within your budget:</p>                            						
-								    <div class="selector" >
-								        <div class="SelectBtn"></div>
-                                            <input value="0" min="0" max="100" step="1" type="range" >
-                                            <input value="100" min="0" max="100" step="1" type="range" >
-                                            </br>
-								                <div> Price per day </br><span class="SelectValue"></span> </div>
-                                        </div>
-                                    </br>
-								    </div> 
-
-								    <script>
-                                        function getVals(){
-                                            
-                                            var parent = this.parentNode;
-                                            var slides = parent.getElementsByTagName("input");
-                                                var slide1 = parseFloat( slides[0].value );
-                                                var slide2 = parseFloat( slides[1].value );
-                                            
-                                            if( slide1 > slide2 )
-                                            { 
-                                                var tmp = slide2; 
-                                                slide2 = slide1; 
-                                                slide1 = tmp; 
-                                            }
-                                            
-                                            var displayElement = parent.getElementsByClassName("SelectValue")[0];
-                                                displayElement.innerHTML = "$ " + slide1 + " To $" + slide2 ;
-                                            }
-
-                                            window.onload = function(){
-                                           
-                                            var sliderSections = document.getElementsByClassName("selector");
-                                                for( var x = 0; x < sliderSections.length; x++ ){
-                                                    var sliders = sliderSections[x].getElementsByTagName("input");
-                                                    for( var y = 0; y < sliders.length; y++ ){
-                                                    if( sliders[y].type ==="range" ){
-                                                        sliders[y].oninput = getVals;
-                                                        sliders[y].oninput();
-                                                    }
-                                                    }
-                                                }
-                                            }                        
-                                    </script>
-
-							    </div>
-                            </div>
-
 						
 						
                         <!-- Single Sidebar End -->
