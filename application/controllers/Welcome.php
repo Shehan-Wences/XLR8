@@ -476,9 +476,9 @@ class Welcome extends CI_Controller {
 									'rent' => $_POST['rent'],
 									'type' => $_POST['type'],
 									'fuel' => $_POST['fuel'],
-									'transmission' => $_POST['trans']
+									'transmission' => $_POST['trans'],
 									'year' => $_POST['year'],
-									'imageurl' => $_POST['imgUrl'],
+									'imageurl' => $_POST['imgUrl']
 
 							    );
 
