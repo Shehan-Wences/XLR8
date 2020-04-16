@@ -49,13 +49,14 @@ $this->load->view('inc/header', $data);
                 			<h3>Add Car</h3>
 							<form action="<?php echo base_url('/addcar'); ?>" method="post" >
                                
-							   	<input name="CarID" type="text" placeholder="Enter CarID">
+							   	<input name="CarID" type="text" placeholder="Enter CarID" required>
+								   
 						                    
-    							<input name="Description" type="text" placeholder="Enter Car Descripition">
+    							<input name="Description" type="text" placeholder="Enter Car Descripition" required> 
 							
 								<div class="row">
 									<div class="col-md-6">
-										<select name="Make">
+										<select name="Make" required>
 											<option value="">Enter Car Make</option>
 											<option value="Honda">Honda</option>
 											<option value="Toyota">Toyota</option>
@@ -68,14 +69,14 @@ $this->load->view('inc/header', $data);
 										</select>
 									</div>	
 									<div class="col-md-6">
-										<input name="Model" type="text" placeholder="Enter Car Model">
+										<input name="Model" type="text" placeholder="Enter Car Model" required>
 									</div>
 								</div>
 
 	
-								<input name="rent" type="number" placeholder="Enter rent per day">
+								<input name="rent" min="10" max="150" type="number" placeholder="Enter rent per day" required>
 							
-								<select name="type">
+								<select name="type" required>
 									<option value="">Enter type</option>
 									<option value="Sedan">Sedan</option>
 									<option value="Van">Van</option>
@@ -85,7 +86,7 @@ $this->load->view('inc/header', $data);
 									<option value="Convertible">Convertible</option>
 								</select>
 								
-								<select name="fuel">
+								<select name="fuel" required>
 									<option value="">Enter Fuel type</option>
 									<option value="Petrol">Petrol</option>
 									<option value="Diesel">Diesel</option>
@@ -93,15 +94,15 @@ $this->load->view('inc/header', $data);
 									<option value="Electric">Electric</option>
 								</select>
 								
-								<select name="trans">
+								<select name="trans" required>
 									<option value="">Enter transmission type</option>
 									<option value="Auto">Auto</option>
 									<option value="Manual">Manual</option>
 								</select>
 								
-								<input name="year" type="number" placeholder="Enter car make year">
+								<input name="year" min="1990" max="2020" type="number" placeholder="Enter car make year" required> 
 								
-								<input name="imgUrl" type="text" placeholder="Enter Car image Url">
+								<input name="imgUrl" type="text" placeholder="Enter Car image Url" required>
 								
 								<div class="log-btn">
 									<button name="add" type="submit"><i class="fa fa-check-square"></i> Add Car</button>

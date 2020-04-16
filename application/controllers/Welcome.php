@@ -480,12 +480,26 @@ class Welcome extends CI_Controller {
 									'year' => $_POST['year'],
 									'imageurl' => $_POST['imgUrl']
 
-							    );
+								);
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
+				$data['errorCarID'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$status=false;
+			}
 
 			$this->carshare_model->add_data('car', $addCar_data);
 			
 		}
 		$this->load->view('carshare_addCar', $data);
 
+	}
+
+
+
+
+	public function cardetails()
+	{
+		$data = array();
+
+		$this->load->view('carshare_cardetails', $data);
 	}
 }
