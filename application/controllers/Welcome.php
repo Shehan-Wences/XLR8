@@ -502,7 +502,7 @@ class Welcome extends CI_Controller {
 
 		$product_id = $this->input->get('id', TRUE);
 
-
+		$data_id = $this->input->get('name_of_field');
 		$this->load->view('carshare_cardetails', $data);
 	}
 }

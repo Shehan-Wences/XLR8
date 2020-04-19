@@ -31,7 +31,7 @@ $this->load->view('inc/header', $data);
                 <!-- Car List Content Start -->
                 <div class="col-lg-12">
                     <div class="car-details-content">
-                        <h2>Aston Martin One-77 <span class="price"><? php echo $product_id;?></span></h2>
+                        <h2>Aston Martin One-77 <span class="price"><?php echo $data_id; ?></span></h2>
                         <div class="car-preview-crousel">
                             <div class="single-car-preview">
                                 <img src="assets/img/car/car-5.jpg" alt="JSOFT">
