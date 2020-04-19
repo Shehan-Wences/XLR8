@@ -66,8 +66,7 @@ class carshare_model extends CI_Model {
             $data[] = $open_info;
         }
         return $data;
-	}
-	
+    }
 	public function carDetails($id) {
 		$data = array();
 		 $this->db->select('description');
@@ -89,7 +88,6 @@ class carshare_model extends CI_Model {
 		 }
 		 return $data;
 	 }
-	
 	 public function locations() {
         $data = array();
         $this->db->select('locationid');
