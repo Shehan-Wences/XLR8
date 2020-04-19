@@ -47,25 +47,6 @@ class carshare_model extends CI_Model {
             $data[] = $open_info;
         }
         return $data;
-    }
-
-    public function member_login_details($email, $pass) {
-        $data = array();
-        $this->db->select('Email');
-        $this->db->select('Fname');
-		$this->db->select('Lname');
-        $this->db->select('Password');
-		$this->db->select('Status');
-        $this->db->from('customer');
-		$this->db->where("customer.Email", $email);
-        $this->db->where("customer.Password", sha1($pass));
-
-        $open_list = $this->db->get();
-		
-        foreach ($open_list->result() as $open_info) {
-            $data[] = $open_info;
-        }
-        return $data;
 	}
 	
 	public function carDetails($id) {
@@ -90,6 +71,25 @@ class carshare_model extends CI_Model {
 		 return $data;
 	 }
 
+    public function member_login_details($email, $pass) {
+        $data = array();
+        $this->db->select('Email');
+        $this->db->select('Fname');
+		$this->db->select('Lname');
+        $this->db->select('Password');
+		$this->db->select('Status');
+        $this->db->from('customer');
+		$this->db->where("customer.Email", $email);
+        $this->db->where("customer.Password", sha1($pass));
+
+        $open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+    }
+	
 	 public function locations() {
         $data = array();
         $this->db->select('locationid');
