@@ -36,12 +36,6 @@ $this->load->view('inc/header', $data);
                             <div class="single-car-preview">
                                 <img src="assets/img/car/car-5.jpg" alt="JSOFT">
                             </div>
-                            <div class="single-car-preview">
-                                <img src="assets/img/car/car-1.jpg" alt="JSOFT">
-                            </div>
-                            <div class="single-car-preview">
-                                <img src="assets/img/car/car-6.jpg" alt="JSOFT">
-                            </div>
                         </div>
                         <div class="car-details-info">
                             <h4>Additional Info</h4>

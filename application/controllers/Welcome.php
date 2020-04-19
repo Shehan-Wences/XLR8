@@ -500,9 +500,11 @@ class Welcome extends CI_Controller {
 	{
 		$data = array();
 
-	
+		$id = $this->input->get('id', TRUE);
 
-		$data_id = $this->input->get('id');
-		$this->load->view('carshare_cardetails', $data_id);
+		$this->carshare_model->carDetails($id);
+
+		
+		$this->load->view('carshare_cardetails', $data);
 	}
 }
