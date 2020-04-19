@@ -499,6 +499,7 @@ class Welcome extends CI_Controller {
 	public function cardetails()
 	{
 		$data = array();
+		$this->load->model('carshare_model');
 
 		$id = $this->input->get('id', TRUE);
 

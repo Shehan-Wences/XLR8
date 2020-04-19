@@ -100,7 +100,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input name="Phone" type="phone" placeholder="Phone Number" value="<?php echo $rent; ?>">
+                                        <input name="Phone" type="phone" placeholder="Phone Number" value="<?php echo $Phone; ?>">
                                     </div>
 								</div>
 							</div>
