@@ -66,7 +66,29 @@ class carshare_model extends CI_Model {
             $data[] = $open_info;
         }
         return $data;
-    }
+	}
+	
+	public function carDetails($id) {
+		$data = array();
+		 $this->db->select('description');
+		 $this->db->select('make');
+		 $this->db->select('model');
+		 $this->db->select('rent');
+		 $this->db->select('type');
+		 $this->db->select('fuel');
+		 $this->db->select('transmission');
+		 $this->db->select('year');
+		 $this->db->select('imageurl');
+		 $this->db->from('car');
+		 $this->db->where("car.carid", $id);
+		 
+		 $open_list = $this->db->get();
+		 
+		 foreach ($open_list->result() as $open_info) {
+			 $data[] = $open_info;
+		 }
+		 return $data;
+	 }
 	
 	 public function locations() {
         $data = array();
