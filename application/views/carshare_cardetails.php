@@ -31,7 +31,7 @@ $this->load->view('inc/header', $data);
                 <!-- Car List Content Start -->
                 <div class="col-lg-12">
                     <div class="car-details-content">
-                        <h2> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?> </h2>
+                        <h2> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?>  </h2> <span class="book"><button class="book-now-btn">Book Now</button></span>
                             <div class="single-car-preview">
                                 <img src=<?php echo $imageurl; ?> alt="JSOFT">
                             </div>
