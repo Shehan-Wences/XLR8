@@ -503,7 +503,12 @@ class Welcome extends CI_Controller {
 
 		$id = $_GET['id'];
 
-		$this->carshare_model->carDetails($id);
+		$model_id = $this->carshare_model->carDetails($id);
+		if (count($model_id) > 0) {
+			$data['rent'] = $model_id[0]->rent;
+			
+		  
+		}
 
 		
 		$this->load->view('carshare_cardetails', $data);
