@@ -506,7 +506,14 @@ class Welcome extends CI_Controller {
 		$model_id = $this->carshare_model->carDetails($id);
 		if (count($model_id) > 0) {
 			$data['rent'] = $model_id[0]->rent;
-			
+			$data['description'] = $model_id[0]->description;
+			$data['make'] = $model_id[0]->make;
+			$data['model'] = $model_id[0]->model;
+			$data['type'] = $model_id[0]->type;
+			$data['fuel'] = $model_id[0]->fuel;
+			$data['transmission'] = $model_id[0]->transmission;
+			$data['year'] = $model_id[0]->year;
+			$data['imageurl'] = $model_id[0]->imageurl;
 		  
 		}
 

@@ -31,15 +31,15 @@ $this->load->view('inc/header', $data);
                 <!-- Car List Content Start -->
                 <div class="col-lg-12">
                     <div class="car-details-content">
-                        <h2>Aston Martin One-77 <span class="price"><?php echo $rent; ?></span></h2>
+                        <h2> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?> </h2>
                         <div class="car-preview-crousel">
                             <div class="single-car-preview">
-                                <img src="assets/img/car/car-5.jpg" alt="JSOFT">
+                                <img src=<?php echo $imageurl; ?> alt="JSOFT">
                             </div>
                         </div>
                         <div class="car-details-info">
                             <h4>Additional Info</h4>
-                            <p>The Aventador LPER 720-4 50° ise a limited (200 units – 100 Coupe and 100 Roadster) versione of thed Aventadored LP 700-4 commemorating the 50th anniversary of Lamborghini. It included ised increased engine power to 720 PS (530 kW; 710 bhp) via a new specific engine calibration, enlarged and extended front air intakes and the aerodynamic splitter.</p>
+                            <p><?php echo $description; ?></p>
 
                             <div class="technical-info">
                                 <div class="row">
@@ -48,19 +48,19 @@ $this->load->view('inc/header', $data);
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <th>Class</th>
-                                                    <td>Compact</td>
+                                                    <td> <?php echo $type; ?> </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Fuel</th>
-                                                    <td>Petrol</td>
+                                                    <td> <?php echo $fuel; ?> </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Doors</th>
-                                                    <td>5</td>
+                                                    <th>Rent</th>
+                                                    <td><?php echo $rent; ?> </td>
                                                 </tr>
                                                 <tr>
                                                     <th>GearBox</th>
-                                                    <td>Automatic</td>
+                                                    <td><?php echo $transmission; ?></td>
                                                 </tr>
                                             </table>
                                         </div>
