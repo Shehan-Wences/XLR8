@@ -49,25 +49,28 @@ class carshare_model extends CI_Model {
         return $data;
     }
 	
-    public function member_login_details($email, $pass) {
-        $data = array();
-        $this->db->select('Email');
-        $this->db->select('Fname');
-		$this->db->select('Lname');
-        $this->db->select('Password');
-		$this->db->select('Status');
-        $this->db->from('customer');
-		$this->db->where("customer.Email", $email);
-        $this->db->where("customer.Password", sha1($pass));
-
-        $open_list = $this->db->get();
-		
-        foreach ($open_list->result() as $open_info) {
-            $data[] = $open_info;
-        }
-        return $data;
-    }
-
+public function carDetails($id) {
+		$data = array();
+		 $this->db->select('description');
+		 $this->db->select('make');
+		 $this->db->select('model');
+		 $this->db->select('rent');
+		 $this->db->select('type');
+		 $this->db->select('fuel');
+		 $this->db->select('transmission');
+		 $this->db->select('year');
+		 $this->db->select('imageurl');
+		 $this->db->from('car');
+		 $this->db->where("car.carid", $id);
+		 
+		 $open_list = $this->db->get();
+		 
+		 foreach ($open_list->result() as $open_info) {
+			 $data[] = $open_info;
+		 }
+		 return $data;
+	 }
+	
     public function member_login_details($email, $pass) {
         $data = array();
         $this->db->select('Email');
