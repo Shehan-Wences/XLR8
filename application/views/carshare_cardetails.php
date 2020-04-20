@@ -34,13 +34,13 @@ $this->load->view('inc/header', $data);
                         <h2> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?> </h2>
                         <div class="car-preview-crousel">
                             <div class="single-car-preview">
-                                <img src="assets/img/car/car-5.jpg" alt="JSOFT">
+                                <img src=<?php echo $imageurl; ?> alt="JSOFT">
                             </div>
                             <div class="single-car-preview">
-                                <img src="assets/img/car/car-1.jpg" alt="JSOFT">
+                                <img src=<?php echo $imageurl; ?> alt="JSOFT">
                             </div>
                             <div class="single-car-preview">
-                                <img src="assets/img/car/car-6.jpg" alt="JSOFT">
+                                <img src=<?php echo $imageurl; ?> alt="JSOFT">
                             </div>
                         </div>
                         <div class="car-details-info">
