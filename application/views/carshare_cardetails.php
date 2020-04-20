@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$data['title'] = ucfirst('Add Car');
+$data['title'] = ucfirst('Car Details');
 $this->load->view('inc/header', $data);
 
 ?>
@@ -32,17 +32,9 @@ $this->load->view('inc/header', $data);
                 <div class="col-lg-12">
                     <div class="car-details-content">
                         <h2> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?> </h2>
-                        <div class="car-preview-crousel">
                             <div class="single-car-preview">
                                 <img src=<?php echo $imageurl; ?> alt="JSOFT">
                             </div>
-                            <div class="single-car-preview">
-                                <img src=<?php echo $imageurl; ?> alt="JSOFT">
-                            </div>
-                            <div class="single-car-preview">
-                                <img src=<?php echo $imageurl; ?> alt="JSOFT">
-                            </div>
-                        </div>
                         <div class="car-details-info">
                             <h4>Additional Info</h4>
                             <p><?php echo $description; ?></p>
