@@ -115,7 +115,7 @@ $this->load->view('inc/header', $data);
                                         <i class="fa fa-smile-o"></i>
                                     </div>
                                     <div class="funfact-content">
-                                        <p><span class="counter">550</span>+</p>
+                                        <p><span class="counter">10</span>+</p>
                                         <h4>HAPPY CLIENTS</h4>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@ $this->load->view('inc/header', $data);
                                         <i class="fa fa-car"></i>
                                     </div>
                                     <div class="funfact-content">
-                                        <p><span class="counter">250</span>+</p>
+                                        <p><span class="counter"><?php echo $numofcars; ?></span>+</p>
                                         <h4>CARS IN STOCK</h4>
                                     </div>
                                 </div>
@@ -143,8 +143,8 @@ $this->load->view('inc/header', $data);
                                         <i class="fa fa-bank"></i>
                                     </div>
                                     <div class="funfact-content">
-                                        <p><span class="counter">50</span>+</p>
-                                        <h4>office in cities</h4>
+                                        <p><span class="counter">20</span>+</p>
+                                        <h4>Locations in Melbourne </h4>
                                     </div>
                                 </div>
                             </div>

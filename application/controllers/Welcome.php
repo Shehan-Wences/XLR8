@@ -23,7 +23,8 @@ class Welcome extends CI_Controller {
 			
 		$this->load->model('carshare_model');
         $data['location']='1';	
-		
+		$numberofcars=$this->carshare_model->cars();
+		$data['numofcars']= (round($numberofcars/10)-1) * 10;
 		$data['locations'] = $this->carshare_model->locations();
 
  		$this->load->view('carshare_home', $data);
