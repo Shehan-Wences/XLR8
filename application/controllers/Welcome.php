@@ -464,6 +464,7 @@ class Welcome extends CI_Controller {
 
 	public function addCar()
 	{
+		$status=true;
 		$data = array();
 
 		$this->load->model('carshare_model');
@@ -481,13 +482,15 @@ class Welcome extends CI_Controller {
 									'imageurl' => $_POST['imgUrl']
 
 								);
-			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
-				$data['errorCarID'] = "Password must contain minimum eight characters, at least one letter and one number";
+
+			if(!preg_match("/^[a-zA-Z0-9 ,.'-]{5,6}$/i", $_POST['CarID'])){
+				$data['CarIDerror']	="Car Id should be of 6 characters";
 				$status=false;
 			}
-
-			$this->carshare_model->add_data('car', $addCar_data);
 			
+			if($status==true){
+				$this->carshare_model->add_data('car', $addCar_data);
+			}
 		}
 		$this->load->view('carshare_addCar', $data);
 
@@ -500,6 +503,7 @@ class Welcome extends CI_Controller {
 	{
 		$data = array();
 		$this->load->model('carshare_model');
+
 
 		$id = $_GET['id'];
 
