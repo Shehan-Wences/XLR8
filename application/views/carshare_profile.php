@@ -24,7 +24,8 @@ $this->load->view('inc/header', $data);
     <!--== My profile Page Area Start ==-->
 	<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page"><?php echo $username; ?></li>
+	<li class="breadcrumb-item"><a href="<?php echo base_url('/profile'); ?>"><?php echo $username; ?></a></li>
+	<li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
 </nav>
 
@@ -33,14 +34,27 @@ $this->load->view('inc/header', $data);
 
     <div class="contact-page-wrao sectionp-padding">
 	<h1 class="text-center" style="margin:50px 0">MY PROFILE</h1>
+	
         <div class="container">
 		
             <div class="row">
                 <div class="col-lg-10 m-auto card">
 				
                     <div class="contact-form">
-					
-					
+					<?php if(isset($accounterror)){  ?>
+						<div class="alert alert-danger" style="margin:1rem;">
+									<strong><?php echo $accounterror; ?></strong> 
+									<?php if(isset($Fnameerror)){ ?><p>* <?php echo $Fnameerror; ?> </p> <?php } ?>
+									<?php if(isset($Lnameerror)){ ?><p>* <?php echo $Lnameerror; ?> </p> <?php } ?>
+									<?php if(isset($Phoneerror)){ ?><p>* <?php echo $Phoneerror; ?> </p> <?php } ?>
+									<?php if(isset($Lerror)){ ?><p>* <?php echo $Lerror; ?> </p> <?php } ?>
+						</div>
+					<?php } ?>
+					<?php if(isset($accountsuccess)){  ?>
+						<div class="alert alert-success" style="margin:1rem;">
+									<strong><?php echo $accountsuccess; ?></strong> 
+						</div>
+					<?php } ?>
                         <form action="<?php echo base_url('/profile'); ?>" method="post" >
 						
 						
@@ -52,7 +66,7 @@ $this->load->view('inc/header', $data);
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="text" placeholder="First Name" value="<?php echo $Fname; ?>">
+                                        <input name="Fname" type="text" placeholder="First Name" value="<?php echo $Fname; ?>">
                                     </div>
                                 </div>
                              </div>
@@ -64,7 +78,7 @@ $this->load->view('inc/header', $data);
 								
 								<div class="col-lg-6 col-md-6">
 								    <div class="website-input">
-                                        <input type="text" placeholder="Last Name" value="<?php echo $Lname; ?>">
+                                        <input name="Lname" type="text" placeholder="Last Name" value="<?php echo $Lname; ?>">
                                     </div>
 								</div>
 							</div>
@@ -75,7 +89,7 @@ $this->load->view('inc/header', $data);
 								</div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="email" placeholder="Email cannot be changed" value="<?php echo $Email; ?>" disabled>
+                                        <input name="Email" type="email" placeholder="Email cannot be changed" value="<?php echo $Email; ?>" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +100,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="phone" placeholder="Phone Number" value="<?php echo $Phone; ?>">
+                                        <input name="Phone" type="phone" placeholder="Phone Number" value="<?php echo $Phone; ?>">
                                     </div>
 								</div>
 							</div>
@@ -97,7 +111,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<div class="col-lg-6 col-md-6">
                                     <div class="website-input">
-                                        <input type="license" placeholder="Driver's License Number" value="<?php echo $DriverL; ?>">
+                                        <input name="DriverL" type="license" placeholder="Driver's License Number" value="<?php echo $DriverL; ?>">
                                     </div>
 								</div>
 							</div>

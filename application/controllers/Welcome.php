@@ -20,20 +20,86 @@ class Welcome extends CI_Controller {
 			
 		}
    	
+			
+		$this->load->model('carshare_model');
+        $data['location']='1';	
+		
+		$data['locations'] = $this->carshare_model->locations();
 
  		$this->load->view('carshare_home', $data);
 	}
 	
-	
-	public function search()
-	{  
-		$data = array();
+	public function error404()
+	{ 
 		
+		$data = array();
+			
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 		}else{
 			
+		}
+ 
+ 		$this->load->view('error_404', $data);
+	}
+	
+	public function search()
+	{  
+		$data = array();
+		$type='';
+		$make='';
+		$this->load->model('carshare_model');
+        
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else{
+			
+		}
+		
+		$data['locations'] = $this->carshare_model->locations();
+		
+		if(($this->input->server('REQUEST_METHOD')) == 'GET'){
+			
+		
+			
+		 if(!isset($_GET['location']) || !isset($_GET['pdate']) || !isset($_GET['ddate'])){
+			 $data['location']='1';
+			 $data['pickup']=date('m/d/Y');
+			 $data['dropoff']=date('m/d/Y',strtotime($data['pickup']. ' + 3 days'));
+			
+		 }else{
+			 $data['location']=$_GET['location'];
+			 $data['pickup']=$_GET['pdate'];
+			 $data['dropoff']=$_GET['ddate'];
+		 }
+		 if(isset($_GET['typesstring'])){
+			$type=json_decode(urldecode($_GET['typesstring']));
+		 }else{
+			$type = array("Sedan", "Van", "Hatchback", "SUV", "Wagon", "Convertible");
+					 }
+		 if(isset($_GET['makestring'])){
+			$make=json_decode(urldecode($_GET['makestring']));
+		 }else{
+			$make = array("Honda", "Toyota", "Hyundai", "Kia", "Holden", "Ford", "BMW", "Lexus");
+		 }
+		 if(isset($_GET['transmissionstring'])){
+			$transmission=json_decode(urldecode($_GET['transmissionstring']));
+		 }else{
+			$transmission = array("Auto", "Manual");
+		 }
+		 if(isset($_GET['fuelstring'])){
+			$fuel=json_decode(urldecode($_GET['fuelstring']));
+		 }else{
+			$fuel = array("Petrol", "Diesel","Hybrid","Electric");
+		 }
+		 $data['cartype']=$type;
+		 $data['carmake']=$make;
+		 $data['cartransmission']=$transmission;
+		 $data['carfuel']=$fuel;
+		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel);
+		
 		}
 		
 		$this->load->view('carshare_search', $data);
@@ -131,7 +197,7 @@ class Welcome extends CI_Controller {
 
 				if(count($login) > 0){
 					
-					$data['erroremail'] = "Account matching that email already exists.";
+					$data['erroracc'] = "Account matching that email already exists.";
 					$status=false;
 				}
 			}
@@ -215,13 +281,51 @@ class Welcome extends CI_Controller {
 	{  
 		
 		$data = array();
+		$status=true;
 		$this->load->model('carshare_model');
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 			$data['Email'] = $session_array_used['email'];
 		
-		$details = $this->carshare_model->profile($data['Email']);
+		
+		
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
+			
+			if(!preg_match("/^[a-z ,.'-]{2,10}$/i", $_POST['Fname'])){
+				$data['Fnameerror']	="First Name should contain 2-10 characters";
+				$status=false;
+			}
+			if(!preg_match("/^[a-z ,.'-]{2,20}$/i", $_POST['Lname'])){
+				$data['Lnameerror']	="Last Name should contain 2-20 characters";
+				$status=false;
+			}
+			if(!preg_match("/^[0]{1}[0-9]{9}$/", $_POST['Phone'])){
+				$data['Phoneerror']	="Invalid Phone number";
+				$status=false;
+			}
+			if(!preg_match("/^[0-9]{9}$/", $_POST['DriverL'])){
+				$data['Lerror']	="Invalid License Number";		
+				$status=false;
+			}
+			
+			if($status==false){
+				$data['accounterror'] =	"Details Could Not Be Updated!";	
+			}else{
+				$edit_data = array('Fname' => $_POST['Fname'],'Lname' => $_POST['Lname'],'Phone' => $_POST['Phone'],'DriverL' => $_POST['DriverL']);
+				$this->carshare_model->edit_data('customer',$session_array_used['email'], 'Email', $edit_data);
+				$data['accountsuccess'] = "Details Successfully Updated";
+			}
+			    
+				
+			$data['Fname'] = $_POST['Fname'];
+			$data['Lname'] = $_POST['Lname'];
+			$data['Phone'] = $_POST['Phone'];
+			$data['DriverL'] = $_POST['DriverL'];					
+				
+			
+		}else{
+			$details = $this->carshare_model->profile($data['Email']);
 			if (count($details) > 0) {
 				$data['Fname'] = $details[0]->Fname;
 				$data['Lname'] = $details[0]->Lname;
@@ -229,11 +333,6 @@ class Welcome extends CI_Controller {
 				$data['DriverL'] = $details[0]->DriverL;
 			  
 			}
-		
-		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
-			
-			
-			
 		}
 		
 		
@@ -361,5 +460,64 @@ class Welcome extends CI_Controller {
         } 
 		
 		$this->load->view('carshare_passwordreset', $data);
+	}
+
+	public function addCar()
+	{
+		$data = array();
+
+		$this->load->model('carshare_model');
+		if (($this->input->server('REQUEST_METHOD')) == 'POST') 
+		{
+			$addCar_data = array('carid' => $_POST['CarID'],
+									'description' => $_POST['Description'],
+									'make' => $_POST['Make'],
+									'model' => $_POST['Model'],
+									'rent' => $_POST['rent'],
+									'type' => $_POST['type'],
+									'fuel' => $_POST['fuel'],
+									'transmission' => $_POST['trans'],
+									'year' => $_POST['year'],
+									'imageurl' => $_POST['imgUrl']
+
+								);
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
+				$data['errorCarID'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$status=false;
+			}
+
+			$this->carshare_model->add_data('car', $addCar_data);
+			
+		}
+		$this->load->view('carshare_addCar', $data);
+
+	}
+
+
+
+
+	public function cardetails()
+	{
+		$data = array();
+		$this->load->model('carshare_model');
+
+		$id = $_GET['id'];
+
+		$model_id = $this->carshare_model->carDetails($id);
+		if (count($model_id) > 0) {
+			$data['rent'] = $model_id[0]->rent;
+			$data['description'] = $model_id[0]->description;
+			$data['make'] = $model_id[0]->make;
+			$data['model'] = $model_id[0]->model;
+			$data['type'] = $model_id[0]->type;
+			$data['fuel'] = $model_id[0]->fuel;
+			$data['transmission'] = $model_id[0]->transmission;
+			$data['year'] = $model_id[0]->year;
+			$data['imageurl'] = $model_id[0]->imageurl;
+		  
+		}
+
+		
+		$this->load->view('carshare_cardetails', $data);
 	}
 }
