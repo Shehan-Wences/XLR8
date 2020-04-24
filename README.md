@@ -9,7 +9,7 @@ Customers can sign-up (once) and login (regularly) via a web site, and from ther
 * [PHP](https://www.php.net/manual/en/langref.php) - Programming language used
 * [Heroku](https://www.heroku.com/) - Application hosting
 * [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/) - Default styles and HTML components
-* [pgAdmin](https://www.pgadmin.org/) - Data storage
+* Heroku Postgres - Data storage
 
 
 ## Authors
