@@ -91,6 +91,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </ul>
                                 </li>
 								<?php 
+								}else if(isset($admin)){
+								?>
+								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $admin; ?></a>
+                                    <ul>
+										<li><a href="<?php echo base_url("/addcar"); ?>">Add Car</a></li>
+
+                                        <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
+                                        
+                                    </ul>
+                                </li>
+								<?php 
+								
+								
 								}else{
 								?>
 								<li class="<?php if ($title == "Sign in") {echo "active";} ?>"><a href="<?php echo base_url("/signin"); ?>"><i class="fa fa-user" aria-hidden="true"></i> Sign in</a></li>

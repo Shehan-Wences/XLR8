@@ -59,8 +59,9 @@ $route['passwordreset'] = 'welcome/passwordreset';
 $route['deactivate'] = 'welcome/deactivate';
 $route['profile'] = 'welcome/profile';
 $route['passwordchange'] = 'welcome/passwordchange';
-$route['addcar'] = 'welcome/addCar';
+$route['addcar'] = 'welcome/addcar';
 $route['car'] = 'welcome/cardetails';
+$route['admin'] = 'welcome/admin';
 
 $route['404_override'] = 'welcome/error404';
 
