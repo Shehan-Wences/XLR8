@@ -481,6 +481,7 @@ class Welcome extends CI_Controller {
 
 	public function addCar()
 	{
+		
 		if($this->session->userdata('admin')){
 			$data = array();
 			$data['admin'] = $this->session->userdata('admin');
@@ -524,6 +525,14 @@ class Welcome extends CI_Controller {
 	public function cardetails()
 	{
 		$data = array();
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
+		}
+		
+		
 		$this->load->model('carshare_model');
 
 		if(isset($_GET['id'])){
