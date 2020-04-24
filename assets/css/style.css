@@ -352,7 +352,7 @@ a.slicknav_btn {
 /*== Slider Area CSS Start ==*/
 
 .single-slide-item {
-	background-image: url('assets/img/banner.jpg');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/banner.jpg');
 	background-position: center center;
 	background-size: cover;
 	padding: 80px 0;
@@ -365,7 +365,7 @@ a.slicknav_btn {
 }
 
 .book-a-car select.custom-select {
-	background-image: url("assets/img/caret-cion.png");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/caret-cion.png");
 	background-position: right 13px center;
 	background-size: 12px auto;
 }
@@ -663,7 +663,7 @@ a.slicknav_btn {
 /*== Fun Fact Area CSS Start ==*/
 
 #funfact-area {
-	background-image: url('assets/img/funfact-bg.jpg');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/funfact-bg.jpg');
 	background-size: cover;
 	background-position: center center;
 	color: #fff;
@@ -1003,7 +1003,7 @@ a.slicknav_btn {
 /*== Pricing Area CSS Start ==*/
 
 #pricing-area {
-	background-image: url('assets/img/pricing-bg.jpg');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/pricing-bg.jpg');
 	background-size: cover;
 	background-position: center center;
 }
@@ -1128,7 +1128,7 @@ a.slicknav_btn {
 }
 
 #mobile-app-area::after {
-	background-image: url("assets/img/mobile-app.png");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/mobile-app.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -1651,7 +1651,7 @@ body,
 }
 
 .book-ur-car select.custom-select {
-	background-image: url("assets/img/caret-cion.png");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/caret-cion.png");
 	background-position: right 12px center;
 	background-size: 12px auto;
 }
@@ -1876,15 +1876,15 @@ body,
 /*== Slider Area CSS ==*/
 
 .slider-bg-1 {
-	background-image: url("assets/img/slider-img/slider-img-4.jpg");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/slider-img/slider-img-4.jpg");
 }
 
 .slider-bg-2 {
-	background-image: url("assets/img/slider-img/slider-img-2.jpg");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/slider-img/slider-img-2.jpg");
 }
 
 .slider-bg-3 {
-	background-image: url("assets/img/slider-img/slider-img-3.jpg");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/slider-img/slider-img-3.jpg");
 }
 
 .home-slider-item {
@@ -1963,15 +1963,15 @@ body,
 /*== What Do Area CSS ==*/
 
 .we-do-bg-1 {
-	background-image: url('assets/img/we-do/service1-img.png');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/we-do/service1-img.png');
 }
 
 .we-do-bg-2 {
-	background-image: url('assets/img/we-do/service2-img.png');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/we-do/service2-img.png');
 }
 
 .we-do-bg-3 {
-	background-image: url('assets/img/we-do/service3-img.png');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/we-do/service3-img.png');
 }
 
 .single-we-do {
@@ -2208,7 +2208,7 @@ body,
 /*== Page Title CSS ==*/
 
 #page-title-area {
-	background-image: url('assets/img/page-title.jpg');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/page-title.jpg');
 	background-position: center center;
 	background-size: cover;
 	padding-top: 220px;
@@ -2717,7 +2717,7 @@ body,
 ================================*/
 
 #our-facility {
-	background-image: url('assets/img/slider-img/slider-img-1.jpg');
+	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/slider-img/slider-img-1.jpg');
 	background-size: cover;
 	background-position: center center;
 	color: #fff;
@@ -3021,7 +3021,7 @@ body,
 ================================*/
 
 #page-404-wrap {
-	background-image: url("assets/img/banner.jpg");
+	background-image: url("https://xlr8-rental.herokuapp.com/assets/img/banner.jpg");
 	background-position: center center;
 	background-size: cover;
 	color: #fff;
