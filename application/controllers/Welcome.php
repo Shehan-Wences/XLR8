@@ -502,10 +502,12 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->model('carshare_model');
 
+		if(isset($_GET['id'])){
 		$id = $_GET['id'];
 
 		$model_id = $this->carshare_model->carDetails($id);
 		if (count($model_id) > 0) {
+			
 			$data['rent'] = $model_id[0]->rent;
 			$data['description'] = $model_id[0]->description;
 			$data['make'] = $model_id[0]->make;
@@ -515,10 +517,59 @@ class Welcome extends CI_Controller {
 			$data['transmission'] = $model_id[0]->transmission;
 			$data['year'] = $model_id[0]->year;
 			$data['imageurl'] = $model_id[0]->imageurl;
-		  
+		  $this->load->view('carshare_cardetails', $data);
+		}else{
+			$this->load->view('error_404', $data);
 		}
 
 		
-		$this->load->view('carshare_cardetails', $data);
+		
+		}else{
+			$this->load->view('error_404', $data);
+		}
+		
+	}
+	
+	public function admin()
+	{  
+		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
+		}
+		
+		$data = array();
+		
+		
+		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
+		
+		$email=$this->input->post('email');
+		$password=$this->input->post('password');
+        $this->load->model('carshare_model');
+        $login = $this->carshare_model->member_login_details($email,$password);
+
+        if (count($login) > 0) {
+            $status=trim($login[0]->Status);
+			if($status == "ACTIVE"){
+				$session_data = array(
+					'email' => $login[0]->Email,
+					'Fname' => $login[0]->Fname,
+					'Lname' => $login[0]->Lname,
+				);
+
+				$this->session->set_userdata('logged_in', $session_data);
+				$session_array_used = $this->session->userdata('logged_in');
+				redirect('', 'refresh');
+			}else{
+				$data['accounterror'] = "Account Status is ".$status.". Please Contact XLR8 Team for more details.";
+			}
+			
+        } else {
+            $data['accounterror'] = "Username or Password is invalid.";
+			
+        }
+		
+		}
+		$this->load->view('carshare_signin', $data);
 	}
 }
