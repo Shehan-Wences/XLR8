@@ -482,10 +482,11 @@ class Welcome extends CI_Controller {
 	public function addCar()
 	{
 		if($this->session->userdata('admin')){
+			$data = array();
 			$data['admin'] = $this->session->userdata('admin');
 		
 		
-		$data = array();
+		
 
 		$this->load->model('carshare_model');
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') 
