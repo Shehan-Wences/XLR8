@@ -74,7 +74,6 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>About us</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                 </div>
                 <!-- Section Title End -->
