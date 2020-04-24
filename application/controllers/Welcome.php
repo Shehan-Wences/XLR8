@@ -513,6 +513,8 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('carshare_addCar', $data);
 
+		}else{
+			redirect('', 'refresh');
 		}
 	}
 
