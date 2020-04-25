@@ -105,6 +105,17 @@ class carshare_model extends CI_Model {
         return $data;
     }
 	
+	public function cars() {
+        $data = array();
+        $this->db->select('carid');
+      		
+        $this->db->from('car');
+		
+        $query = $this->db->get();
+		
+        return $query->num_rows();
+    }
+	
 	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel)
 	{
 

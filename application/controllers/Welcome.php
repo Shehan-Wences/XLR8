@@ -16,14 +16,15 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
    	
 			
 		$this->load->model('carshare_model');
         $data['location']='1';	
-		
+		$numberofcars = $this->carshare_model->cars();
+		$data['numofcars']= (round($numberofcars/10)-1) * 10;
 		$data['locations'] = $this->carshare_model->locations();
 
  		$this->load->view('carshare_home', $data);
@@ -37,8 +38,8 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
  
  		$this->load->view('error_404', $data);
@@ -54,8 +55,8 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
 		
 		$data['locations'] = $this->carshare_model->locations();
@@ -111,8 +112,8 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
 
  
@@ -123,6 +124,8 @@ class Welcome extends CI_Controller {
 	public function signin()
 	{  
 		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
 			redirect('', 'refresh');
 		}
 		
@@ -164,7 +167,10 @@ class Welcome extends CI_Controller {
 	{  
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
 		}
+		
 		$status=true;
 		$data = array();
 		
@@ -250,9 +256,14 @@ class Welcome extends CI_Controller {
 	}
 	public function signout()
 	{  
+		if($this->session->userdata('logged_in')){
+			$this->session->unset_userdata('logged_in');
+			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
+		}
 		
-        $this->session->unset_userdata('logged_in');
-		redirect('', 'refresh');
+       
 	}
 	
 	public function deactivate()
@@ -341,6 +352,10 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect('', 'refresh');
 		}
+				
+	
+		
+		
 	}
 	public function passwordchange()
 	{  
@@ -391,8 +406,10 @@ class Welcome extends CI_Controller {
 		
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
-
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
 		}
+		
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
 			
 			$this->load->model('carshare_model');
@@ -464,7 +481,13 @@ class Welcome extends CI_Controller {
 
 	public function addCar()
 	{
-		$data = array();
+		
+		if($this->session->userdata('admin')){
+			$data = array();
+			$data['admin'] = $this->session->userdata('admin');
+		
+		
+		
 
 		$this->load->model('carshare_model');
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') 
@@ -491,6 +514,9 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('carshare_addCar', $data);
 
+		}else{
+			redirect('', 'refresh');
+		}
 	}
 
 
@@ -499,12 +525,22 @@ class Welcome extends CI_Controller {
 	public function cardetails()
 	{
 		$data = array();
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
+		}
+		
+		
 		$this->load->model('carshare_model');
 
+		if(isset($_GET['id'])){
 		$id = $_GET['id'];
 
 		$model_id = $this->carshare_model->carDetails($id);
 		if (count($model_id) > 0) {
+			
 			$data['rent'] = $model_id[0]->rent;
 			$data['description'] = $model_id[0]->description;
 			$data['make'] = $model_id[0]->make;
@@ -514,10 +550,50 @@ class Welcome extends CI_Controller {
 			$data['transmission'] = $model_id[0]->transmission;
 			$data['year'] = $model_id[0]->year;
 			$data['imageurl'] = $model_id[0]->imageurl;
-		  
+		  $this->load->view('carshare_cardetails', $data);
+		}else{
+			$this->load->view('error_404', $data);
 		}
 
 		
-		$this->load->view('carshare_cardetails', $data);
+		
+		}else{
+			$this->load->view('error_404', $data);
+		}
+		
+	}
+	
+	public function admin()
+	{  
+		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
+		}
+		
+		$data = array();
+		
+		
+		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
+		
+		$email=$this->input->post('email');
+		$password=$this->input->post('password');
+       
+		if($email=="admin" && $password=="1234" ){
+			
+			$session_data = "Admin";
+
+			$this->session->set_userdata('admin', $session_data);
+			
+			redirect('', 'refresh');
+			
+		}else {
+			
+            $data['accounterror'] = "Username or Password is invalid.";
+			
+        }
+		
+		}
+		$this->load->view('carshare_admin', $data);
 	}
 }

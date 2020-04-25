@@ -74,7 +74,6 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>About us</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                 </div>
                 <!-- Section Title End -->
@@ -86,10 +85,7 @@ $this->load->view('inc/header', $data);
                     <div class="display-table">
                         <div class="display-table-cell">
                             <div class="about-content">
-                                <p>Lorem simply dummy is a texted of the printing costed and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.</p>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi aliquid debitis optio praesentium, voluptate repellat accusantium deserunt eius.</p>
-                                
+                                <p>XLR8 is a newly established car sharing service that operates in the heart of Victoria, providing customers the red carpet experience like no other.</p>
                             </div>
                         </div>
                     </div>
@@ -115,7 +111,7 @@ $this->load->view('inc/header', $data);
                                         <i class="fa fa-smile-o"></i>
                                     </div>
                                     <div class="funfact-content">
-                                        <p><span class="counter">550</span>+</p>
+                                        <p><span class="counter">10</span>+</p>
                                         <h4>HAPPY CLIENTS</h4>
                                     </div>
                                 </div>
@@ -129,7 +125,7 @@ $this->load->view('inc/header', $data);
                                         <i class="fa fa-car"></i>
                                     </div>
                                     <div class="funfact-content">
-                                        <p><span class="counter">250</span>+</p>
+                                        <p><span class="counter"><?php echo $numofcars; ?></span>+</p>
                                         <h4>CARS IN STOCK</h4>
                                     </div>
                                 </div>
@@ -143,8 +139,8 @@ $this->load->view('inc/header', $data);
                                         <i class="fa fa-bank"></i>
                                     </div>
                                     <div class="funfact-content">
-                                        <p><span class="counter">50</span>+</p>
-                                        <h4>office in cities</h4>
+                                        <p><span class="counter">20</span>+</p>
+                                        <h4>Locations in Melbourne </h4>
                                     </div>
                                 </div>
                             </div>
