@@ -260,6 +260,7 @@ class Welcome extends CI_Controller {
 			$this->session->unset_userdata('logged_in');
 			redirect('', 'refresh');
 		}else if($this->session->userdata('admin')){
+			$this->session->unset_userdata('admin');
 			redirect('', 'refresh');
 		}
 		
