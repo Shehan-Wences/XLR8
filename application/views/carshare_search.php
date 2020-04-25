@@ -356,6 +356,27 @@ function Validation(){
     <!--== What We Do Area Start ==-->
     <!--== Car List Area Start ==-->
     <section id="car-list-area" class="section-padding">
+	
+		<div class="container" style="margin-bottom: 20px;width: 1140px; display: flex;	justify-content: space-between; ">
+			<div class="item-per-page">
+					<label for="item-per-page">Items per page:</label>
+					<select id="item-per-page" name="location" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
+							<option selected="" value="1"> 5</option>
+							<option value="2">10</option>
+							<option value="3">15</option>
+					</select>
+			</div>
+			
+			<div class="sort">	
+					<label for="sort">Sort by:</label>
+					<select id="sort" name="location" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
+						
+							<option selected="" value="1"> Price low to high</option>
+							<option value="2">Price high to low</option>
+					</select>
+			</div>					
+		</div>
+	
         <div class="container">
             <div class="row">
                 <!-- Sidebar Area Start -->
