@@ -493,11 +493,9 @@ class Welcome extends CI_Controller {
 		
 		if($this->session->userdata('admin')){
 			$data = array();
+			$status=true;
 			$data['admin'] = $this->session->userdata('admin');
 		
-		
-		
-
 		$this->load->model('carshare_model');
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') 
 		{
@@ -514,11 +512,13 @@ class Welcome extends CI_Controller {
 
 								);
 			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
-				$data['errorCarID'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$data['errorCarID'] = "Car_Id should be 8 character long";
 				$status=false;
 			}
-
+			
+			if($status==true){
 			$this->carshare_model->add_data('car', $addCar_data);
+			}
 			
 		}
 		$this->load->view('carshare_addCar', $data);
