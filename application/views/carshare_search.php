@@ -3,64 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $data['title'] = ucfirst('search');
 $this->load->view('inc/header', $data);
 ?>
-
-<!--== CSS Code to merge to range slider ==-->
-<style>
-    .selector {
-    position: relative;
-    width: 100%;
-    margin: 0 auto 20px;
-    height: 35px;
-    text-align: center;
-    }
-
-    .selector input {
-    pointer-events: none;
-    position: absolute;
-    left: 0;
-    top: 15px;
-    width: 100%;
-    outline: none;
-    height: 18px;
-    margin: 0;
-    padding: 0;
-    border-radius: 8px;
-    }
-
-    .selector input::-webkit-slider-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 1;
-    outline: 0;
-    height: 24px;
-    widows: 24px;
-    border-radius: 12px;
-    background-color: white;
-    border: 2px solid black;
-    -webkit-appearance: none;
-    }
-
-    .selector input::-moz-range-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 1;
-    outline: 0;
-    height: 24px;
-    widows: 24px;
-    border-radius: 12px;
-    background-color: white;
-    border: 2px solid black;
-    -moz-appearance: none;
-    }
-
-    input::-moz-range-track {
-    background: #ccc;
-    }
-	
-	
-	
-	
-</style>
 <script>
 $(document).ready(function(){
 	
@@ -68,6 +10,7 @@ $(document).ready(function(){
 	var make='';
 	var transmission='';
 	var fuel='';
+	var price='';
 	
 	function load_search_data()
 	{
@@ -141,6 +84,8 @@ $(document).ready(function(){
 	fuel = JSON.stringify(fuelvalues);
 	fuel = encodeURIComponent(fuel);
 	$("input[name=fuelstring]").val(fuel);
+	
+	
 		
 	if(status==true){
 			
@@ -151,7 +96,7 @@ $(document).ready(function(){
 			$("#searchform").prepend($("input[name=makestring]"));
 			$("#searchform").prepend($("input[name=transmissionstring]"));
 			$("#searchform").prepend($("input[name=fuelstring]"));
-			
+			$("#searchform").prepend($("select[name=price]"));
 			$("#searchform").submit();
 			
 		
@@ -227,7 +172,14 @@ $(document).ready(function(){
 		
 
 	});
-	
+	$("select[name=price]").on('change', function() {
+		if(this.value != "ASC" && this.value != "DESC"){
+			alert( "There seems to be an error! Please reload the page" );
+		}else{
+			load_search_data();
+		}
+		
+	});
 	
 });
 
@@ -355,27 +307,25 @@ function Validation(){
 
     <!--== What We Do Area Start ==-->
     <!--== Car List Area Start ==-->
-    <section id="car-list-area" class="section-padding">
-	
-		<div class="container" style="margin-bottom: 20px;width: 1140px; display: flex;	justify-content: space-between; ">
-			<div class="item-per-page">
-					<label for="item-per-page">Items per page:</label>
-					<select id="item-per-page" name="location" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
-							<option selected="" value="1"> 5</option>
-							<option value="2">10</option>
-							<option value="3">15</option>
-					</select>
-			</div>
+	<section  style="padding-bottom: 0px;padding-top: 25px;">
+	<div class="container">
 			
-			<div class="sort">	
+			
+		
+			<div class="sort" style="text-align: right;">	
 					<label for="sort">Sort by:</label>
-					<select id="sort" name="location" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
+					<select id="sort" name="price" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
 						
-							<option selected="" value="1"> Price low to high</option>
-							<option value="2">Price high to low</option>
+							<option <?php if(isset($price)){ if($price=="ASC"){ echo "selected"; }  }else{ echo "selected";} ?> value="ASC"> Price Low to High</option>
+							<option <?php if(isset($price)){ if($price=="DESC"){ echo "selected"; }  }?> value="DESC">Price High to Low</option>
 					</select>
+							
 			</div>					
 		</div>
+	</section>
+    <section id="car-list-area" style="padding: 25px 0;">
+	
+		
 	
         <div class="container">
             <div class="row">

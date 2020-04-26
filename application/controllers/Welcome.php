@@ -50,6 +50,7 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$type='';
 		$make='';
+		$price='';
 		$this->load->model('carshare_model');
         
 		if($this->session->userdata('logged_in')){
@@ -95,11 +96,18 @@ class Welcome extends CI_Controller {
 		 }else{
 			$fuel = array("Petrol", "Diesel","Hybrid","Electric");
 		 }
+		 if(isset($_GET['price'])){
+			$price=$_GET['price'];
+		 }else{
+			$price = "ASC";
+		 }
+		 
 		 $data['cartype']=$type;
 		 $data['carmake']=$make;
 		 $data['cartransmission']=$transmission;
 		 $data['carfuel']=$fuel;
-		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel);
+		 $data['price']=$price;
+		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel,$price);
 		
 		}
 		

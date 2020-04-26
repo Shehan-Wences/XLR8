@@ -116,7 +116,7 @@ class carshare_model extends CI_Model {
         return $query->num_rows();
     }
 	
-	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel)
+	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel,$sort)
 	{
 
 		if($type != null){
@@ -202,7 +202,7 @@ class carshare_model extends CI_Model {
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);
 		$this->db->where('parking.availablelocationid ', $plocation);
-		$this->db->order_by("rent ASC");
+		$this->db->order_by("rent ".$sort);
 		 
 		 		
 		
