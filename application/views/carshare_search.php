@@ -85,7 +85,8 @@ $(document).ready(function(){
 	fuel = encodeURIComponent(fuel);
 	$("input[name=fuelstring]").val(fuel);
 	
-	
+	price =$("select[name=price]").find(":selected").val();
+	$("input[name=sort]").val(price);
 		
 	if(status==true){
 			
@@ -96,7 +97,7 @@ $(document).ready(function(){
 			$("#searchform").prepend($("input[name=makestring]"));
 			$("#searchform").prepend($("input[name=transmissionstring]"));
 			$("#searchform").prepend($("input[name=fuelstring]"));
-			$("#searchform").prepend($("select[name=price]"));
+			$("#searchform").prepend($("input[name=sort]"));
 			$("#searchform").submit();
 			
 		
@@ -319,7 +320,7 @@ function Validation(){
 							<option <?php if(isset($price)){ if($price=="ASC"){ echo "selected"; }  }else{ echo "selected";} ?> value="ASC"> Price Low to High</option>
 							<option <?php if(isset($price)){ if($price=="DESC"){ echo "selected"; }  }?> value="DESC">Price High to Low</option>
 					</select>
-							
+					<input type="hidden" name="sort"  />		
 			</div>					
 		</div>
 	</section>

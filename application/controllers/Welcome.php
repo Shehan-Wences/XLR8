@@ -96,8 +96,8 @@ class Welcome extends CI_Controller {
 		 }else{
 			$fuel = array("Petrol", "Diesel","Hybrid","Electric");
 		 }
-		 if(isset($_GET['price'])){
-			$price=$_GET['price'];
+		 if(isset($_GET['sort'])){
+			$price=$_GET['sort'];
 		 }else{
 			$price = "ASC";
 		 }
