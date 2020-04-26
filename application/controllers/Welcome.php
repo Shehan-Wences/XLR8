@@ -543,7 +543,18 @@ class Welcome extends CI_Controller {
 		
 		
 		$this->load->model('carshare_model');
-
+	
+		$data['locations'] = $this->carshare_model->locations();
+		
+		if(isset($_GET['plocation'])){
+			$data['location'] = $_GET['plocation'];
+		}
+		if(isset($_GET['pdate'])){
+			$data['pickup'] = $_GET['pdate'];
+		}
+		if(isset($_GET['ddate'])){
+			$data['dropoff'] = $_GET['ddate'];
+		}
 		if(isset($_GET['id'])){
 		$id = $_GET['id'];
 
@@ -605,4 +616,11 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('carshare_admin', $data);
 	}
+	
+	public function booking()
+	{ 
+	
+	
+	}
+	
 }

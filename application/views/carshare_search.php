@@ -285,11 +285,11 @@ function Validation(){
                                 </select>
                             </div>
 
-                            <div class="pick-date bookinput-item">
+                            <div class="bookinput-item">
                                 <input name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
                             </div>
 
-                            <div class="retern-date bookinput-item">
+                            <div class="bookinput-item">
                                 <input name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                             </div>
 
@@ -310,7 +310,9 @@ function Validation(){
     <!--== Car List Area Start ==-->
 	<section  style="padding-bottom: 0px;padding-top: 25px;">
 	<div class="container">
-			
+			<div class="sort" style="text-align: left; float:left;">	
+				<h6>Showing '<?php echo count($cars); ?>' Matching Cars</h6>
+			</div>			
 			
 		
 			<div class="sort" style="text-align: right;">	
@@ -491,7 +493,7 @@ function Validation(){
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="<?php echo base_url('/car?id='.$car->carid); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
+                                                <h2><a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.$location.'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
                                                 <h5>$<?php echo $car->rent; ?> AUD / PER DAY</h5>
                                                 <p><?php echo $car->description; ?></p>
                                                 <ul class="car-info-list">
@@ -500,7 +502,7 @@ function Validation(){
                                                     <li><?php echo $car->transmission; ?></li>
                                                 </ul>
                                              
-                                                <a href="<?php echo base_url('/car?id='.$car->carid); ?>" class="rent-btn">View Car</a>
+                                                <a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.$location.'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>" class="rent-btn">View Car</a>
                                             </div>
                                         </div>
                                     </div>
