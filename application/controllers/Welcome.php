@@ -514,7 +514,7 @@ class Welcome extends CI_Controller {
 
 								);
 			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
-				$data['errorCarID'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$data['errorCarID'] = "Car_Id should be 8 character long";
 				$status=false;
 			}
 
