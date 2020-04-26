@@ -29,7 +29,7 @@ $this->load->view('inc/header', $data);
         <div class="container">
             <div class="row">
                 <!-- Car List Content Start -->
-                <div class="col-lg-12">
+                <div class="col-lg-9">
                     <div class="car-details-content">
                         <h2> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?>  <span class="book"><button class="book-now-btn">Book Now</button></span></h2>
                             <div class="single-car-preview">
