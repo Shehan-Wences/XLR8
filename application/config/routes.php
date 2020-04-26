@@ -62,6 +62,6 @@ $route['passwordchange'] = 'welcome/passwordchange';
 $route['addcar'] = 'welcome/addcar';
 $route['car'] = 'welcome/cardetails';
 $route['admin'] = 'welcome/admin';
-
+$route['booking'] = 'welcome/booking';
 $route['404_override'] = 'welcome/error404';
 

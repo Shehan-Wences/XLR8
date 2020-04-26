@@ -619,7 +619,15 @@ class Welcome extends CI_Controller {
 	
 	public function booking()
 	{ 
-	
+		//$date1 = "2020-04-20";
+		//$date2 = "2020-04-26";
+
+		//$diff = abs(strtotime($date2) - strtotime($date1));
+		//echo ($diff/(60*60*24))+1;
+		$data = array();
+		$data['id']=$_GET['id'];
+		echo json_encode($data);
+  
 	
 	}
 	

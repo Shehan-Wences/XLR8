@@ -8,12 +8,92 @@ $this->load->view('inc/header', $data);
 $(document).ready(function(){
 
 	$( "#booknow" ).click(function() {
+		bookingtotal();
 		$("#myModal").css('display','block');
 	});
 	$( "#dialogclose" ).click(function() {
 		$("#myModal").css('display','none');
+		$("#bookingsuccessful").css('display','none');
+		$("#bookingerror").css('display','none');
 	});
 	
+	$("#startDate2").change(function(){
+		if(!isNaN(new Date($('#startDate2').val()).valueOf())==false){
+			$('#total').text('invalid date');
+		
+		}else{
+			bookingtotal();
+		}
+		$("#bookingsuccessful").css('display','none');
+		$("#bookingerror").css('display','none');
+	});
+	
+	$("#plocation").change(function(){
+		$("#bookingsuccessful").css('display','none');
+		$("#bookingerror").css('display','none');
+	});
+	$("#dlocation").change(function(){
+		$("#bookingsuccessful").css('display','none');
+		$("#bookingerror").css('display','none');
+	});
+	
+	$("#endDate2").change(function(){
+		if(!isNaN(new Date($('#endDate2').val()).valueOf())==false){
+			$('#total').text('invalid date');
+		
+		}else{
+			bookingtotal();
+		}
+		$("#bookingsuccessful").css('display','none');
+		$("#bookingerror").css('display','none');
+	});
+	
+	$( "#booknpay" ).click(function() {
+		$('#booknpay').text('Loading...');
+		$.ajax({
+			
+			
+			url:"<?php echo base_url('/booking?id=success'); ?>",
+ 			method:"GET",
+			dataType:"json",
+			success:function(data)
+			{
+				$('#booknpay').text('Book & Pay');
+				if(data.id=="success"){
+					$("#bookingsuccessful").css('display','block');
+				}else if(data.id=="fail"){
+					$("#bookingerror").css('display','block');
+				}
+				
+				
+				
+			}
+		});
+	});
+	
+
+	
+	
+	
+	
+	
+	
+	
+	function bookingtotal()
+	{
+		var start = new Date($('#startDate2').val());
+		var end = new Date($('#endDate2').val());
+		var diff = new Date(end - start);
+		var days = diff/1000/60/60/24;
+		var rent=$('#rent').text();
+		
+		if(days+1>0){
+			$('#total').text('Booking Total : '+((days+1)*rent)+' AUD');
+		}else{
+		 $('#total').text('Please Check the dates again');
+		}
+		
+    }
 });
 
 </script>
@@ -50,7 +130,7 @@ $(document).ready(function(){
                         <div class="car-details-info">
                             <h4>Additional Info</h4>
                             <p><?php echo $description; ?></p>
-
+							<p id="rent" style="display:none;"><?php echo $rent; ?></p>
                             <div class="technical-info">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -107,7 +187,8 @@ $(document).ready(function(){
   <!-- Modal content -->
   <div class="modal-content">
     <span id="dialogclose" class="close">&times;</span>
-	<h2 style="text-align:center;"> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?> </h2><br>
+	
+	<h2 style="text-align:center; background-color: #4da4bd; color:black;"> <?php echo $make; ?> <?php echo $model; ?>  <?php echo $year; ?> </h2><br>
     <div class="contact-form">
                         
                             <div class="row">
@@ -153,14 +234,20 @@ $(document).ready(function(){
                             </div>
 
                             <div class="message-input">
-                                <textarea name="review" cols="20" rows="2" placeholder="Message"></textarea>
+                                <textarea style="border: 1px solid #4da4bd;" name="review" cols="20" rows="2" placeholder="Message"></textarea>
                             </div>
-							<br><h4 style="text-align:center;">Booking Total : 0 AUD</h4>
+							<br><h4 id="total" style="text-align:center;">Booking Total : 0 AUD</h4>
                             <div class="input-submit">
-                                <button>Book & Pay</button>
+                                <button id="booknpay" >Book & Pay</button>
                             </div>
                         
       </div>
+	<div id="bookingerror" style="display:none;" class="alert alert-danger">
+		<strong>Error!</strong> Booking can not be made. Vehicle in unavailable in the given period.
+	</div>
+	<div id="bookingsuccessful" style="display:none;" class="alert alert-success">
+		<strong>Successful!</strong> Booking has been made.
+	</div>
   </div>
 
 </div>
