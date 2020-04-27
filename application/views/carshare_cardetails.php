@@ -8,8 +8,20 @@ $this->load->view('inc/header', $data);
 $(document).ready(function(){
 
 	$( "#booknow" ).click(function() {
+		if(<?php echo isset($username)?'true':'false'; ?>){
 		bookingtotal();
 		$("#myModal").css('display','block');
+		}else{
+			<?php $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+					$this->session->set_userdata('url', $actual_link);
+
+			?>
+			alert("You need to Sign in to book a vehicle");
+			window.location.href="<?php echo base_url('/signin?auth=required'); ?>";
+			
+			
+		}
+		
 	});
 	$( "#dialogclose" ).click(function() {
 		$("#myModal").css('display','none');
@@ -26,15 +38,18 @@ $(document).ready(function(){
 		}
 		$("#bookingsuccessful").css('display','none');
 		$("#bookingerror").css('display','none');
+		$('#startDate2').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$("#plocation").change(function(){
 		$("#bookingsuccessful").css('display','none');
 		$("#bookingerror").css('display','none');
+		$('#plocation').css({"border": "1px solid #4da4bd"});
 	});
 	$("#dlocation").change(function(){
 		$("#bookingsuccessful").css('display','none');
 		$("#bookingerror").css('display','none');
+		$('#dlocation').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$("#endDate2").change(function(){
@@ -46,29 +61,75 @@ $(document).ready(function(){
 		}
 		$("#bookingsuccessful").css('display','none');
 		$("#bookingerror").css('display','none');
+		$('#endDate2').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$( "#booknpay" ).click(function() {
-		$('#booknpay').text('Loading...');
-		$.ajax({
+		
+		var status=true;
+		var plocation=$("#plocation").val();
+		var dlocation=$("#dlocation").val();
+		var pdate=$("#startDate2").val();
+		var ddate=$("#endDate2").val();
+		var carid="<?php echo $_GET['id'];?>";
+		
+		
+		var loc = new RegExp('^([0-1]?[0-9]|20|21)$');
+	
+		if (!loc.test(plocation)) {
+			$('#plocation').css({"border": "1.5px solid #ff0000"});
+			status=false;
+			
+		}
+		if (!loc.test(dlocation)) {
+			$('#dlocation').css({"border": "1.5px solid #ff0000"});
+			status=false;
+			
+		}
+		var startdate = new Date(pdate);
+		if(!isNaN(startdate.valueOf())==false){
+			 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+			status=false;
+			
+		}
+		var enddate = new Date(ddate);
+		if(!isNaN(enddate.valueOf())==false){
+			 $('#endDate2').css({"border": "1.5px solid #ff0000"});
+			status=false;
+			
+		}	
+		if(status==true){
+	
+			$('#booknpay').text('Loading...');
+			$('#booknpay').prop('disabled', true);
 			
 			
-			url:"<?php echo base_url('/booking?id=success'); ?>",
- 			method:"GET",
-			dataType:"json",
-			success:function(data)
-			{
-				$('#booknpay').text('Book & Pay');
-				if(data.id=="success"){
-					$("#bookingsuccessful").css('display','block');
-				}else if(data.id=="fail"){
-					$("#bookingerror").css('display','block');
+			$.ajax({
+				
+				
+				url:"<?php echo base_url(); ?>booking?id="+carid+"&plocation="+plocation+"&dlocation="+dlocation+"&pdate="+pdate+"&ddate="+ddate+"&rent="+"<?php echo $rent; ?>" ,
+				method:"GET",
+				dataType:"json",
+				success:function(data)
+				{
+					$('#booknpay').text('Book & Pay');
+					$('#booknpay').prop('disabled', false);
+					if(data.status=="success"){
+						$("#bookingsuccessful").css('display','block');
+						$('#booknpay').css('display', 'none');
+						$('#total').css('display', 'none');
+						
+					}else if(data.status=="fail"){
+						$("#bookingerror").css('display','block');
+						$("#bookingerror").text(data.message);
+					}
+					
+					
+					
 				}
-				
-				
-				
-			}
-		});
+			});
+		
+		}
 	});
 	
 
@@ -85,7 +146,7 @@ $(document).ready(function(){
 		var end = new Date($('#endDate2').val());
 		var diff = new Date(end - start);
 		var days = diff/1000/60/60/24;
-		var rent=$('#rent').text();
+		var rent="<?php echo $rent; ?>";
 		
 		if(days+1>0){
 			$('#total').text('Booking Total : '+((days+1)*rent)+' AUD');

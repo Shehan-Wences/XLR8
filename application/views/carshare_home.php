@@ -5,6 +5,7 @@ $this->load->view('inc/header', $data);
 //echo current_url();
 ?>
 
+
     <!--== Slider Area Start ==-->
     <section id="slider-area">
         <!--== slide Item One ==-->
@@ -29,7 +30,7 @@ $this->load->view('inc/header', $data);
                                 <!--== Pick Up Date ==-->
                                 <div class="pick-up-date book-item">
                                     <h4>PICK-UP DATE:</h4>
-                                    <input name="pdate" id="startDate" value="<?php echo date('m/d/Y'); ?>" placeholder="Pick Up Date" />
+                                    <input type="text" name="pdate" id="startDate" value="<?php echo date('m/d/Y'); ?>" placeholder="Pick Up Date" />
 
                                     <div class="return-car">
                                         <h4>Return DATE:</h4>

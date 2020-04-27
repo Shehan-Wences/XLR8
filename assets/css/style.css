@@ -3267,3 +3267,8 @@ body,
 	
 }
 }
+#booknpay:disabled
+{
+	background-color: lightgray;
+    color: #4da4bd;
+}
