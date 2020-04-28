@@ -32,7 +32,7 @@ $this->load->view('inc/header', $data);
     <td><?php echo $row->Id; ?></td> 
     <td><?php echo $row->DriverL; ?></td> 
     <td><?php echo $row->CreatedDate; ?></td> 
-    <td><a href="#" class="delete_data" id="<?php echo $row->id; ?>">Delete</a></td>  
+    <td><a href="#" class="delete_data" id="<?php echo $row->Id; ?>">Delete</a></td>  
     </tr>
   <?php
     $i++;
