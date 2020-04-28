@@ -2,9 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $data['title'] = ucfirst('Customer detail');
 $this->load->view('inc/header', $data);
-
 ?>
 
+<section id="lgoin-page-wrap" class="section-padding">
 <table width="600" border="1" cellspacing="5" cellpadding="5">
   <tr style="background:#CCC">
     <th>Sr No</th>
@@ -36,5 +36,6 @@ $this->load->view('inc/header', $data);
   }
    ?>
 </table>
+</section>
 
 <?php $this->load->view('inc/footer'); ?>
