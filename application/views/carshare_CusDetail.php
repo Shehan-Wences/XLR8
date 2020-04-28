@@ -21,18 +21,20 @@ $this->load->view('inc/header', $data);
   $i=1;
   foreach($Cus_data->result() as $row)
   {
-    echo "<tr>";
-    echo "<td>".$i."</td>";
-    echo "<td>".$row->Fname."</td>";
-    echo "<td>".$row->Lname."</td>";
-    echo "<td>".$row->Email."</td>";
-    echo "<td>".$row->Phone."</td>";
-    echo "<td>".$row->Status."</td>";
-    echo "<td>".$row->Id."</td>";
-    echo "<td>".$row->DriverL."</td>";
-    echo "<td>".$row->CreatedDate."</td>";
-    echo "<td>" "<a href=# class=delete_data id=.$row->id.>""Delete""</a>""</td>";
-    echo "</tr>";
+    ?>
+    <tr>  
+    <td><?php echo $i; ?></td>  
+    <td><?php echo $row->Fname; ?></td>  
+    <td><?php echo $row->Lname; ?></td>
+    <td><?php echo $row->Email; ?></td> 
+    <td><?php echo $row->Phone; ?></td> 
+    <td><?php echo $row->Status; ?></td>   
+    <td><?php echo $row->Id; ?></td> 
+    <td><?php echo $row->DriverL; ?></td> 
+    <td><?php echo $row->CreatedDate; ?></td> 
+    <td><a href="#" class="delete_data" id="<?php echo $row->id; ?>">Delete</a></td>  
+    </tr>
+  <?php
     $i++;
   }
    ?>
