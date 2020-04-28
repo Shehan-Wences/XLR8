@@ -12,12 +12,9 @@ $(document).ready(function(){
 		bookingtotal();
 		$("#myModal").css('display','block');
 		}else{
-			<?php $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-					$this->session->set_userdata('url', $actual_link);
-
-			?>
+			
 			alert("You need to Sign in to book a vehicle");
-			window.location.href="<?php echo base_url('/signin?auth=required'); ?>";
+			
 			
 			
 		}

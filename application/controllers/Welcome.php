@@ -159,13 +159,9 @@ class Welcome extends CI_Controller {
 
 				$this->session->set_userdata('logged_in', $session_data);
 				$session_array_used = $this->session->userdata('logged_in');
-				if($this->session->userdata('url')){
-					$link= $this->session->userdata('url');
-					$this->session->unset_userdata('url');
-					redirect($link, 'refresh');
-				}else{
+
 					redirect('', 'refresh');
-				}
+			
 				
 			}else{
 				$data['accounterror'] = "Account Status is ".$status.". Please Contact XLR8 Team for more details.";
@@ -671,13 +667,10 @@ class Welcome extends CI_Controller {
 						echo json_encode($data);
 						
 					}else{	
-						
-					/*
+					
 						$delete_data = array('parkingid' => $check[0]->parkingid);
 						$this->carshare_model->delete_data('parking', $delete_data);
-						*/
 						//make booking in booking table
-						/*
 						$add_data = array('userid' => $data['id'],
 										'carid' => $_GET['id'],
 										'bookingstatus' => "New",
@@ -687,8 +680,7 @@ class Welcome extends CI_Controller {
 										'dropoffdate' => $_GET['ddate'],
 										'cost' => $cost);
 						$this->carshare_model->add_data('booking', $add_data);
-						*/
-						/*
+						
 						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
 							//available between today and pickupdate
 							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d'),'enddate' => $_GET['pdate']);
@@ -720,39 +712,11 @@ class Welcome extends CI_Controller {
 							
 						}
 						
-						*/
-						$data['status']="fail";
 						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						if(isset($data['id'])){$a=$data['id'];}else{$a="nope";}
-						if(isset($_GET['id'])){$b=	$_GET['id'];}else{$b=	"nope";}
-						if(isset($_GET['plocation'])){$c=	$_GET['plocation'];}else{$c="nope";}
-						if(isset($_GET['pdate'])){$d=	$_GET['pdate'];}else{$d=	"nope";}
-						if(isset($_GET['dlocation'])){$e=	$_GET['dlocation'];}else{$e=	"nope";}
-						if(isset($_GET['ddate'])){$f=	$_GET['ddate'];}else{$f=	"nope";}
-						if(isset($cost)){$g=$cost;}else{$g=	"nope";}
-						
-						
-						
-						
-						
-						
-						
-
-
-
-										
-						$data['message']=$a.' '.$b.' '.$c.' '.$d.' '.$e.' '.$f.' '.$g;
+						$data['status']="success";
+											
+			
 						echo json_encode($data);
-						
 					}
 					
 				}else{
