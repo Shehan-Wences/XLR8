@@ -741,10 +741,7 @@ class Welcome extends CI_Controller {
 		$this->load->model('carshare_model');
 		$result['Cus_data'] = $this->carshare_model->displayrecords();
 		$this->load->view('carshare_CusDetail',$result);
-	}
-
-	public function admin_deactivate()
-	{  
+ 
 		$Email = $this->uri->segment(3);  
 		$edit_data = array('Status' => 'Deactivated');
 
@@ -753,7 +750,7 @@ class Welcome extends CI_Controller {
 		redirect(base_url() . "welcome/admin_dev");  
     }  
 	
-	public function admin_dev()  
+	public function admin_deactivate()  
     {  
 		$this->cusDetail();  
     }  
