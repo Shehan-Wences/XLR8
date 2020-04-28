@@ -747,13 +747,9 @@ class Welcome extends CI_Controller {
 
 		$this->load->model("carshare_model");  
 		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data); 
-		redirect(base_url() . "welcome/admin_dev");  
+		  
+		$this->load->view('carshare_CusDetail',$result);
+ 
     }  
-	
-	public function admin_deactivate()  
-    {  
-		$this->cusDetail();  
-    }  
-
 	
 }
