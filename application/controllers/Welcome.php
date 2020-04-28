@@ -747,10 +747,9 @@ class Welcome extends CI_Controller {
 		$result['Cus_data'] = $this->carshare_model->displayrecords();
 		$this->load->view('carshare_CusDetail',$result);
  
-		$Email = $this->uri->segment(3);  
+		$Email = $this->uri->segment(2);  
 		$edit_data = array('Status' => 'Deactivated');
 
-		$this->load->model("carshare_model");  
 		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data); 
 		  
 		$this->load->view('carshare_CusDetail',$result);
