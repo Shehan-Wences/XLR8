@@ -26,7 +26,7 @@ $this->load->view('inc/header', $data);
   </tr>
   <?php
   $i=1;
-  foreach($data as $row)
+  foreach($Cus_data as $row)
   {
   echo "<tr>";
   echo "<td>".$i."</td>";

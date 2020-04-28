@@ -739,7 +739,7 @@ class Welcome extends CI_Controller {
 	public function cusDetail()
 	{ 
 		$this->load->model('carshare_model');
-		$result['data'] = $this->carshare_model->displayrecords();
+		$result['Cus_data'] = $this->carshare_model->displayrecords();
 		$this->load->view('carshare_CusDetail',$result);
 	}
 
