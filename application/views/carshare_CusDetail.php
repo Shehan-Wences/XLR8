@@ -4,6 +4,11 @@ $data['title'] = ucfirst('Customer detail');
 $this->load->view('inc/header', $data);
 ?>
 
+<html>   
+<head>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
+</head>  
+<body> 
 <section id="lgoin-page-wrap" class="section-padding">
 <table width="600" border="1" cellspacing="5" cellpadding="5">
   <tr style="background:#CCC">
@@ -16,6 +21,7 @@ $this->load->view('inc/header', $data);
     <th>Id</th>
     <th>DriverL</th>
     <th>Created Date</th>
+    <th>Deactivating the account</th>
   </tr>
   <?php
   $i=1;
@@ -32,13 +38,30 @@ $this->load->view('inc/header', $data);
     <td><?php echo $row->Id; ?></td> 
     <td><?php echo $row->DriverL; ?></td> 
     <td><?php echo $row->CreatedDate; ?></td> 
-    <td><a href="#" class="delete_data" id="<?php echo $row->Id; ?>">Delete</a></td>  
+    <td><a href="#" class="deactivate" id="<?php echo $row->Email; ?>">deactivate</a></td>  
     </tr>
   <?php
     $i++;
   }
    ?>
 </table>
-</section>
+<script>  
+$(document).ready(function(){  
+    $('.deactivate').click(function(){  
+        var id = $(this).attr("id");  
+        if(confirm("Are you sure you want to delete this?"))  
+        {  
+            window.location="<?php echo base_url(); ?>welcome/admin_deactivate/"+id;  
+        }  
+        else  
+        {  
+            return false;  
+        }  
+    });  
+});  
+</script>  
+</section>  
+ </body>  
+ </html>  
 
 <?php $this->load->view('inc/footer'); ?>
