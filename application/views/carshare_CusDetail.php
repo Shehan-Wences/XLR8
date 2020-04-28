@@ -31,7 +31,7 @@ $this->load->view('inc/header', $data);
     echo "<td>".$row->Id."</td>";
     echo "<td>".$row->DriverL."</td>";
     echo "<td>".$row->CreatedDate."</td>";
-    echo "<td>" "<a href=# class=delete_data id=.$row->id.>""Delete""</a>""</td>"
+    echo "<td>" "<a href=# class=delete_data id=.$row->id.>""Delete""</a>""</td>";
     echo "</tr>";
     $i++;
   }
