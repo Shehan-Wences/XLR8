@@ -735,5 +735,12 @@ class Welcome extends CI_Controller {
 		}
 	
 	}
+
+	public function cusDetail()
+	{ 
+		$result['data']=$this->carshare_model->displayrecords();
+		$this->load->view('carshare_CusDetail',$result);
+	}
+
 	
 }
