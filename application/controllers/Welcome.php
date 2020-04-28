@@ -719,9 +719,36 @@ class Welcome extends CI_Controller {
 						}
 						
 						*/
-						$data['status']="success";
-											
-			
+						$data['status']="fail";
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						if(isset($data['id'])){$a=$data['id'];}else{$a="nope";}
+						if(isset($_GET['id'])){$b=	$_GET['id'];}else{$b=	"nope";}
+						if(isset($_GET['plocation'])){$c=	$_GET['plocation'];}else{$c="nope";}
+						if(isset($_GET['pdate'])){$d=	$_GET['pdate'];}else{$d=	"nope";}
+						if(isset($_GET['dlocation'])){$e=	$_GET['dlocation'];}else{$e=	"nope";}
+						if(isset($_GET['ddate'])){$f=	$_GET['ddate'];}else{$f=	"nope";}
+						if(isset($cost)){$g=$cost;}else{$g=	"nope";}
+						
+						
+						
+						
+						
+						
+						
+
+
+
+										
+						$data['message']=;
 						echo json_encode($data);
 						
 					}
