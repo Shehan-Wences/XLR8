@@ -748,7 +748,7 @@ class Welcome extends CI_Controller {
 
 
 										
-						$data['message']=;
+						$data['message']=$a.' '.$b.' '.$c.' '.$d.' '.$e.' '.$f.' '.$g;
 						echo json_encode($data);
 						
 					}
