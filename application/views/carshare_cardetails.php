@@ -151,7 +151,7 @@ $(document).ready(function(){
 		if(days+1>0){
 			$('#total').text('Booking Total : '+((days+1)*rent)+' AUD');
 		}else{
-		 $('#total').text('Please Check the dates again');
+		 $('#total').text('Check the dates again');
 		}
 		
     }

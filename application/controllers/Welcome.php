@@ -671,9 +671,11 @@ class Welcome extends CI_Controller {
 						echo json_encode($data);
 						
 					}else{	
-					
+						
+					/*
 						$delete_data = array('parkingid' => $check[0]->parkingid);
 						$this->carshare_model->delete_data('parking', $delete_data);
+						*/
 						//make booking in booking table
 						$add_data = array('userid' => $data['id'],
 										'carid' => $_GET['id'],
@@ -684,7 +686,7 @@ class Welcome extends CI_Controller {
 										'dropoffdate' => $_GET['ddate'],
 										'cost' => $cost);
 						$this->carshare_model->add_data('booking', $add_data);
-						
+						/*
 						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
 							//available between today and pickupdate
 							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d'),'enddate' => $_GET['pdate']);
@@ -716,11 +718,12 @@ class Welcome extends CI_Controller {
 							
 						}
 						
-						
+						*/
 						$data['status']="success";
 											
 			
 						echo json_encode($data);
+						
 					}
 					
 				}else{
