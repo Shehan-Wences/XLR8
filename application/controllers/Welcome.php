@@ -754,9 +754,9 @@ class Welcome extends CI_Controller {
 		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data); 
 		  
 		$this->load->view('carshare_CusDetail',$result);
-	}else{
-		$this->load->view('error_404', $data);
- 
-    }  
+		}else{
+			$this->load->view('error_404', $data);
+		}  
+    }
 	
 }
