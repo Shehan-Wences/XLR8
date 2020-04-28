@@ -677,6 +677,7 @@ class Welcome extends CI_Controller {
 						$this->carshare_model->delete_data('parking', $delete_data);
 						*/
 						//make booking in booking table
+						/*
 						$add_data = array('userid' => $data['id'],
 										'carid' => $_GET['id'],
 										'bookingstatus' => "New",
@@ -686,6 +687,7 @@ class Welcome extends CI_Controller {
 										'dropoffdate' => $_GET['ddate'],
 										'cost' => $cost);
 						$this->carshare_model->add_data('booking', $add_data);
+						*/
 						/*
 						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
 							//available between today and pickupdate
