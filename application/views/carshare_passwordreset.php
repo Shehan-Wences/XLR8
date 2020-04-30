@@ -33,12 +33,12 @@ $this->load->view('inc/header', $data);
                 			<h3>Forgot your Password ?</h3>
 							<?php if(isset($accounterror)){   ?>
 							<div class="alert alert-danger">
-								<strong>Oops!</strong><?php echo $accounterror;   ?> 
+								<?php echo $accounterror;   ?> 
 							</div>
 							<?php }  ?>
 							<?php if(isset($successmessage)){   ?>
 							<div class="alert alert-success">
-								<strong>Yay!</strong><?php echo $successmessage;   ?> 
+								<?php echo $successmessage;   ?> 
 							</div>
 							<?php }  ?>
 							<form action="<?php echo base_url('/passwordreset'); ?>" method="post" >
@@ -47,7 +47,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<?php if(isset($erroremail)){   ?>
 								<div class="alert alert-danger">
-									<strong>Oops!</strong><?php echo $erroremail;   ?> 
+									<?php echo $erroremail;   ?> 
 								</div>
 								<?php }  ?>
 								<div class="log-btn">
