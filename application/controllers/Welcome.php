@@ -516,8 +516,15 @@ class Welcome extends CI_Controller {
 
 								);
 			
-			
-			$this->carshare_model->add_data('car', $addCar_data);
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6}$/", $_POST['CarID']))
+			{
+				$data['errorCarID'] = "Car_Id should be 6 character long";
+				$status=false;
+			}
+
+			if($status==true){
+				$this->carshare_model->add_data('car', $addCar_data);
+			}
 			
 			
 		}
@@ -742,9 +749,6 @@ class Welcome extends CI_Controller {
 
 		$this->load->model('carshare_model');
 		$data['Cus_data'] = $this->carshare_model->displayrecords();
-		$Email = $_GET['Email'];  
-		$edit_data = array('Status' => 'Deactivated');
-		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data); 
 
 		$this->load->view('carshare_CusDetail',$data);
 		}
@@ -753,6 +757,16 @@ class Welcome extends CI_Controller {
 			$this->load->view('error_404', $data);
 		}  
 
-    }
+	}
+
+	public function admindeactivate()
+	{
+		$this->load->model('carshare_model');
+		$Email = $_GET['Email'];  
+		$edit_data = array('Status' => 'Deactivated');
+		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);	
+
+	}
+	
 	
 }

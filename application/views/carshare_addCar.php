@@ -106,6 +106,15 @@ $this->load->view('inc/header', $data);
 								<div class="log-btn">
 									<button name="add" type="submit"><i class="fa fa-check-square"></i> Add Car</button>
 								</div>
+
+								<div id="bookingerror" style="display:none;" class="alert alert-danger">
+									<strong>Error!</strong> Booking can not be made. Vehicle in unavailable in the given period.
+								</div>
+	
+								<div id="bookingsuccessful" style="display:none;" class="alert alert-success">
+									<strong>Successful!</strong> Booking has been made.
+								</div>
+							
 							</form>
                 		</div>
                 	</div>
