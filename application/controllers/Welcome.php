@@ -515,14 +515,10 @@ class Welcome extends CI_Controller {
 									'imageurl' => $_POST['imgUrl']
 
 								);
-			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
-				$data['errorCarID'] = "Car_Id should be 8 character long";
-				$status=false;
-			}
 			
-			if($status==true){
+			
 			$this->carshare_model->add_data('car', $addCar_data);
-			}
+			
 			
 		}
 		$this->load->view('carshare_addCar', $data);
