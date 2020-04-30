@@ -522,14 +522,21 @@ class Welcome extends CI_Controller {
 				$status=false;
 			}
 
+			if(!preg_match("/^[a-zA-Z0-9]{10,100}$/", $_POST['Description']))
+			{
+				$data['errorDescription'] = "Description should be between 10 t0 100 character long";
+				$status=false;
+			}
+
 			if($status==true){
 				$this->carshare_model->add_data('car', $addCar_data);
+				$data['Successcar'] = "Car added to the database";
 			}
-			
-			
+			else{
+				$data['errorCar'] = "Failed to add the car to the databse";
+			}
 		}
 		$this->load->view('carshare_addCar', $data);
-
 		}else{
 			redirect('', 'refresh');
 		}

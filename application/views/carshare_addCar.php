@@ -45,6 +45,20 @@ $this->load->view('inc/header', $data);
             <div class="row">
                 <div class="col-lg-5 col-md-8 m-auto">
                 	<div class="login-page-content">
+
+					<?php if(isset($Successcar)){   ?>
+						<div class="alert alert-success">
+						<?php echo $Successcar;   ?> 
+						</div>
+						<?php }  ?>
+
+					<?php if(isset($errorCar)){   ?>
+						<div class="alert alert-danger">
+						<?php echo $errorCar;   ?> 
+						</div>
+						<?php }  ?>
+
+
                 		<div class="login-form">
                 			<h3>Add Car</h3>
 							<form action="<?php echo base_url('/addcar'); ?>" method="post" >
@@ -57,6 +71,11 @@ $this->load->view('inc/header', $data);
 									<?php }  ?>
 								             
     							<input name="Description" type="text" placeholder="Enter Car Descripition" required> 
+									<?php if(isset($errorDescription)){   ?>
+										<div class="alert alert-danger">
+											<?php echo $errorDescription;   ?> 
+										</div>
+									<?php }  ?>
 							
 								<div class="row">
 									<div class="col-md-6">
@@ -110,14 +129,6 @@ $this->load->view('inc/header', $data);
 								
 								<div class="log-btn">
 									<button name="add" type="submit"><i class="fa fa-check-square"></i> Add Car</button>
-								</div>
-
-								<div id="bookingerror" style="display:none;" class="alert alert-danger">
-									<strong>Error!</strong> Booking can not be made. Vehicle in unavailable in the given period.
-								</div>
-	
-								<div id="bookingsuccessful" style="display:none;" class="alert alert-success">
-									<strong>Successful!</strong> Booking has been made.
 								</div>
 							
 							</form>
