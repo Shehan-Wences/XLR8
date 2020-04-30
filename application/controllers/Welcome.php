@@ -516,7 +516,7 @@ class Welcome extends CI_Controller {
 
 								);
 			
-			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6}$/", $_POST['CarID']))
+			if(!preg_match("/^[a-zA-Z0-9]{6}$/", $_POST['CarID']))
 			{
 				$data['errorCarID'] = "Car_Id should be 6 character long";
 				$status=false;
