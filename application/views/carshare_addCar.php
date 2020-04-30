@@ -52,7 +52,7 @@ $this->load->view('inc/header', $data);
 							   	<input name="CarID" type="text" placeholder="Enter CarID" required>
 								   <?php if(isset($errorCarID)){   ?>
 										<div class="alert alert-danger">
-											<strong>Oops!</strong><?php echo $errorCarID;   ?> 
+											<?php echo $errorCarID;   ?> 
 										</div>
 									<?php }  ?>
 								   

@@ -738,8 +738,9 @@ class Welcome extends CI_Controller {
 
 	public function cusDetail()
 	{ 
+		$data = array();
+		
 		if($this->session->userdata('admin')){
-			$data = array();
 			$status=true;
 			$data['admin'] = $this->session->userdata('admin');
 
@@ -755,7 +756,7 @@ class Welcome extends CI_Controller {
 		else{
 			$this->load->view('error_404', $data);
 		}  
-		
+
     }
 	
 }

@@ -33,7 +33,7 @@ $this->load->view('inc/header', $data);
                 			<h3>Welcome Back!</h3>
 							<?php if(isset($accounterror)){   ?>
 							<div class="alert alert-danger">
-								<strong>Oops!</strong><?php echo $accounterror;   ?> 
+								<?php echo $accounterror;   ?> 
 							</div>
 							<?php }  ?>
 							<form action="<?php echo base_url('/signin'); ?>" method="post" >
