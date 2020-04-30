@@ -51,7 +51,7 @@ $(document).ready(function(){
         var id = $(this).attr("id");  
         if(confirm("Are you sure you want to delete this?"))  
         {  
-            window.location="<?php echo base_url(); ?>/cusdet/"+id;  
+            window.location="<?php echo base_url(); ?>/car?Email="+id;  
         }  
         else  
         {  
