@@ -772,7 +772,7 @@ class Welcome extends CI_Controller {
 		$Email = $_GET['Email'];  
 		$edit_data = array('Status' => 'Deactivated');
 		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);	
-		$this->cusDetail()
+		$this->cusDetail();
 
 	}
 	
