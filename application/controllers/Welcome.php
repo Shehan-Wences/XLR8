@@ -757,8 +757,11 @@ class Welcome extends CI_Controller {
 		$this->load->model('carshare_model');
 		$data['Cus_data'] = $this->carshare_model->displayrecords();
 
-		$edit_data = array('Status' => 'Deactivated');
-		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+		if(isset($_GET['Email'])){
+			$Email = $_GET['Email'];  
+			$edit_data = array('Status' => 'Deactivated');
+			$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+		}
 
 		$this->load->view('carshare_CusDetail',$data);
 		}
@@ -769,13 +772,6 @@ class Welcome extends CI_Controller {
 
 	}
 
-	public function admindeactivate()
-	{
-		$this->load->model('carshare_model');
-		$Email = $_GET['Email'];  	
-		$this->cusDetail();
 
-	}
-	
 	
 }
