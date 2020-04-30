@@ -175,7 +175,7 @@ $this->load->view('inc/header', $data);
                     <div class="testimonial-content">
                         <!--== Single Testimoial Start ==-->
                         <div class="single-testimonial">
-                            <p>Our family car broke down last minute and XLR8 was conveniently available for us to rent for our upcoming family holiday Would highly recommend!</p>
+                            <p>Our family car broke down last minute and XLR8 was conveniently available for us to rent for our upcoming family holiday. Would highly recommend!</p>
                             <h3>Fatima Pratel</h3>
                             <div class="client-logo">
                                 <img src="assets/img/client/client-pic-1.jpg" alt="JSOFT">
@@ -195,7 +195,7 @@ $this->load->view('inc/header', $data);
 
                         <!--== Single Testimoial Start ==-->
                         <div class="single-testimonial">
-                            <p>Booking with XLR8 was the best decision I've made. Renting a Van through them helped me save money while moving houses. The van was spacious and was able to fit majority of my big furnitures! It only costed me $50 which is a lot cheaper if you were to hire a truck.</p>
+                            <p>Booking with XLR8 was the best decision I've made. I rented a van through them, which in fact helped me save money while moving houses. The van was spacious and was able to fit majority of my larger furnitures! It only costed me $50 (which is a lot cheaper if you were to hire a truck).</p>
                             <h3>Achol Deng</h3>
                             <div class="client-logo">
                                 <img src="assets/img/client/client-pic-2.jpg" alt="JSOFT">
