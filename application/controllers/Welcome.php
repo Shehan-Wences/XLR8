@@ -753,18 +753,16 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('admin')){
 			$status=true;
 			$data['admin'] = $this->session->userdata('admin');
+			$this->load->model('carshare_model');
+			
+			if(isset($_GET['Email'])){
+				$Email = $_GET['Email'];  
+				$edit_data = array('Status' => 'Deactivated');
+				$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+			}
 
-		$this->load->model('carshare_model');
-		$data['Cus_data'] = $this->carshare_model->displayrecords();
-
-		if(isset($_GET['Email'])){
-			$Email = $_GET['Email'];  
-			$edit_data = array('Status' => 'Deactivated');
-			$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
-			$this->cusDetail();
-		}
-
-		$this->load->view('carshare_CusDetail',$data);
+			$data['Cus_data'] = $this->carshare_model->displayrecords();
+			$this->load->view('carshare_CusDetail',$data);
 		}
 		
 		else{
