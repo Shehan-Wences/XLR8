@@ -50,13 +50,7 @@ $this->load->view('inc/header', $data);
 							<form action="<?php echo base_url('/addcar'); ?>" method="post" >
                                
 							   	<input name="CarID" type="text" placeholder="Enter CarID" required>
-								   <?php if(isset($errorCarID)){   ?>
-										<div class="alert alert-danger">
-											<?php echo $errorCarID;   ?> 
-										</div>
-									<?php }  ?>
-								   
-						                    
+								             
     							<input name="Description" type="text" placeholder="Enter Car Descripition" required> 
 							
 								<div class="row">
