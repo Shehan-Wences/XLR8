@@ -28,6 +28,7 @@
         // Home Page 0ne Date Picker JS
         var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
         $('#startDate').datepicker({
+			showButtonPanel: true,
             uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
             minDate: today,
@@ -37,6 +38,7 @@
         });
 
         $('#endDate').datepicker({
+			showButtonPanel: true,
             uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
             minDate: function () {

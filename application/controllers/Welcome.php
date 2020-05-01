@@ -16,14 +16,14 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
-   	
+		$this->session->unset_userdata('url');
 			
 		$this->load->model('carshare_model');
         $data['location']='1';	
-		$numberofcars=$this->carshare_model->cars();
+		$numberofcars = $this->carshare_model->cars();
 		$data['numofcars']= (round($numberofcars/10)-1) * 10;
 		$data['locations'] = $this->carshare_model->locations();
 
@@ -38,10 +38,10 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
- 
+		$this->session->unset_userdata('url');
  		$this->load->view('error_404', $data);
 	}
 	
@@ -50,15 +50,16 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$type='';
 		$make='';
+		$price='';
 		$this->load->model('carshare_model');
         
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
-		
+		$this->session->unset_userdata('url');
 		$data['locations'] = $this->carshare_model->locations();
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'GET'){
@@ -95,11 +96,18 @@ class Welcome extends CI_Controller {
 		 }else{
 			$fuel = array("Petrol", "Diesel","Hybrid","Electric");
 		 }
+		 if(isset($_GET['sort'])){
+			$price=$_GET['sort'];
+		 }else{
+			$price = "ASC";
+		 }
+		 
 		 $data['cartype']=$type;
 		 $data['carmake']=$make;
 		 $data['cartransmission']=$transmission;
 		 $data['carfuel']=$fuel;
-		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel);
+		 $data['price']=$price;
+		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel,$price);
 		
 		}
 		
@@ -112,10 +120,10 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-		}else{
-			
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
 		}
-
+		$this->session->unset_userdata('url');
  
 
 			
@@ -124,6 +132,8 @@ class Welcome extends CI_Controller {
 	public function signin()
 	{  
 		if($this->session->userdata('logged_in')){
+			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
 			redirect('', 'refresh');
 		}
 		
@@ -144,11 +154,15 @@ class Welcome extends CI_Controller {
 					'email' => $login[0]->Email,
 					'Fname' => $login[0]->Fname,
 					'Lname' => $login[0]->Lname,
+					'Id' => $login[0]->Id,
 				);
 
 				$this->session->set_userdata('logged_in', $session_data);
 				$session_array_used = $this->session->userdata('logged_in');
-				redirect('', 'refresh');
+
+					redirect('', 'refresh');
+			
+				
 			}else{
 				$data['accounterror'] = "Account Status is ".$status.". Please Contact XLR8 Team for more details.";
 			}
@@ -165,7 +179,10 @@ class Welcome extends CI_Controller {
 	{  
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
 		}
+		
 		$status=true;
 		$data = array();
 		
@@ -251,9 +268,15 @@ class Welcome extends CI_Controller {
 	}
 	public function signout()
 	{  
+		if($this->session->userdata('logged_in')){
+			$this->session->unset_userdata('logged_in');
+			redirect('', 'refresh');
+		}else if($this->session->userdata('admin')){
+			$this->session->unset_userdata('admin');
+			redirect('', 'refresh');
+		}
 		
-        $this->session->unset_userdata('logged_in');
-		redirect('', 'refresh');
+       
 	}
 	
 	public function deactivate()
@@ -342,6 +365,10 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect('', 'refresh');
 		}
+				
+	
+		
+		
 	}
 	public function passwordchange()
 	{  
@@ -392,8 +419,10 @@ class Welcome extends CI_Controller {
 		
 		if($this->session->userdata('logged_in')){
 			redirect('', 'refresh');
-
+		}else if($this->session->userdata('admin')){
+			redirect('', 'refresh');
 		}
+		
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') {
 			
 			$this->load->model('carshare_model');
@@ -465,8 +494,12 @@ class Welcome extends CI_Controller {
 
 	public function addCar()
 	{
-		$data = array();
-
+		
+		if($this->session->userdata('admin')){
+			$data = array();
+			$status=true;
+			$data['admin'] = $this->session->userdata('admin');
+		
 		$this->load->model('carshare_model');
 		if (($this->input->server('REQUEST_METHOD')) == 'POST') 
 		{
@@ -482,16 +515,31 @@ class Welcome extends CI_Controller {
 									'imageurl' => $_POST['imgUrl']
 
 								);
-			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
-				$data['errorCarID'] = "Password must contain minimum eight characters, at least one letter and one number";
+			
+			if(!preg_match("/^[a-zA-Z0-9]{6}$/", $_POST['CarID']))
+			{
+				$data['errorCarID'] = "Car_Id should be 6 character long";
 				$status=false;
 			}
 
-			$this->carshare_model->add_data('car', $addCar_data);
-			
+			if(!preg_match("/^[a-zA-Z0-9]{10,100}$/", $_POST['Description']))
+			{
+				$data['errorDescription'] = "Description should be between 10 t0 100 character long";
+				$status=false;
+			}
+
+			if($status==true){
+				$this->carshare_model->add_data('car', $addCar_data);
+				$data['Successcar'] = "Car added to the database";
+			}
+			else{
+				$data['errorCar'] = "Failed to add the car to the databse";
+			}
 		}
 		$this->load->view('carshare_addCar', $data);
-
+		}else{
+			redirect('', 'refresh');
+		}
 	}
 
 
@@ -500,8 +548,27 @@ class Welcome extends CI_Controller {
 	public function cardetails()
 	{
 		$data = array();
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+		}else if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
+		}
+		
+		
 		$this->load->model('carshare_model');
-
+	
+		$data['locations'] = $this->carshare_model->locations();
+		
+		if(isset($_GET['plocation'])){
+			$data['location'] = $_GET['plocation'];
+		}
+		if(isset($_GET['pdate'])){
+			$data['pickup'] = $_GET['pdate'];
+		}
+		if(isset($_GET['ddate'])){
+			$data['dropoff'] = $_GET['ddate'];
+		}
 		if(isset($_GET['id'])){
 		$id = $_GET['id'];
 
@@ -545,31 +612,165 @@ class Welcome extends CI_Controller {
 		
 		$email=$this->input->post('email');
 		$password=$this->input->post('password');
-        $this->load->model('carshare_model');
-        $login = $this->carshare_model->member_login_details($email,$password);
-
-        if (count($login) > 0) {
-            $status=trim($login[0]->Status);
-			if($status == "ACTIVE"){
-				$session_data = array(
-					'email' => $login[0]->Email,
-					'Fname' => $login[0]->Fname,
-					'Lname' => $login[0]->Lname,
-				);
-
-				$this->session->set_userdata('logged_in', $session_data);
-				$session_array_used = $this->session->userdata('logged_in');
-				redirect('', 'refresh');
-			}else{
-				$data['accounterror'] = "Account Status is ".$status.". Please Contact XLR8 Team for more details.";
-			}
+       
+		if($email=="admin" && $password=="1234" ){
 			
-        } else {
+			$session_data = "Admin";
+
+			$this->session->set_userdata('admin', $session_data);
+			
+			redirect('', 'refresh');
+			
+		}else {
+			
             $data['accounterror'] = "Username or Password is invalid.";
 			
         }
 		
 		}
-		$this->load->view('carshare_signin', $data);
+		$this->load->view('carshare_admin', $data);
 	}
+	
+	public function booking()
+	{ 
+		//$date1 = "2020-04-20";
+		//$date2 = "2020-04-26";
+
+		//$diff = abs(strtotime($date2) - strtotime($date1));
+		//echo ($diff/(60*60*24))+1;
+		$data = array();
+		$this->load->model('carshare_model');
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['id']=$session_array_used['Id'];
+			
+			if(!isset($_GET['id'])||!isset($_GET['plocation'])||!isset($_GET['dlocation'])||!isset($_GET['pdate'])||!isset($_GET['ddate'])){
+				$data['status']="fail";
+				$data['message']="Booking CAN NOT be made.Please re-check booking details.";
+				echo json_encode($data);
+			}else{
+				
+				
+				
+				
+				$check=$this->carshare_model->fetch_thecar($_GET['id'],$_GET['plocation'],$_GET['pdate'],$_GET['ddate']);
+				
+				if(!empty($check)){
+					
+					$today=strtotime(date('Y-m-d'));
+					$availabletime = strtotime($check[0]->availabledate);
+					$endtime = strtotime($check[0]->enddate);
+					$ptime = strtotime($_GET['pdate']);
+					$dtime = strtotime($_GET['ddate']);
+					
+					$diff = abs($dtime - $ptime);
+					$cost= $_GET['rent']*(($diff/(60*60*24))+1);
+					
+					if($ptime < $today || $dtime < $today || $ptime > $dtime){
+						
+						
+						$data['status']="fail";
+						$data['message']="Please check the dates again";
+						
+			
+						echo json_encode($data);
+						
+					}else{	
+					
+						$delete_data = array('parkingid' => $check[0]->parkingid);
+						$this->carshare_model->delete_data('parking', $delete_data);
+						//make booking in booking table
+						$add_data = array('userid' => $data['id'],
+										'carid' => $_GET['id'],
+										'bookingstatus' => "New",
+										'pickuplocationid' => $_GET['plocation'],
+										'pickupdate' => $_GET['pdate'],
+										'dropofflocationid' => $_GET['dlocation'],
+										'dropoffdate' => $_GET['ddate'],
+										'cost' => $cost);
+						$this->carshare_model->add_data('booking', $add_data);
+						
+						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
+							//available between today and pickupdate
+							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d'),'enddate' => $_GET['pdate']);
+							$this->carshare_model->add_data('parking', $add_data);
+						}
+						if($ptime>$today && $ptime>$availabletime && $today<$availabletime){
+							//available available time and pickup
+							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => $check[0]->availabledate,'enddate' => $_GET['pdate']);
+							$this->carshare_model->add_data('parking', $add_data);
+						}
+						if($ptime>$today && $ptime>$availabletime && $today>$availabletime){
+							//available today and pickup
+							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d'),'enddate' => $_GET['pdate']);
+							$this->carshare_model->add_data('parking', $add_data);
+						}
+						if($dtime==$endtime ){
+							//available between drop off and 1 year ahead if another parking is not available
+							//do nothing for now
+						}
+						if($dtime<$endtime ){
+							//available between drop and enddate                                     
+							$add_data = array('carid' => $_GET['id'],
+											'status' => "Available",
+											'availablelocationid' => $_GET['dlocation'],
+											'availabledate' => $_GET['ddate'],
+											'enddate' => $check[0]->enddate);
+							
+							$this->carshare_model->add_data('parking', $add_data);
+							
+						}
+						
+						
+						$data['status']="success";
+											
+			
+						echo json_encode($data);
+					}
+					
+				}else{
+					$data['status']="fail";
+					$data['message']="We are unable to make the booking.Vehicle is unavailable during this period.";
+					echo json_encode($data);
+				}
+				
+				
+				
+			}
+		}else{
+			$data['status']="fail";
+			$data['message']="Please Sign in to make a booking";
+			echo json_encode($data);
+		}
+	
+	}
+
+	public function cusDetail()
+	{ 
+		$data = array();
+		
+		if($this->session->userdata('admin')){
+			$status=true;
+			$data['admin'] = $this->session->userdata('admin');
+			$this->load->model('carshare_model');
+			
+			if(isset($_GET['Email'])){
+				$Email = $_GET['Email'];  
+				$edit_data = array('Status' => 'Deactivated');
+				$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+			}
+
+			$data['Cus_data'] = $this->carshare_model->displayrecords();
+			$this->load->view('carshare_CusDetail',$data);
+		}
+		
+		else{
+			$this->load->view('error_404', $data);
+		}  
+
+	}
+
+
+	
 }

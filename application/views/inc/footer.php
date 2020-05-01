@@ -97,8 +97,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!--== Scroll Top Area End ==-->
 
     <!--=======================Javascript============================-->
-    <!--=== Jquery Min Js ===-->
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    
     <!--=== Jquery Migrate Min Js ===-->
     <script src="assets/js/jquery-migrate.min.js"></script>
     <!--=== Popper Min Js ===-->

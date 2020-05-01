@@ -76,6 +76,7 @@ class carshare_model extends CI_Model {
         $this->db->select('Email');
         $this->db->select('Fname');
 		$this->db->select('Lname');
+		$this->db->select('Id');
         $this->db->select('Password');
 		$this->db->select('Status');
         $this->db->from('customer');
@@ -116,7 +117,7 @@ class carshare_model extends CI_Model {
         return $query->num_rows();
     }
 	
-	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel)
+	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel,$sort)
 	{
 
 		if($type != null){
@@ -202,7 +203,7 @@ class carshare_model extends CI_Model {
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);
 		$this->db->where('parking.availablelocationid ', $plocation);
-		$this->db->order_by("rent ASC");
+		$this->db->order_by("rent ".$sort);
 		 
 		 		
 		
@@ -213,11 +214,44 @@ class carshare_model extends CI_Model {
             $data[] = $open_info;
         }
         return $data;
- }
+	}
  
+	function fetch_thecar($carid,$plocation,$pdate,$ddate)
+	{
+		
+		
+		$data = array();	
+		
+		
+        $this->db->select('parking.parkingid');
+		$this->db->select('parking.availabledate');
+		$this->db->select('parking.enddate');
+        $this->db->from('parking');
+       	
+		
+		
+		
+		$this->db->where('parking.availabledate <=', $pdate);
+		$this->db->where('parking.enddate  >=', $ddate);
+		$this->db->where('parking.availablelocationid ', $plocation);
+		$this->db->where('parking.carid ', $carid);
+	
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
+	
+	function displayrecords()
+	{
+		$query = $this->db->get("customer");
+		return $query;
+	}
  
- 
- 
+
  
 }
 ?>

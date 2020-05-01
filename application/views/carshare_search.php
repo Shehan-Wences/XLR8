@@ -3,64 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $data['title'] = ucfirst('search');
 $this->load->view('inc/header', $data);
 ?>
-
-<!--== CSS Code to merge to range slider ==-->
-<style>
-    .selector {
-    position: relative;
-    width: 100%;
-    margin: 0 auto 20px;
-    height: 35px;
-    text-align: center;
-    }
-
-    .selector input {
-    pointer-events: none;
-    position: absolute;
-    left: 0;
-    top: 15px;
-    width: 100%;
-    outline: none;
-    height: 18px;
-    margin: 0;
-    padding: 0;
-    border-radius: 8px;
-    }
-
-    .selector input::-webkit-slider-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 1;
-    outline: 0;
-    height: 24px;
-    widows: 24px;
-    border-radius: 12px;
-    background-color: white;
-    border: 2px solid black;
-    -webkit-appearance: none;
-    }
-
-    .selector input::-moz-range-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 1;
-    outline: 0;
-    height: 24px;
-    widows: 24px;
-    border-radius: 12px;
-    background-color: white;
-    border: 2px solid black;
-    -moz-appearance: none;
-    }
-
-    input::-moz-range-track {
-    background: #ccc;
-    }
-	
-	
-	
-	
-</style>
 <script>
 $(document).ready(function(){
 	
@@ -68,6 +10,7 @@ $(document).ready(function(){
 	var make='';
 	var transmission='';
 	var fuel='';
+	var price='';
 	
 	function load_search_data()
 	{
@@ -141,6 +84,9 @@ $(document).ready(function(){
 	fuel = JSON.stringify(fuelvalues);
 	fuel = encodeURIComponent(fuel);
 	$("input[name=fuelstring]").val(fuel);
+	
+	price =$("select[name=price]").find(":selected").val();
+	$("input[name=sort]").val(price);
 		
 	if(status==true){
 			
@@ -151,7 +97,7 @@ $(document).ready(function(){
 			$("#searchform").prepend($("input[name=makestring]"));
 			$("#searchform").prepend($("input[name=transmissionstring]"));
 			$("#searchform").prepend($("input[name=fuelstring]"));
-			
+			$("#searchform").prepend($("input[name=sort]"));
 			$("#searchform").submit();
 			
 		
@@ -227,7 +173,14 @@ $(document).ready(function(){
 		
 
 	});
-	
+	$("select[name=price]").on('change', function() {
+		if(this.value != "ASC" && this.value != "DESC"){
+			alert( "There seems to be an error! Please reload the page" );
+		}else{
+			load_search_data();
+		}
+		
+	});
 	
 });
 
@@ -332,11 +285,11 @@ function Validation(){
                                 </select>
                             </div>
 
-                            <div class="pick-date bookinput-item">
+                            <div class="bookinput-item">
                                 <input name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
                             </div>
 
-                            <div class="retern-date bookinput-item">
+                            <div class="bookinput-item">
                                 <input name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                             </div>
 
@@ -355,7 +308,28 @@ function Validation(){
 
     <!--== What We Do Area Start ==-->
     <!--== Car List Area Start ==-->
-    <section id="car-list-area" class="section-padding">
+	<section  style="padding-bottom: 0px;padding-top: 25px;">
+	<div class="container">
+			<div class="sort" style="text-align: left; float:left;">	
+				<h6>Showing '<?php echo count($cars); ?>' Matching Cars</h6>
+			</div>			
+			
+		
+			<div class="sort" style="text-align: right;">	
+					<label for="sort">Sort by:</label>
+					<select id="sort" name="price" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
+						
+							<option <?php if(isset($price)){ if($price=="ASC"){ echo "selected"; }  }else{ echo "selected";} ?> value="ASC"> Price Low to High</option>
+							<option <?php if(isset($price)){ if($price=="DESC"){ echo "selected"; }  }?> value="DESC">Price High to Low</option>
+					</select>
+					<input type="hidden" name="sort"  />		
+			</div>					
+		</div>
+	</section>
+    <section id="car-list-area" style="padding: 25px 0;">
+	
+		
+	
         <div class="container">
             <div class="row">
                 <!-- Sidebar Area Start -->
@@ -519,7 +493,7 @@ function Validation(){
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="<?php echo base_url('/car?id='.$car->carid); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
+                                                <h2><a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.$location.'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
                                                 <h5>$<?php echo $car->rent; ?> AUD / PER DAY</h5>
                                                 <p><?php echo $car->description; ?></p>
                                                 <ul class="car-info-list">
@@ -528,7 +502,7 @@ function Validation(){
                                                     <li><?php echo $car->transmission; ?></li>
                                                 </ul>
                                              
-                                                <a href="<?php echo base_url('/car?id='.$car->carid); ?>" class="rent-btn">View Car</a>
+                                                <a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.$location.'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>" class="rent-btn">View Car</a>
                                             </div>
                                         </div>
                                     </div>
