@@ -22,7 +22,14 @@ $this->load->view('inc/header', $data);
         </div>
     </section>
     <!--== Page Title Area End ==-->
-
+	<br>
+							<?php if(isset($auth)){   ?>
+							<div class="container">
+							<div class="alert alert-danger col-lg-4 col-md-6 m-auto" style="text-align:center;">
+								<?php echo $auth;   ?> 
+							</div>
+							</div>
+							<?php }  ?>
     <!--== Login Page Content Start ==-->
     <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">

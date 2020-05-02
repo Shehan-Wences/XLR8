@@ -139,6 +139,9 @@ class Welcome extends CI_Controller {
 		
 		$data = array();
 		
+		if(isset($_GET['auth'])){
+			$data['auth']="Please Signin to continue with the booking.";
+		}
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
 		
@@ -154,14 +157,17 @@ class Welcome extends CI_Controller {
 					'email' => $login[0]->Email,
 					'Fname' => $login[0]->Fname,
 					'Lname' => $login[0]->Lname,
-					'Id' => $login[0]->Id,
+					'Id' => $login[0]->Id
 				);
 
 				$this->session->set_userdata('logged_in', $session_data);
 				$session_array_used = $this->session->userdata('logged_in');
 
+				if($this->session->userdata('cart')){
+					redirect(base_url('/payment'), 'refresh');
+				}else{	
 					redirect('', 'refresh');
-			
+				}
 				
 			}else{
 				$data['accounterror'] = "Account Status is ".$status.". Please Contact XLR8 Team for more details.";
@@ -270,6 +276,7 @@ class Welcome extends CI_Controller {
 	{  
 		if($this->session->userdata('logged_in')){
 			$this->session->unset_userdata('logged_in');
+			$this->session->unset_userdata('cart');
 			redirect('', 'refresh');
 		}else if($this->session->userdata('admin')){
 			$this->session->unset_userdata('admin');
@@ -633,17 +640,10 @@ class Welcome extends CI_Controller {
 	
 	public function booking()
 	{ 
-		//$date1 = "2020-04-20";
-		//$date2 = "2020-04-26";
 
-		//$diff = abs(strtotime($date2) - strtotime($date1));
-		//echo ($diff/(60*60*24))+1;
 		$data = array();
 		$this->load->model('carshare_model');
-		if($this->session->userdata('logged_in')){
-			$session_array_used = $this->session->userdata('logged_in');
-			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
-			$data['id']=$session_array_used['Id'];
+		
 			
 			if(!isset($_GET['id'])||!isset($_GET['plocation'])||!isset($_GET['dlocation'])||!isset($_GET['pdate'])||!isset($_GET['ddate'])){
 				$data['status']="fail";
@@ -681,8 +681,22 @@ class Welcome extends CI_Controller {
 			
 						echo json_encode($data);
 						
-					}else{	
-					
+					}else{
+						
+						$cart = array(
+							'carid' => $_GET['id'],
+							'plocation' => $_GET['plocation'],
+							'dlocation' => $_GET['dlocation'],
+							'pdate' => $_GET['pdate'],
+							'ddate' => $_GET['ddate'],
+							'rent' => $_GET['rent']
+						);
+
+						$this->session->set_userdata('cart', $cart);
+						
+						
+	
+					/*
 						$delete_data = array('parkingid' => $check[0]->parkingid);
 						$this->carshare_model->delete_data('parking', $delete_data);
 						//make booking in booking table
@@ -732,6 +746,9 @@ class Welcome extends CI_Controller {
 											
 			
 						echo json_encode($data);
+						*/
+						$data['status']="success";
+						echo json_encode($data);
 					}
 					
 				}else{
@@ -743,11 +760,7 @@ class Welcome extends CI_Controller {
 				
 				
 			}
-		}else{
-			$data['status']="fail";
-			$data['message']="Please Sign in to make a booking";
-			echo json_encode($data);
-		}
+		
 	
 	}
 
@@ -775,7 +788,27 @@ class Welcome extends CI_Controller {
 		}  
 
 	}
+	public function payment()
+	{ 
+		$data = array();
+		
+		if($this->session->userdata('logged_in') && $this->session->userdata('cart')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['Email'] = $session_array_used['email'];
+			$data['id'] = $session_array_used['Id'];
+			$data['cart'] = $this->session->userdata('cart');
+		}else{
+			redirect('', 'refresh');
+		}
+		
+		
+		print_r($data['cart']);
+		print_r($data['username']);
+		print_r($data['id']);
 
+
+	}
 
 	
 }

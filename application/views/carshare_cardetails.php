@@ -12,22 +12,13 @@ $(document).ready(function(){
     jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
 	
 	$( "#booknow" ).click(function() {
-		if(<?php echo isset($username)?'true':'false'; ?>){
 		bookingtotal();
 		$("#myModal").css('display','block');
-		}else{
-			
-			alert("You need to Sign in to book a vehicle");
-			//bookingtotal();
-			//$("#myModal").css('display','block');
-			
-			
-		}
 		
 	});
 	$( "#dialogclose" ).click(function() {
 		$("#myModal").css('display','none');
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 	});
 	
@@ -38,19 +29,19 @@ $(document).ready(function(){
 		}else{
 			bookingtotal();
 		}
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 		$('#search-from-date').css({"border": "1px solid #4da4bd"});
 		$('#search-to-date').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$("#plocation").change(function(){
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 		$('#plocation').css({"border": "1px solid #4da4bd"});
 	});
 	$("#dlocation").change(function(){
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 		$('#dlocation').css({"border": "1px solid #4da4bd"});
 	});
@@ -62,7 +53,7 @@ $(document).ready(function(){
 		}else{
 			bookingtotal();
 		}
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 		$('#search-to-date').css({"border": "1px solid #4da4bd"});
 		$('#search-from-date').css({"border": "1px solid #4da4bd"});
@@ -115,7 +106,7 @@ $(document).ready(function(){
 		}	
 		if(status==true){
 	
-			$('#booknpay').text('Loading...');
+			$('#booknpay').text('Checking...');
 			$('#booknpay').prop('disabled', true);
 			
 			
@@ -129,15 +120,28 @@ $(document).ready(function(){
 				{
 					$('#booknpay').text('Book & Pay');
 					$('#booknpay').prop('disabled', false);
+					
 					if(data.status=="success"){
-						$("#bookingsuccessful").css('display','block');
-						$('#booknpay').css('display', 'none');
-						$('#total').css('display', 'none');
+						
+						
+						
+						if(<?php echo isset($username)?'true':'false'; ?>){
+							
+							window.location.href = "<?php echo base_url('/payment'); ?>";
+						}else{
+					
+							window.location.href = "<?php echo base_url('/signin?auth=required'); ?>";	
+						
+						}
 						
 					}else if(data.status=="fail"){
 						$("#bookingerror").css('display','block');
 						$("#bookingerror").text(data.message);
 					}
+					
+					
+					
+					
 					
 					
 					
