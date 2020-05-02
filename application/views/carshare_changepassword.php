@@ -38,12 +38,12 @@ $this->load->view('inc/header', $data);
 				<h1 class="font-weight-normal text-center">Change Password</h1>
 				<?php if(isset($passerror)){   ?>
 							<div class="alert alert-danger">
-								<strong>Oops!</strong><?php echo $passerror;   ?> 
+								<?php echo $passerror;   ?> 
 							</div>
 				<?php }  ?>
 				<?php if(isset($passsuccess)){   ?>
 							<div class="alert alert-success">
-								<strong>Yay!</strong><?php echo $passsuccess;   ?> 
+								<?php echo $passsuccess;   ?> 
 							</div>
 				<?php }  ?>
                     <div class="contact-form">

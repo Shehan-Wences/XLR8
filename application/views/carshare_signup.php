@@ -33,12 +33,12 @@ $this->load->view('inc/header', $data);
                 			<h3>Sign Up</h3>
 							<?php if(isset($successmessage)){   ?>
 								<div class="alert alert-success">
-									<strong>Yay!!</strong><?php echo $successmessage;   ?> 
+									<?php echo $successmessage;   ?> 
 								</div>
 							<?php }  ?>
 							<?php if(isset($erroracc)){   ?>
 								<div class="alert alert-danger">
-									<strong>Oops!!</strong><?php echo $erroracc;   ?> 
+									<?php echo $erroracc;   ?> 
 								</div>
 							<?php }  ?>
 							<form action="<?php echo base_url('/signup'); ?>" method="post" >
@@ -55,12 +55,12 @@ $this->load->view('inc/header', $data);
 									</div>
 									<?php if(isset($errorfname)){   ?>
 										<div class="alert alert-danger">
-											<strong>Oops!</strong><?php echo $errorfname;   ?> 
+											<?php echo $errorfname;   ?> 
 										</div>
 									<?php }  ?>
 									<?php if(isset($errorlname)){   ?>
 										<div class="alert alert-danger">
-											<strong>Oops!</strong><?php echo $errorlname;   ?> 
+											<?php echo $errorlname;   ?> 
 										</div>
 									<?php }  ?>
 								</div>
@@ -69,7 +69,7 @@ $this->load->view('inc/header', $data);
 								</div>
 								<?php if(isset($erroremail)){   ?>
 								<div class="alert alert-danger">
-									<strong>Oops!</strong><?php echo $erroremail;   ?> 
+									<?php echo $erroremail;   ?> 
 								</div>
 								<?php }  ?>
 								<!--<div class="password">

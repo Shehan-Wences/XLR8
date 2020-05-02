@@ -98,6 +98,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <ul>
 										<li><a href="<?php echo base_url("/addcar"); ?>">Add Car</a></li>
 
+                                        <li><a href="<?php echo base_url("/customerDetails"); ?>">Customer Details</a></li>
+
                                         <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
                                         
                                     </ul>

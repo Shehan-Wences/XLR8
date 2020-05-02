@@ -14,7 +14,7 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>SIGN IN</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>Sign in to get started on your trip today!</p>
                     </div>
                 </div>
                 <!-- Page Title End -->
@@ -33,7 +33,7 @@ $this->load->view('inc/header', $data);
                 			<h3>Welcome Back!</h3>
 							<?php if(isset($accounterror)){   ?>
 							<div class="alert alert-danger">
-								<strong>Oops!</strong><?php echo $accounterror;   ?> 
+								<?php echo $accounterror;   ?> 
 							</div>
 							<?php }  ?>
 							<form action="<?php echo base_url('/signin'); ?>" method="post" >

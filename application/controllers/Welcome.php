@@ -515,22 +515,35 @@ class Welcome extends CI_Controller {
 									'imageurl' => $_POST['imgUrl']
 
 								);
-			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['CarID'])){
-				$data['errorCarID'] = "Car_Id should be 8 character long";
+			
+			if(!preg_match("/^[a-zA-Z0-9]{6}$/", $_POST['CarID']))
+			{
+				$data['errorCarID'] = "Car_Id should be 6 character long";
 				$status=false;
 			}
-			
-			if($status==true){
-			$this->carshare_model->add_data('car', $addCar_data);
+
+			if(!preg_match("/^[a-zA-Z0-9]{10,100}$/", $_POST['Description']))
+			{
+				$data['errorDescription'] = "Description should be between 10 t0 100 character long";
+				$status=false;
 			}
-			
+
+			if($status==true){
+				$this->carshare_model->add_data('car', $addCar_data);
+				$data['Successcar'] = "Car added to the database";
+			}
+			else{
+				$data['errorCar'] = "Failed to add the car to the databse";
+			}
 		}
 		$this->load->view('carshare_addCar', $data);
-
 		}else{
 			redirect('', 'refresh');
 		}
 	}
+
+
+
 
 	public function cardetails()
 	{
@@ -735,24 +748,29 @@ class Welcome extends CI_Controller {
 
 	public function cusDetail()
 	{ 
-		//if($this->session->userdata('admin')){
-		//	$data = array();
-		//	$status=true;
-		//	$data['admin'] = $this->session->userdata('admin');
+		$data = array();
+		
+		if($this->session->userdata('admin')){
+			$status=true;
+			$data['admin'] = $this->session->userdata('admin');
+			$this->load->model('carshare_model');
+			
+			if(isset($_GET['Email'])){
+				$Email = $_GET['Email'];  
+				$edit_data = array('Status' => 'Deactivated');
+				$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+			}
 
-		$this->load->model('carshare_model');
-		$result['Cus_data'] = $this->carshare_model->displayrecords();
-		$this->load->view('carshare_CusDetail',$result);
- 
-		$Email = $this->uri->segment(2);  
-		$edit_data = array('Status' => 'Deactivated');
+			$data['Cus_data'] = $this->carshare_model->displayrecords();
+			$this->load->view('carshare_CusDetail',$data);
+		}
+		
+		else{
+			$this->load->view('error_404', $data);
+		}  
 
-		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data); 
-		  
-		$this->load->view('carshare_CusDetail',$result);
-		//}else{
-		//	$this->load->view('error_404', $data);
-		//}  
-    }
+	}
+
+
 	
 }
