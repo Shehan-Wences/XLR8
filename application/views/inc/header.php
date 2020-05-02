@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Australia/Melbourne');
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -32,8 +33,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!--=== Responsive CSS ===-->
     <link href="assets/css/responsive.css" rel="stylesheet">
 	<!--=== Jquery Min Js ===-->
+	 <link rel="stylesheet" type="text/css" href="assets/css/jquery.datetimepicker.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+	 <script src="assets/js/jquery.datetimepicker.full.js"></script>
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

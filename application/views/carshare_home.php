@@ -30,11 +30,12 @@ $this->load->view('inc/header', $data);
                                 <!--== Pick Up Date ==-->
                                 <div class="pick-up-date book-item">
                                     <h4>PICK-UP DATE:</h4>
-                                    <input type="text" name="pdate" id="startDate" value="<?php echo date('m/d/Y'); ?>" placeholder="Pick Up Date" />
-
+                                    <!--<input type="text" name="pdate" id="startDate" value="<?php echo date('Y/m/d H:i'); ?>" placeholder="Pick Up Date" />-->
+									<input type="text" name="search-from-date" id="search-from-date" value="<?php echo date('Y/m/d H:i'); ?>" placeholder="Pick Up Date" />
                                     <div class="return-car">
-                                        <h4>Return DATE:</h4>
-                                        <input name="ddate" id="endDate" value="<?php echo date('m/d/Y',strtotime(date('m/d/Y'). ' + 3 days')); ?>" placeholder="Return Date" />
+                                     <h4>Return DATE:</h4>
+                                     <!--   <input name="ddate" id="endDate" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />-->
+									  <input type="text" name="search-to-date" id="search-to-date" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />
                                     </div>
                                 </div>
                                 <!--== Pick Up Location ==-->
@@ -208,7 +209,16 @@ $this->load->view('inc/header', $data);
         </div>
     </section>
     <!--== Testimonials Area End ==-->
+<script>
+            /*jslint browser:true*/
+            /*global jQuery, document*/
 
+            jQuery(document).ready(function () {
+                'use strict';
+
+                jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
+            });
+</script>
     
 
 

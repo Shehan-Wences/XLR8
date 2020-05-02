@@ -64,17 +64,17 @@ class Welcome extends CI_Controller {
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'GET'){
 			
-		
+		date_default_timezone_set('Australia/Melbourne');
 			
-		 if(!isset($_GET['location']) || !isset($_GET['pdate']) || !isset($_GET['ddate'])){
+		 if(!isset($_GET['location']) || !isset($_GET['search-from-date']) || !isset($_GET['search-to-date'])){
 			 $data['location']='1';
-			 $data['pickup']=date('m/d/Y');
-			 $data['dropoff']=date('m/d/Y',strtotime($data['pickup']. ' + 3 days'));
+			 $data['pickup']=date('Y/m/d H:i');
+			 $data['dropoff']=date('Y/m/d H:i',strtotime($data['pickup']. ' + 3 days'));
 			
 		 }else{
 			 $data['location']=$_GET['location'];
-			 $data['pickup']=$_GET['pdate'];
-			 $data['dropoff']=$_GET['ddate'];
+			 $data['pickup']=$_GET['search-from-date'];
+			 $data['dropoff']=$_GET['search-to-date'];
 		 }
 		 if(isset($_GET['typesstring'])){
 			$type=json_decode(urldecode($_GET['typesstring']));
@@ -665,7 +665,12 @@ class Welcome extends CI_Controller {
 					$dtime = strtotime($_GET['ddate']);
 					
 					$diff = abs($dtime - $ptime);
-					$cost= $_GET['rent']*(($diff/(60*60*24))+1);
+					if(($diff/(60*60*24))>1){
+						$cost= $_GET['rent']*($diff/(60*60*24));
+					}else{
+						$cost= $_GET['rent'];
+					}
+					$cost= $_GET['rent']*($diff/(60*60*24));
 					
 					if($ptime < $today || $dtime < $today || $ptime > $dtime){
 						
@@ -693,7 +698,7 @@ class Welcome extends CI_Controller {
 						
 						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
 							//available between today and pickupdate
-							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d'),'enddate' => $_GET['pdate']);
+							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d H:i'),'enddate' => $_GET['pdate']);
 							$this->carshare_model->add_data('parking', $add_data);
 						}
 						if($ptime>$today && $ptime>$availabletime && $today<$availabletime){
@@ -703,7 +708,7 @@ class Welcome extends CI_Controller {
 						}
 						if($ptime>$today && $ptime>$availabletime && $today>$availabletime){
 							//available today and pickup
-							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d'),'enddate' => $_GET['pdate']);
+							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d H:i'),'enddate' => $_GET['pdate']);
 							$this->carshare_model->add_data('parking', $add_data);
 						}
 						if($dtime==$endtime ){

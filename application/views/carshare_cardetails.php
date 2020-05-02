@@ -6,7 +6,11 @@ $this->load->view('inc/header', $data);
 ?>
 <script>
 $(document).ready(function(){
+	
+	'use strict';
 
+    jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
+	
 	$( "#booknow" ).click(function() {
 		if(<?php echo isset($username)?'true':'false'; ?>){
 		bookingtotal();
@@ -14,7 +18,8 @@ $(document).ready(function(){
 		}else{
 			
 			alert("You need to Sign in to book a vehicle");
-			
+			//bookingtotal();
+			//$("#myModal").css('display','block');
 			
 			
 		}
@@ -26,8 +31,8 @@ $(document).ready(function(){
 		$("#bookingerror").css('display','none');
 	});
 	
-	$("#startDate2").change(function(){
-		if(!isNaN(new Date($('#startDate2').val()).valueOf())==false){
+	$("#search-from-date").change(function(){
+		if(!isNaN(new Date($('#search-from-date').val()).valueOf())==false){
 			$('#total').text('invalid date');
 		
 		}else{
@@ -35,7 +40,8 @@ $(document).ready(function(){
 		}
 		$("#bookingsuccessful").css('display','none');
 		$("#bookingerror").css('display','none');
-		$('#startDate2').css({"border": "1px solid #4da4bd"});
+		$('#search-from-date').css({"border": "1px solid #4da4bd"});
+		$('#search-to-date').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$("#plocation").change(function(){
@@ -49,8 +55,8 @@ $(document).ready(function(){
 		$('#dlocation').css({"border": "1px solid #4da4bd"});
 	});
 	
-	$("#endDate2").change(function(){
-		if(!isNaN(new Date($('#endDate2').val()).valueOf())==false){
+	$("#search-to-date").change(function(){
+		if(!isNaN(new Date($('#search-to-date').val()).valueOf())==false){
 			$('#total').text('invalid date');
 		
 		}else{
@@ -58,7 +64,8 @@ $(document).ready(function(){
 		}
 		$("#bookingsuccessful").css('display','none');
 		$("#bookingerror").css('display','none');
-		$('#endDate2').css({"border": "1px solid #4da4bd"});
+		$('#search-to-date').css({"border": "1px solid #4da4bd"});
+		$('#search-from-date').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$( "#booknpay" ).click(function() {
@@ -66,8 +73,8 @@ $(document).ready(function(){
 		var status=true;
 		var plocation=$("#plocation").val();
 		var dlocation=$("#dlocation").val();
-		var pdate=$("#startDate2").val();
-		var ddate=$("#endDate2").val();
+		var pdate=$("#search-from-date").val();
+		var ddate=$("#search-to-date").val();
 		var carid="<?php echo $_GET['id'];?>";
 		
 		
@@ -85,15 +92,26 @@ $(document).ready(function(){
 		}
 		var startdate = new Date(pdate);
 		if(!isNaN(startdate.valueOf())==false){
-			 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+			 $('#search-from-date').css({"border": "1.5px solid #ff0000"});
 			status=false;
 			
 		}
 		var enddate = new Date(ddate);
 		if(!isNaN(enddate.valueOf())==false){
-			 $('#endDate2').css({"border": "1.5px solid #ff0000"});
+			 $('#search-to-date').css({"border": "1.5px solid #ff0000"});
 			status=false;
 			
+		}
+		if(startdate>enddate){
+		  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+		   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		}
+	
+		if(new Date($.now())>startdate){
+			  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+			   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+			status=false;
 		}	
 		if(status==true){
 	
@@ -139,16 +157,18 @@ $(document).ready(function(){
 	
 	function bookingtotal()
 	{
-		var start = new Date($('#startDate2').val());
-		var end = new Date($('#endDate2').val());
+		var start = new Date($('#search-from-date').val());
+		var end = new Date($('#search-to-date').val());
 		var diff = new Date(end - start);
 		var days = diff/1000/60/60/24;
 		var rent="<?php echo $rent; ?>";
 		
-		if(days+1>0){
-			$('#total').text('Booking Total : '+((days+1)*rent)+' AUD');
+		if(days>1){
+			$('#total').text('Booking Total : '+Math.round(((days)*rent))+' AUD');
+		}else if(days>0){
+			$('#total').text('Booking Total : '+(1*rent)+' AUD');
 		}else{
-		 $('#total').text('Check the dates again');
+			 $('#total').text('Check the dates again');
 		}
 		
     }
@@ -278,15 +298,15 @@ $(document).ready(function(){
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input" >
-									<label for="startDate2">Pick up Date</label>
-                                        <input style="border: 1px solid #4da4bd;"  name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
+									<label for="search-from-date">Pick up Date/Time</label>
+                                        <input type="text" name="search-from-date" id="search-from-date" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="subject-input" >
-									<label for="endDate2">Drop Off Date</label>
-                                        <input style="border: 1px solid #4da4bd;"  name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
+									<label for="search-to-date">Drop Off Date/Time</label>
+                                         <input type="text" name="search-to-date" id="search-to-date" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                                     </div>
                                 </div>
                             </div>
