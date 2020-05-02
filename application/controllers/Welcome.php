@@ -689,7 +689,7 @@ class Welcome extends CI_Controller {
 							'dlocation' => $_GET['dlocation'],
 							'pdate' => $_GET['pdate'],
 							'ddate' => $_GET['ddate'],
-							'rent' => $_GET['rent']
+							'rent' => $cost
 						);
 
 						$this->session->set_userdata('cart', $cart);
