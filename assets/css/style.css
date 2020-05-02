@@ -1799,7 +1799,7 @@ body,
 .team-tab-menu li a h5 {
 	font-size: 18px;
 	font-weight: 600;
-	padding-left: 15px;
+	
 	text-transform: capitalize;
 }
 
@@ -3277,4 +3277,9 @@ body,
 {
 	background-color: lightgray;
     color: #4da4bd;
+}
+.booking-p{
+	color: 	black;
+    text-align: center;
+    font-weight: 600;
 }

@@ -799,16 +799,43 @@ class Welcome extends CI_Controller {
 			$data['id'] = $session_array_used['Id'];
 			$data['cart'] = $this->session->userdata('cart');
 		}else{
-			redirect('', 'refresh');
+			//redirect(base_url('/eror404'), 'refresh');
 		}
 		
 		
-		print_r($data['cart']);
-		print_r($data['username']);
-		print_r($data['id']);
+		if(isset($data['cart'])){print_r($data['cart']);}
+		if(isset($data['username'])){print_r($data['username']);}
+		if(isset($data['id'])){print_r($data['id']);}
+			
+		$this->load->view('carshare_payment', $data);
+			
+	}
+	public function invoice()
+	{ 
+		$data = array();
+		
+		
+			
+		$this->load->view('carshare_invoice', $data);
+			
+	}
+	
+	public function customerbookings()
+	{ 
+		$data = array();
+		
+		$this->load->model('carshare_model');
+		if($this->session->userdata('logged_in')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['Email'] = $session_array_used['email'];
+		}else{
+			redirect(base_url('/eror404'), 'refresh');
+		}
+		
+		$this->load->view('carshare_bookings', $data);
 
 
 	}
-
 	
 }
