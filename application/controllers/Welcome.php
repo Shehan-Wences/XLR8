@@ -532,9 +532,6 @@ class Welcome extends CI_Controller {
 		}
 	}
 
-
-
-
 	public function cardetails()
 	{
 		$data = array();
@@ -738,10 +735,10 @@ class Welcome extends CI_Controller {
 
 	public function cusDetail()
 	{ 
-		if($this->session->userdata('admin')){
-			$data = array();
-			$status=true;
-			$data['admin'] = $this->session->userdata('admin');
+		//if($this->session->userdata('admin')){
+		//	$data = array();
+		//	$status=true;
+		//	$data['admin'] = $this->session->userdata('admin');
 
 		$this->load->model('carshare_model');
 		$result['Cus_data'] = $this->carshare_model->displayrecords();
@@ -753,9 +750,9 @@ class Welcome extends CI_Controller {
 		$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data); 
 		  
 		$this->load->view('carshare_CusDetail',$result);
-		}else{
-			$this->load->view('error_404', $data);
-		}  
+		//}else{
+		//	$this->load->view('error_404', $data);
+		//}  
     }
 	
 }
