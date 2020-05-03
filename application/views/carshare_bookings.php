@@ -73,32 +73,29 @@ $this->load->view('inc/header', $data);
                                                     <table style="width: 100%;">
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;">
 														<th>Booking ID</th>
-														<th>Status</th>
+														
 														<th>CAR</th>
 														<th>Pick Up</th>
-														<th>Drop Off</th>
+														<th>date</th>
+														<!-- <th>Drop Off</th> -->
+														<!-- <th>date</th>-->
 														<th>Cost</th>
-														<th>Message</th>
+														<!-- <th>Message</th>-->
 													  </tr>
-													  
-													  <tr>
-														<td>Booking ID</td>
-														<td>Status</td>
-														<td>CAR</td>
-														<td>Pick Up</td>
-														<td>Drop Off</td>
-														<td>Cost</td>
-														<td>Message</td>
-													  </tr>
-													  <tr>
-														<td>Booking ID</td>
-														<td>Status</td>
-														<td>CAR</td>
-														<td>Pick Up</td>
-														<td>Drop Off</td>
-														<td>Cost</td>
-														<td>Message</td>
-													  </tr>
+													 <?php foreach($newbookings as $key=>$new){?>
+														<tr>
+															<td><?php echo $new->bookingid; ?></td>
+															
+															<td><?php echo $new->carid; ?> <?php echo $new->make; ?> <?php echo $new->model; ?> <?php echo $new->year;?></td>
+															<td><?php echo $new->pickuplocation; ?></td>
+															<td><?php echo $new->pickupdate; ?></td>
+															<!--<td><?php echo $new->dropofflocation; ?></td>-->
+															<!--<td><?php echo $new->dropoffdate; ?></td>-->
+															<td><?php echo $new->cost; ?></td>
+															<!--<td><?php echo $new->message; ?>Message</td>-->
+														</tr>
+													<?php } ?>
+											 
 													 
 													</table>
                                                 </div>
