@@ -833,9 +833,11 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
-		$data['newbookings'] = $this->carshare_model->getbookings();
+		$data['newbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'New');
+		$data['currentbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Current');
+		$data['pastbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Done');
+		$data['cancelledbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Cancelled');
 		
-		//print_r($data['newbookings']);
 		
 		$this->load->view('carshare_bookings', $data);
 
