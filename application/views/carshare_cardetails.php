@@ -188,8 +188,7 @@ $(document).ready(function(){
                     <div class="section-title  text-center">
                         <h2>Our Cars</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    </div>
+                     </div>
                 </div>
                 <!-- Page Title End -->
             </div>
