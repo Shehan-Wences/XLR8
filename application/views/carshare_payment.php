@@ -28,8 +28,9 @@ $this->load->view('inc/header', $data);
 					<div class="responsive_tabs">
 						<div id="horizontalTab">
 							<ul class="resp-tabs-list">
-								<li>Credit/Debit </li>
+								<h2>Credit/Debit </h2>
 							</ul>
+							<br>
 							<div class="resp-tabs-container">
 								<!--/tab_one-->
 								<div class="tab1">
