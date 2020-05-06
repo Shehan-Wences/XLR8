@@ -6,6 +6,21 @@ $this->load->view('inc/header', $data);
 ?>
  
  <!DOCTYPE html>
+ <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>Invoice</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+    <br>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -13,11 +28,8 @@ $this->load->view('inc/header', $data);
     <link rel="stylesheet" href="style.css" media="all" />
   </head>
   <body>
-    <header class="clearfix">
-      <div id="logo">
-        <img src="logo.png">
-      </div>
-      <h1>INVOICE 3-2-1</h1>
+   
+     
       <div id="company" class="clearfix">
         <div>XLR8</div>
         <div>45 Collins St, Melbourne<br />  VIC 3000, AU</div>
@@ -65,18 +77,12 @@ $this->load->view('inc/header', $data);
           </tr>
         </tbody>
       </table>
-      <div id="notices">
-        <div>NOTICE:</div>
-        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
-      </div>
     </main>
-    <footer>
-      Invoice was created on a computer and is valid without the signature and seal.
-    </footer>
   </body>
 </html>
  
  
+
  
  
  
