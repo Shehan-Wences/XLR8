@@ -3283,3 +3283,12 @@ body,
     text-align: center;
     font-weight: 600;
 }
+.booktr{
+line-height: 45px;
+}
+
+.booktr:nth-child(odd){
+  background-color: gray;
+  color: #fff;
+  
+}

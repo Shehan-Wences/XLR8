@@ -825,6 +825,7 @@ class Welcome extends CI_Controller {
 		$data = array();
 		
 		$this->load->model('carshare_model');
+		
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
@@ -832,6 +833,11 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
+		$data['newbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'New');
+		$data['currentbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Current');
+		$data['pastbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Done');
+		$data['cancelledbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Cancelled');
+		
 		
 		$this->load->view('carshare_bookings', $data);
 

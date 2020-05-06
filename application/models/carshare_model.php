@@ -251,7 +251,44 @@ class carshare_model extends CI_Model {
 		return $query;
 	}
  
+	
+	function getbookings($id,$status)
+	{
+		$data = array();	
+		$this->db->select('booking.bookingid');
+		$this->db->select('booking.bookingstatus');
+		$this->db->select('pickup.name as pickuplocation');
+		$this->db->select('booking.pickupdate');
+		$this->db->select('drop.name as dropofflocation');
+		$this->db->select('booking.dropoffdate');
+		$this->db->select('booking.carid');
+		$this->db->select('car.make');
+		$this->db->select('car.model');
+		$this->db->select('car.year');
+		$this->db->select('booking.cost');
+		$this->db->select('booking.message');
+		$this->db->from('booking');
+		
+       
+        $this->db->join('location as pickup', 'booking.pickuplocationid=pickup.locationid'); 	
+		$this->db->join('location  as drop', 'booking.dropofflocationid=drop.locationid'); 	
+        $this->db->join('car', 'booking.carid=car.carid'); 	
 
+		
+		$this->db->where('booking.userid', $id);
+		$this->db->where('booking.bookingstatus', $status);
+		$this->db->order_by('booking.pickupdate','ASC');
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+			
+	}
+ 
+ 
  
 }
 ?>
