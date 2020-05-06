@@ -287,8 +287,54 @@ class carshare_model extends CI_Model {
         return $data;
 			
 	}
- 
- 
+	function fetch_availability1($carid,$bstartdate)
+	{
+		
+		
+		$data = array();	
+		
+		
+        $this->db->select('parking.parkingid');
+		$this->db->select('parking.availabledate');
+		$this->db->select('parking.enddate');
+		$this->db->select('parking.availablelocationid');
+		
+        $this->db->from('parking');
+		$this->db->where('parking.enddate', $bstartdate);
+		$this->db->where('parking.carid ', $carid);
+	
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
+	function fetch_availability2($carid,$benddate)
+	{
+		
+		
+		$data = array();	
+		
+		
+        $this->db->select('parking.parkingid');
+		$this->db->select('parking.availabledate');
+		$this->db->select('parking.enddate');
+		$this->db->select('parking.availablelocationid');
+		
+        $this->db->from('parking');
+		$this->db->where('parking.availabledate', $benddate);
+		$this->db->where('parking.carid ', $carid);
+	
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
  
 }
 ?>
