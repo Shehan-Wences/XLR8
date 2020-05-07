@@ -850,59 +850,82 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->model('carshare_model');
 	
-		if(!isset($_GET['id'])||!isset($_GET['bstartdate'])||!isset($_GET['benddate'])||!isset($_GET['bookingid'])){
+		if(!isset($_GET['id'])||!isset($_GET['bookingid'])){
 				$data['status']="fail";
 				$data['message']="There was an error please reload the page and try again.";
 				echo json_encode($data);
 		}else{
-			//do a check for booking before this
-			$beforeavail = $this->carshare_model->fetch_availability1($_GET['id'],$_GET['bstartdate']);
-			$afteravail = $this->carshare_model->fetch_availability2($_GET['id'],$_GET['benddate']);
-			$update_file = array('bookingstatus' => 'Cancelled');
 			
-			if(count($beforeavail)> 0 && count($afteravail)> 0){
-				//new available date.... beforeavail  availabledate to afteravail enddate
-				$delete_data = array('parkingid' => $beforeavail[0]->parkingid);
-				$this->carshare_model->delete_data('parking', $delete_data);
-				$delete_data = array('parkingid' => $afteravail[0]->parkingid);
-				$this->carshare_model->delete_data('parking', $delete_data);
-	
-				$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
+			if($this->session->userdata('logged_in')){
+				
+				$ses= $this->session->userdata('logged_in');
+				
+				$bookingdetails = $this->carshare_model->bookingsearch($_GET['id'],$ses['Id'],$_GET['bookingid']);
+				
+				if(count($bookingdetails) > 0){
+				
+					$beforeavail = $this->carshare_model->fetch_availability1($_GET['id'],$_GET['bstartdate']);
+					$afteravail = $this->carshare_model->fetch_availability2($_GET['id'],$_GET['benddate']);
+					$update_file = array('bookingstatus' => 'Cancelled');
+					
+					if(count($beforeavail)> 0 && count($afteravail)> 0){
+						//new available date.... beforeavail  availabledate to afteravail enddate
+						$delete_data = array('parkingid' => $beforeavail[0]->parkingid);
+						$this->carshare_model->delete_data('parking', $delete_data);
+						$delete_data = array('parkingid' => $afteravail[0]->parkingid);
+						$this->carshare_model->delete_data('parking', $delete_data);
+			
+						$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
+								
+						$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $beforeavail[0]->availablelocationid,'availabledate' => $beforeavail[0]->availabledate,'enddate' => $beforeavail[0]->enddate);
+						$this->carshare_model->add_data('parking', $add_data);
+					}
+					if(count($beforeavail)> 0 && count($afteravail)== 0){
+						//new available date.... beforeavail  availabledate to $_GET['benddate']
+						$delete_data = array('parkingid' => $beforeavail[0]->parkingid);
+						$this->carshare_model->delete_data('parking', $delete_data);
 						
-				$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $beforeavail[0]->availablelocationid,'availabledate' => $beforeavail[0]->availabledate,'enddate' => $beforeavail[0]->enddate);
-				$this->carshare_model->add_data('parking', $add_data);
-			}
-			if(count($beforeavail)> 0 && count($afteravail)== 0){
-				//new available date.... beforeavail  availabledate to $_GET['benddate']
-				$delete_data = array('parkingid' => $beforeavail[0]->parkingid);
-				$this->carshare_model->delete_data('parking', $delete_data);
+						$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
+						
+						$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $beforeavail[0]->availablelocationid,'availabledate' => $beforeavail[0]->availabledate,'enddate' => $bookingdetails[0]->dropoffdate);
+						$this->carshare_model->add_data('parking', $add_data);
+					}
+					if(count($beforeavail)== 0 && count($afteravail)> 0){
+						//new available date.... $_GET['bstartdate'] to afteravail enddate
+						$delete_data = array('parkingid' => $afteravail[0]->parkingid);
+						$this->carshare_model->delete_data('parking', $delete_data);
+						
+						$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
+						
+						$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $afteravail[0]->availablelocationid,'availabledate' => $bookingdetails[0]->pickupdate,'enddate' => $afteravail[0]->enddate);
+						$this->carshare_model->add_data('parking', $add_data);
+					}
+					if(count($beforeavail)== 0 && count($afteravail)== 0){
+						//new available date.... $_GET['bstartdate'] to $_GET['benddate']
+						$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
+						
+						$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $bookingdetails[0]->pickuplocationid,'availabledate' => $bookingdetails[0]->pickupdate,'enddate' => $bookingdetails[0]->dropoffdate);
+						$this->carshare_model->add_data('parking', $add_data);
+					}
+					
+					$data['status']="success";
+					
+						echo json_encode($data);
 				
-				$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
-				
-				$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $beforeavail[0]->availablelocationid,'availabledate' => $beforeavail[0]->availabledate,'enddate' => $_GET['benddate']);
-				$this->carshare_model->add_data('parking', $add_data);
-			}
-			if(count($beforeavail)== 0 && count($afteravail)> 0){
-				//new available date.... $_GET['bstartdate'] to afteravail enddate
-				$delete_data = array('parkingid' => $afteravail[0]->parkingid);
-				$this->carshare_model->delete_data('parking', $delete_data);
-				
-				$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
-				
-				$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $afteravail[0]->availablelocationid,'availabledate' => $_GET['bstartdate'],'enddate' => $afteravail[0]->enddate);
-				$this->carshare_model->add_data('parking', $add_data);
-			}
-			if(count($beforeavail)== 0 && count($afteravail)== 0){
-				//new available date.... $_GET['bstartdate'] to $_GET['benddate']
-				$this->carshare_model->edit_data('booking', $_GET['bookingid'], 'bookingid', $update_file);
-				
-				$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => '1','availabledate' => $_GET['bstartdate'],'enddate' => $_GET['benddate']);
-				$this->carshare_model->add_data('parking', $add_data);
-			}
 			
-			$data['status']="success";
-			
+				}else{
+					$data['status']="fail";
+					$data['message']="Booking does not exist";
+					echo json_encode($data);
+				}
+				
+			}else{
+				
+				$data['status']="fail";
+				$data['message']="There was an error please reload the page and try again.";
 				echo json_encode($data);
+				
+			}
 			
 			
 			
