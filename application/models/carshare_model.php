@@ -335,6 +335,34 @@ class carshare_model extends CI_Model {
         }
         return $data;
 	}
+	
+	function bookingsearch($carid,$userid,$bookingid)
+	{
+		
+		$data = array();	
+		
+		
+        $this->db->select('booking.userid');
+		$this->db->select('booking.bookingid');
+		$this->db->select('booking.carid');
+		$this->db->select('booking.pickuplocationid');
+		$this->db->select('booking.pickupdate');
+		$this->db->select('booking.dropofflocationid');
+		$this->db->select('booking.dropoffdate');
+		
+        $this->db->from('booking');
+		$this->db->where('booking.userid', $userid);
+		$this->db->where('booking.carid ', $carid);
+		$this->db->where('booking.bookingid', $bookingid);
+		
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
  
 }
 ?>

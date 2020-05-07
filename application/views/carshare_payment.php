@@ -28,8 +28,9 @@ $this->load->view('inc/header', $data);
 					<div class="responsive_tabs">
 						<div id="horizontalTab">
 							<ul class="resp-tabs-list">
-								<li>Credit/Debit </li>
+								<h2>Credit/Debit </h2>
 							</ul>
+							<br>
 							<div class="resp-tabs-container">
 								<!--/tab_one-->
 								<div class="tab1">
@@ -72,22 +73,6 @@ $this->load->view('inc/header', $data);
 
 									</div>
 								</div>
-								<!--//tab_one-->
-								<div class="tab2">
-									<div class="pay_info row">
-										<div class="col-md-6 tab-grid">
-                                        <img src="assets/img/paypal.png" alt="JSOFT">
-											<p>Important: You will be redirected to PayPal's website to securely complete your payment.</p>
-											<a class="btn btn-primary">Checkout via Paypal</a>
-										</div>
-											</form>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 								
 					<!--//tabs-->
 				</div>
