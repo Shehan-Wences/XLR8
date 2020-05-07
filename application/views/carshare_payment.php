@@ -5,7 +5,98 @@ $this->load->view('inc/header', $data);
 
 ?>
 
-<br><br><br><br><br><br><br><br><br><br>
+<!--Payment-->
+<section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>Payment</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+
+<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+			<div class="container">
+				<div class="inner-sec-shop px-lg-4 px-3">
+					<!--/tabs-->
+					<div class="responsive_tabs">
+						<div id="horizontalTab">
+							<ul class="resp-tabs-list">
+								<h2>Credit/Debit </h2>
+							</ul>
+							<br>
+							<div class="resp-tabs-container">
+								<!--/tab_one-->
+								<div class="tab1">
+									<div class="pay_info">
+										<form action="#" method="post" class="creditly-card-form agileinfo_form">
+											<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+												<div class="credit-card-wrapper">
+													<div class="first-row form-group">
+														<div class="controls">
+															<label class="control-label">Name on Card</label>
+															<input class="billing-address-name form-control" type="text" name="name" placeholder="Enter Name">
+														</div>
+														<div class="w3_agileits_card_number_grids">
+															<div class="w3_agileits_card_number_grid_left">
+																<div class="controls">
+																	<label class="control-label">Card Number</label>
+																	<input class="number credit-card-number form-control" type="text" name="number" inputmode="numeric" autocomplete="cc-number"
+																	    autocompletetype="cc-number" x-autocompletetype="cc-number" placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
+																</div>
+															</div>
+															<div class="w3_agileits_card_number_grid_right">
+																<div class="controls">
+																	<label class="control-label">CVV</label>
+																	<input class="security-code form-control" Â· inputmode="numeric" type="text" name="security-code" placeholder="&#149;&#149;&#149;">
+																</div>
+															</div>
+															<div class="clear"> </div>
+														</div>
+														<div class="controls">
+															<label class="control-label">Expiration Date</label>
+															<input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
+														</div>
+													</div>
+													<button class="submit">
+														<span>Make a payment </span>
+													</button>
+												</div>
+											</section>
+										</form>
+
+									</div>
+								</div>
+								<!--//tab_one-->
+								<div class="tab2">
+									<div class="pay_info row">
+										<div class="col-md-6 tab-grid">
+                                        <img src="assets/img/paypal.png" alt="JSOFT">
+											<p>Important: You will be redirected to PayPal's website to securely complete your payment.</p>
+											<a class="btn btn-primary">Checkout via Paypal</a>
+										</div>
+											</form>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+								
+					<!--//tabs-->
+				</div>
+
+			</div>
+			<!-- //payment -->
+		</section>
+		<!--//Payment-->
 
 
 
