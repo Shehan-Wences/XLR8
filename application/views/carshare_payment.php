@@ -65,9 +65,7 @@ $this->load->view('inc/header', $data);
 															<input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
 														</div>
 													</div>
-													<button class="book-button text-center">
 														<button id="paynow" class="book-now-btn">Pay Now</button>
-													</button>
 												</div>
 											</section>
 										</form>
