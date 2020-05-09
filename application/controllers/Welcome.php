@@ -16,6 +16,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['cart'] = $this->session->userdata('cart');
 		}else if($this->session->userdata('admin')){
 			$data['admin'] = $this->session->userdata('admin');
 		}
@@ -56,6 +57,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['cart'] = $this->session->userdata('cart');
 		}else if($this->session->userdata('admin')){
 			$data['admin'] = $this->session->userdata('admin');
 		}
@@ -68,13 +70,15 @@ class Welcome extends CI_Controller {
 			
 		 if(!isset($_GET['location']) || !isset($_GET['search-from-date']) || !isset($_GET['search-to-date'])){
 			 $data['location']='1';
-			 $data['pickup']=date('Y/m/d H:i');
+			 $data['pickup']=date("Y-m-d H:i", strtotime('+1 hour'));
 			 $data['dropoff']=date('Y/m/d H:i',strtotime($data['pickup']. ' + 3 days'));
+			 //redirect('', 'refresh');
 			
 		 }else{
 			 $data['location']=$_GET['location'];
 			 $data['pickup']=$_GET['search-from-date'];
 			 $data['dropoff']=$_GET['search-to-date'];
+			 
 		 }
 		 if(isset($_GET['typesstring'])){
 			$type=json_decode(urldecode($_GET['typesstring']));
@@ -294,6 +298,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['cart'] = $this->session->userdata('cart');
 		}else{
 			redirect('', 'refresh');
 		}
@@ -318,6 +323,7 @@ class Welcome extends CI_Controller {
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 			$data['Email'] = $session_array_used['email'];
+			$data['cart'] = $this->session->userdata('cart');
 		
 		
 		
@@ -385,6 +391,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['cart'] = $this->session->userdata('cart');
 		}else{
 			redirect('', 'refresh');
 		}
@@ -558,6 +565,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['cart'] = $this->session->userdata('cart');
 		}else if($this->session->userdata('admin')){
 			$data['admin'] = $this->session->userdata('admin');
 		}
@@ -658,7 +666,7 @@ class Welcome extends CI_Controller {
 				
 				if(!empty($check)){
 					
-					$today=strtotime(date('Y-m-d'));
+					$today=strtotime(date('Y-m-d H:i'));
 					$availabletime = strtotime($check[0]->availabledate);
 					$endtime = strtotime($check[0]->enddate);
 					$ptime = strtotime($_GET['pdate']);
@@ -689,64 +697,15 @@ class Welcome extends CI_Controller {
 							'dlocation' => $_GET['dlocation'],
 							'pdate' => $_GET['pdate'],
 							'ddate' => $_GET['ddate'],
-							'rent' => $cost
+							'rent' => $cost,
+							'today' => date('Y-m-d H:i')
 						);
 
 						$this->session->set_userdata('cart', $cart);
 						
 						
 	
-					/*
-						$delete_data = array('parkingid' => $check[0]->parkingid);
-						$this->carshare_model->delete_data('parking', $delete_data);
-						//make booking in booking table
-						$add_data = array('userid' => $data['id'],
-										'carid' => $_GET['id'],
-										'bookingstatus' => "New",
-										'pickuplocationid' => $_GET['plocation'],
-										'pickupdate' => $_GET['pdate'],
-										'dropofflocationid' => $_GET['dlocation'],
-										'dropoffdate' => $_GET['ddate'],
-										'cost' => $cost);
-						$this->carshare_model->add_data('booking', $add_data);
-						
-						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
-							//available between today and pickupdate
-							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d H:i'),'enddate' => $_GET['pdate']);
-							$this->carshare_model->add_data('parking', $add_data);
-						}
-						if($ptime>$today && $ptime>$availabletime && $today<$availabletime){
-							//available available time and pickup
-							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => $check[0]->availabledate,'enddate' => $_GET['pdate']);
-							$this->carshare_model->add_data('parking', $add_data);
-						}
-						if($ptime>$today && $ptime>$availabletime && $today>$availabletime){
-							//available today and pickup
-							$add_data = array('carid' => $_GET['id'],'status' => "Available",'availablelocationid' => $_GET['dlocation'],'availabledate' => date('Y-m-d H:i'),'enddate' => $_GET['pdate']);
-							$this->carshare_model->add_data('parking', $add_data);
-						}
-						if($dtime==$endtime ){
-							//available between drop off and 1 year ahead if another parking is not available
-							//do nothing for now
-						}
-						if($dtime<$endtime ){
-							//available between drop and enddate                                     
-							$add_data = array('carid' => $_GET['id'],
-											'status' => "Available",
-											'availablelocationid' => $_GET['dlocation'],
-											'availabledate' => $_GET['ddate'],
-											'enddate' => $check[0]->enddate);
-							
-							$this->carshare_model->add_data('parking', $add_data);
-							
-						}
-						
-						
-						$data['status']="success";
-											
-			
-						echo json_encode($data);
-						*/
+					
 						$data['status']="success";
 						echo json_encode($data);
 					}
@@ -799,13 +758,10 @@ class Welcome extends CI_Controller {
 			$data['id'] = $session_array_used['Id'];
 			$data['cart'] = $this->session->userdata('cart');
 		}else{
-			//redirect(base_url('/eror404'), 'refresh');
+			redirect(base_url('/eror404'), 'refresh');
 		}
 		
-		
-		if(isset($data['cart'])){print_r($data['cart']);}
-		if(isset($data['username'])){print_r($data['username']);}
-		if(isset($data['id'])){print_r($data['id']);}
+				
 			
 		$this->load->view('carshare_payment', $data);
 			
@@ -819,6 +775,89 @@ class Welcome extends CI_Controller {
 		$this->load->view('carshare_invoice', $data);
 			
 	}
+	public function bookingconfirmation()
+	{ 
+		$data = array();
+		
+				if($this->session->userdata('logged_in') && $this->session->userdata('cart')){
+			$session_array_used = $this->session->userdata('logged_in');
+			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
+			$data['Email'] = $session_array_used['email'];
+			$data['id'] = $session_array_used['Id'];
+			$data['cart'] = $this->session->userdata('cart');
+		}else{
+			redirect(base_url('/eror404'), 'refresh');
+		}
+		
+		$this->load->model('carshare_model');
+		$check=$this->carshare_model->fetch_thecar($data['cart']['carid'],$data['cart']['plocation'],$data['cart']['pdate'],$data['cart']['ddate']);
+		/*
+		if(isset($data['cart'])){print_r($data['cart']);}
+		if(isset($data['username'])){print_r($data['username']);}
+		if(isset($data['id'])){print_r($data['id']);}
+			*/
+			
+		$today=strtotime($data['cart']['today']);
+		$availabletime = strtotime($check[0]->availabledate);
+		$endtime = strtotime($check[0]->enddate);
+		$ptime = strtotime($data['cart']['pdate']);
+		$dtime = strtotime($data['cart']['ddate']);	
+		
+						$delete_data = array('parkingid' => $check[0]->parkingid);
+						$this->carshare_model->delete_data('parking', $delete_data);
+						//make booking in booking table
+						$add_data = array('userid' => $data['id'],
+										'carid' => $data['cart']['carid'],
+										'bookingstatus' => "New",
+										'pickuplocationid' => $data['cart']['plocation'],
+										'pickupdate' => $data['cart']['pdate'],
+										'dropofflocationid' => $data['cart']['dlocation'],
+										'dropoffdate' => $data['cart']['ddate'],
+										'cost' => $data['cart']['rent']);
+						$this->carshare_model->add_data('booking', $add_data);
+						
+						if($ptime>$today && $ptime>$availabletime && $today==$availabletime){
+							//available between today and pickupdate
+							$add_data = array('carid' => $data['cart']['carid'],'status' => "Available",'availablelocationid' => $data['cart']['dlocation'],'availabledate' => date('Y-m-d H:i'),'enddate' => $data['cart']['pdate']);
+							$this->carshare_model->add_data('parking', $add_data);
+						}
+						if($ptime>$today && $ptime>$availabletime && $today<$availabletime){
+							//available available time and pickup
+							$add_data = array('carid' => $data['cart']['carid'],'status' => "Available",'availablelocationid' => $data['cart']['dlocation'],'availabledate' => $check[0]->availabledate,'enddate' => $data['cart']['pdate']);
+							$this->carshare_model->add_data('parking', $add_data);
+						}
+						if($ptime>$today && $ptime>$availabletime && $today>$availabletime){
+							//available today and pickup
+							$add_data = array('carid' => $data['cart']['carid'],'status' => "Available",'availablelocationid' => $data['cart']['dlocation'],'availabledate' => date('Y-m-d H:i'),'enddate' => $data['cart']['pdate']);
+							$this->carshare_model->add_data('parking', $add_data);
+						}
+						if($dtime==$endtime ){
+							//available between drop off and 1 year ahead if another parking is not available
+							//do nothing for now
+						}
+						if($dtime<$endtime ){
+							//available between drop and enddate                                     
+							$add_data = array('carid' => $data['cart']['carid'],
+											'status' => "Available",
+											'availablelocationid' => $data['cart']['dlocation'],
+											'availabledate' => $data['cart']['ddate'],
+											'enddate' => $check[0]->enddate);
+							
+							$this->carshare_model->add_data('parking', $add_data);
+							
+						}
+						
+						
+						
+											
+			
+						
+						
+						
+		$this->session->unset_userdata('cart');
+		$this->load->view('carshare_bookingconfirmation', $data);
+			
+	}
 	
 	public function customerbookings()
 	{ 
@@ -830,6 +869,7 @@ class Welcome extends CI_Controller {
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 			$data['Email'] = $session_array_used['email'];
+			$data['cart'] = $this->session->userdata('cart');
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
