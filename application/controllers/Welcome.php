@@ -1010,13 +1010,34 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
-		$data['newbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'New');
-		$data['currentbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Current');
-		$data['pastbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Done');
-		$data['cancelledbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Cancelled');
+		$data['newbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'New','Only');
+		$data['currentbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Current','Only');
+		$data['pastbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Done','Only');
+		$data['cancelledbookings'] = $this->carshare_model->getbookings($session_array_used['Id'],'Cancelled','Only');
 		
 		
 		$this->load->view('carshare_bookings', $data);
+
+
+	}
+	public function allbookings()
+	{ 
+		$data = array();
+		
+		$this->load->model('carshare_model');
+		
+		if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
+		}else{
+			redirect(base_url('/eror404'), 'refresh');
+		}
+		$data['newbookings'] = $this->carshare_model->getbookings('','New','All');
+		$data['currentbookings'] = $this->carshare_model->getbookings('','Current','All');
+		$data['pastbookings'] = $this->carshare_model->getbookings('','Done','All');
+		$data['cancelledbookings'] = $this->carshare_model->getbookings('','Cancelled','All');
+		
+		
+		$this->load->view('carshare_allbookings', $data);
 
 
 	}

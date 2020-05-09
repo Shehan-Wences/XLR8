@@ -88,5 +88,16 @@ $this->load->view('inc/header', $data);
 			<!-- //payment -->
 		</section>
 		<!--//Payment-->
+<script>
+$(document).ready(function(){
 
+	$( "#paynow" ).click(function() {
+
+		window.location.href = "<?php echo base_url('/bookingconfirmation'); ?>";
+
+	});
+
+});
+
+</script>
 <?php $this->load->view('inc/footer'); ?>

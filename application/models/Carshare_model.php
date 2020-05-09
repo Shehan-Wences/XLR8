@@ -252,9 +252,14 @@ class carshare_model extends CI_Model {
 	}
  
 	
-	function getbookings($id,$status)
+	function getbookings($id,$status,$search)
 	{
 		$data = array();	
+		
+		if($search=='All'){
+		$this->db->select('booking.userid');
+		}
+		
 		$this->db->select('booking.bookingid');
 		$this->db->select('booking.bookingstatus');
 		$this->db->select('pickup.name as pickuplocation');
@@ -274,8 +279,9 @@ class carshare_model extends CI_Model {
 		$this->db->join('location  as drop', 'booking.dropofflocationid=drop.locationid'); 	
         $this->db->join('car', 'booking.carid=car.carid'); 	
 
-		
+		if($search=='Only'){
 		$this->db->where('booking.userid', $id);
+		}
 		$this->db->where('booking.bookingstatus', $status);
 		$this->db->order_by('booking.pickupdate','ASC');
 		

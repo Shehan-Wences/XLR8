@@ -102,6 +102,7 @@ date_default_timezone_set('Australia/Melbourne');
 										<li><a href="<?php echo base_url("/addcar"); ?>">Add Car</a></li>
 
                                         <li><a href="<?php echo base_url("/customerDetails"); ?>">Customer Details</a></li>
+										<li><a href="<?php echo base_url("/allbookings"); ?>">View All Bookings</a></li>
 
                                         <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
                                         
