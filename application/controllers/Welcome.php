@@ -848,7 +848,144 @@ class Welcome extends CI_Controller {
 						}
 						
 						
-						
+		$emailContent = '<html><head></head><body style="background-color:#EAECED;"> <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+						<style> @import url("https://fonts.googleapis.com/css?family=Open+Sans"); </style> <table align="center" bgcolor="#EAECED" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr><td>&nbsp;</td></tr><tr style="font-size:0;line-height:0"><td>&nbsp;</td></tr><tr><td align="center" valign="top"><table width="600"><tbody>
+                        <tr><td align="center"><table border="0" cellpadding="0" cellspacing="0" width="570">
+						<tbody><tr><td style="text-align: center"><a href="<?php echo base_url(); ?>" target="_blank"><img alt="XLR8 Logo" src="https://xlr8-rental.herokuapp.com/assets/img/logo2.png" style="border:0"></a></td></tr>
+                        </tbody></table></td></tr>
+                        <tr><td>&nbsp;</td></tr><tr><td align="center" valign="top"><table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" style="overflow:hidden!important;border-radius:3px" width="580">
+                        <tbody><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td align="center"><table width="85%"><tbody><tr><td align="center"><h2 style="margin:0!important;font-size:28px!important;line-height:38px!important;font-weight:200!important;color:#252b33!important">Booking Confirmation</h2>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+										
+                                        <tr>
+                                            <td align="center">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="78%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left" style="font-size:16px!important;line-height:30px!important;font-weight:100!important;color:#7e8890!important">
+                                                                <p>Booking successfully made.Check your bookings page for more information.As always, we are here to help should you have any questions.</p>
+                                                                <ul style="text-align: left">
+                                                                    <li>Customer name: <strong>'.$data['username'].'</strong></li>
+                                                                    <li>Car: <strong>'.$data['cart']['carid'].'</strong></li>
+                                                                    <li>Pick Up: <strong>'.$data['cart']['pdate'].'</strong></li>
+                                                                    <li>Drop Off: <strong>'.$data['cart']['ddate'].'</strong></li>
+                                                                    <li>Total Amount: <strong>'.round($data['cart']['rent']).' AUD</strong></li>
+                                                                </ul>
+                                                                <p>Kind regards</p>
+                                                                <p>XLR8 Bookings Team</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                            <td align="center" valign="top">
+                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                       
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="580">
+                                    <tbody>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" style="color:#7e8890!important;font-size:12px!important;text-transform:uppercase!important;letter-spacing:.045em!important"
+                                                valign="top">XLR8 &#9679; CAR RENTAL &#9679; SERVICES</td>
+                            </tr>
+                            <tr style="padding:0;margin:0;font-size:0;line-height:0">
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="color:#7e8890!important;font-size:11px!important;letter-spacing:.05em!important"
+                                    valign="top"><em></em></td>
+            </tr>
+            <tr style="padding:0;margin:0;font-size:0;line-height:0">
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" valign="top">
+                    <p style="margin-bottom:1em;color:#7e8890!important;font-size:12px!important;font-weight:300!important">
+                        <span>XLR8 Car Rental Ltd. 45 Collins St, Melbourne, VIC 3000</span></p>
+                </td>
+            </tr>
+                        <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            
+           
+            </tbody>
+            </table>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+  
+  </body>
+</html>';
+		
+				$config['protocol']    = 'smtp';
+				$config['smtp_host']    = 'ssl://smtp.gmail.com';
+				$config['smtp_port']    = '465';
+				$config['smtp_timeout'] = '60';
+
+				$config['smtp_user']    = 'xlr8.carshare@gmail.com';    
+				$config['smtp_pass']    = 's3757847'; 
+
+				$config['charset']    = 'utf-8';
+				$config['newline']    = "\r\n";
+				$config['mailtype'] = 'html'; 
+				$config['validation'] = TRUE; 
+
+				 
+
+				$this->email->initialize($config);
+				$this->email->set_mailtype("html");
+				$this->email->from('xlr8.carshare@gmail.com','XLR8');
+				$this->email->to($data['Email']);
+				$this->email->subject('XLR8 - Booking Confirmation');
+				$this->email->message($emailContent);
+				$this->email->send();				
 											
 			
 						

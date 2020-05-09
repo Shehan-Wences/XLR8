@@ -82,7 +82,7 @@
                                                                     <li>Car: <strong><?php echo $cart['carid']; ?></strong></li>
                                                                     <li>Pick Up: <strong><?php echo $cart['pdate']; ?></strong></li>
                                                                     <li>Drop Off: <strong><?php echo $cart['ddate']; ?></strong></li>
-                                                                    <li>Total Amount: <strong><?php echo round($cart['rent']); ?></strong></li>
+                                                                    <li>Total Amount: <strong><?php echo round($cart['rent']); ?> AUD</strong></li>
 <!--                                                                     <li>Your earning: <strong>£350.00</strong></li> -->
                                                                 </ul>
                                                                 <p>Kind regards</p>

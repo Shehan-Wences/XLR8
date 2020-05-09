@@ -84,15 +84,14 @@ $(document).ready(function(){
 
 									</div>
 								</div>
-<<<<<<< HEAD
+
 								<!--//tab_one-->
 								
 								</div>
 							</div>
 						</div>
 					</div>
-=======
->>>>>>> 5c0c91893504a17ac03b22317a56870ca8c50c43
+
 								
 					<!--//tabs-->
 				</div>
