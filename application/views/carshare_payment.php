@@ -4,7 +4,49 @@ $data['title'] = ucfirst('payment');
 $this->load->view('inc/header', $data);
 
 ?>
+<style>
 
+	table.timetable_sub {
+	width: 100%;
+	margin: 0 auto;
+	border-collapse: collapse;
+  width: 100%;
+  position:relative;
+  bottom:1147px;
+
+}
+
+
+.timetable_sub th {
+	background: #212121;
+	color: #fff !important;
+	text-transform: capitalize;
+	font-size: 13px;
+	border-right: 1px solid #ded2d2;
+}
+
+.timetable_sub th,
+.timetable_sub td {
+    text-align: center;
+    padding: 7px;
+    font-size: 16px;
+    color: #868282;
+}
+
+.timetable_sub td {
+	border: 1px solid #CDCDCD;
+}
+.container1 {
+	
+  position: relative;
+  top:200px;
+}
+td.image{
+	text-align: left;
+  
+  }
+
+	</style>
 <!--Payment-->
 <section id="page-title-area" class="section-padding overlay">
         <div class="container">
@@ -19,10 +61,32 @@ $this->load->view('inc/header', $data);
                 <!-- Page Title End -->
             </div>
         </div>
-    </section>
+	</section>
+	<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>Car</th>
+								<th>Pickup Date</th>
+								<th>Pickup Time</th>
+								<th>Dropoff Date</th>
+								<th>Dropoff Time</th>
+							</tr>
+						</thead>
+						<tbody>
 
+								<td class="image">
+										<<img style="width: 20%;" src="assets/img/car/AUDI-A4-2019.jpg">
+										
+								</td>
+								<td class="invert">Date</td>
+								<td class="invert">Date</td>
+								<td class="invert">Time</td>
+								<td class="invert">Time</td>
+
+								</td>
+							</tr>
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
-			<div class="container">
+			<div class="container1">
 				<div class="inner-sec-shop px-lg-4 px-3">
 					<!--/tabs-->
 					<div class="responsive_tabs">
@@ -70,7 +134,17 @@ $this->load->view('inc/header', $data);
 												</div>
 											</section>
 										</form>
-
+										
+		<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ 
 									</div>
 								</div>
 								
@@ -81,38 +155,5 @@ $this->load->view('inc/header', $data);
 			<!-- //payment -->
 		</section>
 		<!--//Payment-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php $this->load->view('inc/footer'); ?>
