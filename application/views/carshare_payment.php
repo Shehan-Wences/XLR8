@@ -4,6 +4,7 @@ $data['title'] = ucfirst('payment');
 $this->load->view('inc/header', $data);
 
 ?>
+<<<<<<< HEAD
 <style>
 
 	table.timetable_sub {
@@ -47,6 +48,20 @@ td.image{
   }
 
 	</style>
+=======
+<script>
+$(document).ready(function(){
+	
+	$( "#paynow" ).click(function() {
+		
+		window.location.href = "<?php echo base_url('/bookingconfirmation'); ?>";
+		
+	});
+	
+});
+
+</script>
+>>>>>>> a340a80e46efa735d32d08a5e392b3796997a528
 <!--Payment-->
 <section id="page-title-area" class="section-padding overlay">
         <div class="container">
@@ -61,6 +76,7 @@ td.image{
                 <!-- Page Title End -->
             </div>
         </div>
+<<<<<<< HEAD
 	</section>
 	<table class="timetable_sub">
 						<thead>
@@ -87,6 +103,12 @@ td.image{
 							</tr>
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
 			<div class="container1">
+=======
+    </section>
+
+<section class="section-padding">
+			<div class="container">
+>>>>>>> a340a80e46efa735d32d08a5e392b3796997a528
 				<div class="inner-sec-shop px-lg-4 px-3">
 					<!--/tabs-->
 					<div class="responsive_tabs">
@@ -99,7 +121,7 @@ td.image{
 								<!--/tab_one-->
 								<div class="tab1">
 									<div class="pay_info">
-										<form action="#" method="post" class="creditly-card-form agileinfo_form">
+										<div class="creditly-card-form agileinfo_form">
 											<section class="creditly-wrapper wthree, w3_agileits_wrapper">
 												<div class="credit-card-wrapper">
 													<div class="first-row form-group">
@@ -128,11 +150,12 @@ td.image{
 															<input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
 														</div>
 													</div>
-													<button class="submit">
-														<span>Make a payment </span>
+													<button class="book-button text-center">
+														<button id="paynow" class="book-now-btn">Pay Now</button>
 													</button>
 												</div>
 											</section>
+<<<<<<< HEAD
 										</form>
 										
 		<br>
@@ -145,8 +168,20 @@ td.image{
 <br>
 <br>
  
+=======
+										</div>
+
+>>>>>>> a340a80e46efa735d32d08a5e392b3796997a528
 									</div>
 								</div>
+
+								<!--//tab_one-->
+								
+								</div>
+							</div>
+						</div>
+					</div>
+
 								
 					<!--//tabs-->
 				</div>

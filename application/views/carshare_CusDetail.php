@@ -8,7 +8,9 @@ $this->load->view('inc/header', $data);
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  position: relative;
+  left: 100px;
+  width: 90%;
 }
 
 th, td {

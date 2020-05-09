@@ -68,5 +68,6 @@ $route['payment'] = 'welcome/payment';
 $route['invoice'] = 'welcome/invoice';
 $route['mybookings'] = 'welcome/customerbookings';
 $route['cancelbooking'] = 'welcome/cancelbooking';
+$route['bookingconfirmation'] = 'welcome/bookingconfirmation';
 $route['404_override'] = 'welcome/error404';
 

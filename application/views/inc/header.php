@@ -78,7 +78,7 @@ date_default_timezone_set('Australia/Melbourne');
                         <nav class="mainmenu alignright">
                             <ul>
                                 <li class="<?php if ($title == "Home") {echo "active";} ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
-								<li class="<?php if ($title == "Search") {echo "active";} ?>"><a href="<?php echo base_url("/search"); ?>">Search</a></li>
+								<!--<li class="<?php if ($title == "Search") {echo "active";} ?>"><a href="<?php echo base_url("/search"); ?>">Search</a></li>-->
                                 <li class="<?php if ($title == "Contact us") {echo "active";} ?>"><a href="<?php echo base_url("/contact"); ?>">Contact Us</a></li>
 								<?php   
 								if(isset($username)){
@@ -90,6 +90,7 @@ date_default_timezone_set('Australia/Melbourne');
 										<li><a href="<?php echo base_url("/passwordchange"); ?>">Change Password</a></li>
 										<li><a href="<?php echo base_url("/deactivate"); ?>">Deactivate</a></li>
                                         <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
+																			
                                         
                                     </ul>
                                 </li>
@@ -113,6 +114,13 @@ date_default_timezone_set('Australia/Melbourne');
 								?>
 								<li class="<?php if ($title == "Sign in") {echo "active";} ?>"><a href="<?php echo base_url("/signin"); ?>"><i class="fa fa-user" aria-hidden="true"></i> Sign in</a></li>
 								<?php } ?>
+								<?php   
+								if(isset($cart)){
+								?>
+								<li ><a style="padding-top: 15px;" href="<?php echo base_url("/payment"); ?>"><i style="font-size:20px;color: yellow;"  class="fa fa-cart-plus"></i></a></li>
+								<?php   
+								}
+								?>
                             </ul>
                         </nav>
                     </div>
