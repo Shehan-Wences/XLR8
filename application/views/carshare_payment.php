@@ -13,7 +13,8 @@ $this->load->view('inc/header', $data);
                 <!-- Page Title Start -->
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
-                        <h2>Payment</h2>
+
+                        <h2>CHECKOUT</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
                     </div>
                 </div>
@@ -21,7 +22,68 @@ $this->load->view('inc/header', $data);
             </div>
         </div>
 	</section>
+
+
+      
+	  
+	  
+<div id="blog-page-content" class="section-padding" style="padding-top: 100px;">
+
+<div class="container">
+<div class="row">
+
+<div class="col-lg-12">
+<article class="single-article">
+<div class="row">
+
+ <div class="col-lg-5">
+<div class="article-thumb">
+<img src="assets\img\car\2020_lexus_es-350.jpg" alt="JSOFT">
+</div>
+</div>
+
+
+<div class="col-lg-7">
+<div class="display-table">
+<div class="display-table-cell">
+<div class="article-body">
+<h3><a href="">Lexus ES350 2020</a></h3>
 	
+	<div class="article-meta">
+	<a href="#" class="author">Pick Up Date : <span>10/05/2020</span></a>
+	<a href="#" class="author">Pick Up Time : <span>13:00</span></a>
+	</div>
+	
+	<div class="article-meta">
+	<a href="#" class="author">Pick Up Location : <span>Melbourne Central</span></a>
+	</div>
+	
+	<div class="article-meta">
+	<a href="#" class="commnet">Drop Off Date : <span>20/05/2020</span></a>
+	<a href="#" class="commnet">Drop Off Time : <span>18:00</span></a>
+	</div>
+	<div class="article-meta">
+	<a href="#" class="author">Drop Off Location : <span>Noble Park</span></a>
+	</div>
+	<div class="article-meta">
+	<a href="#" class="commnet">Price : <span>$50.00</span></a>
+	<a href="#" class="commnet">Total : <span>$650.00 AUD</span></a>
+	</div>
+	<div class="article-meta" style="text-align: right;">
+	<a class="remove" href="/cart/change?line=1&amp;quantity=0">Remove</a>
+	</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</article>
+
+<article class="single-article" style="margin-top: 50px; padding-bottom: 10px; margin-bottom: 100px;">
+
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
 			<div class="container1">
 				<div class="inner-sec-shop px-lg-4 px-3">
@@ -29,7 +91,9 @@ $this->load->view('inc/header', $data);
 					<div class="responsive_tabs">
 						<div id="horizontalTab">
 							<ul class="resp-tabs-list">
-								<h2>Credit/Debit </h2>
+
+								<h2>Payment </h2>
+
 							</ul>
 							<br>
 							<div class="resp-tabs-container">
@@ -88,6 +152,26 @@ $this->load->view('inc/header', $data);
 			<!-- //payment -->
 		</section>
 		<!--//Payment-->
+<<<<<<< HEAD
+</article>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+
 <script>
 $(document).ready(function(){
 
@@ -100,4 +184,5 @@ $(document).ready(function(){
 });
 
 </script>
+
 <?php $this->load->view('inc/footer'); ?>
