@@ -30,11 +30,12 @@ $this->load->view('inc/header', $data);
                                 <!--== Pick Up Date ==-->
                                 <div class="pick-up-date book-item">
                                     <h4>PICK-UP DATE:</h4>
-                                    <input type="text" name="pdate" id="startDate" value="<?php echo date('m/d/Y'); ?>" placeholder="Pick Up Date" />
-
+                                    <!--<input type="text" name="pdate" id="startDate" value="<?php echo date('Y/m/d H:i'); ?>" placeholder="Pick Up Date" />-->
+									<input type="text" name="search-from-date" id="search-from-date" value="<?php echo date("Y-m-d H:i", strtotime('+1 hour')); ?>" placeholder="Pick Up Date" />
                                     <div class="return-car">
-                                        <h4>Return DATE:</h4>
-                                        <input name="ddate" id="endDate" value="<?php echo date('m/d/Y',strtotime(date('m/d/Y'). ' + 3 days')); ?>" placeholder="Return Date" />
+                                     <h4>Return DATE:</h4>
+                                     <!--   <input name="ddate" id="endDate" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />-->
+									  <input type="text" name="search-to-date" id="search-to-date" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />
                                     </div>
                                 </div>
                                 <!--== Pick Up Location ==-->
@@ -162,9 +163,9 @@ $this->load->view('inc/header', $data);
                 <!-- Section Title Start -->
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
-                        <h2>Testimonials</h2>
+                        <h2>Reviews</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet elit.</p>
+                        <p>Here's what our customers have said about their rental experience.</p>
                     </div>
                 </div>
                 <!-- Section Title End -->
@@ -175,8 +176,8 @@ $this->load->view('inc/header', $data);
                     <div class="testimonial-content">
                         <!--== Single Testimoial Start ==-->
                         <div class="single-testimonial">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis totam obcaecati impedit, at autem repellat vel magni architecto veritatis sed.</p>
-                            <h3>Vongchong Smith</h3>
+                            <p>Our family car broke down last minute and XLR8 was conveniently available for us to rent for our upcoming family holiday. Would highly recommend!</p>
+                            <h3>Fatima Pratel</h3>
                             <div class="client-logo">
                                 <img src="assets/img/client/client-pic-1.jpg" alt="JSOFT">
                             </div>
@@ -185,8 +186,8 @@ $this->load->view('inc/header', $data);
 
                         <!--== Single Testimoial Start ==-->
                         <div class="single-testimonial">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis totam obcaecati impedit, at autem repellat vel magni architecto veritatis sed.</p>
-                            <h3>Amader Tuni</h3>
+                            <p>Rented a luxury car to take out my boss for a business trip. My boss complimented the clean, nice modern car thinking it was my own! Definitely would recommend if you need a last minute car to impress someone.</p>
+                            <h3>John Smith</h3>
                             <div class="client-logo">
                                 <img src="assets/img/client/client-pic-3.jpg" alt="JSOFT">
                             </div>
@@ -195,8 +196,8 @@ $this->load->view('inc/header', $data);
 
                         <!--== Single Testimoial Start ==-->
                         <div class="single-testimonial">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis totam obcaecati impedit, at autem repellat vel magni architecto veritatis sed.</p>
-                            <h3>Atex Tuntuni Smith</h3>
+                            <p>Booking with XLR8 was the best decision I've made. I rented a van through them, which in fact helped me save money while moving houses. The van was spacious and was able to fit majority of my larger furnitures! It only costed me $50 (which is a lot cheaper if you were to hire a truck).</p>
+                            <h3>Achol Deng</h3>
                             <div class="client-logo">
                                 <img src="assets/img/client/client-pic-2.jpg" alt="JSOFT">
                             </div>
@@ -208,7 +209,16 @@ $this->load->view('inc/header', $data);
         </div>
     </section>
     <!--== Testimonials Area End ==-->
+<script>
+            /*jslint browser:true*/
+            /*global jQuery, document*/
 
+            jQuery(document).ready(function () {
+                'use strict';
+
+                jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
+            });
+</script>
     
 
 

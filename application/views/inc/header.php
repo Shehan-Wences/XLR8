@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Australia/Melbourne');
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -32,8 +33,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!--=== Responsive CSS ===-->
     <link href="assets/css/responsive.css" rel="stylesheet">
 	<!--=== Jquery Min Js ===-->
+	 <link rel="stylesheet" type="text/css" href="assets/css/jquery.datetimepicker.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+	 <script src="assets/js/jquery.datetimepicker.full.js"></script>
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -76,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <nav class="mainmenu alignright">
                             <ul>
                                 <li class="<?php if ($title == "Home") {echo "active";} ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
-								<li class="<?php if ($title == "Search") {echo "active";} ?>"><a href="<?php echo base_url("/search"); ?>">Search</a></li>
+								<!--<li class="<?php if ($title == "Search") {echo "active";} ?>"><a href="<?php echo base_url("/search"); ?>">Search</a></li>-->
                                 <li class="<?php if ($title == "Contact us") {echo "active";} ?>"><a href="<?php echo base_url("/contact"); ?>">Contact Us</a></li>
 								<?php   
 								if(isset($username)){
@@ -84,10 +86,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $username; ?></a>
                                     <ul>
 										<li><a href="<?php echo base_url("/profile"); ?>">Profile</a></li>
-										<li><a href="<?php echo base_url("/bookings"); ?>">Bookings</a></li>
+										<li><a href="<?php echo base_url("/mybookings"); ?>">Bookings</a></li>
 										<li><a href="<?php echo base_url("/passwordchange"); ?>">Change Password</a></li>
 										<li><a href="<?php echo base_url("/deactivate"); ?>">Deactivate</a></li>
                                         <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
+																			
                                         
                                     </ul>
                                 </li>
@@ -97,6 +100,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<li class="active"><a href="<?php echo base_url("/"); ?>"><?php echo $admin; ?></a>
                                     <ul>
 										<li><a href="<?php echo base_url("/addcar"); ?>">Add Car</a></li>
+
+                                        <li><a href="<?php echo base_url("/customerDetails"); ?>">Customer Details</a></li>
+										<li><a href="<?php echo base_url("/allbookings"); ?>">View All Bookings</a></li>
 
                                         <li><a href="<?php echo base_url("/signout"); ?>">Sign Out</a></li>
                                         
@@ -109,6 +115,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								?>
 								<li class="<?php if ($title == "Sign in") {echo "active";} ?>"><a href="<?php echo base_url("/signin"); ?>"><i class="fa fa-user" aria-hidden="true"></i> Sign in</a></li>
 								<?php } ?>
+								<?php   
+								if(isset($cart)){
+								?>
+								<li ><a style="padding-top: 15px;" href="<?php echo base_url("/payment"); ?>"><i style="font-size:20px;color: yellow;"  class="fa fa-cart-plus"></i></a></li>
+								<?php   
+								}
+								?>
                             </ul>
                         </nav>
                     </div>

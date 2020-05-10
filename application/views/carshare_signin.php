@@ -14,7 +14,7 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>SIGN IN</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>Sign in to get started on your trip today!</p>
                     </div>
                 </div>
                 <!-- Page Title End -->
@@ -22,7 +22,14 @@ $this->load->view('inc/header', $data);
         </div>
     </section>
     <!--== Page Title Area End ==-->
-
+	<br>
+							<?php if(isset($auth)){   ?>
+							<div class="container">
+							<div class="alert alert-danger col-lg-4 col-md-6 m-auto" style="text-align:center;">
+								<?php echo $auth;   ?> 
+							</div>
+							</div>
+							<?php }  ?>
     <!--== Login Page Content Start ==-->
     <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">

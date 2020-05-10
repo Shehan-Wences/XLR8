@@ -6,59 +6,57 @@ $this->load->view('inc/header', $data);
 ?>
 <script>
 $(document).ready(function(){
+	
+	'use strict';
 
+    jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
+	
 	$( "#booknow" ).click(function() {
-		if(<?php echo isset($username)?'true':'false'; ?>){
 		bookingtotal();
 		$("#myModal").css('display','block');
-		}else{
-			
-			alert("You need to Sign in to book a vehicle");
-			
-			
-			
-		}
 		
 	});
 	$( "#dialogclose" ).click(function() {
 		$("#myModal").css('display','none');
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 	});
 	
-	$("#startDate2").change(function(){
-		if(!isNaN(new Date($('#startDate2').val()).valueOf())==false){
+	$("#search-from-date").change(function(){
+		if(!isNaN(new Date($('#search-from-date').val()).valueOf())==false){
 			$('#total').text('invalid date');
 		
 		}else{
 			bookingtotal();
 		}
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
-		$('#startDate2').css({"border": "1px solid #4da4bd"});
+		$('#search-from-date').css({"border": "1px solid #4da4bd"});
+		$('#search-to-date').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$("#plocation").change(function(){
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 		$('#plocation').css({"border": "1px solid #4da4bd"});
 	});
 	$("#dlocation").change(function(){
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
 		$('#dlocation').css({"border": "1px solid #4da4bd"});
 	});
 	
-	$("#endDate2").change(function(){
-		if(!isNaN(new Date($('#endDate2').val()).valueOf())==false){
+	$("#search-to-date").change(function(){
+		if(!isNaN(new Date($('#search-to-date').val()).valueOf())==false){
 			$('#total').text('invalid date');
 		
 		}else{
 			bookingtotal();
 		}
-		$("#bookingsuccessful").css('display','none');
+		
 		$("#bookingerror").css('display','none');
-		$('#endDate2').css({"border": "1px solid #4da4bd"});
+		$('#search-to-date').css({"border": "1px solid #4da4bd"});
+		$('#search-from-date').css({"border": "1px solid #4da4bd"});
 	});
 	
 	$( "#booknpay" ).click(function() {
@@ -66,8 +64,8 @@ $(document).ready(function(){
 		var status=true;
 		var plocation=$("#plocation").val();
 		var dlocation=$("#dlocation").val();
-		var pdate=$("#startDate2").val();
-		var ddate=$("#endDate2").val();
+		var pdate=$("#search-from-date").val();
+		var ddate=$("#search-to-date").val();
 		var carid="<?php echo $_GET['id'];?>";
 		
 		
@@ -85,19 +83,30 @@ $(document).ready(function(){
 		}
 		var startdate = new Date(pdate);
 		if(!isNaN(startdate.valueOf())==false){
-			 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+			 $('#search-from-date').css({"border": "1.5px solid #ff0000"});
 			status=false;
 			
 		}
 		var enddate = new Date(ddate);
 		if(!isNaN(enddate.valueOf())==false){
-			 $('#endDate2').css({"border": "1.5px solid #ff0000"});
+			 $('#search-to-date').css({"border": "1.5px solid #ff0000"});
 			status=false;
 			
+		}
+		if(startdate>enddate){
+		  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+		   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+		status=false;
+		}
+	
+		if(new Date($.now())>startdate){
+			  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+			   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+			status=false;
 		}	
 		if(status==true){
 	
-			$('#booknpay').text('Loading...');
+			$('#booknpay').text('Checking...');
 			$('#booknpay').prop('disabled', true);
 			
 			
@@ -111,15 +120,28 @@ $(document).ready(function(){
 				{
 					$('#booknpay').text('Book & Pay');
 					$('#booknpay').prop('disabled', false);
+					
 					if(data.status=="success"){
-						$("#bookingsuccessful").css('display','block');
-						$('#booknpay').css('display', 'none');
-						$('#total').css('display', 'none');
+						
+						
+						
+						if(<?php echo isset($username)?'true':'false'; ?>){
+							
+							window.location.href = "<?php echo base_url('/payment'); ?>";
+						}else{
+					
+							window.location.href = "<?php echo base_url('/signin?auth=required'); ?>";	
+						
+						}
 						
 					}else if(data.status=="fail"){
 						$("#bookingerror").css('display','block');
 						$("#bookingerror").text(data.message);
 					}
+					
+					
+					
+					
 					
 					
 					
@@ -139,16 +161,18 @@ $(document).ready(function(){
 	
 	function bookingtotal()
 	{
-		var start = new Date($('#startDate2').val());
-		var end = new Date($('#endDate2').val());
+		var start = new Date($('#search-from-date').val());
+		var end = new Date($('#search-to-date').val());
 		var diff = new Date(end - start);
 		var days = diff/1000/60/60/24;
 		var rent="<?php echo $rent; ?>";
 		
-		if(days+1>0){
-			$('#total').text('Booking Total : '+((days+1)*rent)+' AUD');
+		if(days>1){
+			$('#total').text('Booking Total : '+Math.round(((days)*rent))+' AUD');
+		}else if(days>0){
+			$('#total').text('Booking Total : '+(1*rent)+' AUD');
 		}else{
-		 $('#total').text('Check the dates again');
+			 $('#total').text('Check the dates again');
 		}
 		
     }
@@ -164,8 +188,7 @@ $(document).ready(function(){
                     <div class="section-title  text-center">
                         <h2>Our Cars</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    </div>
+                     </div>
                 </div>
                 <!-- Page Title End -->
             </div>
@@ -278,15 +301,15 @@ $(document).ready(function(){
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="website-input" >
-									<label for="startDate2">Pick up Date</label>
-                                        <input style="border: 1px solid #4da4bd;"  name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
+									<label for="search-from-date">Pick up Date/Time</label>
+                                        <input type="text" name="search-from-date" id="search-from-date" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="subject-input" >
-									<label for="endDate2">Drop Off Date</label>
-                                        <input style="border: 1px solid #4da4bd;"  name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
+									<label for="search-to-date">Drop Off Date/Time</label>
+                                         <input type="text" name="search-to-date" id="search-to-date" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                                     </div>
                                 </div>
                             </div>

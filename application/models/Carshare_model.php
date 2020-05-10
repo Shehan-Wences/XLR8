@@ -251,7 +251,124 @@ class carshare_model extends CI_Model {
 		return $query;
 	}
  
+	
+	function getbookings($id,$status,$search)
+	{
+		$data = array();	
+		
+		if($search=='All'){
+		$this->db->select('booking.userid');
+		}
+		
+		$this->db->select('booking.bookingid');
+		$this->db->select('booking.bookingstatus');
+		$this->db->select('pickup.name as pickuplocation');
+		$this->db->select('booking.pickupdate');
+		$this->db->select('drop.name as dropofflocation');
+		$this->db->select('booking.dropoffdate');
+		$this->db->select('booking.carid');
+		$this->db->select('car.make');
+		$this->db->select('car.model');
+		$this->db->select('car.year');
+		$this->db->select('booking.cost');
+		$this->db->select('booking.message');
+		$this->db->from('booking');
+		
+       
+        $this->db->join('location as pickup', 'booking.pickuplocationid=pickup.locationid'); 	
+		$this->db->join('location  as drop', 'booking.dropofflocationid=drop.locationid'); 	
+        $this->db->join('car', 'booking.carid=car.carid'); 	
 
+		if($search=='Only'){
+		$this->db->where('booking.userid', $id);
+		}
+		$this->db->where('booking.bookingstatus', $status);
+		$this->db->order_by('booking.pickupdate','ASC');
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+			
+	}
+	function fetch_availability1($carid,$bstartdate)
+	{
+		
+		
+		$data = array();	
+		
+		
+        $this->db->select('parking.parkingid');
+		$this->db->select('parking.availabledate');
+		$this->db->select('parking.enddate');
+		$this->db->select('parking.availablelocationid');
+		
+        $this->db->from('parking');
+		$this->db->where('parking.enddate', $bstartdate);
+		$this->db->where('parking.carid ', $carid);
+	
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
+	function fetch_availability2($carid,$benddate)
+	{
+		
+		
+		$data = array();	
+		
+		
+        $this->db->select('parking.parkingid');
+		$this->db->select('parking.availabledate');
+		$this->db->select('parking.enddate');
+		$this->db->select('parking.availablelocationid');
+		
+        $this->db->from('parking');
+		$this->db->where('parking.availabledate', $benddate);
+		$this->db->where('parking.carid ', $carid);
+	
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
+	
+	function bookingsearch($carid,$userid,$bookingid)
+	{
+		
+		$data = array();	
+		
+		
+        $this->db->select('booking.userid');
+		$this->db->select('booking.bookingid');
+		$this->db->select('booking.carid');
+		$this->db->select('booking.pickuplocationid');
+		$this->db->select('booking.pickupdate');
+		$this->db->select('booking.dropofflocationid');
+		$this->db->select('booking.dropoffdate');
+		
+        $this->db->from('booking');
+		$this->db->where('booking.userid', $userid);
+		$this->db->where('booking.carid ', $carid);
+		$this->db->where('booking.bookingid', $bookingid);
+		
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+	}
  
 }
 ?>

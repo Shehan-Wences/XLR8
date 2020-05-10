@@ -5,7 +5,9 @@ $this->load->view('inc/header', $data);
 ?>
 <script>
 $(document).ready(function(){
-	
+	 'use strict';
+
+    jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
 	var types='';
 	var make='';
 	var transmission='';
@@ -15,16 +17,16 @@ $(document).ready(function(){
 	function load_search_data()
 	{
 	var location=$('#searchlocation').val();
-	var start=$('#startDate2').val();
+	var start=$('#search-from-date').val();
 	var startdate = new Date(start);
 	
-	var end=$('#endDate2').val();
+	var end=$('#search-to-date').val();
 	var enddate = new Date(end);
 	
 	var status=true;
 	
 	var loc = new RegExp('^([0-1]?[0-9]|20|21)$');
-		
+	
 	if (!loc.test(location)) {
         $('#searchlocation').css({"border": "1.5px solid #ff0000"});
 		status=false;
@@ -32,14 +34,25 @@ $(document).ready(function(){
     }
 	
 	if(!isNaN(startdate.valueOf())==false){
-		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		 $('#search-from-date').css({"border": "1.5px solid #ff0000"});
 		status=false;
 		
 	}
 	if(!isNaN(enddate.valueOf())==false){
-		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		 $('#search-to-date').css({"border": "1.5px solid #ff0000"});
 		status=false;
 		
+	}	
+	if(startdate>enddate){
+		  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+		   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+		status=false;
+	}
+	
+	if(new Date($.now())>startdate){
+		  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+		   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+		status=false;
 	}
 	/*Car Type*/
 	var typevalues = new Array();
@@ -109,11 +122,13 @@ $(document).ready(function(){
 	$("#searchlocation").change(function () {
 		$('#searchlocation').css({"border": "1px solid #4da4bd"});
     });
-	$("#startDate2").change(function () {
-		$('#startDate2').css({"border": "1px solid #4da4bd"});
+	$("#search-from-date").change(function () {
+		$('#search-from-date').css({"border": "1px solid #4da4bd"});
+		$('#search-to-date').css({"border": "1px solid #4da4bd"});
     });
-	$("#endDate2").change(function () {
-		$('#endDate2').css({"border": "1px solid #4da4bd"});
+	$("#search-to-date").change(function () {
+		$('#search-to-date').css({"border": "1px solid #4da4bd"});
+		$('#search-from-date').css({"border": "1px solid #4da4bd"});
     });
 	
 	$( "input[name=type]" ).click(function() {
@@ -187,10 +202,10 @@ $(document).ready(function(){
 function Validation(){
     
 	var location=$('#searchlocation').val();
-	var start=$('#startDate2').val();
+	var start=$('#search-from-date').val();
 	var startdate = new Date(start);
 	
-	var end=$('#endDate2').val();
+	var end=$('#search-to-date').val();
 	var enddate = new Date(end);
 	
 	var status=true;
@@ -204,12 +219,24 @@ function Validation(){
     }
 	
 	if(!isNaN(startdate.valueOf())==false){
-		 $('#startDate2').css({"border": "1.5px solid #ff0000"});
+		 $('#search-from-date').css({"border": "1.5px solid #ff0000"});
 		status=false;
 		
 	}
+	if(startdate>enddate){
+		  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+		   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+		status=false;
+	}
+	
+	if(new Date($.now())>startdate){
+		  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+		   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+		status=false;
+	}
+	
 	if(!isNaN(enddate.valueOf())==false){
-		 $('#endDate2').css({"border": "1.5px solid #ff0000"});
+		 $('#search-to-date').css({"border": "1.5px solid #ff0000"});
 		status=false;
 		
 	}	
@@ -286,11 +313,13 @@ function Validation(){
                             </div>
 
                             <div class="bookinput-item">
-                                <input name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
+                                <!--<input name="pdate" id="startDate2" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />-->
+								<input type="text" name="search-from-date" id="search-from-date" value="<?php if(isset($pickup)){ echo $pickup;} ?>" placeholder="Pick up Date" />
                             </div>
 
                             <div class="bookinput-item">
-                                <input name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
+                                <!--<input name="ddate" id="endDate2" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />-->
+								 <input type="text" name="search-to-date" id="search-to-date" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                             </div>
 
                            

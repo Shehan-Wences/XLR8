@@ -51,6 +51,7 @@
 *	27. Login Page Css
 *	28. $404 ERROR Page Css
 *	29. Driver Page Css
+*      
 *
 *	Responsive Css Include on assets/css/responsive.css
 *
@@ -79,7 +80,7 @@
 }
 
 .section-padding {
-	padding: 100px 0;
+	padding: 20px 0;
 }
 .sectionp-padding {
 	padding-bottom: 100px;
@@ -392,6 +393,7 @@ a.slicknav_btn {
 	font-size: 14px;
 	height: 45px;
 	width: 100%;
+	text-align:center;
 }
 
 .book-a-car input:focus,
@@ -400,7 +402,7 @@ a.slicknav_btn {
 }
 
 .book-a-car input {
-	border-right: 0 none;
+	    border: 1px solid #4da4bd;
 }
 
 .book-a-car .pick-up-date span.input-group-append {
@@ -1798,7 +1800,7 @@ body,
 .team-tab-menu li a h5 {
 	font-size: 18px;
 	font-weight: 600;
-	padding-left: 15px;
+	
 	text-transform: capitalize;
 }
 
@@ -1915,7 +1917,9 @@ body,
 .booka-car-content input,
 .booka-car-content select {
 	border: 1px solid #4da4bd;
-	width: 100%;
+    width: 100%;
+    height: 39px;
+	text-align:center;
 }
 
 .booka-car-content input:focus,
@@ -1933,7 +1937,9 @@ body,
 }
 
 .booka-car-content input {
-	border-right: 0 none;
+ 
+    border: 1px solid #4da4bd;
+	border-radius: .25rem;
 }
 
 .booka-car-content .bookcar-btn button {
@@ -2584,7 +2590,8 @@ body,
 .contact-form textarea,
 .review-area textarea {
 	background-color: #fafafa;
-	border: 1px solid #eaeaea;
+	border: 1px solid #4da4bd;
+	border-radius: .25rem;
 	color: #000;
 	padding: 8px 15px;
 	resize: none;
@@ -3272,3 +3279,18 @@ body,
 	background-color: lightgray;
     color: #4da4bd;
 }
+.booking-p{
+	color: 	black;
+    text-align: center;
+    font-weight: 600;
+}
+.booktr{
+line-height: 45px;
+}
+
+.booktr:nth-child(odd){
+  background-color: gray;
+  color: #fff;
+  
+}
+
