@@ -71,5 +71,7 @@ $route['cancelbooking'] = 'welcome/cancelbooking';
 $route['bookingconfirmation'] = 'welcome/bookingconfirmation';
 $route['allbookings'] = 'welcome/allbookings';
 $route['removecart'] = 'welcome/removecart';
+$route['changecar'] = 'welcome/changeCar';
+$route['updatecar'] = 'welcome/updatecar';
 $route['404_override'] = 'welcome/error404';
 

@@ -1226,23 +1226,58 @@ class Welcome extends CI_Controller {
 			
 			
 			
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		}	
 	}
+
+	public function changeCar()
+    { 
+        $data = array();
+
+		if($this->session->userdata('admin')){
+        $status=true;
+        $data['admin'] = $this->session->userdata('admin');
+        $this->load->model('carshare_model');
+
+        $data['user'] = $this->carshare_model->displayrecord2();
+		$this->load->view('carshare_changeCar',$data);
+		}
+		else{
+			$this->load->view('error_404', $data);
+		}  
+
+    
+    }
+
+    public function updatecar(){
+        $data = array();
+        $this->load->model('carshare_model');
+
+        $data['message'] = "Car Details has been updated";
+        if(isset($_GET['carid']))
+        
+        {
+            
+            $id= $_GET['carid'];
+
+            $update_data = array(
+                'make' => $_GET['make'],
+                'model' => $_GET['model'],
+                'year' => $_GET['year'],
+                'rent' => $_GET['rent'],
+                'fuel' => $_GET['fuel'],
+                'type' => $_GET['type'],
+                'transmission' => $_GET['transmission']
+            );
+
+            $this->carshare_model->edit_data('car', $id, 'carid', $update_data);
+            $data['success'] = "working";
+            echo json_encode($data);
+        }   
+
+        else{
+            $data['fail'] = "fail";
+            echo json_encode($data);
+        }
+
+    }
 }
