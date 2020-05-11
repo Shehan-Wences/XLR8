@@ -843,10 +843,11 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
+		if(isset($_GET['bookingstatus'])){
 		if($_GET['bookingstatus']=='failed'){
 			$data['error']="Vehicle Unavailable.";
 		}
-		
+		}
 		$this->load->model('carshare_model');		
 		$data['car']=$this->carshare_model->carDetails($data['cart']['carid']);		
 		$data['locations']=$this->carshare_model->locations();	
