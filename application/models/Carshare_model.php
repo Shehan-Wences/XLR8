@@ -250,6 +250,12 @@ class carshare_model extends CI_Model {
 		$query = $this->db->get("customer");
 		return $query;
 	}
+	
+	function displayrecord2()
+	{
+		$query = $this->db->get("car");
+		return $query;
+	}
  
 	
 	function getbookings($id,$status,$search)
