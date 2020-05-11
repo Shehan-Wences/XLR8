@@ -2983,16 +2983,41 @@ body,
 	background: linear-gradient(to bottom, #344e86, #3b5998);
 }
 
+
+
+
 .login-with-btn.google {
-	background: -webkit-gradient(linear, left top, left bottom, from(#DC4A38), to(#Dd5b21));
-	background: linear-gradient(to bottom, #DC4A38, #Dd5b21);
-	margin-top: 15px;
+		
+	background-image: url("../../assets/img/google/btn_google_signin_dark_normal_web.png");
+	border-radius: 3px;
+	color: #fff;
+	display: block;
+	font-size: 16px;
+	font-weight: 600;
+	margin: auto;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	padding: 10px;
+	width:191px;
+	height:46px;
+	
 }
 
 .login-with-btn.google:hover {
-	background: -webkit-gradient(linear, left top, left bottom, from(#Dd5b21), to(#DC4A38));
-	background: linear-gradient(to bottom, #Dd5b21, #DC4A38);
+	background-image: url("../../assets/img/google/btn_google_signin_dark_focus_web.png");
+	border-radius: 3px;
+	color: #fff;
+	display: block;
+	font-size: 16px;
+	font-weight: 600;
+	margin: auto;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	padding: 10px;
+	width:191px;
+	height:46px;
 }
+
 
 .login-with-btn:hover {
 	color: #fff;

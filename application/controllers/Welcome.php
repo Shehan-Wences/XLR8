@@ -142,16 +142,95 @@ class Welcome extends CI_Controller {
 		}
 		
 		$data = array();
-		
+		 $this->load->model('carshare_model');
 		if(isset($_GET['auth'])){
 			$data['auth']="Please Signin to continue with the booking.";
+		}
+		
+		require APPPATH . 'vendor/google/google-api-php-client/vendor/autoload.php';
+		$scopes = [
+		 'https://www.googleapis.com/auth/plus.login',
+		  'https://www.googleapis.com/auth/userinfo.email',
+		];
+
+		
+		
+		$gClient = new Google_Client();
+		$gClient->setClientId("74415772971-pp3su1uji356qg18l84qbjt0idgbnrf0.apps.googleusercontent.com");
+		$gClient->setClientSecret("3KsbtO-dESeZsadDOji6B7Z8");
+		$gClient->setApplicationName("XLR8");
+		$gClient->setRedirectUri(base_url('/signin'));
+		
+		$gClient->setScopes($scopes);
+		
+		$data['url']=$gClient->createAuthUrl();
+		
+		if(isset($_GET['code'])){
+			
+			$token=$gClient->fetchAccessTokenWithAuthCode($_GET['code']);
+				try {
+					$oAuth = new Google_Service_Oauth2($gClient);
+					$userData = $oAuth->userinfo_v2_me->get();
+					
+				}catch (\Exception $e) { 
+					redirect('/eror404', 'refresh');
+				}
+			
+			
+			$profile = $this->carshare_model->profile($userData['email']);
+			
+			if(count($profile)>0){
+				
+				$session_data = array(
+					'email' => $userData['email'],
+					'Fname' => $profile[0]->Fname,
+					'Lname' => $profile[0]->Lname,
+					'Id' => $profile[0]->Id
+				);				
+								
+				
+				$gClient->revokeToken();
+				$this->session->set_userdata('logged_in', $session_data);
+				
+				redirect('', 'refresh');
+				
+				
+			}else{
+				
+				$add_data = array('Fname' => $userData['givenName'],
+									'Lname' =>$userData['familyName'],
+									'Email' => $userData['email'],
+									'Status' => 'ACTIVE');
+
+				$this->carshare_model->add_data('customer', $add_data);
+				
+				
+				$session_data = array(
+					'email' => $userData['email'],
+					'Fname' => $userData['givenName'],
+					'Lname' => $userData['familyName'],
+					'Id' => $userData['id']
+				);						
+				
+				$gClient->revokeToken();
+				$this->session->set_userdata('logged_in', $session_data);
+				
+				redirect('', 'refresh');
+				
+			
+			}
+			
+			
+			
+			
+	
 		}
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
 		
 		$email=$this->input->post('email');
 		$password=$this->input->post('password');
-        $this->load->model('carshare_model');
+       
         $login = $this->carshare_model->member_login_details($email,$password);
 
         if (count($login) > 0) {
@@ -183,8 +262,12 @@ class Welcome extends CI_Controller {
         }
 		
 		}
+		
 		$this->load->view('carshare_signin', $data);
 	}
+	
+
+	
 	public function signup()
 	{  
 		if($this->session->userdata('logged_in')){
@@ -1051,7 +1134,6 @@ class Welcome extends CI_Controller {
 		$this->session->unset_userdata('cart');
 		redirect(base_url(''), 'refresh');
 	}
-	
 	
 	public function cancelbooking()
 	{ 

@@ -34,7 +34,8 @@ class carshare_model extends CI_Model {
     }
 	public function profile($email) {
        $data = array();
-        $this->db->select('Fname');
+        $this->db->select('Id');
+		$this->db->select('Fname');
 		$this->db->select('Lname');
         $this->db->select('Phone');
 		$this->db->select('DriverL');
@@ -369,6 +370,12 @@ class carshare_model extends CI_Model {
         }
         return $data;
 	}
+ 
+	function searchid($id){
+		
+	}
+ 
+ 
  
 }
 ?>

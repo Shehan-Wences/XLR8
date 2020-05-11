@@ -58,12 +58,12 @@ $this->load->view('inc/header', $data);
                 		<div class="create-ac">
                 			<p>Forgot your password? <a href="<?php echo base_url("/passwordreset"); ?>">Reset</a></p>
                 		</div>
-                		<!--<div class="login-other">
+                		<div class="login-other">
                 			<span class="or">or</span>
-                			<a href="#" class="login-with-btn facebook"><i class="fa fa-facebook"></i> Sign With Facebook</a>
-                			<a href="#" class="login-with-btn google"><i class="fa fa-google"></i> Sign With Google</a>
+                			<a href="<?php echo $url; ?>"  class="login-with-btn google"></a>
+                			
                 		</div>
-						-->
+						
                 		<div class="create-ac">
                 			<p>Don't have an account? <a href="<?php echo base_url("/signup"); ?>">Sign Up</a></p>
                 		</div>
