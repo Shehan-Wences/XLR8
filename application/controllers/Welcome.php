@@ -1170,7 +1170,7 @@ class Welcome extends CI_Controller {
         $data = array();
         $this->load->model('carshare_model');
 
-        $data['message'] = "done done done";
+        $data['message'] = "Car Details has been updated";
         if(isset($_GET['carid']))
         
         {
