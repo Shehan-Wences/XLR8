@@ -5,7 +5,6 @@ $this->load->view('inc/header', $data);
 
 ?>
 
-
 <!--Payment-->
 <section id="page-title-area" class="section-padding overlay">
         <div class="container">
@@ -38,7 +37,7 @@ $this->load->view('inc/header', $data);
 
  <div class="col-lg-5">
 <div class="article-thumb">
-<img src="assets\img\car\2020_lexus_es-350.jpg" alt="JSOFT">
+<img src="<?php echo $car[0]->imageurl;?>" alt="JSOFT">
 </div>
 </div>
 
@@ -47,30 +46,30 @@ $this->load->view('inc/header', $data);
 <div class="display-table">
 <div class="display-table-cell">
 <div class="article-body">
-<h3><a href="">Lexus ES350 2020</a></h3>
+<h3><a href="#"><?php echo $car[0]->make;?> <?php echo $car[0]->model;?> <?php echo $car[0]->year;?></a></h3>
 	
 	<div class="article-meta">
-	<a href="#" class="author">Pick Up Date : <span>10/05/2020</span></a>
-	<a href="#" class="author">Pick Up Time : <span>13:00</span></a>
-	</div>
-	
-	<div class="article-meta">
-	<a href="#" class="author">Pick Up Location : <span>Melbourne Central</span></a>
+	<a href="#" class="author">Pick Up Date : <span><?php echo date_format(date_create($cart['pdate']),'Y-m-d');?></span></a>
+	<a href="#" class="author">Pick Up Time : <span><?php echo date_format(date_create($cart['pdate']),'H:i');?></span></a>
 	</div>
 	
 	<div class="article-meta">
-	<a href="#" class="commnet">Drop Off Date : <span>20/05/2020</span></a>
-	<a href="#" class="commnet">Drop Off Time : <span>18:00</span></a>
+	<a href="#" class="author">Pick Up Location : <span><?php foreach($locations as $key=>$loc){if(trim($loc->locationid)==$cart['plocation']){ echo $loc->name; }}?></span></a>
+	</div>
+	
+	<div class="article-meta">
+	<a href="#" class="commnet">Drop Off Date : <span><?php echo date_format(date_create($cart['ddate']),'Y-m-d');?></span></a>
+	<a href="#" class="commnet">Drop Off Time : <span><?php echo date_format(date_create($cart['ddate']),'H:i');?></span></a>
 	</div>
 	<div class="article-meta">
-	<a href="#" class="author">Drop Off Location : <span>Noble Park</span></a>
+	<a href="#" class="author">Drop Off Location : <span><?php foreach($locations as $key=>$loc){if(trim($loc->locationid)==$cart['dlocation']){ echo $loc->name; }}?></span></a>
 	</div>
 	<div class="article-meta">
-	<a href="#" class="commnet">Price : <span>$50.00</span></a>
-	<a href="#" class="commnet">Total : <span>$650.00 AUD</span></a>
+	
+	<a href="#" class="commnet">Total : <span><?php echo round($cart['rent']);?> AUD</span></a>
 	</div>
 	<div class="article-meta" style="text-align: right;">
-	<a class="remove" href="/cart/change?line=1&amp;quantity=0">Remove</a>
+	<a id="removebooking" class="remove" href="<?php echo base_url('/removecart'); ?>">Remove</a>
 	</div>
 
 
@@ -152,7 +151,7 @@ $this->load->view('inc/header', $data);
 			<!-- //payment -->
 		</section>
 		<!--//Payment-->
-<<<<<<< HEAD
+
 </article>
 </div>
 

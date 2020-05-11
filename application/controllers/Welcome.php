@@ -760,9 +760,13 @@ class Welcome extends CI_Controller {
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
+		if($_GET['bookingstatus']=='failed'){
+			$data['error']="Vehicle Unavailable.";
+		}
 		
-				
-			
+		$this->load->model('carshare_model');		
+		$data['car']=$this->carshare_model->carDetails($data['cart']['carid']);		
+		$data['locations']=$this->carshare_model->locations();	
 		$this->load->view('carshare_payment', $data);
 			
 	}
@@ -790,12 +794,12 @@ class Welcome extends CI_Controller {
 		}
 		
 		$this->load->model('carshare_model');
+		
 		$check=$this->carshare_model->fetch_thecar($data['cart']['carid'],$data['cart']['plocation'],$data['cart']['pdate'],$data['cart']['ddate']);
-		/*
-		if(isset($data['cart'])){print_r($data['cart']);}
-		if(isset($data['username'])){print_r($data['username']);}
-		if(isset($data['id'])){print_r($data['id']);}
-			*/
+		
+		if(count($check)<1){
+			redirect(base_url('/payment?bookingstatus=failed'), 'refresh');
+		}
 			
 		$today=strtotime($data['cart']['today']);
 		$availabletime = strtotime($check[0]->availabledate);
@@ -1042,6 +1046,13 @@ class Welcome extends CI_Controller {
 
 	}
 	
+	public function removecart()
+	{ 
+		$this->session->unset_userdata('cart');
+		redirect(base_url(''), 'refresh');
+	}
+	
+	
 	public function cancelbooking()
 	{ 
 	
@@ -1054,11 +1065,17 @@ class Welcome extends CI_Controller {
 				echo json_encode($data);
 		}else{
 			
-			if($this->session->userdata('logged_in')){
+			if($this->session->userdata('logged_in') || $this->session->userdata('admin') ){
 				
+				if($this->session->userdata('logged_in')){
 				$ses= $this->session->userdata('logged_in');
 				
-				$bookingdetails = $this->carshare_model->bookingsearch($_GET['id'],$ses['Id'],$_GET['bookingid']);
+					$bookingdetails = $this->carshare_model->bookingsearch($_GET['id'],$ses['Id'],$_GET['bookingid']);
+				}
+				if($this->session->userdata('admin')){
+								
+					$bookingdetails = $this->carshare_model->bookingsearch($_GET['id'],$_GET['userid'],$_GET['bookingid']);
+				}
 				
 				if(count($bookingdetails) > 0){
 				

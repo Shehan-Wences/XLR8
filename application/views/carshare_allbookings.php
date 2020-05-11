@@ -13,21 +13,22 @@ $(document).ready(function(){
 		
 	});
 	
-	$( "#cancelbooking" ).click(function() {
+	$( "#admincancelbooking" ).click(function() {
 		
-		$('#cancelbooking').text('Checking...');
-		$('#cancelbooking').prop('disabled', true);
+		$('#admincancelbooking').text('Checking...');
+		$('#admincancelbooking').prop('disabled', true);
 			
 					
 		
-		var carid=	 $("#carid").val();
-		var bstartdate=	$("#carpdate").val();
-		var benddate=	$("#carddate").val();
-		var bookingid= $("#bkid").val();	
+		var carid=	 $("#admincarid").val();
+		var bstartdate=	$("#admincarpdate").val();
+		var benddate=	$("#admincarddate").val();
+		var bookingid= $("#adminbkid").val();	
+		var userid= $("#userid").val();	
 			
 		$.ajax({
 			
-		url:"<?php echo base_url(); ?>cancelbooking?id="+carid+"&bstartdate="+bstartdate+"&benddate="+benddate+"&bookingid="+bookingid,
+		url:"<?php echo base_url(); ?>cancelbooking?id="+carid+"&bstartdate="+bstartdate+"&benddate="+benddate+"&bookingid="+bookingid+"&userid="+userid,
 		method:"GET",
 		dataType:"json",
 		success:function(data)
@@ -39,8 +40,8 @@ $(document).ready(function(){
 				window.location.href = "<?php echo base_url('/allbookings'); ?>";
 				
 			}else if(data.status=="fail"){
-						$('#cancelbooking').text('Cancel Booking');
-						$('#cancelbooking').prop('disabled', false);
+						$('#admincancelbooking').text('Cancel Booking');
+						$('#admincancelbooking').prop('disabled', false);
 						alert(data.message);
 						
 						
@@ -120,6 +121,16 @@ $(document).ready(function(){
                 <input  type="text"  id="admincarddate" disabled />
             </div>
         </div>
+    </div>
+	<div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="website-input" >
+				<label for="userid">User ID</label>
+                    <input   type="text"  id="userid" disabled />
+            </div>
+        </div>
+
+       
     </div>
 	<div class="row">
         <div class="col-lg-12 col-md-12">
@@ -215,7 +226,7 @@ $(document).ready(function(){
 															<td><img id="<?php echo trim($new->bookingid); ?>" src="assets/img/icon-transparent.png" 
 															onmouseover="hover('<?php echo trim($new->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($new->bookingid); ?>')" style="height: 30px; width: 30px; cursor:pointer;" 
-															onclick="dialog('<?php echo $new->carid; ?>','<?php echo $new->make; ?>','<?php echo $new->model; ?>','<?php echo $new->year;?>','<?php echo $new->pickuplocation; ?>','<?php echo $new->pickupdate; ?>','<?php echo $new->dropofflocation; ?>','<?php echo $new->dropoffdate; ?>','<?php echo $new->cost; ?>','<?php echo $new->message; ?>','New','<?php echo $new->bookingid; ?>')"></td>
+															onclick="dialog('<?php echo $new->carid; ?>','<?php echo $new->make; ?>','<?php echo $new->model; ?>','<?php echo $new->year;?>','<?php echo $new->pickuplocation; ?>','<?php echo $new->pickupdate; ?>','<?php echo $new->dropofflocation; ?>','<?php echo $new->dropoffdate; ?>','<?php echo $new->cost; ?>','<?php echo $new->message; ?>','New','<?php echo $new->bookingid; ?>','<?php echo $new->userid; ?>')"></td>
 															
 														</tr>
 													<?php } ?>
@@ -251,7 +262,7 @@ $(document).ready(function(){
 															<td><img id="<?php echo $current->bookingid; ?>" src="assets/img/icon-transparent.png" 
 															onmouseover="hover('<?php echo trim($current->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($current->bookingid); ?>')" style="height: 30px; width: 30px; cursor:pointer;" 
-															onclick="dialog('<?php echo $current->carid; ?>','<?php echo $current->make; ?>','<?php echo $current->model; ?>','<?php echo $current->year;?>','<?php echo $current->pickuplocation; ?>','<?php echo $current->pickupdate; ?>','<?php echo $current->dropofflocation; ?>','<?php echo $current->dropoffdate; ?>','<?php echo $current->cost; ?>','<?php echo $current->message; ?>','Current','<?php echo $current->bookingid; ?>')"></td>
+															onclick="dialog('<?php echo $current->carid; ?>','<?php echo $current->make; ?>','<?php echo $current->model; ?>','<?php echo $current->year;?>','<?php echo $current->pickuplocation; ?>','<?php echo $current->pickupdate; ?>','<?php echo $current->dropofflocation; ?>','<?php echo $current->dropoffdate; ?>','<?php echo $current->cost; ?>','<?php echo $current->message; ?>','Current','<?php echo $current->bookingid; ?>','<?php echo $current->userid; ?>')"></td>
 															
 														</tr>
 													<?php } ?>
@@ -286,7 +297,7 @@ $(document).ready(function(){
 															<td><img id="<?php echo $past->bookingid; ?>" src="assets/img/icon-transparent.png" style="height: 30px; width: 30px; cursor:pointer;" 
 															onmouseover="hover('<?php echo trim($past->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($past->bookingid); ?>')"
-															onclick="dialog('<?php echo $past->carid; ?>','<?php echo $past->make; ?>','<?php echo $past->model; ?>','<?php echo $past->year;?>','<?php echo $past->pickuplocation; ?>','<?php echo $past->pickupdate; ?>','<?php echo $past->dropofflocation; ?>','<?php echo $past->dropoffdate; ?>','<?php echo $past->cost; ?>','<?php echo $past->message; ?>','Past','<?php echo $past->bookingid; ?>')"></td>
+															onclick="dialog('<?php echo $past->carid; ?>','<?php echo $past->make; ?>','<?php echo $past->model; ?>','<?php echo $past->year;?>','<?php echo $past->pickuplocation; ?>','<?php echo $past->pickupdate; ?>','<?php echo $past->dropofflocation; ?>','<?php echo $past->dropoffdate; ?>','<?php echo $past->cost; ?>','<?php echo $past->message; ?>','Past','<?php echo $past->bookingid; ?>','<?php echo $past->userid; ?>')"></td>
 															
 														</tr>
 													<?php } ?>
@@ -321,7 +332,7 @@ $(document).ready(function(){
 															<td><img id="<?php echo $cancelled->bookingid; ?>" src="assets/img/icon-transparent.png" style="height: 30px; width: 30px; cursor:pointer;" 
 															onmouseover="hover('<?php echo trim($cancelled->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($cancelled->bookingid); ?>')"
-															onclick="dialog('<?php echo $cancelled->carid; ?>','<?php echo $cancelled->make; ?>','<?php echo $cancelled->model; ?>','<?php echo $cancelled->year;?>','<?php echo $cancelled->pickuplocation; ?>','<?php echo $cancelled->pickupdate; ?>','<?php echo $cancelled->dropofflocation; ?>','<?php echo $cancelled->dropoffdate; ?>','<?php echo $cancelled->cost; ?>','<?php echo $cancelled->message; ?>','Cancelled','<?php echo $cancelled->bookingid; ?>')"></td>
+															onclick="dialog('<?php echo $cancelled->carid; ?>','<?php echo $cancelled->make; ?>','<?php echo $cancelled->model; ?>','<?php echo $cancelled->year;?>','<?php echo $cancelled->pickuplocation; ?>','<?php echo $cancelled->pickupdate; ?>','<?php echo $cancelled->dropofflocation; ?>','<?php echo $cancelled->dropoffdate; ?>','<?php echo $cancelled->cost; ?>','<?php echo $cancelled->message; ?>','Cancelled','<?php echo $cancelled->bookingid; ?>','<?php echo $cancelled->userid; ?>')"></td>
 															
 														</tr>
 													<?php } ?>
@@ -345,7 +356,7 @@ $(document).ready(function(){
     </section>
 	<script type="text/javascript">
 																
-	function dialog(id,make,model,year,pickuplocation,pickupdate,dropofflocation,dropoffdate,cost,message,status,bookingid)
+	function dialog(id,make,model,year,pickuplocation,pickupdate,dropofflocation,dropoffdate,cost,message,status,bookingid,userid)
 	{
 		$("#allBooking").css('display','block');
 		$("#admincartitle").text(make+' '+model+' '+year);
@@ -354,6 +365,8 @@ $(document).ready(function(){
 		$("#admincarpdate").val(pickupdate);
 		$("#admincarddate").val(dropoffdate);
 		$("#admincarmessage").val(message);
+		$("#userid").val(userid);
+		
 		$("#admincarid").val(id);
 		$("#adminbkid").val(bookingid);
 		$("#admincarcost").text('Booking Total : '+cost+' AUD');

@@ -32,7 +32,7 @@
                                     <tbody>
                                         <tr>
                                             <td style="text-align: center">
-                                                <a href="<?php echo base_url(); ?>" target="_blank"><img alt="XLR8 Logo" src="assets/img/logo2.png" style="border:0"></a>
+                                                <a href="<?php echo base_url(); ?>" ><img alt="XLR8 Logo" src="assets/img/logo2.png" style="border:0"></a>
                                             </td>
                                         </tr>
                                     </tbody>
