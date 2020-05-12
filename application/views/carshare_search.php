@@ -523,16 +523,18 @@ function Validation(){
                                     <div class="display-table">
                                         <div class="display-table-cell">
                                             <div class="car-list-info">
-                                                <h2><a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.$location.'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
-                                                <h5>$<?php echo $car->rent; ?> AUD / PER DAY</h5>
+                                                <h2><a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.trim($car->availablelocationid).'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>"><?php echo $car->year; ?> <?php echo $car->make; ?> <?php echo $car->model; ?></a></h2>
+                                                <h5 style="margin-bottom: 0px;">$<?php echo $car->rent; ?> AUD / PER DAY</h5>
+												<p style="border-bottom: 1px solid #ddd;color: #4da4bd;margin-bottom: 10px;">Pickup @ <?php foreach($locations as $key=>$loc){if(trim($loc->locationid)==trim($car->availablelocationid)){ echo $loc->name; }}?></p>
                                                 <p><?php echo $car->description; ?></p>
                                                 <ul class="car-info-list">
                                                     <li><?php echo $car->type; ?></li>
                                                     <li><?php echo $car->fuel; ?></li>
                                                     <li><?php echo $car->transmission; ?></li>
+												
                                                 </ul>
                                              
-                                                <a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.$location.'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>" class="rent-btn">View Car</a>
+                                                <a href="<?php echo base_url('/car?id='.trim($car->carid).'&plocation='.trim($car->availablelocationid).'&pdate='.rawurlencode ($pickup).'&ddate='.rawurlencode ($dropoff)); ?>" class="rent-btn">View Car</a>
                                             </div>
                                         </div>
                                     </div>

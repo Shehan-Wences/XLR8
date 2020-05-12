@@ -196,6 +196,7 @@ class carshare_model extends CI_Model {
         $this->db->select('transmission');
 		$this->db->select('year');
 		$this->db->select('imageurl'); 
+		$this->db->select('parking.availablelocationid'); 
         $this->db->from('car');
         $this->db->join('parking', 'car.carid = parking.carid', 'left'); 	
 		

@@ -2243,7 +2243,8 @@ body,
 .car-list-thumb {
 	background-size: cover;
 	background-position: center center;
-	height: 300px;
+	/*height: 300px;*/
+	height: 100%;
 	max-height: 100%;
 }
 
@@ -3298,6 +3299,7 @@ body,
 	width: 80%;
 	
 }
+
 }
 #booknpay:disabled
 {
@@ -3318,4 +3320,12 @@ line-height: 45px;
   color: #fff;
   
 }
+@media only screen and (max-width: 986px) {
+	.car-list-thumb {
+
+		height: 300px;
+		
+	}
+}
+
 
