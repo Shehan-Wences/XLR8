@@ -6,7 +6,7 @@ $this->load->view('inc/header', $data);
 <script>
 $(document).ready(function(){
 	 'use strict';
-
+	getLocation();
     jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
 	var types='';
 	var make='';
@@ -25,7 +25,7 @@ $(document).ready(function(){
 	
 	var status=true;
 	
-	var loc = new RegExp('^([0-1]?[0-9]|20|21)$');
+	var loc = new RegExp('^([0-1]?[0-9]|20|21|Current Location)$');
 	
 	if (!loc.test(location)) {
         $('#searchlocation').css({"border": "1.5px solid #ff0000"});
@@ -210,7 +210,7 @@ function Validation(){
 	
 	var status=true;
 	
-	var loc = new RegExp('^([0-1]?[0-9]|20|21)$');
+	var loc = new RegExp('^([0-1]?[0-9]|20|21|Current Location)$');
 	
 	if (!loc.test(location)) {
         $('#searchlocation').css({"border": "1.5px solid #ff0000"});
@@ -302,7 +302,7 @@ function Validation(){
                             <div class="pick-location bookinput-item">
                                 <select id="searchlocation" name="location" class="custom-select">
 								
-                                  <option selected>Pick up Location</option>
+                                  <option selected>Current Location</option>
 								 
 									<?php foreach($locations as $key=>$loc){?>
                                   <option <?php if(isset($location)){ if($location==trim($loc->locationid)){ echo "selected"; }  }?> value="<?php echo trim($loc->locationid); ?>"> <?php echo trim($loc->name); ?></option>
@@ -322,7 +322,7 @@ function Validation(){
 								 <input type="text" name="search-to-date" id="search-to-date" value="<?php if(isset($dropoff)){ echo $dropoff;} ?>" placeholder="Return Date" />
                             </div>
 
-                           
+                           <input type="hidden" name="nearestlocations"  />	
 
                             <div class="bookcar-btn bookinput-item">
                                 <button type="submit" id="searchbutton">Search</button>
@@ -569,6 +569,53 @@ function Validation(){
             </div>
         </div>
     </section>
-	
+<script>
+        
+		
+		 
+        function getLocation() {
+			
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else { 
+				alert( "Geolocation is not supported by this browser.");
+			}
+		}
+
+		function showPosition(position) {
+			
+			
+			//alert("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+			var locarray = new Array();
+		   <?php foreach($locations as $key=>$loc){?>
+              
+			if(( getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,<?php echo $loc->lat; ?>,<?php echo $loc->long; ?> ).toFixed(1))<10){	
+			  locarray.push(<?php echo $loc->locationid; ?>); 
+			}
+		
+			<?php } ?>
+			locvalues = JSON.stringify(locarray);
+			locvalues = encodeURIComponent(locvalues);
+			$("input[name=nearestlocations]").val(locvalues);
+		}
+		
+		function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+		  var R = 6371; // Radius of the earth in km
+		  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		  var dLon = deg2rad(lon2-lon1); 
+		  var a = 
+			Math.sin(dLat/2) * Math.sin(dLat/2) +
+			Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+			Math.sin(dLon/2) * Math.sin(dLon/2)
+			; 
+		  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		  var d = R * c; // Distance in km
+		  return d;
+		}
+
+		function deg2rad(deg) {
+		  return deg * (Math.PI/180)
+		}
+</script>	
 
 <?php $this->load->view('inc/footer'); ?>

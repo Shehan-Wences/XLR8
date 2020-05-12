@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
 		$this->session->unset_userdata('url');
 			
 		$this->load->model('carshare_model');
-        $data['location']='1';	
+        $data['location']='Current Location';	
 		$numberofcars = $this->carshare_model->cars();
 		$data['numofcars']= (round($numberofcars/10)-1) * 10;
 		$data['locations'] = $this->carshare_model->locations();
@@ -52,6 +52,7 @@ class Welcome extends CI_Controller {
 		$type='';
 		$make='';
 		$price='';
+		$nearest='';
 		$this->load->model('carshare_model');
         
 		if($this->session->userdata('logged_in')){
@@ -69,17 +70,21 @@ class Welcome extends CI_Controller {
 		date_default_timezone_set('Australia/Melbourne');
 			
 		 if(!isset($_GET['location']) || !isset($_GET['search-from-date']) || !isset($_GET['search-to-date'])){
-			 $data['location']='1';
-			 $data['pickup']=date("Y-m-d H:i", strtotime('+1 hour'));
-			 $data['dropoff']=date('Y/m/d H:i',strtotime($data['pickup']. ' + 3 days'));
-			 //redirect('', 'refresh');
+			 //$data['location']='1';
+			// $data['pickup']=date("Y-m-d H:i", strtotime('+1 hour'));
+			 //$data['dropoff']=date('Y/m/d H:i',strtotime($data['pickup']. ' + 3 days'));
+			 redirect('', 'refresh');
 			
 		 }else{
 			 $data['location']=$_GET['location'];
 			 $data['pickup']=$_GET['search-from-date'];
 			 $data['dropoff']=$_GET['search-to-date'];
+			 if($_GET['location']=='Current Location'){
+				 $nearest=json_decode(urldecode($_GET['nearestlocations']));
+			 }
 			 
 		 }
+		 
 		 if(isset($_GET['typesstring'])){
 			$type=json_decode(urldecode($_GET['typesstring']));
 		 }else{
@@ -111,7 +116,7 @@ class Welcome extends CI_Controller {
 		 $data['cartransmission']=$transmission;
 		 $data['carfuel']=$fuel;
 		 $data['price']=$price;
-		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel,$price);
+		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel,$price,$nearest);
 		
 		}
 		

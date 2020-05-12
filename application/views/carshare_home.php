@@ -4,7 +4,28 @@ $data['title'] = ucfirst('home');
 $this->load->view('inc/header', $data);
 //echo current_url();
 ?>
+<script>
+        
+    jQuery(document).ready(function () {
+        'use strict';
 
+        jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
+		getLocation();
+		
+		$("[name='location']").change(function() {
+			//alert($(this).val());
+			if($(this).val()== "Current Location"){
+				
+				getLocation();
+			}
+	
+				
+		});
+		
+		
+		
+    });
+</script>
 
     <!--== Slider Area Start ==-->
     <section id="slider-area">
@@ -14,12 +35,12 @@ $this->load->view('inc/header', $data);
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="book-a-car">
-                            <form action="<?php echo base_url('/search'); ?>" method="get">
+                            <form action="<?php echo base_url('/search'); ?>" method="get" onsubmit="return Validation()">
                                 <!--== Pick Up Location ==-->
                                 <div class="pickup-location book-item">
                                     <h4>PICK-UP LOCATION:</h4>
                                     <select name="location" class="custom-select">
-                                      <option selected>Pick up Location</option>
+                                      <option selected>Current Location</option>
                                       <?php foreach($locations as $key=>$loc){?>
                                   <option <?php if(isset($location)){ if($location==trim($loc->locationid)){ echo "selected"; }  }?> value="<?php echo trim($loc->locationid); ?>"> <?php echo trim($loc->name); ?></option>
 								<?php } ?>
@@ -31,11 +52,11 @@ $this->load->view('inc/header', $data);
                                 <div class="pick-up-date book-item">
                                     <h4>PICK-UP DATE:</h4>
                                     <!--<input type="text" name="pdate" id="startDate" value="<?php echo date('Y/m/d H:i'); ?>" placeholder="Pick Up Date" />-->
-									<input type="text" name="search-from-date" id="search-from-date" value="<?php echo date("Y-m-d H:i", strtotime('+1 hour')); ?>" placeholder="Pick Up Date" />
+									<input type="text" name="search-from-date" id="search-from-date" value="<?php echo date("Y-m-d H:i", strtotime('+1 hour')); ?>" placeholder="Pick Up Date" autocomplete="off"/>
                                     <div class="return-car">
                                      <h4>Return DATE:</h4>
                                      <!--   <input name="ddate" id="endDate" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />-->
-									  <input type="text" name="search-to-date" id="search-to-date" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />
+									  <input type="text" name="search-to-date" id="search-to-date" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <!--== Pick Up Location ==-->
@@ -43,9 +64,9 @@ $this->load->view('inc/header', $data);
                                 <!--== Car Choose ==-->
                              
                                 <!--== Car Choose ==-->
-
+								<input type="hidden" name="nearestlocations"  />	
                                 <div class="book-button text-center">
-                                    <button class="book-now-btn">Book Now</button>
+                                    <button type="submit" class="book-now-btn">Book Now</button>
                                 </div>
                             </form>
                         </div>
@@ -209,18 +230,103 @@ $this->load->view('inc/header', $data);
         </div>
     </section>
     <!--== Testimonials Area End ==-->
-<script>
-            /*jslint browser:true*/
-            /*global jQuery, document*/
 
-            jQuery(document).ready(function () {
-                'use strict';
-
-                jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
-            });
-</script>
     
+<script>
+        
+		
+		 
+        function getLocation() {
+			
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else { 
+				alert( "Geolocation is not supported by this browser.");
+			}
+		}
 
+		function showPosition(position) {
+			
+			
+			//alert("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+			var locarray = new Array();
+		   <?php foreach($locations as $key=>$loc){?>
+              
+			if(( getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,<?php echo $loc->lat; ?>,<?php echo $loc->long; ?> ).toFixed(1))<10){	
+			  locarray.push(<?php echo $loc->locationid; ?>); 
+			}
+		
+			<?php } ?>
+			locvalues = JSON.stringify(locarray);
+			locvalues = encodeURIComponent(locvalues);
+			$("input[name=nearestlocations]").val(locvalues);
+		}
+		
+		function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+		  var R = 6371; // Radius of the earth in km
+		  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		  var dLon = deg2rad(lon2-lon1); 
+		  var a = 
+			Math.sin(dLat/2) * Math.sin(dLat/2) +
+			Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+			Math.sin(dLon/2) * Math.sin(dLon/2)
+			; 
+		  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		  var d = R * c; // Distance in km
+		  return d;
+		}
+
+		function deg2rad(deg) {
+		  return deg * (Math.PI/180)
+		}
+		
+		function Validation(){
+			
+			var location=$("[name='location']").val();
+			var start=$('#search-from-date').val();
+			var startdate = new Date(start);
+			
+			var end=$('#search-to-date').val();
+			var enddate = new Date(end);
+			
+			var status=true;
+			
+			var loc = new RegExp('^([0-1]?[0-9]|20|21|Current Location)$');
+			
+			if (!loc.test(location)) {
+				$("[name='location']").css({"border": "1.5px solid #ff0000"});
+				status=false;
+				
+			}
+			
+			if(!isNaN(startdate.valueOf())==false){
+				 $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+				status=false;
+				
+			}
+			if(startdate>enddate){
+				  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+				   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+				status=false;
+			}
+			
+			if(new Date($.now())>startdate){
+				  $('#search-from-date').css({"border": "1.5px solid #ff0000"});
+				   $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+				status=false;
+			}
+			
+			if(!isNaN(enddate.valueOf())==false){
+				 $('#search-to-date').css({"border": "1.5px solid #ff0000"});
+				status=false;
+				
+			}	
+			
+			if(status==false){
+				return false;
+			}
+		}
+</script>
 
 
 

@@ -96,7 +96,8 @@ class carshare_model extends CI_Model {
         $data = array();
         $this->db->select('locationid');
         $this->db->select('name');
-		
+		$this->db->select('lat');
+        $this->db->select('long');
         $this->db->from('location');
 		
         $open_list = $this->db->get();
@@ -118,7 +119,7 @@ class carshare_model extends CI_Model {
         return $query->num_rows();
     }
 	
-	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel,$sort)
+	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel,$sort,$nearest)
 	{
 
 		if($type != null){
@@ -130,6 +131,19 @@ class carshare_model extends CI_Model {
 				 $typeq= "car.type='".$t."' ";		
 				}else{
 				 $typeq= " ".$typeq."OR car.type='".$t."' ";
+				}
+			}
+		}
+		
+		if($nearest != null){
+			
+			$a=0;
+			foreach($nearest as $n){
+				$a++;
+				if($a==1){
+				 $nearestq= "parking.availablelocationid ='".$n."' ";		
+				}else{
+				 $nearestq= " ".$nearestq."OR parking.availablelocationid ='".$n."' ";
 				}
 			}
 		}
@@ -203,7 +217,15 @@ class carshare_model extends CI_Model {
 		
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);
-		$this->db->where('parking.availablelocationid ', $plocation);
+		
+		if($plocation=="Current Location"){
+			if(isset($nearestq)){
+			$this->db->where("(".$nearestq.")", NULL, FALSE);
+			}
+		}else{
+			$this->db->where('parking.availablelocationid', $plocation);
+		}
+		
 		$this->db->order_by("rent ".$sort);
 		 
 		 		
