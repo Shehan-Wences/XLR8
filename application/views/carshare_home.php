@@ -281,7 +281,7 @@ $this->load->view('inc/header', $data);
 		}
 		
 		function Validation(){
-			
+			getLocation();
 			var location=$("[name='location']").val();
 			var start=$('#search-from-date').val();
 			var startdate = new Date(start);

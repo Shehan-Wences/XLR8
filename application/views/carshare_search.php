@@ -16,6 +16,7 @@ $(document).ready(function(){
 	
 	function load_search_data()
 	{
+	getLocation();	
 	var location=$('#searchlocation').val();
 	var start=$('#search-from-date').val();
 	var startdate = new Date(start);
@@ -200,7 +201,7 @@ $(document).ready(function(){
 });
 
 function Validation(){
-    
+    getLocation();
 	var location=$('#searchlocation').val();
 	var start=$('#search-from-date').val();
 	var startdate = new Date(start);
