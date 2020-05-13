@@ -87,41 +87,7 @@ $this->load->view('inc/header', $data);
         <!--== slide Item One ==-->
     </section>
     <!--== Slider Area End ==-->
-
-    <!--== About Us Area Start ==-->
-    <section id="about-area" class="section-padding">
-        <div class="container">
-            <div class="row">
-                <!-- Section Title Start -->
-                <div class="col-lg-12">
-                    <div class="section-title  text-center">
-                        <h2>About us</h2>
-                        <span class="title-line"><i class="fa fa-car"></i></span>
-                    </div>
-                </div>
-                <!-- Section Title End -->
-            </div>
-
-            <div class="row">
-                <!-- About Content Start -->
-                <div class="col-lg-12">
-                    <div class="display-table">
-                        <div class="display-table-cell">
-                            <div class="about-content">
-                                <p>XLR8 is a newly established car sharing service that operates in the heart of Victoria, providing customers the red carpet experience like no other.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- About Content End -->
-
-            </div>
-        </div>
-    </section>
-    <!--== About Us Area End ==-->
-    
-    <!--== Fun Fact Area Start ==-->
-    <section id="funfact-area" class="overlay section-padding">
+	    <section id="funfact-area" class="overlay section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-11 col-md-12 m-auto">
@@ -174,6 +140,12 @@ $this->load->view('inc/header', $data);
             </div>
         </div>
     </section>
+    <!--== About Us Area Start ==-->
+   
+    <!--== About Us Area End ==-->
+    
+    <!--== Fun Fact Area Start ==-->
+
     <!--== Fun Fact Area End ==-->
 
    
@@ -252,7 +224,7 @@ $this->load->view('inc/header', $data);
 			var locarray = new Array();
 		   <?php foreach($locations as $key=>$loc){?>
               
-			if(( getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,<?php echo $loc->lat; ?>,<?php echo $loc->long; ?> ).toFixed(1))<10){	
+			if(( getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,<?php echo $loc->lat; ?>,<?php echo $loc->long; ?> ).toFixed(1))<30){	
 			  locarray.push(<?php echo $loc->locationid; ?>); 
 			}
 		

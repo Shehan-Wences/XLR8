@@ -394,6 +394,8 @@ a.slicknav_btn {
 	height: 45px;
 	width: 100%;
 	text-align:center;
+	
+	text-align-last:center;
 }
 
 .book-a-car input:focus,
@@ -665,7 +667,8 @@ a.slicknav_btn {
 /*== Fun Fact Area CSS Start ==*/
 
 #funfact-area {
-	background-image: url('https://xlr8-rental.herokuapp.com/assets/img/funfact-bg.jpg');
+	//background-image: url('https://xlr8-rental.herokuapp.com/assets/img/funfact-bg.jpg');
+	background:black;
 	background-size: cover;
 	background-position: center center;
 	color: #fff;
@@ -1919,6 +1922,7 @@ body,
 	border: 1px solid #4da4bd;
     width: 100%;
     height: 39px;
+	text-align-last:center;
 	text-align:center;
 }
 
