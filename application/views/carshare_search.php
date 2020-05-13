@@ -193,7 +193,7 @@ $(document).ready(function(){
 		if(this.value != "ASC" && this.value != "DESC"){
 			alert( "There seems to be an error! Please reload the page" );
 		}else{
-			
+			load_search_data();
 		}
 		
 	});
