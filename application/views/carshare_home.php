@@ -52,11 +52,11 @@ $this->load->view('inc/header', $data);
                                 <div class="pick-up-date book-item">
                                     <h4>PICK-UP DATE:</h4>
                                     <!--<input type="text" name="pdate" id="startDate" value="<?php echo date('Y/m/d H:i'); ?>" placeholder="Pick Up Date" />-->
-									<input type="text" name="search-from-date" id="search-from-date" value="<?php echo date("Y-m-d H:i", strtotime('+1 hour')); ?>" placeholder="Pick Up Date" autocomplete="off"/>
+									<input type="text" name="search-from-date" id="search-from-date" value="<?php echo date("Y/m/d H:i", strtotime('+1 hour')); ?>" placeholder="Pick Up Date" autocomplete="off"/>
                                     <div class="return-car">
                                      <h4>Return DATE:</h4>
                                      <!--   <input name="ddate" id="endDate" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" />-->
-									  <input type="text" name="search-to-date" id="search-to-date" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days')); ?>" placeholder="Return Date" autocomplete="off"/>
+									  <input type="text" name="search-to-date" id="search-to-date" value="<?php echo date('Y/m/d H:i',strtotime(date('Y/m/d H:i'). ' + 3 days'. ' + 1 hours')); ?>" placeholder="Return Date" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <!--== Pick Up Location ==-->
