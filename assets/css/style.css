@@ -2790,6 +2790,7 @@ body,
 .single-faq-sub-content .card {
 	border: medium none;
 	margin-bottom: 20px;
+	float:left;
 }
 
 .single-faq-sub-content .card-header {

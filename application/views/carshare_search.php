@@ -141,7 +141,7 @@ $(document).ready(function(){
 		
 		}else{
 		
-		load_search_data();
+		//load_search_data();
 		}
 		
 
@@ -155,7 +155,7 @@ $(document).ready(function(){
 		
 		}else{
 		
-		load_search_data();
+		//load_search_data();
 		}
 		
 
@@ -170,7 +170,7 @@ $(document).ready(function(){
 		
 		}else{
 		
-		load_search_data();
+		//load_search_data();
 		}
 		
 
@@ -184,7 +184,7 @@ $(document).ready(function(){
 		
 		}else{
 		
-		load_search_data();
+		//load_search_data();
 		}
 		
 
@@ -193,10 +193,25 @@ $(document).ready(function(){
 		if(this.value != "ASC" && this.value != "DESC"){
 			alert( "There seems to be an error! Please reload the page" );
 		}else{
-			load_search_data();
+			
 		}
 		
 	});
+	
+	$( "#advancedfilter" ).click(function() {
+		
+		$("#filterdialog").css('display','block');
+		
+	});
+	$( "#dialogclose" ).click(function() {
+		$("#filterdialog").css('display','none');
+
+	});
+	$( "#searchfilterbtn" ).click(function() {
+		load_search_data();
+
+	});
+	
 	
 });
 
@@ -247,7 +262,25 @@ function Validation(){
 }
 </script>
 <!--== End of CSS Code to merge to range slider ==-->
- 
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <!--== Slider Area Start ==-->
     <section id="home-slider-area">
         <div class="home-slider-item slider-bg-1 overlay">
@@ -336,6 +369,7 @@ function Validation(){
     </div>
     <!--== Book A Car Area End ==-->
 
+  
     <!--== What We Do Area Start ==-->
     <!--== Car List Area Start ==-->
 	<section  style="padding-bottom: 0px;padding-top: 25px;">
@@ -346,6 +380,7 @@ function Validation(){
 			
 		
 			<div class="sort" style="text-align: right;">	
+			 <button id="advancedfilter" type="button" class="btn btn-info btn-lg" >Advanced Search</button>
 					<label for="sort">Sort by:</label>
 					<select id="sort" name="price" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
 						
@@ -358,150 +393,16 @@ function Validation(){
 	</section>
     <section id="car-list-area" style="padding: 25px 0;">
 	
-		
+
 	
         <div class="container">
             <div class="row">
                 <!-- Sidebar Area Start -->
-                <div class="col-lg-4">
-                    <div class="sidebar-content-wrap">
-                        <!-- Single Sidebar Start -->
-						
-						<div class="single-sidebar">
-                            <h3>CAR TYPE</h3>
-							<div class="text-left">
-							
-                            <div class="sidebar-body type">
- 								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Sedan" <?php if(is_array($cartype)){ if (in_array("Sedan", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Sedan</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Van" <?php if(is_array($cartype)){ if (in_array("Van", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Van</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Hatchback" <?php if(is_array($cartype)){ if (in_array("Hatchback", $cartype)){ echo "checked"; }  }else{echo "checked";}?> > Hatchback</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="SUV" <?php if(is_array($cartype)){ if (in_array("SUV", $cartype)){ echo "checked"; }  }else{echo "checked";}?> > SUV</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Wagon" <?php if(is_array($cartype)){ if (in_array("Wagon", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Wagon</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="type" type="checkbox" value="Convertible" <?php if(is_array($cartype)){ if (in_array("Convertible", $cartype)){ echo "checked"; }  }else{echo "checked";} ?> > Convertible</label>
-									</div>
-								</div>
-								<input type="hidden" name="typesstring"  />
-	                        </div>
-							
-							</div>
-                        </div>
-						
-						
-						<div class="single-sidebar">
-                            <h3>MAKE</h3>
-							<div class="text-left">
-							
-                            <div class="sidebar-body make">
- 								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Honda" <?php if(is_array($carmake)){  if (in_array("Honda", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Honda</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Toyota" <?php if(is_array($carmake)){  if (in_array("Toyota", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Toyota</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Hyundai" <?php if(is_array($carmake)){  if (in_array("Hyundai", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Hyundai</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Kia" <?php if(is_array($carmake)){  if (in_array("Kia", $carmake)){ echo "checked"; }  }else{echo "checked";} ?> > Kia</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Holden" <?php if(is_array($carmake)){  if (in_array("Holden", $carmake)){ echo "checked"; }  }else{echo "checked";} ?> > Holden</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Ford" <?php if(is_array($carmake)){  if (in_array("Ford", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Ford</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="BMW" <?php if(is_array($carmake)){  if (in_array("BMW", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > BMW</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="make" type="checkbox" value="Lexus" <?php if(is_array($carmake)){  if (in_array("Lexus", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Lexus</label>
-									</div>
-								</div>
-								<input type="hidden" name="makestring"  />
-	                        </div>
-							
-							</div>
-                        </div>
 
-					
-						
-						<div class="single-sidebar">
-                            <h3>Transmission</h3>
-							<div class="text-left">
-							
-                            <div class="sidebar-body transmission">
- 								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="transmission" type="checkbox" value="Auto" <?php if(is_array($cartransmission)){ if (in_array("Auto", $cartransmission)){ echo "checked"; } }else{echo "checked";} ?> > Auto</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="transmission" type="checkbox" value="Manual" <?php if(is_array($cartransmission)){ if (in_array("Manual", $cartransmission)){ echo "checked"; } }else{echo "checked";} ?> > Manual</label>
-									</div>
-								</div>
-								<input type="hidden" name="transmissionstring"  />
-	                        </div>
-							
-							</div>
-                        </div>
-						
-						<div class="single-sidebar">
-                            <h3>Fuel</h3>
-							<div class="text-left">
-													
-                            <div class="sidebar-body fuel">
- 								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Petrol" <?php if(is_array($carfuel)){ if (in_array("Petrol", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Petrol</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Diesel" <?php if(is_array($carfuel)){if (in_array("Diesel", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Diesel</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Hybrid" <?php if(is_array($carfuel)){if (in_array("Hybrid", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Hybrid</label>
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<label><input name="fuel" type="checkbox" value="Electric" <?php if(is_array($carfuel)){if (in_array("Electric", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Electric</label>
-									</div>
-								</div>
-								<input type="hidden" name="fuelstring"  />
-	                        </div>
-							
-							</div>
-                        </div>
-						
-						
-                        <!-- Single Sidebar End -->
-                    </div>
-                </div>
                 <!-- Sidebar Area End -->
 
                 <!-- Car List Content Start -->
-                <div class="col-lg-8">
+                <div class="col-lg-10 m-auto">
                     <div class="car-list-content m-t-50">
 
                       
@@ -572,6 +473,164 @@ function Validation(){
             </div>
         </div>
     </section>
+	
+<div id="filterdialog" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="width:80%;">
+    <span id="dialogclose" class="close">&times;</span>
+	
+	<h2 style="text-align:center; background-color: #4da4bd; color:black;">Advanced Search</h2><br>
+  							<div class="single-faq-sub-content">
+								<div id="accordion">
+									<div class="col-md-6 col-lg-6" style="float:left;">
+									<div class="card col-md-12">
+										<div class="card-header" id="headingOne">
+											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+												<span>CAR TYPE</span>
+												<i class="fa fa-angle-down"></i>
+												<i class="fa fa-angle-up"></i>
+											</button></h5>
+										</div>
+
+										<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+											<div class="card-body">
+											<div class="row">
+												<input type="hidden" name="typesstring"  />
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Sedan" <?php if(is_array($cartype)){ if (in_array("Sedan", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Sedan</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Van" <?php if(is_array($cartype)){ if (in_array("Van", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Van</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Hatchback" <?php if(is_array($cartype)){ if (in_array("Hatchback", $cartype)){ echo "checked"; }  }else{echo "checked";}?> > Hatchback</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="SUV" <?php if(is_array($cartype)){ if (in_array("SUV", $cartype)){ echo "checked"; }  }else{echo "checked";}?> > SUV</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Wagon" <?php if(is_array($cartype)){ if (in_array("Wagon", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Wagon</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Convertible" <?php if(is_array($cartype)){ if (in_array("Convertible", $cartype)){ echo "checked"; }  }else{echo "checked";} ?> > Convertible</label>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="card col-md-12">
+										<div class="card-header" id="headingTwo">
+											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									  			<span>MAKE</span>
+												<i class="fa fa-angle-down"></i>
+												<i class="fa fa-angle-up"></i>
+									  		</button></h5>
+										</div>
+										<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+											<div class="card-body">
+											<div class="row">
+											<input type="hidden" name="makestring"  />
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Honda" <?php if(is_array($carmake)){  if (in_array("Honda", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Honda</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Toyota" <?php if(is_array($carmake)){  if (in_array("Toyota", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Toyota</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Hyundai" <?php if(is_array($carmake)){  if (in_array("Hyundai", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Hyundai</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Kia" <?php if(is_array($carmake)){  if (in_array("Kia", $carmake)){ echo "checked"; }  }else{echo "checked";} ?> > Kia</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Holden" <?php if(is_array($carmake)){  if (in_array("Holden", $carmake)){ echo "checked"; }  }else{echo "checked";} ?> > Holden</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Ford" <?php if(is_array($carmake)){  if (in_array("Ford", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Ford</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="BMW" <?php if(is_array($carmake)){  if (in_array("BMW", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > BMW</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Lexus" <?php if(is_array($carmake)){  if (in_array("Lexus", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Lexus</label>
+												</div>
+											</div>	
+												</div>
+										</div>
+										
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-6" style="float:left;">
+									<div class="card col-md-12">
+										<div class="card-header" id="headingThree">
+											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									  			<span>Transmission</span>
+												<i class="fa fa-angle-down"></i>
+												<i class="fa fa-angle-up"></i>
+											</button></h5>
+										</div>
+										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+											<div class="card-body">
+												<div class="row">
+												<input type="hidden" name="transmissionstring"  />
+													<div class="col-md-12">
+														<label><input name="transmission" type="checkbox" value="Auto" <?php if(is_array($cartransmission)){ if (in_array("Auto", $cartransmission)){ echo "checked"; } }else{echo "checked";} ?> > Auto</label>
+													</div>
+													<div class="col-md-12">
+														<label><input name="transmission" type="checkbox" value="Manual" <?php if(is_array($cartransmission)){ if (in_array("Manual", $cartransmission)){ echo "checked"; } }else{echo "checked";} ?> > Manual</label>
+													</div>
+												</div>
+								
+												</div>
+										</div>
+									</div>
+									<div class="card col-md-12">
+										<div class="card-header" id="headingFour">
+											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									  			<span>Fuel</span>
+												<i class="fa fa-angle-down"></i>
+												<i class="fa fa-angle-up"></i>
+											</button></h5>
+										</div>
+										<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+											<div class="card-body">
+											<div class="row">
+											<input type="hidden" name="fuelstring"  />	
+												<div class="col-md-12">
+													<label><input name="fuel" type="checkbox" value="Petrol" <?php if(is_array($carfuel)){ if (in_array("Petrol", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Petrol</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="fuel" type="checkbox" value="Diesel" <?php if(is_array($carfuel)){if (in_array("Diesel", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Diesel</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="fuel" type="checkbox" value="Hybrid" <?php if(is_array($carfuel)){if (in_array("Hybrid", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Hybrid</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="fuel" type="checkbox" value="Electric" <?php if(is_array($carfuel)){if (in_array("Electric", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Electric</label>
+												</div>
+											</div>
+								
+												</div>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+		
+	 <button id="searchfilterbtn" type="button" class="btn btn-info btn-lg" >Filter Search</button>               
+  
+  </div>
+
+</div>
+ 
 <script>
         
 		
@@ -592,7 +651,7 @@ function Validation(){
 			var locarray = new Array();
 		   <?php foreach($locations as $key=>$loc){?>
               
-			if(( getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,<?php echo $loc->lat; ?>,<?php echo $loc->long; ?> ).toFixed(1))<10){	
+			if(( getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,<?php echo $loc->lat; ?>,<?php echo $loc->long; ?> ).toFixed(1))<30){	
 			  locarray.push(<?php echo $loc->locationid; ?>); 
 			}
 		
