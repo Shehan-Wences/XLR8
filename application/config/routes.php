@@ -73,5 +73,6 @@ $route['allbookings'] = 'welcome/allbookings';
 $route['removecart'] = 'welcome/removecart';
 $route['changecar'] = 'welcome/changeCar';
 $route['updatecar'] = 'welcome/updatecar';
+$route['reports'] = 'welcome/reports';
 $route['404_override'] = 'welcome/error404';
 

@@ -1253,6 +1253,23 @@ class Welcome extends CI_Controller {
 
     
     }
+	 public function reports(){
+		 
+		 $data = array();
+
+		if($this->session->userdata('admin')){
+        $status=true;
+        $data['admin'] = $this->session->userdata('admin');
+        
+			$this->load->view('carshare_report', $data);
+		
+		}
+		else{
+			$this->load->view('error_404', $data);
+		}  
+
+		 
+	 }
 
     public function updatecar(){
         $data = array();
