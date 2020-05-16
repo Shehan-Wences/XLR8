@@ -36,7 +36,7 @@ $this->load->view('inc/header', $data);
 <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">
 	    <div class="wchoose-content">
-		<h4>STATISTICS AND DATA</h4>
+		<h4 style="text-align: center">STATISTICS AND DATA</h4>
 		<p>To view statistical data of bookings made, follow the instructions provided below:</p>
 		<div class="row">
 		<div class="col-lg-6 col-md-6">
