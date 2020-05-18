@@ -477,98 +477,97 @@ function Validation(){
 <div id="filterdialog" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content" style="width:80%;">
-    <span id="dialogclose" class="close">&times;</span>
+  <div class="modal-content" style="width:40%;">
+    <span id="dialogclose" class="close">×</span>
 	
-	<h2 style="text-align:center; background-color: #4da4bd; color:black;">Advanced Search</h2><br>
+	<h3 style="text-align:center; color:black;">Advanced Search</h3><br>
   							<div class="single-faq-sub-content">
 								<div id="accordion">
-									<div class="col-md-6 col-lg-6" style="float:left;">
-									<div class="card col-md-12">
+    <div class="card col-md-12">
 										<div class="card-header" id="headingOne">
-											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-												<span>CAR TYPE</span>
+											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+												<span>Type</span>
 												<i class="fa fa-angle-down"></i>
 												<i class="fa fa-angle-up"></i>
 											</button></h5>
 										</div>
 
-										<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+										<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="">
 											<div class="card-body">
 											<div class="row">
-												<input type="hidden" name="typesstring"  />
+												<input type="hidden" name="typesstring">
 												<div class="col-md-12">
-													<label><input name="type" type="checkbox" value="Sedan" <?php if(is_array($cartype)){ if (in_array("Sedan", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Sedan</label>
+													<label><input name="type" type="checkbox" value="Sedan" checked=""> Sedan</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="type" type="checkbox" value="Van" <?php if(is_array($cartype)){ if (in_array("Van", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Van</label>
-												</div>
-											
-												<div class="col-md-12">
-													<label><input name="type" type="checkbox" value="Hatchback" <?php if(is_array($cartype)){ if (in_array("Hatchback", $cartype)){ echo "checked"; }  }else{echo "checked";}?> > Hatchback</label>
-												</div>
-												<div class="col-md-12">
-													<label><input name="type" type="checkbox" value="SUV" <?php if(is_array($cartype)){ if (in_array("SUV", $cartype)){ echo "checked"; }  }else{echo "checked";}?> > SUV</label>
+													<label><input name="type" type="checkbox" value="Van" checked=""> Van</label>
 												</div>
 											
 												<div class="col-md-12">
-													<label><input name="type" type="checkbox" value="Wagon" <?php if(is_array($cartype)){ if (in_array("Wagon", $cartype)){ echo "checked"; } }else{echo "checked";} ?> > Wagon</label>
+													<label><input name="type" type="checkbox" value="Hatchback" checked=""> Hatchback</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="type" type="checkbox" value="Convertible" <?php if(is_array($cartype)){ if (in_array("Convertible", $cartype)){ echo "checked"; }  }else{echo "checked";} ?> > Convertible</label>
+													<label><input name="type" type="checkbox" value="SUV" checked=""> SUV</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Wagon" checked=""> Wagon</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="type" type="checkbox" value="Convertible" checked=""> Convertible</label>
 												</div>
 											</div>
 											</div>
 										</div>
 									</div>
+    
+    
 									
-									<div class="card col-md-12">
+								
+								<div class="card col-md-12">
 										<div class="card-header" id="headingTwo">
 											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-									  			<span>MAKE</span>
+									  			<span>Make</span>
 												<i class="fa fa-angle-down"></i>
 												<i class="fa fa-angle-up"></i>
 									  		</button></h5>
 										</div>
-										<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+										<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion" style="">
 											<div class="card-body">
 											<div class="row">
-											<input type="hidden" name="makestring"  />
+											<input type="hidden" name="makestring">
 												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Honda" <?php if(is_array($carmake)){  if (in_array("Honda", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Honda</label>
+													<label><input name="make" type="checkbox" value="Honda" checked=""> Honda</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Toyota" <?php if(is_array($carmake)){  if (in_array("Toyota", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Toyota</label>
-												</div>
-											
-												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Hyundai" <?php if(is_array($carmake)){  if (in_array("Hyundai", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Hyundai</label>
-												</div>
-												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Kia" <?php if(is_array($carmake)){  if (in_array("Kia", $carmake)){ echo "checked"; }  }else{echo "checked";} ?> > Kia</label>
+													<label><input name="make" type="checkbox" value="Toyota" checked=""> Toyota</label>
 												</div>
 											
 												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Holden" <?php if(is_array($carmake)){  if (in_array("Holden", $carmake)){ echo "checked"; }  }else{echo "checked";} ?> > Holden</label>
+													<label><input name="make" type="checkbox" value="Hyundai" checked=""> Hyundai</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Ford" <?php if(is_array($carmake)){  if (in_array("Ford", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Ford</label>
+													<label><input name="make" type="checkbox" value="Kia" checked=""> Kia</label>
 												</div>
 											
 												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="BMW" <?php if(is_array($carmake)){  if (in_array("BMW", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > BMW</label>
+													<label><input name="make" type="checkbox" value="Holden" checked=""> Holden</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="make" type="checkbox" value="Lexus" <?php if(is_array($carmake)){  if (in_array("Lexus", $carmake)){ echo "checked"; } }else{echo "checked";} ?> > Lexus</label>
+													<label><input name="make" type="checkbox" value="Ford" checked=""> Ford</label>
+												</div>
+											
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="BMW" checked=""> BMW</label>
+												</div>
+												<div class="col-md-12">
+													<label><input name="make" type="checkbox" value="Lexus" checked=""> Lexus</label>
 												</div>
 											</div>	
 												</div>
 										</div>
 										
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-6" style="float:left;">
-									<div class="card col-md-12">
+									</div><div class="card col-md-12">
 										<div class="card-header" id="headingThree">
 											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 									  			<span>Transmission</span>
@@ -576,22 +575,21 @@ function Validation(){
 												<i class="fa fa-angle-up"></i>
 											</button></h5>
 										</div>
-										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion" style="">
 											<div class="card-body">
 												<div class="row">
-												<input type="hidden" name="transmissionstring"  />
+												<input type="hidden" name="transmissionstring">
 													<div class="col-md-12">
-														<label><input name="transmission" type="checkbox" value="Auto" <?php if(is_array($cartransmission)){ if (in_array("Auto", $cartransmission)){ echo "checked"; } }else{echo "checked";} ?> > Auto</label>
+														<label><input name="transmission" type="checkbox" value="Auto" checked=""> Auto</label>
 													</div>
 													<div class="col-md-12">
-														<label><input name="transmission" type="checkbox" value="Manual" <?php if(is_array($cartransmission)){ if (in_array("Manual", $cartransmission)){ echo "checked"; } }else{echo "checked";} ?> > Manual</label>
+														<label><input name="transmission" type="checkbox" value="Manual" checked=""> Manual</label>
 													</div>
 												</div>
 								
 												</div>
 										</div>
-									</div>
-									<div class="card col-md-12">
+									</div><div class="card col-md-12">
 										<div class="card-header" id="headingFour">
 											<h5 class="mb-0"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
 									  			<span>Fuel</span>
@@ -599,37 +597,33 @@ function Validation(){
 												<i class="fa fa-angle-up"></i>
 											</button></h5>
 										</div>
-										<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+										<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion" style="">
 											<div class="card-body">
 											<div class="row">
-											<input type="hidden" name="fuelstring"  />	
+											<input type="hidden" name="fuelstring">	
 												<div class="col-md-12">
-													<label><input name="fuel" type="checkbox" value="Petrol" <?php if(is_array($carfuel)){ if (in_array("Petrol", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Petrol</label>
+													<label><input name="fuel" type="checkbox" value="Petrol" checked=""> Petrol</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="fuel" type="checkbox" value="Diesel" <?php if(is_array($carfuel)){if (in_array("Diesel", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Diesel</label>
+													<label><input name="fuel" type="checkbox" value="Diesel" checked=""> Diesel</label>
 												</div>
 											
 												<div class="col-md-12">
-													<label><input name="fuel" type="checkbox" value="Hybrid" <?php if(is_array($carfuel)){if (in_array("Hybrid", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Hybrid</label>
+													<label><input name="fuel" type="checkbox" value="Hybrid" checked=""> Hybrid</label>
 												</div>
 												<div class="col-md-12">
-													<label><input name="fuel" type="checkbox" value="Electric" <?php if(is_array($carfuel)){if (in_array("Electric", $carfuel)){ echo "checked"; } }else{echo "checked";} ?> > Electric</label>
+													<label><input name="fuel" type="checkbox" value="Electric" checked=""> Electric</label>
 												</div>
 											</div>
 								
 												</div>
 										</div>
-									</div>
-								</div>
-								</div>
+									</div></div>
 							</div>
 		
-	 <button id="searchfilterbtn" type="button" class="btn btn-info btn-lg" >Filter Search</button>               
+	 <button id="searchfilterbtn" type="button" class="book-now-btn" style="margin: 0 auto;">FILTER</button>               
   
   </div>
-
-</div>
  
 <script>
         
