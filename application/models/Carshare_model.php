@@ -18,7 +18,22 @@ class carshare_model extends CI_Model {
         $this->db->delete($table, $data);
         return true;
     }
-	
+	public function getLocationDetails($id) {
+		$data = array();
+		 
+		 $this->db->select('name');
+		 $this->db->select('lat');	
+		 $this->db->select('long');	
+		 $this->db->from('location');
+		 $this->db->where("location.locationid", $id);
+		 
+		 $open_list = $this->db->get();
+		 
+		 foreach ($open_list->result() as $open_info) {
+			 $data[] = $open_info;
+		 }
+		 return $data;
+	}
 	public function email_check($email) {
         $data = array();
         $this->db->select('Email');
@@ -32,6 +47,21 @@ class carshare_model extends CI_Model {
         }
         return $data;
     }
+	public function confirmation($token) {
+        $data = array();
+        $this->db->select('Id');
+        $this->db->from('customer');
+		$this->db->where("customer.token", $token);
+        $this->db->where("customer.Status", "Pending");
+	   
+        $open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+    }
+	
 	public function profile($email) {
        $data = array();
         $this->db->select('Id');
