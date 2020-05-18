@@ -380,7 +380,7 @@ function Validation(){
 			
 		
 			<div class="sort" style="text-align: right;">	
-			 <button id="advancedfilter" type="button" class="btn btn-info btn-lg" >Advanced Search</button>
+			<button id="advancedfilter" type="button" class="custom-select" style=" width: 14%; margin-right: 20px; border: 1px solid #17a2b8;">Filter</button>
 					<label for="sort">Sort by:</label>
 					<select id="sort" name="price" class="custom-select" style="border: 1px solid rgb(77, 164, 189);">
 						
