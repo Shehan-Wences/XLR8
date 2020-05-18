@@ -1386,7 +1386,6 @@ class Welcome extends CI_Controller {
             echo json_encode($data);
         }
     }
-<<<<<<< HEAD
 
 
 
@@ -1399,7 +1398,6 @@ class Welcome extends CI_Controller {
 
 
 
-=======
 	
 	public function accountconfirmation(){
 	
@@ -1433,6 +1431,5 @@ class Welcome extends CI_Controller {
 	
 	}
 	
->>>>>>> 008898ac9d76dbaa7cf84a9863ead092f66997eb
 	
 }
