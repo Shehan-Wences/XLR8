@@ -304,6 +304,10 @@ class Welcome extends CI_Controller {
 				$data['errorlname'] = "Last Name should contain 2-20 characters";
 				$status=false;
 			}
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['Password'])){
+				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$status=false;
+			}
 			if(!preg_match("/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i", $_POST['Email'])){
 				$data['erroremail'] = "Invalid Email";
 				$status=false;
@@ -322,14 +326,15 @@ class Welcome extends CI_Controller {
 				$add_data = array('Fname' => $_POST['Fname'],
 									'Lname' => $_POST['Lname'],
 									'Email' => $_POST['Email'],
-									'Status' => 'ACTIVE',
-									'Password' => sha1($randomPassword));
+									'Status' => 'Pending',
+									'token' => sha1($randomPassword),
+									'Password' => $_POST['Password']);
 
 				$this->carshare_model->add_data('customer', $add_data);
 				
 				
 				$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>Thank You for Registering with XLR8 CarShare.</p>
-				<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
+				<a href="'.base_url().'accountconfirmation?token='.sha1($randomPassword).'">Click here to Activate your account</a>
 				<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
 				<p>Many Thanks</p>
 				<p>XLR8 Team</p></body></html>';
@@ -356,7 +361,8 @@ class Welcome extends CI_Controller {
 				$this->email->subject('Welcome To XLR8');
 				$this->email->message($emailContent);
 				$this->email->send();
-				$data['successmessage'] = "Account Create succefully. Please check your email.";
+				$data['successmessage'] = "Account Created succefully. Please check your email to verify your account.";
+				$_POST = array();
 			}
           
         } 
@@ -1313,4 +1319,38 @@ class Welcome extends CI_Controller {
         }
 
     }
+	
+	public function accountconfirmation(){
+	
+		if(isset($_GET['token'])){
+			
+			 $data = array();
+			$this->load->model('carshare_model');
+			
+			$user=$this->carshare_model->confirmation($_GET['token']);
+			
+			if(count($user)>0){
+				
+				$update_data = array(
+                'Status' => "ACTIVE",
+                
+				);
+
+            $this->carshare_model->edit_data('customer', $user[0]->Id, 'Id', $update_data);
+            
+				
+				
+				echo "Thank You for confirming your email.";
+			}else{
+				$this->load->view('error_404', $data);
+			}
+			
+		}else{
+			$this->load->view('error_404', $data);
+		}  
+	
+	
+	}
+	
+	
 }

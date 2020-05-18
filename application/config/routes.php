@@ -74,5 +74,6 @@ $route['removecart'] = 'welcome/removecart';
 $route['changecar'] = 'welcome/changeCar';
 $route['updatecar'] = 'welcome/updatecar';
 $route['reports'] = 'welcome/reports';
+$route['accountconfirmation'] = 'welcome/accountconfirmation';
 $route['404_override'] = 'welcome/error404';
 

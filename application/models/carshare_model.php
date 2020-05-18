@@ -47,6 +47,21 @@ class carshare_model extends CI_Model {
         }
         return $data;
     }
+	public function confirmation($token) {
+        $data = array();
+        $this->db->select('Id');
+        $this->db->from('customer');
+		$this->db->where("customer.token", $token);
+        $this->db->where("customer.Status", "Pending");
+	   
+        $open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+    }
+	
 	public function profile($email) {
        $data = array();
         $this->db->select('Id');

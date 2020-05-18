@@ -45,11 +45,11 @@ $this->load->view('inc/header', $data);
 								<div class="name">
 									<div class="row">
 										<div class="col-md-6">
-											<input name="Fname" type="text" placeholder="First Name">
+											<input name="Fname" type="text" placeholder="First Name" value="<?php if(isset($_POST['Fname'])){echo $_POST['Fname'];} ?>">
 										</div>
 										
 										<div class="col-md-6">
-											<input name="Lname" type="text" placeholder="Last Name">
+											<input name="Lname" type="text" placeholder="Last Name" value="<?php if(isset($_POST['Lname'])){echo $_POST['Lname'];} ?>">
 										</div>
 									
 									</div>
@@ -63,19 +63,25 @@ $this->load->view('inc/header', $data);
 											<?php echo $errorlname;   ?> 
 										</div>
 									<?php }  ?>
+									
 								</div>
 								<div class="Email">
-									<input name="Email" type="email" placeholder="Email">
+									<input name="Email" type="email" placeholder="Email" value="<?php if(isset($_POST['Email'])){echo $_POST['Email'];} ?>">
 								</div>
 								<?php if(isset($erroremail)){   ?>
 								<div class="alert alert-danger">
 									<?php echo $erroremail;   ?> 
 								</div>
 								<?php }  ?>
-								<!--<div class="password">
-									<input name="Password" type="password" placeholder="Password">
+								<div class="password">
+									<input name="Password" type="password" placeholder="Password" value="<?php if(isset($_POST['Password'])){echo $_POST['Password'];} ?>">
 								</div>
-								-->
+								
+								<?php if(isset($passerror)){   ?>
+										<div class="alert alert-danger">
+											<?php echo $passerror;   ?> 
+										</div>
+									<?php }  ?>
 								<div class="log-btn">
 									<button name="signup" type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
 								</div>
