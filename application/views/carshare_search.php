@@ -624,7 +624,7 @@ function Validation(){
 	 <button id="searchfilterbtn" type="button" class="book-now-btn" style="margin: 0 auto;">FILTER</button>               
   
   </div>
- 
+ </div>
 <script>
         
 		
