@@ -30,19 +30,50 @@ $this->load->view('inc/header', $data);
 							</div>
 							</div>
 							<?php }  ?>
-    <!--== Login Page Content Start ==-->
-    <section id="lgoin-page-wrap" class="section-padding">
+    <!--== Reports page Content Start ==-->
+
+
+<section id="lgoin-page-wrap" class="section-padding">
         <div class="container">
-            <div class="row">
-				click the button <br>
-				enter account name : report<br>
-				username : xlr8-admin<br>
-				password : xlr8admin<br>
-				
-                <a class="btn btn-primary" href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/d7890e07-3d80-487d-a856-85d5bf688d57" target="_blank">Reports Click me</a>
-        	</div>
+	    <div class="wchoose-content">
+		<h4 style="text-align: center">STATISTICS AND DATA</h4>
+		<p>To view statistical data of bookings made, follow the instructions provided below:</p>
+	
+	<div class="row">
+		<div class="col-lg-6 col-md-6">
+		<div class="single-choose-item">
+		<span>1. Click the button below to navigate to reports page.</span>
+		</div>
+		</div>
+			
+		<div class="col-lg-6 col-md-6">
+		<div class="single-choose-item">
+		<span>2. Enter 'report' as the account name.</span>
+		</div>
+		</div>
+			
+		<div class="col-lg-6 col-md-6">
+		<div class="single-choose-item">
+		<span>3. Enter username 'xlr8-admin'</span>
+		</div>
+		</div>
+			
+		<div class="col-lg-6 col-md-6">
+		<div class="single-choose-item">
+		<span>4. Enter password 'xlr8admin'</span>
+		</div>
+		</div>
+		
+		<div class="single-choose-item" style="margin: 0 auto;">
+		<a class="book-now-btn" href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/d7890e07-3d80-487d-a856-85d5bf688d57" target="_blank" style="margin: 0 auto;">View Reports</a>
+		</div>	
+			
+	</div>
+
+</div>
+           
         </div>
     </section>
-    <!--== Login Page Content End ==-->
+    <!--== Reports Page Content End ==-->
 
 <?php $this->load->view('inc/footer'); ?>

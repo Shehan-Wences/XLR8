@@ -80,8 +80,9 @@
                                                                 <ul style="text-align: left">
                                                                     <li>Customer name: <strong><?php echo $username; ?></strong></li>
                                                                     <li>Car: <strong><?php echo $cart['carid']; ?></strong></li>
-                                                                    <li>Pick Up: <strong><?php echo $cart['pdate']; ?></strong></li>
-                                                                    <li>Drop Off: <strong><?php echo $cart['ddate']; ?></strong></li>
+                                                                    <li><a href="https://maps.google.com/?q=<?php echo $pickupL[0]->lat;?>,<?php echo $pickupL[0]->long;?>" target="_blank" class="author">Pick Up : <?php echo $cart['pdate']; ?> <span><?php echo $pickupL[0]->name; ?></span></a></li>
+																	
+                                                                    <li><a href="https://maps.google.com/?q=<?php echo $dropL[0]->lat;?>,<?php echo $dropL[0]->long;?>" target="_blank" class="author">Drop Off : <?php echo $cart['ddate']; ?> <span><?php echo $dropL[0]->name; ?></span></a></li>
                                                                     <li>Total Amount: <strong><?php echo round($cart['rent']); ?> AUD</strong></li>
 <!--                                                                     <li>Your earning: <strong>£350.00</strong></li> -->
                                                                 </ul>

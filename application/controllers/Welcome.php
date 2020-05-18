@@ -304,6 +304,10 @@ class Welcome extends CI_Controller {
 				$data['errorlname'] = "Last Name should contain 2-20 characters";
 				$status=false;
 			}
+			if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['Password'])){
+				$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
+				$status=false;
+			}
 			if(!preg_match("/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i", $_POST['Email'])){
 				$data['erroremail'] = "Invalid Email";
 				$status=false;
@@ -322,14 +326,15 @@ class Welcome extends CI_Controller {
 				$add_data = array('Fname' => $_POST['Fname'],
 									'Lname' => $_POST['Lname'],
 									'Email' => $_POST['Email'],
-									'Status' => 'ACTIVE',
-									'Password' => sha1($randomPassword));
+									'Status' => 'Pending',
+									'token' => sha1($randomPassword),
+									'Password' => $_POST['Password']);
 
 				$this->carshare_model->add_data('customer', $add_data);
 				
 				
 				$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>Thank You for Registering with XLR8 CarShare.</p>
-				<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
+				<a href="'.base_url().'accountconfirmation?token='.sha1($randomPassword).'">Click here to Activate your account</a>
 				<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
 				<p>Many Thanks</p>
 				<p>XLR8 Team</p></body></html>';
@@ -356,7 +361,8 @@ class Welcome extends CI_Controller {
 				$this->email->subject('Welcome To XLR8');
 				$this->email->message($emailContent);
 				$this->email->send();
-				$data['successmessage'] = "Account Create succefully. Please check your email.";
+				$data['successmessage'] = "Account Created succefully. Please check your email to verify your account.";
+				$_POST = array();
 			}
           
         } 
@@ -766,7 +772,7 @@ class Welcome extends CI_Controller {
 					}else{
 						$cost= $_GET['rent'];
 					}
-					$cost= $_GET['rent']*($diff/(60*60*24));
+					//$cost= $_GET['rent']*($diff/(60*60*24));
 					
 					if($ptime < $today || $dtime < $today || $ptime > $dtime){
 						
@@ -786,7 +792,8 @@ class Welcome extends CI_Controller {
 							'pdate' => $_GET['pdate'],
 							'ddate' => $_GET['ddate'],
 							'rent' => $cost,
-							'today' => date('Y-m-d H:i')
+							'today' => date('Y-m-d H:i'),
+							'token' => sha1($_GET['id'])
 						);
 
 						$this->session->set_userdata('cart', $cart);
@@ -856,6 +863,8 @@ class Welcome extends CI_Controller {
 		$this->load->model('carshare_model');		
 		$data['car']=$this->carshare_model->carDetails($data['cart']['carid']);		
 		$data['locations']=$this->carshare_model->locations();	
+		$data['pickupL']=$this->carshare_model->getLocationDetails($data['cart']['plocation']);
+		$data['dropL']=$this->carshare_model->getLocationDetails($data['cart']['dlocation']);	
 		$this->load->view('carshare_payment', $data);
 			
 	}
@@ -872,12 +881,16 @@ class Welcome extends CI_Controller {
 	{ 
 		$data = array();
 		
-				if($this->session->userdata('logged_in') && $this->session->userdata('cart')){
+		if($this->session->userdata('logged_in') && $this->session->userdata('cart')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
 			$data['Email'] = $session_array_used['email'];
 			$data['id'] = $session_array_used['Id'];
 			$data['cart'] = $this->session->userdata('cart');
+			if($_GET['token']!=$data['cart']['token']){
+				
+				redirect(base_url('/eror404'), 'refresh');
+			}
 		}else{
 			redirect(base_url('/eror404'), 'refresh');
 		}
@@ -939,7 +952,8 @@ class Welcome extends CI_Controller {
 							$this->carshare_model->add_data('parking', $add_data);
 							
 						}
-						
+		$data['pickupL']=$this->carshare_model->getLocationDetails($data['cart']['plocation']);
+		$data['dropL']=$this->carshare_model->getLocationDetails($data['cart']['dlocation']);			
 						
 		$emailContent = '<html><head></head><body style="background-color:#EAECED;"> <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 						<style> @import url("https://fonts.googleapis.com/css?family=Open+Sans"); </style> <table align="center" bgcolor="#EAECED" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -965,12 +979,14 @@ class Welcome extends CI_Controller {
                                                     <tbody>
                                                         <tr>
                                                             <td align="left" style="font-size:16px!important;line-height:30px!important;font-weight:100!important;color:#7e8890!important">
-                                                                <p>Booking successfully made.Check your bookings page for more information.As always, we are here to help should you have any questions.</p>
+                                                                <p>Booking successfully made.Check your bookings page and your Email for more information.As always, we are here to help should you have any questions.</p>
                                                                 <ul style="text-align: left">
                                                                     <li>Customer name: <strong>'.$data['username'].'</strong></li>
                                                                     <li>Car: <strong>'.$data['cart']['carid'].'</strong></li>
-                                                                    <li>Pick Up: <strong>'.$data['cart']['pdate'].'</strong></li>
-                                                                    <li>Drop Off: <strong>'.$data['cart']['ddate'].'</strong></li>
+                                                                    <li><a href="https://maps.google.com/?q='.$data['pickupL'][0]->lat.','.$data['pickupL'][0]->long.'" target="_blank" class="author">Drop Off :<strong>'.$data['cart']['ddate'].' '.$data['pickupL'][0]->name.'</strong><span>'.$data['pickupL'][0]->name.'</span></a></li>
+																	
+                                                                    <li><a href="https://maps.google.com/?q='.$data['dropL'][0]->lat.','.$data['dropL'][0]->long.'" target="_blank" class="author">Drop Off :<strong>'.$data['cart']['ddate'].' '.$data['dropL'][0]->name.'</strong><span>'.$data['dropL'][0]->name.'</span></a></li>
+																	
                                                                     <li>Total Amount: <strong>'.round($data['cart']['rent']).' AUD</strong></li>
                                                                 </ul>
                                                                 <p>Kind regards</p>
@@ -1370,6 +1386,7 @@ class Welcome extends CI_Controller {
             echo json_encode($data);
         }
     }
+<<<<<<< HEAD
 
 
 
@@ -1382,5 +1399,40 @@ class Welcome extends CI_Controller {
 
 
 
+=======
+	
+	public function accountconfirmation(){
+	
+		if(isset($_GET['token'])){
+			
+			 $data = array();
+			$this->load->model('carshare_model');
+			
+			$user=$this->carshare_model->confirmation($_GET['token']);
+			
+			if(count($user)>0){
+				
+				$update_data = array(
+                'Status' => "ACTIVE",
+                
+				);
+
+            $this->carshare_model->edit_data('customer', $user[0]->Id, 'Id', $update_data);
+            
+				
+				
+				echo "Thank You for confirming your email.";
+			}else{
+				$this->load->view('error_404', $data);
+			}
+			
+		}else{
+			$this->load->view('error_404', $data);
+		}  
+	
+	
+	}
+	
+>>>>>>> 008898ac9d76dbaa7cf84a9863ead092f66997eb
 	
 }

@@ -74,8 +74,12 @@ $route['removecart'] = 'welcome/removecart';
 $route['changecar'] = 'welcome/changeCar';
 $route['updatecar'] = 'welcome/updatecar';
 $route['reports'] = 'welcome/reports';
+<<<<<<< HEAD
 $route['changedate'] = 'welcome/changedate';
 $route['pickedup'] = 'welcome/pickedup';
 $route['dropped'] = 'welcome/dropped';
+=======
+$route['accountconfirmation'] = 'welcome/accountconfirmation';
+>>>>>>> 008898ac9d76dbaa7cf84a9863ead092f66997eb
 $route['404_override'] = 'welcome/error404';
 

@@ -14,7 +14,6 @@ $this->load->view('inc/header', $data);
                     <div class="section-title  text-center">
                         <h2>ADMIN SIGN IN</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                 </div>
                 <!-- Page Title End -->
