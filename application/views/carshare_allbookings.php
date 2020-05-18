@@ -5,6 +5,65 @@ $this->load->view('inc/header', $data);
 
 ?>
 
+<style>
+.contact-form .input1 button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	float:left;
+	
+
+}
+.contact-form .input2 button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	float:right;
+
+}
+
+.in1, .in2{
+  background-color: #999999;
+  border: 2px solid #4da4bd;
+	color: #222;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 70px;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+.in1, .in2,.in3, .in4 {
+  transition-duration: 0.4s;
+}
+
+.in1, .in2 {
+  background-color: #00cc00; /* Green */
+  color: white;
+}
+
+.in3, .in4{
+  background-color: #4da4bd;
+  border: 2px solid #4da4bd;
+	color: #222;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 70px;
+	cursor: pointer;
+	text-transform: uppercase;
+  margin: 0px auto;
+}
+
+
+.in3, .in4 {
+  background-color: #b30000; /* Green */
+  color: white;
+}
+
+</style>
+
 <script>
 $(document).ready(function(){
 	
@@ -245,13 +304,17 @@ $(document).ready(function(){
 				<h4 id="admincarcost" style="text-align:center;">Booking Total : 0 AUD</h4>
             </div>
         </div>
-		<div class="col-lg-6 col-md-6">>
-		<div class="input-submit">
- 			 <button id="adminshortenbooking" >Shorten Booking</button>
-			 <button id="admincancelbooking" style="background-color:red;" >Cancel Booking</button>
-			 <button id="admincarpickedup" style="background-color:green;" >Car Picked Up</button>
-			<button id="admincarDroped" style="background-color:green;" >Car Dropped</button>
+		</div>
+		</br>
+		</br>
+		<div class="input1">
+ 			 <button id="adminshortenbooking" class='in1' >Change Booking Period</button>
+			 <button id="admincancelbooking" class='in2'   >Cancel Booking</button>
         </div>
+
+		<div class="input2">
+		<button id="admincarpickedup" class='in3'  >Car Picked Up</button>
+		<button id="admincarDroped" class='in4'  >Car Dropped</button>
 		</div>
     </div>
 	
