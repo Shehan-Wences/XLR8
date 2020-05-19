@@ -987,9 +987,9 @@ class Welcome extends CI_Controller {
                                                                 <ul style="text-align: left">
                                                                     <li>Customer name: <strong>'.$data['username'].'</strong></li>
                                                                     <li>Car: <strong>'.$data['cart']['carid'].'</strong></li>
-                                                                    <li><a href="https://maps.google.com/?q='.$data['pickupL'][0]->lat.','.$data['pickupL'][0]->long.'" target="_blank" class="author">Drop Off :<strong>'.$data['cart']['ddate'].' '.$data['pickupL'][0]->name.'</strong><span>'.$data['pickupL'][0]->name.'</span></a></li>
+                                                                    <li><a href="https://maps.google.com/?q='.$data['pickupL'][0]->lat.','.$data['pickupL'][0]->long.'" target="_blank" class="author">Drop Off :<strong>'.$data['cart']['ddate'].'</strong><span>'.$data['pickupL'][0]->name.'</span></a></li>
 																	
-                                                                    <li><a href="https://maps.google.com/?q='.$data['dropL'][0]->lat.','.$data['dropL'][0]->long.'" target="_blank" class="author">Drop Off :<strong>'.$data['cart']['ddate'].' '.$data['dropL'][0]->name.'</strong><span>'.$data['dropL'][0]->name.'</span></a></li>
+                                                                    <li><a href="https://maps.google.com/?q='.$data['dropL'][0]->lat.','.$data['dropL'][0]->long.'" target="_blank" class="author">Drop Off :<strong>'.$data['cart']['ddate'].'</strong><span>'.$data['dropL'][0]->name.'</span></a></li>
 																	
                                                                     <li>Total Amount: <strong>'.round($data['cart']['rent']).' AUD</strong></li>
                                                                 </ul>
