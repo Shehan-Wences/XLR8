@@ -550,7 +550,7 @@ $(document).ready(function(){
 			$("#adminshortenbooking").css('display','block');
 		}else if(status=='Past'){
 			$("#admincancelbooking").css('display','none');
-			$("#admincarpickedup").css('display','block');
+			$("#admincarpickedup").css('display','none');
 			$("#admincarDroped").css('display','none');
 			$("#adminshortenbooking").css('display','none');
 		}else if(status=='Cancelled'){
