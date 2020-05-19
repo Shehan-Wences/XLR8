@@ -110,16 +110,13 @@ class Welcome extends CI_Controller {
 		 }else{
 			$price = "ASC";
 		 }
-		 
 		 $data['cartype']=$type;
 		 $data['carmake']=$make;
 		 $data['cartransmission']=$transmission;
 		 $data['carfuel']=$fuel;
 		 $data['price']=$price;
 		 $data['cars'] =$this->carshare_model->fetch_cars( $data['location'], $data['pickup'],$data['dropoff'],$type,$make,$transmission,$fuel,$price,$nearest);
-		
-		}
-		
+		}		
 		$this->load->view('carshare_search', $data);
 	}
 	public function contact()
@@ -133,9 +130,7 @@ class Welcome extends CI_Controller {
 			$data['admin'] = $this->session->userdata('admin');
 		}
 		$this->session->unset_userdata('url');
- 
-
-			
+ 			
 		$this->load->view('carshare_contact', $data);
 	}
 	public function signin()
@@ -158,16 +153,12 @@ class Welcome extends CI_Controller {
 		  'https://www.googleapis.com/auth/userinfo.email',
 		];
 
-		
-		
 		$gClient = new Google_Client();
 		$gClient->setClientId("74415772971-pp3su1uji356qg18l84qbjt0idgbnrf0.apps.googleusercontent.com");
 		$gClient->setClientSecret("3KsbtO-dESeZsadDOji6B7Z8");
 		$gClient->setApplicationName("XLR8");
 		$gClient->setRedirectUri(base_url('/signin'));
-		
 		$gClient->setScopes($scopes);
-		
 		$data['url']=$gClient->createAuthUrl();
 		
 		if(isset($_GET['code'])){
@@ -175,12 +166,10 @@ class Welcome extends CI_Controller {
 			$token=$gClient->fetchAccessTokenWithAuthCode($_GET['code']);
 				try {
 					$oAuth = new Google_Service_Oauth2($gClient);
-					$userData = $oAuth->userinfo_v2_me->get();
-					
+					$userData = $oAuth->userinfo_v2_me->get();		
 				}catch (\Exception $e) { 
 					redirect('/eror404', 'refresh');
 				}
-			
 			
 			$profile = $this->carshare_model->profile($userData['email']);
 			
@@ -192,24 +181,21 @@ class Welcome extends CI_Controller {
 					'Lname' => $profile[0]->Lname,
 					'Id' => $profile[0]->Id
 				);				
-								
-				
+											
 				$gClient->revokeToken();
 				$this->session->set_userdata('logged_in', $session_data);
 				
 				redirect('', 'refresh');
-				
-				
+
 			}else{
 				
 				$add_data = array('Fname' => $userData['givenName'],
 									'Lname' =>$userData['familyName'],
 									'Email' => $userData['email'],
-									'Status' => 'ACTIVE');
+									'Status' => 'ACTIVE
+									');
 
 				$this->carshare_model->add_data('customer', $add_data);
-				
-				
 				$session_data = array(
 					'email' => $userData['email'],
 					'Fname' => $userData['givenName'],
@@ -219,16 +205,8 @@ class Welcome extends CI_Controller {
 				
 				$gClient->revokeToken();
 				$this->session->set_userdata('logged_in', $session_data);
-				
 				redirect('', 'refresh');
-				
-			
 			}
-			
-			
-			
-			
-	
 		}
 		
 		if(($this->input->server('REQUEST_METHOD')) == 'POST'){
@@ -742,7 +720,6 @@ class Welcome extends CI_Controller {
 	
 	public function booking()
 	{ 
-
 		$data = array();
 		$this->load->model('carshare_model');
 		
@@ -756,10 +733,6 @@ class Welcome extends CI_Controller {
 				$data['message']="Booking CAN NOT be made.Please re-check booking details.";
 				echo json_encode($data);
 			}else{
-				
-				
-				
-				
 				$check=$this->carshare_model->fetch_thecar($_GET['id'],$_GET['plocation'],$_GET['pdate'],$_GET['ddate']);
 				
 				if(!empty($check)){
@@ -779,12 +752,8 @@ class Welcome extends CI_Controller {
 					//$cost= $_GET['rent']*($diff/(60*60*24));
 					
 					if($ptime < $today || $dtime < $today || $ptime > $dtime){
-						
-						
 						$data['status']="fail";
 						$data['message']="Please check the dates again";
-						
-			
 						echo json_encode($data);
 						
 					}else{
@@ -801,10 +770,6 @@ class Welcome extends CI_Controller {
 						);
 
 						$this->session->set_userdata('cart', $cart);
-						
-						
-	
-					
 						$data['status']="success";
 						echo json_encode($data);
 					}
@@ -813,19 +778,14 @@ class Welcome extends CI_Controller {
 					$data['status']="fail";
 					$data['message']="We are unable to make the booking.Vehicle is unavailable during this period.";
 					echo json_encode($data);
-				}
-				
-				
-				
+				}		
 			}
 		}
-	
 	}
 
 	public function cusDetail()
 	{ 
 		$data = array();
-		
 		$this->load->model('carshare_model');
 		
 		if($this->session->userdata('admin')){
@@ -843,13 +803,11 @@ class Welcome extends CI_Controller {
 		$data['Active'] = $this->carshare_model->displayrecords('','ACTIVE','All');
 		$data['Deactive'] = $this->carshare_model->displayrecords('','Deactivated','All');
 		$this->load->view('carshare_CusDetail',$data);
-	
 	}
 
 	public function payment()
 	{ 
 		$data = array();
-		
 		if($this->session->userdata('logged_in') && $this->session->userdata('cart')){
 			$session_array_used = $this->session->userdata('logged_in');
 			$data['username'] = $session_array_used['Fname'].' '.$session_array_used['Lname'];
@@ -872,15 +830,13 @@ class Welcome extends CI_Controller {
 		$this->load->view('carshare_payment', $data);
 			
 	}
+
 	public function invoice()
 	{ 
 		$data = array();
-		
-		
-			
 		$this->load->view('carshare_invoice', $data);
-			
 	}
+
 	public function bookingconfirmation()
 	{ 
 		$data = array();
@@ -1090,8 +1046,6 @@ class Welcome extends CI_Controller {
 				$config['mailtype'] = 'html'; 
 				$config['validation'] = TRUE; 
 
-				 
-
 				$this->email->initialize($config);
 				$this->email->set_mailtype("html");
 				$this->email->from('xlr8.carshare@gmail.com','XLR8');
@@ -1099,11 +1053,7 @@ class Welcome extends CI_Controller {
 				$this->email->subject('XLR8 - Booking Confirmation');
 				$this->email->message($emailContent);
 				$this->email->send();				
-											
-			
-						
-						
-						
+									
 		$this->session->unset_userdata('cart');
 		$this->load->view('carshare_bookingconfirmation', $data);
 			
@@ -1382,6 +1332,13 @@ class Welcome extends CI_Controller {
 			);
 			$this->carshare_model->edit_data('parking', $carid, 'carid', $update_Car);
 
+			#updating mileage
+			$mile = $_GET['mile'];
+			$update_mile = array(
+                'Mileage' => $mile,
+			);
+			$this->carshare_model->edit_data('car', $carid, 'carid', $update_mile);
+
             $data['success'] = "working";
             echo json_encode($data);
         }   
@@ -1390,18 +1347,6 @@ class Welcome extends CI_Controller {
             echo json_encode($data);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	public function accountconfirmation(){
 	

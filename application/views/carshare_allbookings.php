@@ -6,24 +6,38 @@ $this->load->view('inc/header', $data);
 ?>
 
 <style>
+
 .contact-form .input1 button {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	float:left;
-	
-
 }
+
 .contact-form .input2 button {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	float:right;
-
 }
 
-.in1, .in2{
-  background-color: #999999;
+.modal-content input {
+	background-color: #fafafa;
+	border: 1px solid #4da4bd;
+	border-radius: .25rem;
+	color: #000;
+	padding: 8px 15px;
+	resize: none;
+	width: 100%;
+}
+
+.modal-content input:focus {
+	border-color: #4da4bd;
+}
+
+
+.in1, .in2, .for2{
+  background-color: #4da4bd;
   border: 2px solid #4da4bd;
 	color: #222;
 	display: inline-block;
@@ -34,16 +48,16 @@ $this->load->view('inc/header', $data);
 	text-transform: uppercase;
 }
 
-.in1, .in2,.in3, .in4 {
+.in1, .in2,.in3, .in4, .for1 {
   transition-duration: 0.4s;
 }
 
-.in1, .in2 {
+.in1:hover, .in2:hover, .for2:hover {
   background-color: #00cc00; /* Green */
   color: white;
 }
 
-.in3, .in4{
+.in3, .in4, .for1{
   background-color: #4da4bd;
   border: 2px solid #4da4bd;
 	color: #222;
@@ -56,8 +70,7 @@ $this->load->view('inc/header', $data);
   margin: 0px auto;
 }
 
-
-.in3, .in4 {
+.in3:hover, .in4:hover, .for1:hover{
   background-color: #b30000; /* Green */
   color: white;
 }
@@ -82,17 +95,14 @@ $(document).ready(function(){
 	});
 
 	$( "#newadminshortenbooking" ).click(function() {
-		
 		$('#newadminshortenbooking').text('Updating Date and Time...');
 		$('#newadminshortenbooking').prop('disabled', true);
 		
 		var bookingid= $("#newadminbkid").val();
 		var carid=	 $("#newadmincarid").val();
 		var benddate= $("#newadmincarddate").val();
-		
-			
+	
 		$.ajax({
-			
 		url:"<?php echo base_url(); ?>changedate?id="+carid+"&benddate="+benddate+"&bookingid="+bookingid,
 		method:"GET",
 		dataType:"json",
@@ -104,18 +114,13 @@ $(document).ready(function(){
 		});
 	});
 
-
-
-	
 	$( "#admincarpickedup" ).click(function() {
-		
 		$('#admincarpickedup').text('Updating Booking...');
 		$('#admincarpickedup').prop('disabled', true);
 					
 		var bookingid= $("#adminbkid").val();
 			
 		$.ajax({
-			
 		url:"<?php echo base_url(); ?>pickedup?&bookingid="+bookingid+"&bookingstatus=Current",
 		method:"GET",
 		dataType:"json",
@@ -128,16 +133,25 @@ $(document).ready(function(){
 	});
 
 	$( "#admincarDroped" ).click(function() {
-		
-		$('#admincarDroped').text('Updating Booking...');
-		$('#admincarDroped').prop('disabled', true);
+		$("#allBooking").css('display','none');
+		$("#miles").css('display','block');
+	});
+
+	$( "#milesclose" ).click(function() {
+		$("#miles").css('display','none');
+		$("#allBooking").css('display','block');
+	});
+
+	$( "#milesup" ).click(function() {
+		$('#milesup').text('Updating Mileage...');
+		$('#milesup').prop('disabled', true);
 					
 		var bookingid= $("#adminbkid").val();
 		var carid=	 $("#admincarid").val();
+		var mile=	 $("#mile").val();
 			
 		$.ajax({
-			
-		url:"<?php echo base_url(); ?>dropped?&bookingid="+bookingid+"&bookingstatus=Done"+"&carid="+carid,
+		url:"<?php echo base_url(); ?>dropped?&bookingid="+bookingid+"&bookingstatus=Done"+"&carid="+carid+"&mile="+mile,
 		method:"GET",
 		dataType:"json",
 		success:function(data)
@@ -149,31 +163,23 @@ $(document).ready(function(){
 	});
 
 	$( "#admincancelbooking" ).click(function() {
-		
 		$('#admincancelbooking').text('Checking...');
 		$('#admincancelbooking').prop('disabled', true);
 			
-					
-		
 		var carid=	 $("#admincarid").val();
 		var bstartdate=	$("#admincarpdate").val();
 		var benddate=	$("#admincarddate").val();
 		var bookingid= $("#adminbkid").val();	
 		var userid= $("#userid").val();	
 			
-		$.ajax({
-			
+		$.ajax({		
 		url:"<?php echo base_url(); ?>cancelbooking?id="+carid+"&bstartdate="+bstartdate+"&benddate="+benddate+"&bookingid="+bookingid+"&userid="+userid,
 		method:"GET",
 		dataType:"json",
 		success:function(data)
 		{
-			
-					
-			if(data.status=="success"){
-						
+			if(data.status=="success"){				
 				window.location.href = "<?php echo base_url('/allbookings'); ?>";
-				
 			}else if(data.status=="fail"){
 						$('#admincancelbooking').text('Cancel Booking');
 						$('#admincancelbooking').prop('disabled', false);
@@ -182,10 +188,7 @@ $(document).ready(function(){
 		}
 		});
 	});
-
-	
 });
-
 </script>
 
    <!--== Page Title Area Start ==-->
@@ -206,21 +209,17 @@ $(document).ready(function(){
     <!--== Page Title Area End ==-->
 
     <!--== My bookings Page Area Start ==-->
-
-
-<div id="sjrt" class="modal">
+	<div id="miles" class="modal">
 
 <div class="modal-content">
-    <span id="newadmindialogclose" class="close">&times;</span>
+    <span id="milesclose" class="close">&times;</span>
 
-	<h2 style="text-align:center; background-color: #4da4bd; color:black;">Change Date/Time</h2>
+	<h2 style="text-align:center; background-color: #4da4bd; color:black;">Update Mileage</h2>
 	<div class="row">
         <div class="1" style=" margin: auto;">
             <div class="subject-input" style="text-align: center;" >
-				<label for="newcarddate">Dropoff Date/Time --> </label>
-				
-                <input  type="text"  id="newadmincarddate" />
-
+				<label for="milage">New Milage </label>
+                <input  type="text"  id="mile" />
 				<input  type="text"  id="newadmincarid" hidden />
 			 	<input  type="text"  id="newadminbkid" hidden />
             </div>
@@ -230,7 +229,33 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="2" style=" margin: auto;">
 		<div class="input-submit">
- 			<button id="newadminshortenbooking" >Update Time-period</button>
+ 			<button id="milesup" class="for1" >Update</button>
+        </div>
+		</div>
+    </div>
+</div>
+</div>
+
+
+<div id="sjrt" class="modal">
+<div class="modal-content">
+    <span id="newadmindialogclose" class="close">&times;</span>
+	<h2 style="text-align:center; background-color: #4da4bd; color:black;">Change Date/Time</h2>
+	<div class="row">
+        <div class="1" style=" margin: auto;">
+            <div class="subject-input" style="text-align: center;" >
+				<label for="newcarddate">Dropoff Date/Time --> </label>
+                <input  type="text"  id="newadmincarddate"  />
+				<input  type="text"  id="newadmincarid" hidden />
+			 	<input  type="text"  id="newadminbkid" hidden />
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="2" style=" margin: auto;">
+		<div class="input-submit">
+ 			<button id="newadminshortenbooking" class="for2" >Update Time-period</button>
         </div>
 		</div>
     </div>
@@ -317,7 +342,6 @@ $(document).ready(function(){
 		<button id="admincarDroped" class='in4'  >Car Dropped</button>
 		</div>
     </div>
-	
 </div>
  </div>
  </div>  
@@ -330,7 +354,6 @@ $(document).ready(function(){
                         <div class="row">
                             <!-- Team Tab Menu start -->
                             <div class="col-lg-12">
-                                
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
 										<li class="nav-item">
                                             <a class="nav-link active" id="tab_item_1" data-toggle="tab" href="#team_member_1" role="tab" aria-selected="true">
@@ -345,18 +368,14 @@ $(document).ready(function(){
                                         <li class="nav-item">
                                             <a class="nav-link" id="tab_item_3" data-toggle="tab" href="#team_member_3" role="tab" aria-selected="true">
 												<p class="booking-p">Past Bookings</p>
-                                             
                                             </a>
                                         </li>
 										<li class="nav-item">
                                             <a class="nav-link" id="tab_item_4" data-toggle="tab" href="#team_member_4" role="tab" aria-selected="true">
 												<p class="booking-p">Cancelled Bookings</p>
-                                             
                                             </a>
-                                        </li>
-										
+                                        </li>	
                                     </ul>
-                                
                             </div>
                             <!-- Team Tab Menu End -->
 
@@ -381,28 +400,22 @@ $(document).ready(function(){
 														<tr class="booktr" >
 															<td><?php echo $new->userid; ?></td>
 															<td><?php echo $new->bookingid; ?></td>
-															
 															<td> <?php echo $new->make; ?> <?php echo $new->model; ?> <?php echo $new->year;?></td>
 															<td><?php echo $new->cost; ?></td>
 															<td><img id="<?php echo trim($new->bookingid); ?>" src="assets/img/icon-transparent.png" 
 															onmouseover="hover('<?php echo trim($new->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($new->bookingid); ?>')" style="height: 30px; width: 30px; cursor:pointer;" 
 															onclick="dialog('<?php echo $new->carid; ?>','<?php echo $new->make; ?>','<?php echo $new->model; ?>','<?php echo $new->year;?>','<?php echo $new->pickuplocation; ?>','<?php echo $new->pickupdate; ?>','<?php echo $new->dropofflocation; ?>','<?php echo $new->dropoffdate; ?>','<?php echo $new->cost; ?>','<?php echo $new->message; ?>','New','<?php echo $new->bookingid; ?>','<?php echo $new->userid; ?>')"></td>
-															
 														</tr>
-													<?php } ?>
-											 
-													 
+													<?php } ?>	 
 													</table>
                                                 </div>
-                                            </div>
-											
+                                            </div>				
                                         </div>
                                     </div>
-									
+							
                                     <div class="tab-pane fade show" id="team_member_2" role="tabpanel" aria-labelledby="tab_item_2">
                                         <div class="row">
-                                           
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
@@ -417,7 +430,6 @@ $(document).ready(function(){
 														<tr class="booktr" >
 															<td><?php echo $current->userid; ?></td>
 															<td><?php echo $current->bookingid; ?></td>
-															
 															<td> <?php echo $current->make; ?> <?php echo $current->model; ?> <?php echo $current->year;?></td>
 															<td><?php echo $current->cost; ?></td>
 															<td><img id="<?php echo $current->bookingid; ?>" src="assets/img/icon-transparent.png" 
@@ -426,18 +438,14 @@ $(document).ready(function(){
 															onclick="dialog('<?php echo $current->carid; ?>','<?php echo $current->make; ?>','<?php echo $current->model; ?>','<?php echo $current->year;?>','<?php echo $current->pickuplocation; ?>','<?php echo $current->pickupdate; ?>','<?php echo $current->dropofflocation; ?>','<?php echo $current->dropoffdate; ?>','<?php echo $current->cost; ?>','<?php echo $current->message; ?>','Current','<?php echo $current->bookingid; ?>','<?php echo $current->userid; ?>')"></td>
 															
 														</tr>
-													<?php } ?>
-											 
-													 
+													<?php } ?>	 
 													</table>
                                                 </div>
                                             </div>
-											
                                         </div>
                                     </div>
 									<div class="tab-pane fade show" id="team_member_3" role="tabpanel" aria-labelledby="tab_item_3">
                                         <div class="row">
-                                           
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
@@ -452,27 +460,21 @@ $(document).ready(function(){
 														<tr class="booktr" >
 															<td><?php echo $past->userid; ?></td>
 															<td><?php echo $past->bookingid; ?></td>
-															
 															<td> <?php echo $past->make; ?> <?php echo $past->model; ?> <?php echo $past->year;?></td>
 															<td><?php echo $past->cost; ?></td>
 															<td><img id="<?php echo $past->bookingid; ?>" src="assets/img/icon-transparent.png" style="height: 30px; width: 30px; cursor:pointer;" 
 															onmouseover="hover('<?php echo trim($past->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($past->bookingid); ?>')"
 															onclick="dialog('<?php echo $past->carid; ?>','<?php echo $past->make; ?>','<?php echo $past->model; ?>','<?php echo $past->year;?>','<?php echo $past->pickuplocation; ?>','<?php echo $past->pickupdate; ?>','<?php echo $past->dropofflocation; ?>','<?php echo $past->dropoffdate; ?>','<?php echo $past->cost; ?>','<?php echo $past->message; ?>','Past','<?php echo $past->bookingid; ?>','<?php echo $past->userid; ?>')"></td>
-															
 														</tr>
-													<?php } ?>
-											 
-													 
+													<?php } ?>	 
 													</table>
                                                 </div>
                                             </div>
-											
                                         </div>
                                     </div>
 									<div class="tab-pane fade show" id="team_member_4" role="tabpanel" aria-labelledby="tab_item_4">
                                         <div class="row">
-                                           
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
@@ -487,25 +489,19 @@ $(document).ready(function(){
 														<tr class="booktr" >
 														<td><?php echo $cancelled->userid; ?></td>
 															<td><?php echo $cancelled->bookingid; ?></td>
-															
 															<td> <?php echo $cancelled->make; ?> <?php echo $cancelled->model; ?> <?php echo $cancelled->year;?></td>
 															<td><?php echo $cancelled->cost; ?></td>
 															<td><img id="<?php echo $cancelled->bookingid; ?>" src="assets/img/icon-transparent.png" style="height: 30px; width: 30px; cursor:pointer;" 
 															onmouseover="hover('<?php echo trim($cancelled->bookingid); ?>')" 
 															onmouseout="out('<?php echo trim($cancelled->bookingid); ?>')"
 															onclick="dialog('<?php echo $cancelled->carid; ?>','<?php echo $cancelled->make; ?>','<?php echo $cancelled->model; ?>','<?php echo $cancelled->year;?>','<?php echo $cancelled->pickuplocation; ?>','<?php echo $cancelled->pickupdate; ?>','<?php echo $cancelled->dropofflocation; ?>','<?php echo $cancelled->dropoffdate; ?>','<?php echo $cancelled->cost; ?>','<?php echo $cancelled->message; ?>','Cancelled','<?php echo $cancelled->bookingid; ?>','<?php echo $cancelled->userid; ?>')"></td>
-															
 														</tr>
-													<?php } ?>
-											 
-													 
+													<?php } ?>	 
 													</table>
                                                 </div>
-                                            </div>
-											
+                                            </div>	
                                         </div>
                                     </div>
- 
                                 </div>
                             </div>
                             <!-- Team Tab Content End -->
@@ -528,13 +524,10 @@ $(document).ready(function(){
 		$("#newadmincarddate").val(dropoffdate);
 		$("#admincarmessage").val(message);
 		$("#userid").val(userid);
-		
 		$("#admincarid").val(id);
 		$("#adminbkid").val(bookingid);
-
 		$("#newadmincarid").val(id);
 		$("#newadminbkid").val(bookingid);
-
 		$("#admincarcost").text('Booking Total : '+cost+' AUD');
 		
 		if(status=='New'){
@@ -550,7 +543,7 @@ $(document).ready(function(){
 			$("#adminshortenbooking").css('display','block');
 		}else if(status=='Past'){
 			$("#admincancelbooking").css('display','none');
-			$("#admincarpickedup").css('display','none');
+			$("#admincarpickedup").css('display','block');
 			$("#admincarDroped").css('display','none');
 			$("#adminshortenbooking").css('display','none');
 		}else if(status=='Cancelled'){
@@ -559,24 +552,14 @@ $(document).ready(function(){
 			$("#admincarDroped").css('display','none');
 			$("#adminshortenbooking").css('display','none');
 		}
-		
-		
-		
-    }	
-	
+    }		
 	function hover(id){
 		$("#"+id).attr("src","assets/img/icon-transparenthover.png");
 	}
 	function out(id){
 		$("#"+id).attr("src","assets/img/icon-transparent.png");
 	}
-	
-	
-	</script>
-   
-
+</script>
     <!--== My bookings Page Area End ==-->
-
- 
 
 <?php $this->load->view('inc/footer'); ?>
