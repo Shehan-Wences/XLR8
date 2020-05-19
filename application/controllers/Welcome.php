@@ -746,7 +746,7 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->model('carshare_model');
 		
-		if(isset($this->session->userdata('admin'))){
+		if($this->session->userdata('admin')){
 				$data['status']="fail";
 				$data['message']="Admins Cannot make bookings.";
 				echo json_encode($data);
