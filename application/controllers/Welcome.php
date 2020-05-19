@@ -746,7 +746,11 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->model('carshare_model');
 		
-			
+		if(isset($this->session->userdata('admin')){
+				$data['status']="fail";
+				$data['message']="Admins Cannot make bookings.";
+				echo json_encode($data);
+		}else{	
 			if(!isset($_GET['id'])||!isset($_GET['plocation'])||!isset($_GET['dlocation'])||!isset($_GET['pdate'])||!isset($_GET['ddate'])){
 				$data['status']="fail";
 				$data['message']="Booking CAN NOT be made.Please re-check booking details.";
@@ -814,7 +818,7 @@ class Welcome extends CI_Controller {
 				
 				
 			}
-		
+		}
 	
 	}
 
