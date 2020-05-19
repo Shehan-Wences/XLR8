@@ -299,10 +299,34 @@ class carshare_model extends CI_Model {
         return $data;
 	}
 	
-	function displayrecords()
+	function displayrecords($id,$status,$search)
 	{
-		$query = $this->db->get("customer");
-		return $query;
+
+		$data = array();	
+		
+		if($search=='All'){
+		$this->db->select('customer.Id');
+		}
+		
+		$this->db->select('customer.Fname');
+		$this->db->select('customer.Lname');
+		$this->db->select('customer.Email');
+		$this->db->select('customer.DriverL');
+		$this->db->from('customer');
+	
+
+		if($search=='Only'){
+		$this->db->where('customer.Id', $id);
+		}
+		$this->db->where('customer.Status', $status);
+		
+		$open_list = $this->db->get();
+		
+        foreach ($open_list->result() as $open_info) {
+            $data[] = $open_info;
+        }
+        return $data;
+
 	}
 	
 	function displayrecord2()

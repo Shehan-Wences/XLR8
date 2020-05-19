@@ -826,26 +826,26 @@ class Welcome extends CI_Controller {
 	{ 
 		$data = array();
 		
-		if($this->session->userdata('admin')){
-			$status=true;
-			$data['admin'] = $this->session->userdata('admin');
-			$this->load->model('carshare_model');
-			
-			if(isset($_GET['Email'])){
-				$Email = $_GET['Email'];  
-				$edit_data = array('Status' => 'Deactivated');
-				$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
-			}
-
-			$data['Cus_data'] = $this->carshare_model->displayrecords();
-			$this->load->view('carshare_CusDetail',$data);
-		}
+		$this->load->model('carshare_model');
 		
-		else{
-			$this->load->view('error_404', $data);
-		}  
+		if($this->session->userdata('admin')){
+			$data['admin'] = $this->session->userdata('admin');
+		}else{
+			redirect(base_url('/eror404'), 'refresh');
+		}
 
+		if(isset($_GET['Email'])){
+			$Email = $_GET['Email'];  
+			$edit_data = array('Status' => 'Deactivated');
+			$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+		}
+
+		$data['Active'] = $this->carshare_model->displayrecords('','ACTIVE','All');
+		$data['Deactive'] = $this->carshare_model->displayrecords('','Deactivated','All');
+		$this->load->view('carshare_CusDetail',$data);
+	
 	}
+
 	public function payment()
 	{ 
 		$data = array();
@@ -1297,11 +1297,8 @@ class Welcome extends CI_Controller {
 
         $data['message'] = "Car Details has been updated";
         if(isset($_GET['carid']))
-        
         {
-            
             $id= $_GET['carid'];
-
             $update_data = array(
                 'make' => $_GET['make'],
                 'model' => $_GET['model'],
@@ -1311,18 +1308,100 @@ class Welcome extends CI_Controller {
                 'type' => $_GET['type'],
                 'transmission' => $_GET['transmission']
             );
-
             $this->carshare_model->edit_data('car', $id, 'carid', $update_data);
             $data['success'] = "working";
             echo json_encode($data);
         }   
-
         else{
             $data['fail'] = "fail";
             echo json_encode($data);
         }
+	}
 
+	public function changedate(){
+        $data = array();
+		$this->load->model('carshare_model');
+		
+        $data['message'] = "New date and time has been updated";
+        if(isset($_GET['benddate']))
+        {
+			#changing at booking database
+            $id = $_GET['bookingid'];
+            $update_Status = array(
+                'dropoffdate' => $_GET['benddate'],
+            );
+            $this->carshare_model->edit_data('booking', $id, 'bookingid', $update_Status);
+            $data['success'] = "working";
+            echo json_encode($data);
+        }   
+        else{
+            $data['fail'] = "fail";
+            echo json_encode($data);
+        }
+	}
+	
+	public function pickedup(){
+        $data = array();
+		$this->load->model('carshare_model');
+		
+        $data['message'] = "Car Booking has been updated";
+        if(isset($_GET['bookingid']))
+        {
+            $id = $_GET['bookingid'];
+            $update_Status = array(
+                'bookingstatus' => $_GET['bookingstatus'],
+            );
+            $this->carshare_model->edit_data('booking', $id, 'bookingid', $update_Status);
+            $data['success'] = "working";
+            echo json_encode($data);
+        }   
+        else{
+            $data['fail'] = "fail";
+            echo json_encode($data);
+        }
+	}
+	
+	public function dropped(){
+        $data = array();
+        $this->load->model('carshare_model');
+		$data['message'] = "Car Booking has been updated";
+		
+        if(isset($_GET['bookingid']))
+        {
+			#update booking status 
+            $id = $_GET['bookingid'];
+            $update_Status = array(
+                'bookingstatus' => $_GET['bookingstatus'],
+            );
+			$this->carshare_model->edit_data('booking', $id, 'bookingid', $update_Status);
+
+			#making the car available 
+			$carid = $_GET['carid'];
+			$update_Car = array(
+                'status' => 'Available',
+			);
+			$this->carshare_model->edit_data('parking', $carid, 'carid', $update_Car);
+
+            $data['success'] = "working";
+            echo json_encode($data);
+        }   
+        else{
+            $data['fail'] = "fail";
+            echo json_encode($data);
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	public function accountconfirmation(){
 	

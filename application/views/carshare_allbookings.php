@@ -4,15 +4,150 @@ $data['title'] = ucfirst('bookings');
 $this->load->view('inc/header', $data);
 
 ?>
+
+<style>
+.contact-form .input1 button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	float:left;
+	
+
+}
+.contact-form .input2 button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	float:right;
+
+}
+
+.in1, .in2{
+  background-color: #999999;
+  border: 2px solid #4da4bd;
+	color: #222;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 70px;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+.in1, .in2,.in3, .in4 {
+  transition-duration: 0.4s;
+}
+
+.in1, .in2 {
+  background-color: #00cc00; /* Green */
+  color: white;
+}
+
+.in3, .in4{
+  background-color: #4da4bd;
+  border: 2px solid #4da4bd;
+	color: #222;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 70px;
+	cursor: pointer;
+	text-transform: uppercase;
+  margin: 0px auto;
+}
+
+
+.in3, .in4 {
+  background-color: #b30000; /* Green */
+  color: white;
+}
+
+</style>
+
 <script>
 $(document).ready(function(){
 	
 	$( "#admindialogclose" ).click(function() {
 		$("#allBooking").css('display','none');
-		
-		
 	});
+
+	$( "#adminshortenbooking" ).click(function() {
+		$("#allBooking").css('display','none');
+		$("#sjrt").css('display','block');
+	});
+
+	$( "#newadmindialogclose" ).click(function() {
+		$("#sjrt").css('display','none');
+		$("#allBooking").css('display','block');
+	});
+
+	$( "#newadminshortenbooking" ).click(function() {
+		
+		$('#newadminshortenbooking').text('Updating Date and Time...');
+		$('#newadminshortenbooking').prop('disabled', true);
+		
+		var bookingid= $("#newadminbkid").val();
+		var carid=	 $("#newadmincarid").val();
+		var benddate= $("#newadmincarddate").val();
+		
+			
+		$.ajax({
+			
+		url:"<?php echo base_url(); ?>changedate?id="+carid+"&benddate="+benddate+"&bookingid="+bookingid,
+		method:"GET",
+		dataType:"json",
+		success:function(data)
+		{
+				alert(data.message); 
+				window.location.href = "<?php echo base_url('/allbookings'); ?>";		
+		}
+		});
+	});
+
+
+
 	
+	$( "#admincarpickedup" ).click(function() {
+		
+		$('#admincarpickedup').text('Updating Booking...');
+		$('#admincarpickedup').prop('disabled', true);
+					
+		var bookingid= $("#adminbkid").val();
+			
+		$.ajax({
+			
+		url:"<?php echo base_url(); ?>pickedup?&bookingid="+bookingid+"&bookingstatus=Current",
+		method:"GET",
+		dataType:"json",
+		success:function(data)
+		{
+				alert(data.message); 
+				window.location.href = "<?php echo base_url('/allbookings'); ?>";		
+		}
+		});
+	});
+
+	$( "#admincarDroped" ).click(function() {
+		
+		$('#admincarDroped').text('Updating Booking...');
+		$('#admincarDroped').prop('disabled', true);
+					
+		var bookingid= $("#adminbkid").val();
+		var carid=	 $("#admincarid").val();
+			
+		$.ajax({
+			
+		url:"<?php echo base_url(); ?>dropped?&bookingid="+bookingid+"&bookingstatus=Done"+"&carid="+carid,
+		method:"GET",
+		dataType:"json",
+		success:function(data)
+		{
+				alert(data.message); 
+				window.location.href = "<?php echo base_url('/allbookings'); ?>";		
+		}
+		});
+	});
+
 	$( "#admincancelbooking" ).click(function() {
 		
 		$('#admincancelbooking').text('Checking...');
@@ -42,21 +177,10 @@ $(document).ready(function(){
 			}else if(data.status=="fail"){
 						$('#admincancelbooking').text('Cancel Booking');
 						$('#admincancelbooking').prop('disabled', false);
-						alert(data.message);
-						
-						
-			}
-					
-					
-					
-					
-					
-					
-					
+						alert(data.message);			
+			}			
 		}
 		});
-		
-		
 	});
 
 	
@@ -82,6 +206,37 @@ $(document).ready(function(){
     <!--== Page Title Area End ==-->
 
     <!--== My bookings Page Area Start ==-->
+
+
+<div id="sjrt" class="modal">
+
+<div class="modal-content">
+    <span id="newadmindialogclose" class="close">&times;</span>
+
+	<h2 style="text-align:center; background-color: #4da4bd; color:black;">Change Date/Time</h2>
+	<div class="row">
+        <div class="1" style=" margin: auto;">
+            <div class="subject-input" style="text-align: center;" >
+				<label for="newcarddate">Dropoff Date/Time --> </label>
+				
+                <input  type="text"  id="newadmincarddate" />
+
+				<input  type="text"  id="newadmincarid" hidden />
+			 	<input  type="text"  id="newadminbkid" hidden />
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="2" style=" margin: auto;">
+		<div class="input-submit">
+ 			<button id="newadminshortenbooking" >Update Time-period</button>
+        </div>
+		</div>
+    </div>
+
+</div>
+</div>
 
 
 <div id="allBooking" class="modal">
@@ -149,12 +304,18 @@ $(document).ready(function(){
 				<h4 id="admincarcost" style="text-align:center;">Booking Total : 0 AUD</h4>
             </div>
         </div>
-		<div class="col-lg-6 col-md-6">
-		<div class="input-submit">
- 			 <button id="adminshortenbooking" >Shorten Booking</button>
-			 <button id="admincancelbooking" style="background-color:red;" >Cancel Booking</button>
+		</div>
+		</br>
+		</br>
+		<div class="input1">
+ 			 <button id="adminshortenbooking" class='in1' >Change Booking Period</button>
+			 <button id="admincancelbooking" class='in2'   >Cancel Booking</button>
         </div>
-        </div>
+
+		<div class="input2">
+		<button id="admincarpickedup" class='in3'  >Car Picked Up</button>
+		<button id="admincarDroped" class='in4'  >Car Dropped</button>
+		</div>
     </div>
 	
 </div>
@@ -364,25 +525,38 @@ $(document).ready(function(){
 		$("#admincardloc").val(dropofflocation);
 		$("#admincarpdate").val(pickupdate);
 		$("#admincarddate").val(dropoffdate);
+		$("#newadmincarddate").val(dropoffdate);
 		$("#admincarmessage").val(message);
 		$("#userid").val(userid);
 		
 		$("#admincarid").val(id);
 		$("#adminbkid").val(bookingid);
+
+		$("#newadmincarid").val(id);
+		$("#newadminbkid").val(bookingid);
+
 		$("#admincarcost").text('Booking Total : '+cost+' AUD');
 		
 		if(status=='New'){
 			$("#admincancelbooking").css('display','block');
+			$("#admincarpickedup").css('display','block');
+			$("#admincarDroped").css('display','none');
 			$("#adminshortenbooking").css('display','none');
 			
 		}else if(status=='Current'){
 			$("#admincancelbooking").css('display','none');
+			$("#admincarpickedup").css('display','none');
+			$("#admincarDroped").css('display','block');
 			$("#adminshortenbooking").css('display','block');
 		}else if(status=='Past'){
 			$("#admincancelbooking").css('display','none');
+			$("#admincarpickedup").css('display','block');
+			$("#admincarDroped").css('display','none');
 			$("#adminshortenbooking").css('display','none');
 		}else if(status=='Cancelled'){
 			$("#admincancelbooking").css('display','none');
+			$("#admincarpickedup").css('display','none');
+			$("#admincarDroped").css('display','none');
 			$("#adminshortenbooking").css('display','none');
 		}
 		

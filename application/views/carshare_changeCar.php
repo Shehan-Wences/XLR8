@@ -5,33 +5,61 @@ $this->load->view('inc/header', $data);
 ?>
 
 <style>
-table {
-  border-collapse: collapse;
-  margin: 0px auto;
-  width: 40%;
-}
 
 th, td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid #ddd;
-}
 
-th {
-  background-color: #4da4bd;
-  color: white;
+}
+.contact-form .inputup button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
 }
 
 .Update{
-  background-color: #4da4bd;
+  background-color: #999999;
+  border: 2px solid #4da4bd;
 	color: #222;
 	display: inline-block;
 	font-size: 15px;
 	font-weight: 600;
-	padding: 12px 30px;
-	border: none;
+	padding: 2px 30px;
 	cursor: pointer;
 	text-transform: uppercase;
+}
+
+.Update {
+  transition-duration: 0.4s;
+}
+
+.Update:hover {
+  background-color: #00cc00; /* Green */
+  color: white;
+}
+
+.go_up{
+  background-color: #4da4bd;
+  border: 2px solid #4da4bd;
+	color: #222;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 100px;
+	cursor: pointer;
+	text-transform: uppercase;
+  margin: 0px auto;
+}
+
+.go_up {
+  transition-duration: 0.4s;
+}
+
+.go_up:hover {
+  background-color: #b30000; /* Green */
+  color: white;
 }
 </style>
 
@@ -114,69 +142,125 @@ th {
     </section>
     <!--== Page Title Area End ==-->
 
-<section id="lgoin-page-wrap" class="section-padding">
-<table width="600" border="1" cellspacing="5" cellpadding="5">
-  <tr style="background:#CCC">
-    <th>Serial no.</th>
-    <th>Car Id</th>
-    <th>Car Picture</th>
-    <th>change details</th>
-  </tr>
-  <?php
-  $i=1;
-  foreach($user->result() as $row)
-  {
-    ?>
-    <tr>  
-    <td><?php echo $i; ?></td>  
-    <td><?php echo $row->carid; ?></td>  
-    <td><img style="width: 50%;" src=<?php echo $row->imageurl; ?> alt="JSOFT"></td>
-    <td><button type="submit" class="Update" id="<?php echo $row->carid; ?>"
-    onclick="dialog('<?php echo $row->carid; ?>','<?php echo $row->make; ?>','<?php echo $row->model; ?>','<?php echo $row->year;?>','<?php echo $row->rent;?>','<?php echo $row->type;?>','<?php echo $row->fuel;?>','<?php echo $row->transmission;?>',' ')"> 
-    Change Details</button></td>
-    </tr>
-  <?php
-    $i++;
-  }
-   ?>
-</table>  
+    <section id="lgoin-page-wrap" class="section-padding">
+                            <!-- Team Tab Content start -->
+                              <div class="col-lg-12">
+                                <div class="tab-content" style="border-bottom: solid 1px #e5e1e1;   border-left: solid 1px #e5e1e1;  border-right: solid 1px #e5e1e1;" id="myTabContent">
+                                    <!-- Single Team  start -->
+								                  	<div class="tab-pane fade show active" id="team_member_1" role="tabpanel" aria-labelledby="tab_item_1">
+                                      <div class="row">     
+                                        <div class="col-lg-12 col-md-12">
+                                          <div style="padding: 50px 30px;" >
+                                            <table class="text-center" style="width: 70%;  margin: 0px auto;">
+                                             <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
+                                            <th>Car Id</th>
+                                            <th>Car Picture</th>
+                                            <th>Make and Model</th>
+                                            <th>change details</th>
+                                              </tr>
+                                              <?php
+                                                $i=1;
+                                                foreach($user->result() as $row)
+                                                {
+                                                  ?>
+                                                  <tr class="booktr">  
+                                                  <td style="width: 20%;"><?php echo $row->carid; ?></td>  
+                                                  <td style="width: 40%;"><img style="width: 50%; " src=<?php echo $row->imageurl; ?> alt="JSOFT"></td>
+                                                  <td style="width: 20%;"><?php echo $row->make;?> <?php echo $row->model;?> <?php echo $row->year;?></td>
+                                                  <td style="width: 20%;"><button type="submit" class="Update" id="<?php echo $row->carid; ?>"
+                                                  onclick="dialog('<?php echo $row->carid; ?>','<?php echo $row->make; ?>','<?php echo $row->model; ?>','<?php echo $row->year;?>','<?php echo $row->rent;?>','<?php echo $row->type;?>','<?php echo $row->fuel;?>','<?php echo $row->transmission;?>',' ')"> 
+                                                  Change Details</button></td>
+                                                  </tr>
+                                                <?php
+                                                  $i++;
+                                                }
+                                                ?>             
+													                    </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
 </section> 
+
+
 </body>
-<!--== model ==-->
 <div id="updateBox" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span id="closeBox" class="close">&times;</span>
-	
-	<h2 id="heading" style="text-align:center; background-color: #4da4bd; color:black;"></h2>
-	 
-  <label >Car-ID</label>
-    <input  type="text"  id="carid" disabled />
 
-    <label >Make</label>
-    <input  type="text"  id="make" />
+<!-- Modal content -->
+<div class="modal-content">
+  <span id="closeBox" class="close">&times;</span>
 
-    <label >Model</label>
-    <input  type="text"  id="model" />
+<h1 id="heading" style="text-align:center; background-color: #4da4bd; color:black;">Something</h2>
+ <div class="contact-form">
+<div class="row">
+      <div class="col-lg-6 col-md-6">
+          <div class="website-input" >
+      <label for="carploc">Make</label>
+        <input  type="text"  id="make" />
+          </div>
+      </div>
 
-    <label >Year</label>
-    <input  type="text"  id="year" />
+      <div class="col-lg-6 col-md-6">
+          <div class="subject-input" >
+      <label for="cardloc">Model</label>
+      <input  type="text"  id="model" />
+          </div>
+      </div>
+  </div>
+<div class="row">
+      <div class="col-lg-6 col-md-6">
+          <div class="website-input" >
+      <label for="carpdate">Year</label>
+      <input  type="text"  id="year" />
+          </div>
+      </div>
 
-    <label >Rent</label>
-    <input  type="text"  id="rent" />
+      <div class="col-lg-6 col-md-6">
+          <div class="subject-input" >
+      <label for="carddate">Rent</label>
+      <input  type="text"  id="rent" />
+          </div>
+      </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-lg-6 col-md-6">
+          <div class="website-input" >
+      <label for="carpdate">Type</label>
+      <input  type="text"  id="type" />
+          </div>
+      </div>
 
-    <label >Type</label>
-    <input  type="text"  id="type" />
+      <div class="col-lg-6 col-md-6">
+          <div class="subject-input" >
+      <label for="carddate">Fuel</label>
+      <input  type="text"  id="fuel" />
+          </div>
+      </div>
+  </div>
 
-    <label >Fuel</label>
-    <input  type="text"  id="fuel" />
+<div class="row">
+      <div class="col-lg-6 col-md-6">
+          <div class="website-input" >
+      <label for="userid">Transmission</label>
+      <input  type="text"  id="transmission" />
+                  <input   type="text"  id="carid" hidden />
+          </div>
+      </div>
+      </div>
+</br>
+</br>
 
-    <label >Transmission</label>
-    <input  type="text"  id="transmission" />
+     <div class="inputup">
+  <button id="go" class="go_up" style= " margin: 0px auto;">Update</button>
+      </div>
+  </div>
 
-    <button id="go" style="background-color:blue;" >Update</button>
-    </div>
-    </div> 
+
+</div>
+</div>
+</div>  
+
 <!--== model ==-->
 </html> 
 
