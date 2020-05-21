@@ -390,6 +390,7 @@ $(document).ready(function(){
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
+													  		   <?php if(!empty($newbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
 														<th>User ID</th>
 														<th>Booking ID</th>
@@ -397,6 +398,11 @@ $(document).ready(function(){
 														<th>Cost</th>
 														<th>Details</th>
 													  </tr>
+													 <?php }else{ ?> 
+													 
+													 <p>No Bookings Available</p>
+													 
+													 <?php }?> 
 													 <?php foreach($newbookings as $key=>$new){?>
 														<tr class="booktr" >
 															<td><?php echo $new->userid; ?></td>
@@ -420,6 +426,7 @@ $(document).ready(function(){
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
+													 		   <?php if(!empty($currentbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
 														<th>User ID</th>
 														<th>Booking ID</th>
@@ -427,6 +434,11 @@ $(document).ready(function(){
 														<th>Cost</th>
 														<th>Details</th>
 													  </tr>
+													 <?php }else{ ?> 
+													 
+													 <p>No Bookings Available</p>
+													 
+													 <?php }?> 
 													 <?php foreach($currentbookings as $key=>$current){?>
 														<tr class="booktr" >
 															<td><?php echo $current->userid; ?></td>
@@ -450,6 +462,7 @@ $(document).ready(function(){
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
+													 		   <?php if(!empty($pastbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
 														<th>User ID</th>
 														<th>Booking ID</th>
@@ -457,6 +470,11 @@ $(document).ready(function(){
 														<th>Cost</th>
 														<th>Details</th>
 													  </tr>
+													 <?php }else{ ?> 
+													 
+													 <p>No Bookings Available</p>
+													 
+													 <?php }?> 
 													 <?php foreach($pastbookings as $key=>$past){?>
 														<tr class="booktr" >
 															<td><?php echo $past->userid; ?></td>
@@ -479,6 +497,7 @@ $(document).ready(function(){
                                             <div class="col-lg-12 col-md-12">
                                                 <div style="padding: 50px 30px;" >
                                                     <table class="text-center" style="width: 100%;">
+													  		   <?php if(!empty($cancelledbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
 														<th>User ID</th>
 														<th>Booking ID</th>
@@ -486,6 +505,11 @@ $(document).ready(function(){
 														<th>Cost</th>
 														<th>Details</th>
 													  </tr>
+													 <?php }else{ ?> 
+													 
+													 <p>No Bookings Available</p>
+													 
+													 <?php }?> 
 													 <?php foreach($cancelledbookings as $key=>$cancelled){?>
 														<tr class="booktr" >
 														<td><?php echo $cancelled->userid; ?></td>

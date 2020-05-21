@@ -185,7 +185,11 @@ class Welcome extends CI_Controller {
 				$gClient->revokeToken();
 				$this->session->set_userdata('logged_in', $session_data);
 				
-				redirect('', 'refresh');
+				if($this->session->userdata('cart')){
+					redirect(base_url('/payment'), 'refresh');
+				}else{	
+					redirect('', 'refresh');
+				}
 
 			}else{
 				
@@ -205,7 +209,11 @@ class Welcome extends CI_Controller {
 				
 				$gClient->revokeToken();
 				$this->session->set_userdata('logged_in', $session_data);
-				redirect('', 'refresh');
+				if($this->session->userdata('cart')){
+					redirect(base_url('/payment'), 'refresh');
+				}else{	
+					redirect('', 'refresh');
+				}
 			}
 		}
 		
