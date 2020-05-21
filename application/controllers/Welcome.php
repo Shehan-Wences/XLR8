@@ -1333,11 +1333,11 @@ class Welcome extends CI_Controller {
 			$this->carshare_model->edit_data('parking', $carid, 'carid', $update_Car);
 
 			#updating mileage
-			$mile = $_GET['mile'];
-			$update_mile = array(
-                'Mileage' => $mile,
-			);
-			$this->carshare_model->edit_data('car', $carid, 'carid', $update_mile);
+			#$mile = $_GET['mile'];
+			#$update_mile = array(
+            #    'Mileage' => $mile,
+			#);
+			#$this->carshare_model->edit_data('car', $carid, 'carid', $update_mile);
 
             $data['success'] = "working";
             echo json_encode($data);
