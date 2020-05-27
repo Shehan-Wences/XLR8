@@ -132,7 +132,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$( "#admincarDroped" ).click(function() {
+	/*$( "#admincarDroped" ).click(function() {
 		$("#allBooking").css('display','none');
 		$("#miles").css('display','block');
 	});
@@ -140,18 +140,19 @@ $(document).ready(function(){
 	$( "#milesclose" ).click(function() {
 		$("#miles").css('display','none');
 		$("#allBooking").css('display','block');
-	});
+	});*/
 
-	$( "#milesup" ).click(function() {
-		$('#milesup').text('Updating Mileage...');
-		$('#milesup').prop('disabled', true);
+
+	$( "#admincarDroped" ).click(function() {
+		$('#admincarDroped').text('Updating Booking...');
+		$('#admincarDroped').prop('disabled', true);
 					
 		var bookingid= $("#adminbkid").val();
 		var carid=	 $("#admincarid").val();
-		var mile=	 $("#mile").val();
+		/*var mile=	 $("#mile").val(); +"&mile="+mile*/
 			
 		$.ajax({
-		url:"<?php echo base_url(); ?>dropped?&bookingid="+bookingid+"&bookingstatus=Done"+"&carid="+carid+"&mile="+mile,
+		url:"<?php echo base_url(); ?>dropped?&bookingid="+bookingid+"&bookingstatus=Done"+"&carid="+carid,
 		method:"GET",
 		dataType:"json",
 		success:function(data)
@@ -208,7 +209,7 @@ $(document).ready(function(){
     </section>
     <!--== Page Title Area End ==-->
 
-    <!--== My bookings Page Area Start ==-->
+    <!--== My bookings Page Area Start 
 	<div id="miles" class="modal">
 
 <div class="modal-content">
@@ -234,7 +235,7 @@ $(document).ready(function(){
 		</div>
     </div>
 </div>
-</div>
+</div>==-->
 
 
 <div id="sjrt" class="modal">
