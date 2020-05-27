@@ -78,5 +78,6 @@ $route['changedate'] = 'welcome/changedate';
 $route['pickedup'] = 'welcome/pickedup';
 $route['dropped'] = 'welcome/dropped';
 $route['accountconfirmation'] = 'welcome/accountconfirmation';
+$route['faq'] = 'welcome/faq';
 $route['404_override'] = 'welcome/error404';
 

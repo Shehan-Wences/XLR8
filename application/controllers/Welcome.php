@@ -844,6 +844,11 @@ class Welcome extends CI_Controller {
 		$data = array();
 		$this->load->view('carshare_invoice', $data);
 	}
+	public function faq()
+	{ 
+		$data = array();
+		$this->load->view('carshare_faq', $data);
+	}
 
 	public function bookingconfirmation()
 	{ 
