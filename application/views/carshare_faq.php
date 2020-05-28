@@ -46,7 +46,7 @@ $this->load->view('inc/header', $data);
 
 										<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 											<div class="card-body">
-												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, noncepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+												The previous bookings can be seen under the "bookings page" when the user has logged in.
 											</div>
 										</div>
 									</div>
