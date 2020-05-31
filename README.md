@@ -6,10 +6,13 @@ Customers can sign-up (once) and login (regularly) via a web site, and from ther
 
 ## Built With
 
-* [PHP](https://www.php.net/manual/en/langref.php) - Programming language used
+* [Codeigniter](https://codeigniter.com/userguide3/index.html) - PHP Framework
+* [PHP](https://www.php.net/manual/en/langref.php)
 * [Heroku](https://www.heroku.com/) - Application hosting
 * [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/) - Default styles and HTML components
-* Heroku Postgres - Data storage
+* [AWS RDS](https://aws.amazon.com/rds/postgresql/) - Data storage
+* [AWS Quicksight](https://aws.amazon.com/quicksight/) - Generate Visualizations for Reports
+* [Paypal](https://developer.paypal.com/classic-home/) - Secure Payment
 
 
 ## Authors
@@ -18,3 +21,14 @@ Customers can sign-up (once) and login (regularly) via a web site, and from ther
 * **Kim Cao** - [kkimcao](https://github.com/kkimcao)
 * **Nicholas Roger Shepherd** - [Nickunel](https://github.com/Nickunel)
 * **Jackson Joseph Varghese** - [j-jv](https://github.com/j-jv)
+
+# Features
+* Traditional Signup and User Management(Update Details, Change Password, Deactivate)
+* Google Signin
+* Search Vehicles to Rent based on Location/User Location and Filter Search
+* Secure Payment with Paypal
+* Booking Management for Users (Make and Cancel)
+* Booking Management for Adminisstrators (Cancel,Pickup,Return,Shorten)
+* User Management for Administrators (Deactivate)
+* Vehicle Management for Administrators (Create and Update Vehciel Details)
+* Reports using AWS Quicksight
