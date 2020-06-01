@@ -32,3 +32,9 @@ Customers can sign-up (once) and login (regularly) via a web site, and from ther
 * User Management for Administrators (Deactivate)
 * Vehicle Management for Administrators (Create and Update Vehciel Details)
 * Reports using AWS Quicksight
+
+# Issues (Lateset Release - Sprint 04 Release)
+* Deactivate not working for Google Signed in users
+* Change password function is useless with Google signed in users
+* Footer links not working for Terms and Conditions
+* Add Car admin function - description allowed only one word
