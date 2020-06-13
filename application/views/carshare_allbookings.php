@@ -408,7 +408,7 @@ $(document).ready(function(){
 															<td><?php echo $new->userid; ?></td>
 															<td><?php echo $new->bookingid; ?></td>
 															<td> <?php echo $new->make; ?> <?php echo $new->model; ?> <?php echo $new->year;?></td>
-															<td><?php echo $new->cost; ?></td>
+															<td><?php echo $new->cost; ?> AUD</td>
 															<td><img id="<?php echo trim($new->bookingid); ?>" src="assets/img/icon-transparent.png"
 															onmouseover="hover('<?php echo trim($new->bookingid); ?>')"
 															onmouseout="out('<?php echo trim($new->bookingid); ?>')" style="height: 30px; width: 30px; cursor:pointer;"
@@ -444,7 +444,7 @@ $(document).ready(function(){
 															<td><?php echo $current->userid; ?></td>
 															<td><?php echo $current->bookingid; ?></td>
 															<td> <?php echo $current->make; ?> <?php echo $current->model; ?> <?php echo $current->year;?></td>
-															<td><?php echo $current->cost; ?></td>
+															<td><?php echo $current->cost; ?> AUD</td>
 															<td><img id="<?php echo $current->bookingid; ?>" src="assets/img/icon-transparent.png"
 															onmouseover="hover('<?php echo trim($current->bookingid); ?>')"
 															onmouseout="out('<?php echo trim($current->bookingid); ?>')" style="height: 30px; width: 30px; cursor:pointer;"
@@ -480,7 +480,7 @@ $(document).ready(function(){
 															<td><?php echo $past->userid; ?></td>
 															<td><?php echo $past->bookingid; ?></td>
 															<td> <?php echo $past->make; ?> <?php echo $past->model; ?> <?php echo $past->year;?></td>
-															<td><?php echo $past->cost; ?></td>
+															<td><?php echo $past->cost; ?> AUD</td>
 															<td><img id="<?php echo $past->bookingid; ?>" src="assets/img/icon-transparent.png" style="height: 30px; width: 30px; cursor:pointer;"
 															onmouseover="hover('<?php echo trim($past->bookingid); ?>')"
 															onmouseout="out('<?php echo trim($past->bookingid); ?>')"
@@ -515,7 +515,7 @@ $(document).ready(function(){
 														<td><?php echo $cancelled->userid; ?></td>
 															<td><?php echo $cancelled->bookingid; ?></td>
 															<td> <?php echo $cancelled->make; ?> <?php echo $cancelled->model; ?> <?php echo $cancelled->year;?></td>
-															<td><?php echo $cancelled->cost; ?></td>
+															<td><?php echo $cancelled->cost; ?> AUD</td>
 															<td><img id="<?php echo $cancelled->bookingid; ?>" src="assets/img/icon-transparent.png" style="height: 30px; width: 30px; cursor:pointer;"
 															onmouseover="hover('<?php echo trim($cancelled->bookingid); ?>')"
 															onmouseout="out('<?php echo trim($cancelled->bookingid); ?>')"
