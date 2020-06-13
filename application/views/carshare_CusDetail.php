@@ -6,7 +6,7 @@ $this->load->view('inc/header', $data);
 
 
 
-<html> 
+<html>
 
 <style>
 .deactivate{
@@ -32,10 +32,10 @@ $this->load->view('inc/header', $data);
 </style>
 
 
-<head>  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
-</head>  
-<body> 
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
 
 <!--== Page Title Area Start ==-->
 <section id="page-title-area" class="section-padding overlay">
@@ -61,7 +61,7 @@ $this->load->view('inc/header', $data);
                     <div class="team-content">
                         <div class="row">
                             <!-- Team Tab Menu start -->
-                            <div class="col-lg-12">    
+                            <div class="col-lg-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
 										        <li class="nav-item">
                               <a class="nav-link active" id="tab_item_1" data-toggle="tab" href="#team_member_1" role="tab" aria-selected="true">
@@ -82,7 +82,7 @@ $this->load->view('inc/header', $data);
                                 <div class="tab-content" style="border-bottom: solid 1px #e5e1e1;   border-left: solid 1px #e5e1e1;  border-right: solid 1px #e5e1e1;" id="myTabContent">
                                     <!-- Single Team  start -->
 								                  	<div class="tab-pane fade show active" id="team_member_1" role="tabpanel" aria-labelledby="tab_item_1">
-                                      <div class="row">     
+                                      <div class="row">
                                         <div class="col-lg-12 col-md-12">
                                           <div style="padding: 50px 30px;" >
                                             <table class="text-center" style="width: 100%;">
@@ -101,15 +101,15 @@ $this->load->view('inc/header', $data);
                                                 <td><?php echo $act->Lname; ?></td>
                                                 <td><?php echo $act->Email; ?></td>
                                                 <td><?php echo $act->DriverL; ?></td>
-                                                <td><button type="submit" class="deactivate" id="<?php echo $act->Email; ?>">deactivate</button></td>  
-                                              </tr>											
-                                                  <?php } ?>             
+                                                <td><button type="submit" class="deactivate" id="<?php echo $act->Email; ?>">deactivate</button></td>
+                                              </tr>
+                                                  <?php } ?>
 													                    </table>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
-									
+
                                     <div class="tab-pane fade show" id="team_member_2" role="tabpanel" aria-labelledby="tab_item_2">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
@@ -128,9 +128,9 @@ $this->load->view('inc/header', $data);
                                                         <td><?php echo $deact->Fname; ?></td>
                                                         <td><?php echo $deact->Lname; ?></td>
                                                         <td><?php echo $deact->Email; ?></td>
-                                                        <td><?php echo $deact->DriverL; ?></td>  
+                                                        <td><?php echo $deact->DriverL; ?></td>
                                                       </tr>
-                                                    <?php } ?>                                                                                               
+                                                    <?php } ?>
 													                          </table>
                                                   </div>
                                                </div>
@@ -139,20 +139,20 @@ $this->load->view('inc/header', $data);
                                               </div>
                                               </section>
 
-<script>  
-$(document).ready(function(){  
-    $('.deactivate').click(function(){  
-        var id = $(this).attr("id");  
-        if(confirm("Are you sure you want to delete this?"))  
-        {  
+<script>
+$(document).ready(function(){
+    $('.deactivate').click(function(){
+        var id = $(this).attr("id");
+        if(confirm("Are you sure you want to deactivate this account?"))
+        {
             window.location="<?php echo base_url(); ?>customerDetails?Email="+id;  
-        }  
-        else  
-        {  
-            return false;  
-        }  
-    });  
-});  
-</script>  
+        }
+        else
+        {
+            return false;
+        }
+    });
+});
+</script>
 
 <?php $this->load->view('inc/footer'); ?>
