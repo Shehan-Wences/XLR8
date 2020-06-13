@@ -11,14 +11,14 @@
                             <div class="widget-body">
                                 <img src="assets/img/logo.png" alt="JSOFT">
                                 <p>XLR8 is a newly established car sharing service that operates in the heart of Victoria, providing customers the red carpet experience like no other. </p>
-								<p>If you would like to be the first to find out about our latest deals and offers, subscribe to our newsletter below: </p>	
-                                <div class="newsletter-area">
+								<p>If you would like to be the first to find out about our latest deals and offers, subscribe to our newsletter below: </p>
+      <!--                          <div class="newsletter-area">
                                     <form action="index.html">
                                         <input type="email" placeholder="Enter an email address">
                                         <button type="submit" class="newsletter-btn"><i class="fa fa-send"></i></button>
                                     </form>
                                 </div>
-
+-->
                             </div>
                         </div>
                     </div>
@@ -74,12 +74,12 @@
         </div>
         <!-- Footer Widget End -->
 
-        <!-- Footer Bottom Start 
+        <!-- Footer Bottom Start
         <div class="footer-bottom-area">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">-->
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. 
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 --><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. </p>
                     </div>
@@ -97,7 +97,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!--== Scroll Top Area End ==-->
 
     <!--=======================Javascript============================-->
-    
+
     <!--=== Jquery Migrate Min Js ===-->
     <script src="assets/js/jquery-migrate.min.js"></script>
     <!--=== Popper Min Js ===-->
