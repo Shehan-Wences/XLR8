@@ -1381,7 +1381,8 @@ class Welcome extends CI_Controller {
 
 
 
-				echo "Thank You for confirming your email.";
+							$this->load->view('carshare_acc', $data);
+
 			}else{
 				$this->load->view('error_404', $data);
 			}
