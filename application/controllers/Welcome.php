@@ -1401,7 +1401,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function reset(){
-
+		$data = array();
 		if(isset($_POST['token'])){
 			$status=true;
 			$data['token']=$_POST['token'];
@@ -1445,7 +1445,7 @@ class Welcome extends CI_Controller {
 
 		}else if(isset($_GET['token'])){
 
-			 $data = array();
+			 
 			$this->load->model('carshare_model');
 
 			$user=$this->carshare_model->reset($_GET['token']);
