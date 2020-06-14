@@ -1403,7 +1403,7 @@ class Welcome extends CI_Controller {
 	public function reset(){
 
 		if(isset($_POST['token'])){
-			$status="";
+			$status=true;
 			$data['token']=$_POST['token'];
 			$this->load->model('carshare_model');
 			 $user=$this->carshare_model->reset($_POST['token']);
@@ -1430,7 +1430,7 @@ class Welcome extends CI_Controller {
 					}
 
 					if($status==true){
-						$edit_data = array('token' => sha1($randomPassword));
+						$edit_data = array('token' => ' ');
 						$this->carshare_model->edit_data('customer', $Email, 'Email', $edit_data);
 						$edit_data = array('Password' => sha1($_POST['confirmpass']));
 						$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
