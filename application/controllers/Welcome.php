@@ -1440,6 +1440,7 @@ class Welcome extends CI_Controller {
 					}
 				}else{
 					$data['passerror'] = "Passwords Reset Failed!";
+						$this->load->view('carshare_reset', $data);
 				}
 
 		}else if(isset($_GET['token'])){
