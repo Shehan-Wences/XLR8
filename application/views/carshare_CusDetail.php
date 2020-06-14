@@ -10,8 +10,8 @@ $this->load->view('inc/header', $data);
 
 <style>
 .deactivate{
-  background-color: #999999;
-  border: 2px solid #4da4bd;
+  background-color: #808080;
+  border: none;
 	color: #222;
 	display: inline-block;
 	font-size: 15px;
@@ -57,6 +57,12 @@ $this->load->view('inc/header', $data);
     <section id="help-desk-page-wrap" class="section-padding">
         <div class="container">
             <div class="row">
+              <?php if(isset($deacerror)){   ?>
+                <div class="alert alert-danger">
+                  <?php echo $deacerror;   ?>
+                </div>
+              <?php }  ?>
+
                 <div class="col-lg-12">
                     <div class="team-content">
                         <div class="row">
@@ -101,7 +107,7 @@ $this->load->view('inc/header', $data);
                                                 <td><?php echo $act->Lname; ?></td>
                                                 <td><?php echo $act->Email; ?></td>
                                                 <td><?php echo $act->DriverL; ?></td>
-                                                <td><button type="submit" class="deactivate" id="<?php echo $act->Email; ?>">deactivate</button></td>
+                                                <td><button type="submit" class="deactivate" id="<?php echo trim($act->Id); ?>">deactivate</button></td>
                                               </tr>
                                                   <?php } ?>
 													                    </table>
@@ -145,7 +151,7 @@ $(document).ready(function(){
         var id = $(this).attr("id");
         if(confirm("Are you sure you want to deactivate this account?"))
         {
-            window.location="<?php echo base_url(); ?>customerDetails?Email="+id;  
+            window.location="<?php echo base_url(); ?>customerDetails?id="+id;
         }
         else
         {

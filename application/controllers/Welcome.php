@@ -802,10 +802,18 @@ class Welcome extends CI_Controller {
 			redirect(base_url('/eror404'), 'refresh');
 		}
 
-		if(isset($_GET['Email'])){
-			$Email = $_GET['Email'];
-			$edit_data = array('Status' => 'Deactivated');
-			$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+
+			$new=$this->carshare_model->getbookings($id,'New','Only');
+			$current= $this->carshare_model->getbookings($id,'Current','Only');
+
+			if(count($new)<1 && count($current)<1 ){
+				$edit_data = array('Status' => 'Deactivated');
+				$this->carshare_model->edit_data('customer',$id, 'Id', $edit_data);
+			}else{
+				$data['deacerror']="This User has New or Current Bookings in Progress, Account can't be Deactivated !";
+			}
 		}
 
 		$data['Active'] = $this->carshare_model->displayrecords('','ACTIVE','All');
