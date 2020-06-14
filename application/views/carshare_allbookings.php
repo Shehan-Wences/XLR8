@@ -306,7 +306,7 @@ $(document).ready(function(){
 	<div class="row">
         <div class="col-lg-6 col-md-6">
             <div class="website-input" >
-				<label for="userid">User ID</label>
+				<label for="userid">User</label>
                     <input   type="text"  id="userid" disabled />
             </div>
         </div>
@@ -392,7 +392,7 @@ $(document).ready(function(){
                                                     <table class="text-center" style="width: 100%;">
 													  		   <?php if(!empty($newbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
-														<th>User ID</th>
+														<th>User</th>
 														<th>Booking ID</th>
 														<th>CAR</th>
 														<th>Cost</th>
@@ -428,7 +428,7 @@ $(document).ready(function(){
                                                     <table class="text-center" style="width: 100%;">
 													 		   <?php if(!empty($currentbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
-														<th>User ID</th>
+														<th>User</th>
 														<th>Booking ID</th>
 														<th>CAR</th>
 														<th>Cost</th>
@@ -464,7 +464,7 @@ $(document).ready(function(){
                                                     <table class="text-center" style="width: 100%;">
 													 		   <?php if(!empty($pastbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
-														<th>User ID</th>
+														<th>User</th>
 														<th>Booking ID</th>
 														<th>CAR</th>
 														<th>Cost</th>
@@ -499,7 +499,7 @@ $(document).ready(function(){
                                                     <table class="text-center" style="width: 100%;">
 													  		   <?php if(!empty($cancelledbookings)){?>
 													  <tr style="width: 100%; border-bottom: 1px solid #ddd;  background-color: #4da4bd;line-height: 45px;">
-														<th>User ID</th>
+														<th>User</th>
 														<th>Booking ID</th>
 														<th>CAR</th>
 														<th>Cost</th>
