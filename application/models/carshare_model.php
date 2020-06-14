@@ -20,15 +20,15 @@ class carshare_model extends CI_Model {
     }
 	public function getLocationDetails($id) {
 		$data = array();
-		 
+
 		 $this->db->select('name');
-		 $this->db->select('lat');	
-		 $this->db->select('long');	
+		 $this->db->select('lat');
+		 $this->db->select('long');
 		 $this->db->from('location');
 		 $this->db->where("location.locationid", $id);
-		 
+
 		 $open_list = $this->db->get();
-		 
+
 		 foreach ($open_list->result() as $open_info) {
 			 $data[] = $open_info;
 		 }
@@ -39,9 +39,9 @@ class carshare_model extends CI_Model {
         $this->db->select('Email');
         $this->db->from('customer');
 		$this->db->where("customer.Email", $email);
-       
+
         $open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
@@ -53,15 +53,15 @@ class carshare_model extends CI_Model {
         $this->db->from('customer');
 		$this->db->where("customer.token", $token);
         $this->db->where("customer.Status", "Pending");
-	   
+
         $open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
     }
-	
+
 	public function profile($email) {
        $data = array();
         $this->db->select('Id');
@@ -71,15 +71,15 @@ class carshare_model extends CI_Model {
 		$this->db->select('DriverL');
         $this->db->from('customer');
 		$this->db->where("customer.Email", $email);
-        
+
         $open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
 	}
-	
+
 	public function carDetails($id) {
 		$data = array();
 		 $this->db->select('description');
@@ -93,9 +93,9 @@ class carshare_model extends CI_Model {
 		 $this->db->select('imageurl');
 		 $this->db->from('car');
 		 $this->db->where("car.carid", $id);
-		 
+
 		 $open_list = $this->db->get();
-		 
+
 		 foreach ($open_list->result() as $open_info) {
 			 $data[] = $open_info;
 		 }
@@ -115,13 +115,13 @@ class carshare_model extends CI_Model {
         $this->db->where("customer.Password", sha1($pass));
 
         $open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
     }
-	
+
 	 public function locations() {
         $data = array();
         $this->db->select('locationid');
@@ -129,93 +129,93 @@ class carshare_model extends CI_Model {
 		$this->db->select('lat');
         $this->db->select('long');
         $this->db->from('location');
-		
+
         $open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
     }
-	
+
 	public function cars() {
         $data = array();
         $this->db->select('carid');
-      		
+
         $this->db->from('car');
-		
+
         $query = $this->db->get();
-		
+
         return $query->num_rows();
     }
-	
+
 	function fetch_cars($plocation,$pdate,$ddate,$type,$make,$transmission,$fuel,$sort,$nearest)
 	{
 
 		if($type != null){
-			
+
 			$a=0;
 			foreach($type as $t){
 				$a++;
 				if($a==1){
-				 $typeq= "car.type='".$t."' ";		
+				 $typeq= "car.type='".$t."' ";
 				}else{
 				 $typeq= " ".$typeq."OR car.type='".$t."' ";
 				}
 			}
 		}
-		
+
 		if($nearest != null){
-			
+
 			$a=0;
 			foreach($nearest as $n){
 				$a++;
 				if($a==1){
-				 $nearestq= "parking.availablelocationid ='".$n."' ";		
+				 $nearestq= "parking.availablelocationid ='".$n."' ";
 				}else{
 				 $nearestq= " ".$nearestq."OR parking.availablelocationid ='".$n."' ";
 				}
 			}
 		}
-		
+
 		if($make != null){
-			
+
 			$a=0;
 			foreach($make as $m){
 				$a++;
 				if($a==1){
-				 $makeq= "car.make='".$m."' ";		
+				 $makeq= "car.make='".$m."' ";
 				}else{
 				 $makeq= " ".$makeq."OR car.make='".$m."' ";
 				}
 			}
 		}
 		if($transmission != null){
-			
+
 			$a=0;
 			foreach($transmission as $m){
 				$a++;
 				if($a==1){
-				 $transmissionq= "car.transmission='".$m."' ";		
+				 $transmissionq= "car.transmission='".$m."' ";
 				}else{
 				 $transmissionq= " ".$transmissionq."OR car.transmission='".$m."' ";
 				}
 			}
 		}
 		if($fuel != null){
-			
+
 			$a=0;
 			foreach($fuel as $m){
 				$a++;
 				if($a==1){
-				 $fuelq= "car.fuel='".$m."' ";		
+				 $fuelq= "car.fuel='".$m."' ";
 				}else{
 				 $fuelq= " ".$fuelq."OR car.fuel='".$m."' ";
 				}
 			}
 		}
-		$data = array();	
-		
+		$data = array();
+
 		$this->db->select('car.carid');
         $this->db->select('description');
         $this->db->select('make');
@@ -225,11 +225,11 @@ class carshare_model extends CI_Model {
         $this->db->select('fuel');
         $this->db->select('transmission');
 		$this->db->select('year');
-		$this->db->select('imageurl'); 
-		$this->db->select('parking.availablelocationid'); 
+		$this->db->select('imageurl');
+		$this->db->select('parking.availablelocationid');
         $this->db->from('car');
-        $this->db->join('parking', 'car.carid = parking.carid', 'left'); 	
-		
+        $this->db->join('parking', 'car.carid = parking.carid', 'left');
+
 		//$this->db->where("(car.type='SUV')", NULL, FALSE);
 		if(isset($typeq)){
 		 $this->db->where("(".$typeq.")", NULL, FALSE);
@@ -237,18 +237,18 @@ class carshare_model extends CI_Model {
 		if(isset($makeq)){
 		 $this->db->where("(".$makeq.")", NULL, FALSE);
 		}
-		
+
 		if(isset($transmissionq)){
 		 $this->db->where("(".$transmissionq.")", NULL, FALSE);
 		}
-		
+
 		if(isset($fuelq)){
 		 $this->db->where("(".$fuelq.")", NULL, FALSE);
 		}
-		
+
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);
-		
+
 		if($plocation=="Current Location"){
 			if(isset($nearestq)){
 			$this->db->where("(".$nearestq.")", NULL, FALSE);
@@ -256,94 +256,96 @@ class carshare_model extends CI_Model {
 		}else{
 			$this->db->where('parking.availablelocationid', $plocation);
 		}
-		
+
 		$this->db->order_by("rent ".$sort);
-		 
-		 		
-		
-		
+
+
+
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
 	}
- 
+
 	function fetch_thecar($carid,$plocation,$pdate,$ddate)
 	{
-		
-		
-		$data = array();	
-		
-		
+
+
+		$data = array();
+
+
         $this->db->select('parking.parkingid');
 		$this->db->select('parking.availabledate');
 		$this->db->select('parking.enddate');
         $this->db->from('parking');
-       	
-		
-		
-		
+
+
+
+
 		$this->db->where('parking.availabledate <=', $pdate);
 		$this->db->where('parking.enddate  >=', $ddate);
 		$this->db->where('parking.availablelocationid ', $plocation);
 		$this->db->where('parking.carid ', $carid);
-	
-		
+
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
 	}
-	
+
 	function displayrecords($id,$status,$search)
 	{
 
-		$data = array();	
-		
+		$data = array();
+
 		if($search=='All'){
 		$this->db->select('customer.Id');
 		}
-		
+
 		$this->db->select('customer.Fname');
 		$this->db->select('customer.Lname');
 		$this->db->select('customer.Email');
 		$this->db->select('customer.DriverL');
 		$this->db->from('customer');
-	
+
 
 		if($search=='Only'){
 		$this->db->where('customer.Id', $id);
 		}
 		$this->db->where('customer.Status', $status);
-		
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
 
 	}
-	
+
 	function displayrecord2()
 	{
 		$query = $this->db->get("car");
 		return $query;
 	}
- 
-	
+
+
 	function getbookings($id,$status,$search)
 	{
-		$data = array();	
-		
+		$data = array();
+
 		if($search=='All'){
 		$this->db->select('booking.userid');
+    $this->db->select('customer.Fname');
+		$this->db->select('customer.Lname');
 		}
-		
+
 		$this->db->select('booking.bookingid');
 		$this->db->select('booking.bookingstatus');
 		$this->db->select('pickup.name as pickuplocation');
@@ -356,46 +358,50 @@ class carshare_model extends CI_Model {
 		$this->db->select('car.year');
 		$this->db->select('booking.cost');
 		$this->db->select('booking.message');
+
 		$this->db->from('booking');
-		
-       
-        $this->db->join('location as pickup', 'booking.pickuplocationid=pickup.locationid'); 	
-		$this->db->join('location  as drop', 'booking.dropofflocationid=drop.locationid'); 	
-        $this->db->join('car', 'booking.carid=car.carid'); 	
+
+
+        $this->db->join('location as pickup', 'booking.pickuplocationid=pickup.locationid');
+		    $this->db->join('location  as drop', 'booking.dropofflocationid=drop.locationid');
+        $this->db->join('car', 'booking.carid=car.carid');
+      if($search=='All'){
+        $this->db->join('customer', 'booking.userid=customer.Id');
+      }
 
 		if($search=='Only'){
 		$this->db->where('booking.userid', $id);
 		}
 		$this->db->where('booking.bookingstatus', $status);
 		$this->db->order_by('booking.pickupdate','ASC');
-		
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
-			
+
 	}
 	function fetch_availability1($carid,$bstartdate)
 	{
-		
-		
-		$data = array();	
-		
-		
+
+
+		$data = array();
+
+
         $this->db->select('parking.parkingid');
 		$this->db->select('parking.availabledate');
 		$this->db->select('parking.enddate');
 		$this->db->select('parking.availablelocationid');
-		
+
         $this->db->from('parking');
 		$this->db->where('parking.enddate', $bstartdate);
 		$this->db->where('parking.carid ', $carid);
-	
-		
+
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
@@ -403,35 +409,35 @@ class carshare_model extends CI_Model {
 	}
 	function fetch_availability2($carid,$benddate)
 	{
-		
-		
-		$data = array();	
-		
-		
+
+
+		$data = array();
+
+
         $this->db->select('parking.parkingid');
 		$this->db->select('parking.availabledate');
 		$this->db->select('parking.enddate');
 		$this->db->select('parking.availablelocationid');
-		
+
         $this->db->from('parking');
 		$this->db->where('parking.availabledate', $benddate);
 		$this->db->where('parking.carid ', $carid);
-	
-		
+
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
 	}
-	
+
 	function bookingsearch($carid,$userid,$bookingid)
 	{
-		
-		$data = array();	
-		
-		
+
+		$data = array();
+
+
         $this->db->select('booking.userid');
 		$this->db->select('booking.bookingid');
 		$this->db->select('booking.carid');
@@ -439,26 +445,26 @@ class carshare_model extends CI_Model {
 		$this->db->select('booking.pickupdate');
 		$this->db->select('booking.dropofflocationid');
 		$this->db->select('booking.dropoffdate');
-		
+
         $this->db->from('booking');
 		$this->db->where('booking.userid', $userid);
 		$this->db->where('booking.carid ', $carid);
 		$this->db->where('booking.bookingid', $bookingid);
-		
-		
+
+
 		$open_list = $this->db->get();
-		
+
         foreach ($open_list->result() as $open_info) {
             $data[] = $open_info;
         }
         return $data;
 	}
- 
+
 	function searchid($id){
-		
+
 	}
- 
- 
- 
+
+
+
 }
 ?>

@@ -405,7 +405,7 @@ $(document).ready(function(){
 													 <?php }?>
 													 <?php foreach($newbookings as $key=>$new){?>
 														<tr class="booktr" >
-															<td><?php echo $new->userid; ?></td>
+															<td><?php echo $new->Fname; ?> <?php echo $new->Lname; ?></td>
 															<td><?php echo $new->bookingid; ?></td>
 															<td> <?php echo $new->make; ?> <?php echo $new->model; ?> <?php echo $new->year;?></td>
 															<td><?php echo $new->cost; ?> AUD</td>
@@ -441,7 +441,7 @@ $(document).ready(function(){
 													 <?php }?>
 													 <?php foreach($currentbookings as $key=>$current){?>
 														<tr class="booktr" >
-															<td><?php echo $current->userid; ?></td>
+															<td><?php echo $current->Fname; ?> <?php echo $current->Lname; ?></td>
 															<td><?php echo $current->bookingid; ?></td>
 															<td> <?php echo $current->make; ?> <?php echo $current->model; ?> <?php echo $current->year;?></td>
 															<td><?php echo $current->cost; ?> AUD</td>
@@ -477,7 +477,7 @@ $(document).ready(function(){
 													 <?php }?>
 													 <?php foreach($pastbookings as $key=>$past){?>
 														<tr class="booktr" >
-															<td><?php echo $past->userid; ?></td>
+															<td><?php echo $past->Fname; ?> <?php echo $past->Lname; ?></td>
 															<td><?php echo $past->bookingid; ?></td>
 															<td> <?php echo $past->make; ?> <?php echo $past->model; ?> <?php echo $past->year;?></td>
 															<td><?php echo $past->cost; ?> AUD</td>
@@ -512,7 +512,7 @@ $(document).ready(function(){
 													 <?php }?>
 													 <?php foreach($cancelledbookings as $key=>$cancelled){?>
 														<tr class="booktr" >
-														<td><?php echo $cancelled->userid; ?></td>
+														<td><?php echo $cancelled->Fname; ?> <?php echo $cancelled->Lname; ?></td>
 															<td><?php echo $cancelled->bookingid; ?></td>
 															<td> <?php echo $cancelled->make; ?> <?php echo $cancelled->model; ?> <?php echo $cancelled->year;?></td>
 															<td><?php echo $cancelled->cost; ?> AUD</td>
