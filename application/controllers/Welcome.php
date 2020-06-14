@@ -1403,6 +1403,7 @@ class Welcome extends CI_Controller {
 	public function reset(){
 
 		if(isset($_POST['token'])){
+			$data['token']=$_POST['token'];
 			$this->load->model('carshare_model');
 			 $user=$this->carshare_model->reset($_POST['token']);
 
