@@ -545,13 +545,11 @@ class Welcome extends CI_Controller {
 			}
 
 			if($status==true){
-				$edit_data = array('Password' => sha1($randomPassword));
-
-
+				$edit_data = array('token' => sha1($randomPassword));
 				$this->carshare_model->edit_data('customer', $_POST['Email'], 'Email', $edit_data);
 
 				$emailContent = '<!DOCTYPE><html><head></head><body><p>Hi,</p><p>You have requested to RESET your password.</p>
-				<p>Your Password is : '.$randomPassword.'</p><p>Do not forget to Change your Password at your first login.</p>
+				<a href="'.base_url().'reset?token='.sha1($randomPassword).'">Click here to Reset your password</a>
 				<p>If you are having any issues using our services please let us know by replying to this email and we will endeavour to help you.</p>
 				<p>Many Thanks</p>
 				<p>XLR8 Team</p></body></html>';
@@ -578,7 +576,7 @@ class Welcome extends CI_Controller {
 				$this->email->subject('XLR8 >> Password Reset');
 				$this->email->message($emailContent);
 				$this->email->send();
-				$data['successmessage'] = "Password succefully reseted.Please check your email.";
+				$data['successmessage'] = "Please check your email to reset password.";
 			}
 
         }
@@ -1402,5 +1400,75 @@ class Welcome extends CI_Controller {
 
 	}
 
+	public function reset(){
+
+		if(isset($_POST['token'])){
+			 $user=$this->carshare_model->reset($_POST['token']);
+
+			 	if(count($user)>0){
+					$Email= $user[0]->Email;
+
+					if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['newpass'])){
+						$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
+						$status=false;
+					}
+					if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $_POST['confirmpass'])){
+						$data['passerror'] = "Password must contain minimum eight characters, at least one letter and one number";
+						$status=false;
+					}
+					if($_POST['confirmpass']!=$_POST['newpass']){
+						if(isset($data['passerror'])){
+							$data['passerror'] =$data['passerror']."\r\n Passwords does not match!";
+						}else{
+							$data['passerror'] = "Passwords does not match!";
+						}
+
+						$status=false;
+					}
+
+					if($status==true){
+						$edit_data = array('token' => sha1($randomPassword));
+						$this->carshare_model->edit_data('customer', $Email, 'Email', $edit_data);
+						$edit_data = array('Password' => sha1($_POST['confirmpass']));
+						$this->carshare_model->edit_data('customer',$Email, 'Email', $edit_data);
+						redirect('/signin', 'refresh');
+					}else{
+							$this->load->view('carshare_reset', $data);
+					}
+				}else{
+					$data['passerror'] = "Passwords Reset Failed!";
+				}
+
+		}else if(isset($_GET['token'])){
+
+			 $data = array();
+			$this->load->model('carshare_model');
+
+			$user=$this->carshare_model->reset($_GET['token']);
+
+			if(count($user)>0){
+
+				$data['token']=$_GET['token'];
+			//	$update_data = array(
+      //          'Status' => "ACTIVE",
+
+			//	);
+
+        //    $this->carshare_model->edit_data('customer', $user[0]->Id, 'Id', $update_data);
+
+
+
+							$this->load->view('carshare_reset', $data);
+
+			}else{
+				$this->load->view('error_404', $data);
+			}
+
+		}else{
+			$this->load->view('error_404', $data);
+		}
+
+
+	}
 
 }
