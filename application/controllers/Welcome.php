@@ -314,7 +314,7 @@ class Welcome extends CI_Controller {
 									'Email' => $_POST['Email'],
 									'Status' => 'Pending',
 									'token' => sha1($randomPassword),
-									'Password' => sha1($_POST['Password']);
+									'Password' => sha1($_POST['Password']));
 
 				$this->carshare_model->add_data('customer', $add_data);
 
