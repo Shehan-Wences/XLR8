@@ -170,7 +170,7 @@ class Welcome extends CI_Controller {
 				}catch (\Exception $e) {
 					redirect('/eror404', 'refresh');
 				}
-			print_r($userData);
+			//print_r($userData);
 			$profile = $this->carshare_model->profile($userData['email']);
 
 			if(count($profile)>0){
@@ -203,8 +203,7 @@ class Welcome extends CI_Controller {
 				$session_data = array(
 					'email' => $userData['email'],
 					'Fname' => $userData['givenName'],
-					'Lname' => $userData['familyName'],
-					'Id' => $userData['id']
+					'Lname' => $userData['familyName']
 				);
 
 				$gClient->revokeToken();
