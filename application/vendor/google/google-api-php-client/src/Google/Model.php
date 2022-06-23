@@ -252,6 +252,7 @@ class Google_Model implements ArrayAccess
     return isset($this->$offset) || isset($this->modelData[$offset]);
   }
 
+  #[\ReturnTypeWillChange]
   public function offsetGet($offset)
   {
     return isset($this->$offset) ?
