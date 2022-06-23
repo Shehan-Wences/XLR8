@@ -170,7 +170,7 @@ class Welcome extends CI_Controller {
 				}catch (\Exception $e) {
 					redirect('/eror404', 'refresh');
 				}
-
+			echo $userData;
 			$profile = $this->carshare_model->profile($userData['email']);
 
 			if(count($profile)>0){
