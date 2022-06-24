@@ -115,7 +115,7 @@ $(document).ready(function(){
 				
 				url:"<?php echo base_url(); ?>booking?id="+carid+"&plocation="+plocation+"&dlocation="+dlocation+"&pdate="+pdate+"&ddate="+ddate+"&rent="+"<?php echo $rent; ?>" ,
 				method:"GET",
-				
+				dataType: "json",
 				success:function(data)
 				{
 					console.log(data);
