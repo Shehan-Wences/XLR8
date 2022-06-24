@@ -731,12 +731,12 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('admin')){
 				$data['status']="fail";
 				$data['message']="Admins Cannot make bookings.";
-				echo json_encode($data);
+				
 		}else{
 			if(!isset($_GET['id'])||!isset($_GET['plocation'])||!isset($_GET['dlocation'])||!isset($_GET['pdate'])||!isset($_GET['ddate'])){
 				$data['status']="fail";
 				$data['message']="Booking CAN NOT be made.Please re-check booking details.";
-				echo json_encode($data);
+				
 			}else{
 				$check=$this->carshare_model->fetch_thecar($_GET['id'],$_GET['plocation'],$_GET['pdate'],$_GET['ddate']);
 
@@ -759,7 +759,7 @@ class Welcome extends CI_Controller {
 					if($ptime < $today || $dtime < $today || $ptime > $dtime){
 						$data['status']="fail";
 						$data['message']="Please check the dates again";
-						echo json_encode($data);
+						
 
 					}else{
 
@@ -776,16 +776,17 @@ class Welcome extends CI_Controller {
 
 						$this->session->set_userdata('cart', $cart);
 						$data['status']="success";
-						echo json_encode($data);
+						
 					}
 
 				}else{
 					$data['status']="fail";
 					$data['message']="We are unable to make the booking.Vehicle is unavailable during this period.";
-					echo json_encode($data);
+					
 				}
 			}
 		}
+		echo json_encode("test");
 	}
 
 	public function cusDetail()
