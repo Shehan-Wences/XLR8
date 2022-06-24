@@ -118,6 +118,7 @@ $(document).ready(function(){
 				dataType:"json",
 				success:function(data)
 				{
+					console.log(data);
 					$('#booknpay').text('Book & Pay');
 					$('#booknpay').prop('disabled', false);
 					
