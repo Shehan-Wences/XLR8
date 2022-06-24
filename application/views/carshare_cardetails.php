@@ -128,11 +128,11 @@ $(document).ready(function(){
 						if(<?php echo isset($username)?'true':'false'; ?>){
 							
 							window.location.href = "<?php echo base_url('/payment'); ?>";
-							return false;
+							
 						}else{
 					
 							window.location.href = "<?php echo base_url('/signin?auth=required'); ?>";
-							return false;
+							
 						
 						}
 						
@@ -147,10 +147,15 @@ $(document).ready(function(){
 					
 					
 					
-				}
+				},
+				
+			 error: function(XMLHttpRequest, textStatus, errorThrown) { 
+				alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+			    }    
 			});
 		
 		}
+		return false;
 	});
 	
 
