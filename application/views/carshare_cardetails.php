@@ -149,9 +149,9 @@ $(document).ready(function(){
 					
 				},
 				
-			 error: function(XMLHttpRequest, textStatus, errorThrown) { 
-				alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-			    }    
+			   error: function (req, status, err) {
+				console.log('Something went wrong', status, err);
+			    } 
 			});
 		
 		}
